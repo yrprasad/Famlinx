@@ -30,10 +30,10 @@ public interface ApiEndpointInterface {
     @POST("/authenticate")
     void authenticate(@Body UserLoginModel user, Callback<ResponseDto<UserModel>> cb);
 
-    @PUT("/api/users/{groupOwnerId}/groupsList/{groupId}/member")
+    @PUT("/api/users/{groupOwnerId}/groups/{groupId}/member")
     void inviteMembers(@Path("groupOwnerId") String groupOwnerId, @Path("groupId") String groupId, @Body GroupMemberModel member, Callback<ResponseDto<GroupMemberModel>> cb);
 
-    @DELETE("/api/users/{groupOwnerId}/groupsList/{groupId}/member/{memberId}")
+    @DELETE("/api/users/{groupOwnerId}/groups/{groupId}/member/{memberId}")
     void deleteMemerFromGroup(@Path("groupOwnerId") String groupOwnerId, @Path("groupId") String groupId, @Path("memberId") String memberId, Callback<ResponseDto<GroupMemberModel>> cb);
 
     @GET("/api/users/id/{userId}/basic")
@@ -42,7 +42,7 @@ public interface ApiEndpointInterface {
     @GET("/api/users/id/{userId}")
     void getUserDetailsIncludingGroups(@Path("userId") String userId, Callback<ResponseDto<UserModel>> cb);
 
-    @PUT("/api/users/{ownerUuid}/groupsList")
+    @PUT("/api/users/{ownerUuid}/groups")
     void createGroup(@Path("ownerUuid") String ownerUuid, @Body GroupModel groupModel, Callback<ResponseDto<GroupModel>> cb);
 
     @PUT("/api/register")
@@ -51,13 +51,13 @@ public interface ApiEndpointInterface {
     @GET("/api/users/name/{userName}")
     void getUserByName(@Path("userName") String userName, Callback<ResponseDto<UserModel>> cb);
 
-    @GET("/api/users/{ownerUuid}/groupsList")
+    @GET("/api/users/{ownerUuid}/groups")
     void getGroups(@Path("ownerUuid") String ownerUuid, @Query("userType") String userType, Callback<ResponseDto<GroupModel>> cb);
 
     @GET("/api/users/{ownerUuid}/groups")
     void getGroups(@Path("ownerUuid") String ownerUuid, @Query("latitude") String latitude, @Query("longitude") String longitude, Callback<ResponseDto<GroupModel>> cb);
 
-    @DELETE("/api/users/{ownerUuid}/groupsList/{groupId}")
+    @DELETE("/api/users/{ownerUuid}/groups/{groupId}")
     void deleteGroup(@Path("ownerUuid") String ownerUuid, @Path("groupId") String groupId, Callback<ResponseDto<GroupModel>> cb);
 
     @GET("/api/users/{ownerUuid}/invites")
@@ -99,7 +99,7 @@ public interface ApiEndpointInterface {
     @GET("/logout")
     void logout(Callback<ResponseDto<UserModel>> cb);
 
-    @GET("/api/users/{userId}/groupsList/{groupId}/members/{memberId}/track")
+    @GET("/api/users/{userId}/groups/{groupId}/members/{memberId}/track")
     void trackMember(@Path("userId") String userId, @Path("groupId") String groupId, @Path("memberId") String memberId, Callback<ResponseDto<GroupMemberModel>> cb);
 
     @GET("/api/users/{userId}/notifications")

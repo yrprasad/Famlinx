@@ -5,12 +5,12 @@
         <item android:id="@+id/nav_home"
             android:title="Home" />
         <!--<item android:id="@+id/nav_group"
-            android:title="Group" />-->
+            android:title="D-Create Group" />-->
         <item android:id="@+id/nav_sharing"
             android:title="Sharing" />
         <!--<item android:id="@+id/nav_fence"
-            android:title="Fence" />
-        <item android:id="@+id/nav_device"
+            android:title="Fence" />-->
+        <!--<<item android:id="@+id/nav_device"
             android:title="Device" />
         <item android:id="@+id/nav_profile"
             android:title="Profile" />

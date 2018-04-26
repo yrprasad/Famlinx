@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fitsSystemWindows="true" tools:openDrawer="start">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".MainActivity">
+        <!-- include your toolbar layout-->
+        <include layout="@layout/toolbar_group" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="5"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <android.support.v4.widget.NestedScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fillViewport="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp"/>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:weightSum="2"
+                                        android:orientation="horizontal">
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".5">
+
+                                            <ImageView
+                                                android:layout_width="50dp"
+                                                android:layout_height="50dp"
+                                                android:layout_centerVertical="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:background="@drawable/img1"/>
+
+
+                                        </RelativeLayout>
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:text="Member 1"
+                                            android:textColor="@android:color/black"
+                                            android:textSize="16sp"
+                                            android:gravity="center_vertical"/>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".5">
+
+                                            <CheckBox
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"/>
+
+
+                                        </RelativeLayout>
+
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp">
+
+                                    <View
+                                        android:id="@+id/view1"
+                                        android:layout_width="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_height="1dp"
+                                        android:background="#000000"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:weightSum="2"
+                                        android:orientation="horizontal">
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".5">
+
+                                            <ImageView
+                                                android:layout_width="50dp"
+                                                android:layout_height="50dp"
+                                                android:layout_centerVertical="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:background="@drawable/img2"/>
+
+
+                                        </RelativeLayout>
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:text="Member 2"
+                                            android:textColor="@android:color/black"
+                                            android:textSize="16sp"
+                                            android:gravity="center_vertical"/>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".5">
+
+                                            <CheckBox
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"/>
+
+
+                                        </RelativeLayout>
+
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp">
+
+                                    <View
+                                        android:id="@+id/view2"
+                                        android:layout_width="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_height="1dp"
+                                        android:background="#000000"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:weightSum="2"
+                                    android:orientation="horizontal">
+
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight=".5">
+
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_centerVertical="true"
+                                            android:layout_centerHorizontal="true"
+                                            android:background="@drawable/img1"/>
+
+
+                                    </RelativeLayout>
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:text="Member 3"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="16sp"
+                                        android:gravity="center_vertical"/>
+
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight=".5">
+
+                                        <CheckBox
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_centerVertical="true"/>
+
+
+                                    </RelativeLayout>
+
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp">
+
+                                    <View
+                                        android:id="@+id/view3"
+                                        android:layout_width="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_height="1dp"
+                                        android:background="#000000"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:weightSum="2"
+                                        android:orientation="horizontal">
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".5">
+
+                                            <ImageView
+                                                android:layout_width="50dp"
+                                                android:layout_height="50dp"
+                                                android:layout_centerVertical="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:background="@drawable/img2"/>
+
+
+                                        </RelativeLayout>
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:text="Member 4"
+                                            android:textColor="@android:color/black"
+                                            android:textSize="16sp"
+                                            android:gravity="center_vertical"/>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".5">
+
+                                            <CheckBox
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"/>
+
+
+                                        </RelativeLayout>
+
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp">
+
+                                    <View
+                                        android:id="@+id/view4"
+                                        android:layout_width="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_height="1dp"
+                                        android:background="#000000"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:weightSum="2"
+                                    android:orientation="horizontal">
+
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight=".5">
+
+                                        <ImageView
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_centerVertical="true"
+                                            android:layout_centerHorizontal="true"
+                                            android:background="@drawable/img1"/>
+
+
+                                    </RelativeLayout>
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:text="Member 5"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="16sp"
+                                        android:gravity="center_vertical"/>
+
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight=".5">
+
+                                        <CheckBox
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_centerVertical="true"/>
+
+
+                                    </RelativeLayout>
+
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp">
+
+                                    <View
+                                        android:id="@+id/view5"
+                                        android:layout_width="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_height="1dp"
+                                        android:background="#000000"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp">
+
+                                    <Button
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="40dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="@drawable/button_rounded_add"
+                                        android:text="Update"/>
+
+                                </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                    </android.support.v4.widget.NestedScrollView>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
+

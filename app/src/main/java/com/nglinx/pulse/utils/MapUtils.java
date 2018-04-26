@@ -99,6 +99,10 @@ public class MapUtils {
 
     public void updateMyLocationOnMap(final Context context, final SupportMapFragment fm, final LatLng myLatLng) {
 
+        //TODO: Need to check the crash
+        if(1 == 1)
+            return;
+
         fm.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap map) {

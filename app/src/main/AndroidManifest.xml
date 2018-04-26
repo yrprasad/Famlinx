@@ -46,6 +46,8 @@
         <activity android:name="com.nglinx.pulse.activity.SettingsActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.SignupActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.NotificationsDetailActivity"></activity>
+        <activity android:name="com.nglinx.pulse.activity.CreateGroupActivty"></activity>
+        <activity android:name="com.nglinx.pulse.activity.AddMemberActivity"></activity>
 
         <!--<activity android:name=".mainClasses.RetroResponse"></activity>-->
         <service android:name=".activity.AuthenticateIntentService"></service>

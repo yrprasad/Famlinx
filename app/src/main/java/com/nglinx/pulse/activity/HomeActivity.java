@@ -1,7 +1,6 @@
 package com.nglinx.pulse.activity;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,40 +11,31 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nglinx.pulse.R;
-import com.nglinx.pulse.adapter.CustomInfoViewAdaptor;
 import com.nglinx.pulse.adapter.GroupAdapter;
 import com.nglinx.pulse.adapter.GroupMemberAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
-import com.nglinx.pulse.models.UserType;
+import com.nglinx.pulse.models.UserModel;
 import com.nglinx.pulse.service.BackendService;
 import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.session.SharedPrefUtility;
@@ -53,7 +43,6 @@ import com.nglinx.pulse.utils.ApplicationUtils;
 import com.nglinx.pulse.utils.DialogUtils;
 import com.nglinx.pulse.utils.MapUtils;
 import com.nglinx.pulse.utils.ProgressbarUtil;
-import com.nglinx.pulse.utils.RestApiUtils;
 import com.nglinx.pulse.utils.retrofit.ApiEndpointInterface;
 import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
@@ -92,6 +81,9 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
     //Right Group NavigationView Icons
     TextView tv_username_grouptabs;
+    Button bt_addGroup;
+    CreateGroupListener createGroupListener;
+    View headerLayout_groups;
 
     //Left Menu NavigationView
     TextView tv_username;
@@ -121,11 +113,11 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         ds = DataSession.getInstance();
         mapUtils = new MapUtils();
 
-        //Initialize all the icons on this screen and Navigation Menu screens
-        initializeIcons();
-
         //Intialize all the Parent Abstract activities
         initializeParent();
+
+        //Initialize all the icons on this screen and Navigation Menu screens
+        initializeIcons();
 
         //Activate icons for the default look on screen
         activateDefaultVisibleItems();
@@ -140,6 +132,8 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         getLocation();
 
         startTimerMapRefreshTask();
+
+        refreshUserDetails();
     }
 
     @Override
@@ -185,12 +179,21 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         lv_groups.setFastScrollEnabled(true);
 
         nav_groups = (NavigationView) findViewById(R.id.nav_groups);
-        View headerLayout = nav_groups.getHeaderView(0);
-        tv_username_grouptabs = (TextView) headerLayout.findViewById(R.id.tv_username_grouptabs);
+        headerLayout_groups = nav_groups.getHeaderView(0);
+
+        tv_username_grouptabs = (TextView) headerLayout_groups.findViewById(R.id.tv_username_grouptabs);
+        bt_addGroup = (Button) headerLayout_groups.findViewById(R.id.bt_addGroup);
 
         sv_group_members = (HorizontalView) findViewById(R.id.sv_group_members);
 
         fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+
+        headerLayout = navigationView.getHeaderView(0);
+        TextView tv_username = headerLayout.findViewById(R.id.tv_username);
+        tv_username.setText(ds.getUserModel().getName());
+        TextView tv_email = headerLayout.findViewById(R.id.tv_email);
+        tv_email.setText(ds.getUserModel().getEmail());
     }
 
     private void initializeGroups() {
@@ -206,6 +209,11 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
         groupClickListener = new GroupClickListener();
         lv_groups.setOnItemClickListener(groupClickListener);
+
+        createGroupListener = new CreateGroupListener();
+        bt_addGroup.setOnClickListener(createGroupListener);
+
+        tv_username_grouptabs.setText(ds.getUserModel().getName());
     }
 
     private void initializeGroupMembers() {
@@ -315,8 +323,9 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
             GroupMemberModel selectedMember = groupsMembersList.get(position);
 
             if (selectedMember.getId().equals("")) {
-                //addNewGroupMember();
-                Toast.makeText(HomeActivity.this, "TBD", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), AddMemberActivity.class);
+                startActivity(intent);
+                finish();
             } else {
                 ds.setSelected_group_member_id(selectedMember.getId());
                 SharedPrefUtility.saveSelectedGroupMemberId(getApplicationContext(), selectedMember.getId());
@@ -519,42 +528,51 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         }
     }
 
-    /*class CreateGroupListener implements View.OnClickListener {
+    class CreateGroupListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            final Dialog dialog = new Dialog(Home.this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setCancelable(true);
-
-            // Include dialog.xml file
-            dialog.setContentView(R.layout.create_new_circle);
-
-            // set values for custom dialog components - text, image and button
-            GroupName1 = (EditText) dialog.findViewById(R.id.group_name);
-
-            dialog.show();
-            DialogCreateBtn = (Button) dialog.findViewById(R.id.btnCreate);
-            dialogbackbtn = (ImageView) dialog.findViewById(R.id.dialog_back_btn);
-            dialogbackbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-
-            DialogCreateBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    newGroupName = GroupName1.getText().toString().trim();
-                    if (newGroupName.isEmpty() || newGroupName.length() == 0 || newGroupName.equals("") || newGroupName == null) {
-                        Toast.makeText(Home.this, "Enter Group Name", Toast.LENGTH_SHORT).show();
-                    } else {
-                        CreateGroupApi();
-                        dialog.dismiss();
-                    }
-                }
-            });
+            Intent intent = new Intent(getApplicationContext(), CreateGroupActivty.class);
+            startActivity(intent);
         }
-    }*/
+    }
+
+    private void refreshUserDetails() {
+
+        final ProgressDialog mProgressDialog = ProgressbarUtil.startProgressBar(this);
+
+        ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
+        apiEndpointInterface.getUserDetailsIncludingGroups(ds.getUserModel().getId(), new RetroResponse<UserModel>() {
+            @Override
+            public void onSuccess() {
+                ProgressbarUtil.stopProgressBar(mProgressDialog);
+                UserModel userModel = (UserModel) model;
+                ds.setUserModel(userModel);
+                groupsList.clear();
+                groupsList.addAll(ds.getUserModel().getGroups());
+                groupAdapter.notifyDataSetChanged();
+                groupMemberAdapter.notifyDataSetChanged();
+                int pos = getGroupPositionInList(groupsList, ds.getSelected_group_id());
+                lv_groups.performItemClick(groupAdapter.getView(pos, null, null), pos, pos);
+            }
+
+            @Override
+            public void onFailure() {
+                ProgressbarUtil.stopProgressBar(mProgressDialog);
+                DialogUtils.diaplayErrorDialog(HomeActivity.this, errorMsg);
+            }
+        });
+    }
+
+
+    private int getGroupPositionInList(ArrayList<GroupModel> groups, String groupId) {
+        int pos = 0;
+        for (int i = 0; i < groups.size(); i++) {
+            GroupModel model = groups.get(i);
+            if (model.getId().equalsIgnoreCase(groupId)) {
+                pos = i;
+                break;
+            }
+        }
+        return pos;
+    }
 }
