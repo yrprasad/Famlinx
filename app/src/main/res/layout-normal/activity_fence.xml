@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fitsSystemWindows="true" tools:openDrawer="start">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="com.nglinx.pulse.activity.HomeActivity">
+        <!-- include your toolbar layout-->
+        <include layout="@layout/toolbar_group" />
+        <!-- Let's add fragment -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="20">
+
+            <RelativeLayout
+                android:id="@+id/frame1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4">
+
+                 <LinearLayout
+                     android:id="@+id/frame2"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:orientation="vertical"
+                     android:weightSum="4">
+
+                      <RelativeLayout
+                          android:id="@+id/frame3"
+                          android:layout_width="match_parent"
+                          android:layout_height="0dp"
+                          android:layout_weight="2">
+
+                          <Spinner
+                              android:theme="@style/MatchSpinnerTheme"
+                              android:id="@+id/spinner1"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:entries="@array/fence_arrays"
+                              android:prompt="@string/fence_prompt"
+                              android:background="#00405d"
+                              android:popupBackground="#00405d"
+                              android:overlapAnchor="false"/>
+
+
+                      </RelativeLayout>
+
+                     <RelativeLayout
+                         android:id="@+id/frame4"
+                         android:layout_width="match_parent"
+                         android:layout_height="0dp"
+                         android:layout_weight="2"
+                         android:background="#002333">
+
+                         <LinearLayout
+                             android:id="@+id/frame5"
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:orientation="horizontal"
+                             android:weightSum="5">
+
+                             <RelativeLayout
+                                 android:id="@+id/frame6"
+                                 android:layout_width="0dp"
+                                 android:layout_height="match_parent"
+                                 android:layout_weight=".5">
+
+                                 <ImageView
+                                     android:layout_width="@dimen/image_width_twenty"
+                                     android:layout_height="@dimen/image_height_twenty"
+                                     android:layout_centerHorizontal="true"
+                                     android:layout_centerVertical="true"
+                                     android:background="@drawable/search_icon"/>
+
+                             </RelativeLayout>
+
+                             <RelativeLayout
+                                 android:id="@+id/frame7"
+                                 android:layout_width="0dp"
+                                 android:layout_height="match_parent"
+                                 android:layout_weight="4.5">
+
+
+                                 <AutoCompleteTextView
+                                     android:id="@+id/editText6"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="match_parent"
+                                     android:inputType="textPersonName"
+                                     android:textColor="#ffffff"
+                                     android:textSize="@dimen/text_size_fourteen"
+                                     android:text="Search location here" />
+                             </RelativeLayout>
+
+                         </LinearLayout>
+
+                     </RelativeLayout>
+
+                 </LinearLayout>
+
+
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/frame8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="16">
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <LinearLayout
+                android:id="@+id/frame9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="20">
+
+                <RelativeLayout
+                    android:id="@+id/frame10"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="10"/>
+
+                <RelativeLayout
+                    android:id="@+id/frame11"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="9">
+
+                    <LinearLayout
+                        android:id="@+id/frame12"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <RelativeLayout
+                            android:id="@+id/frame13"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5">
+
+                            <LinearLayout
+                                android:id="@+id/frame14"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <RelativeLayout
+                                    android:id="@+id/frame27"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.75">
+
+                                    <LinearLayout
+                                        android:id="@+id/frame25"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:weightSum="5">
+
+                                        <RelativeLayout
+                                            android:id="@+id/frame26"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="2.5">
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/frame28"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentTop="true"
+                                            android:layout_weight="1.5">
+
+                                            <ImageView
+                                                android:id="@+id/imageView"
+                                                android:layout_width="@dimen/image_width_fifty"
+                                                android:layout_height="@dimen/image_height_fifty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/locate_me_icon" />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/frame35"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentTop="true"
+                                            android:layout_weight="0.5">
+
+                                            <TextView
+                                                android:id="@+id/textView12"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:text="Locate Me"
+                                                android:textSize="10sp" />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/frame34"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentTop="true"
+                                            android:layout_weight="0.5">
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/frame15"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.25">
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/frame30"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.5">
+
+                            <LinearLayout
+                                android:id="@+id/frame19"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="10">
+
+                                <RelativeLayout
+                                    android:id="@+id/frame31"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="7">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:weightSum="6">
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="3">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:weightSum="3"
+                                                android:orientation="vertical">
+
+                                                <RelativeLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="0dp"
+                                                    android:layout_weight="1">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="Create Park Fence"
+                                                        android:textSize="@dimen/text_size_eight"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:layout_alignParentEnd="true"/>
+
+                                                </RelativeLayout>
+
+                                                <RelativeLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="0dp"
+                                                    android:layout_weight="1">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="Create School Fence"
+                                                        android:textSize="@dimen/text_size_eight"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:layout_alignParentEnd="true"/>
+
+                                                </RelativeLayout>
+
+                                                <RelativeLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="0dp"
+                                                    android:layout_weight="1">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:text="Create Home Fence"
+                                                        android:textSize="@dimen/text_size_eight"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:layout_alignParentEnd="true"/>
+
+                                                </RelativeLayout>
+
+
+                                            </LinearLayout>
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/blank"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="3">
+                                        </RelativeLayout>
+                                   </LinearLayout>
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/frame18"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="vertical"
+                                            android:weightSum="5">
+
+                                            <RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0dp"
+                                                android:layout_weight="3.5">
+
+                                        <ImageView
+                                            android:layout_width="10dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_alignParentTop="true"
+                                            android:layout_centerHorizontal="true"
+                                            android:background="@drawable/fence_bg_bar" />
+
+                                            </RelativeLayout>
+
+                                        </LinearLayout>
+
+                                    </RelativeLayout>
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="vertical"
+                                            android:weightSum="6">
+
+                                            <RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0dp"
+                                                android:layout_weight=".9">
+
+                                                <ImageView
+                                                    android:layout_width="@dimen/image_width_thirty"
+                                                    android:layout_height="@dimen/image_height_thirty"
+                                                    android:layout_alignParentTop="true"
+                                                    android:layout_centerHorizontal="true"
+                                                    android:background="@drawable/park_fence" />
+
+                                            </RelativeLayout>
+
+                                            <RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0dp"
+                                                android:layout_weight=".2"/>
+
+                                            <RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0dp"
+                                                android:layout_weight=".9">
+
+                                                <ImageView
+                                                    android:layout_width="@dimen/image_width_thirty"
+                                                    android:layout_height="@dimen/image_height_thirty"
+                                                    android:layout_alignParentTop="true"
+                                                    android:layout_centerHorizontal="true"
+                                                    android:background="@drawable/school_fence" />
+
+                                            </RelativeLayout>
+
+                                            <RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0dp"
+                                                android:layout_weight=".2"/>
+
+                                            <RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="0dp"
+                                                android:layout_weight=".9">
+
+                                                <ImageView
+                                                    android:layout_width="@dimen/image_width_thirty"
+                                                    android:layout_height="@dimen/image_height_thirty"
+                                                    android:layout_alignParentTop="true"
+                                                    android:layout_centerHorizontal="true"
+                                                    android:background="@drawable/home_fence" />
+
+                                            </RelativeLayout>
+
+
+
+                                        </LinearLayout>
+
+                                    </RelativeLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/frame32"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:weightSum="5">
+
+                                        <RelativeLayout
+                                            android:id="@+id/frame33"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="2.5">
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/frame36"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1.5">
+
+                                            <ImageView
+                                                android:id="@+id/imageView2"
+                                                android:layout_width="@dimen/image_width_fifty"
+                                                android:layout_height="@dimen/image_height_fifty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/fence" />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/frame29"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentTop="true"
+                                            android:layout_weight="0.5">
+
+                                            <TextView
+                                                android:id="@+id/textView13"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:text="Create"
+                                                android:textSize="@dimen/text_size_ten" />
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:id="@+id/frame37"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentTop="true"
+                                            android:layout_weight="0.5">
+
+                                            <TextView
+                                                android:id="@+id/textView14"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:text="Geo Fence"
+                                                android:textSize="@dimen/text_size_ten" />
+
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/frame23"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+<android.support.design.widget.NavigationView android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
+

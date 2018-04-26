@@ -1,0 +1,144 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_notification_row"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:weightSum="4"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_height_hundred"
+        android:background="@drawable/notification_bg"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/layout_height_fifty"
+            android:layout_weight="1.5">
+
+            <ImageView
+                android:id="@+id/image_for_member1"
+                android:layout_width="@dimen/image_width_thirty_five"
+                android:layout_height="@dimen/image_height_thirty_five"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/img2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/layout_height_fifty"
+            android:layout_marginTop="2dp"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/notif_row_member_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jhon Doe1"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_twelve"/>
+
+            <TextView
+                android:id="@+id/notif_row_member_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notif_row_member_name"
+                android:text="Has left from home"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_twelve"/>
+
+            <TextView
+                android:id="@+id/invite_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/notif_row_member_detail"
+                android:text="Home fence - 3 hour ago"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_ten"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin_top_five"
+                android:orientation="horizontal"
+                android:weightSum="2.5">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8">
+
+                    <ImageView
+                        android:id="@+id/suspend_member"
+                        android:layout_width="@dimen/image_width_fifteen"
+                        android:layout_height="@dimen/image_height_fifteen"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:src="@drawable/gps"
+                        android:onClick="suspendInviteHandler"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".3">
+
+                    <View
+                        android:id="@+id/view1"
+                        android:layout_width="1dp"
+                        android:layout_height="@dimen/layout_height_thirty"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/editText"
+                        android:background="#000000"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".8">
+
+
+                    <ImageView
+                        android:id="@+id/reject_member"
+                        android:layout_width="@dimen/image_width_fifteen"
+                        android:layout_height="@dimen/image_height_fifteen"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:src="@drawable/phone"
+                        android:onClick="rejectInviteHandlerFromAcceptedInvites"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fitsSystemWindows="true" tools:openDrawer="start">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="com.nglinx.pulse.activity.HomeActivity">
+        <!-- include your toolbar layout-->
+        <include layout="@layout/toolbar_setting" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="20">
+
+
+         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="20"
+                android:orientation="vertical">
+
+             <android.support.v4.widget.NestedScrollView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:fillViewport="true">
+
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".5"/>
+
+                <RelativeLayout
+                    android:id="@+id/manage_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:elevation="2dp"
+                    android:clickable="true"
+                    android:background="@drawable/myrect"
+                    android:foreground="@drawable/ripple_effect">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:text="Manage User"
+                        android:fontFamily="sans-serif"
+                        android:textSize="@dimen/text_size_sixteen"
+                        android:textColor="#000000"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".3"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4.5"
+                    android:elevation="2dp"
+                    android:background="@drawable/myrect">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="4">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.2">
+
+                            <TextView
+                                android:id="@+id/speedview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="Speed"
+                                android:textSize="@dimen/text_size_sixteen"
+                                android:textColor="#000000"
+                                android:layout_centerHorizontal="true" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.2">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight=".6">
+
+                                        <RadioButton
+                                            android:id="@+id/radiobutton"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginEnd="@dimen/text_size_fourteen"
+                                            android:textColor="#000000" />
+
+
+                                    </RelativeLayout>
+
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1">
+
+                                        <TextView
+                                            android:id="@+id/metric"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true"
+                                            android:layout_centerHorizontal="true"
+                                            android:textSize="@dimen/text_size_twelve"
+                                            android:textColor="#000000"
+                                            android:text="Metric" />
+                                    </RelativeLayout>
+
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal"
+                                        android:weightSum="2">
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".6">
+
+                                            <RadioButton
+                                                android:id="@+id/radiobutton1"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:textColor="#000000" />
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:id="@+id/imperial"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerVertical="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:textSize="@dimen/text_size_twelve"
+                                                android:textColor="#000000"
+                                                android:text="Imperial" />
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight=".2">
+
+                            <View
+                                android:id="@+id/view1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="#cccccc"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.5">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".8">
+
+                                    <TextView
+                                        android:id="@+id/limit"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/text_size_twelve"
+                                        android:textColor="#000000"
+                                        android:text="Set Speed Limit"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".5"
+                                    android:focusableInTouchMode="true">
+
+                                    <EditText
+                                        android:id="@+id/editspeedlimit"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_centerVertical="true"
+                                        android:inputType="number"
+                                        android:hint="000"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".7">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/text_size_twelve"
+                                        android:text="KMph / Mph" />
+
+                                </RelativeLayout>
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".3"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="8"
+                    android:elevation="2dp"
+                    android:background="@drawable/myrect">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="7.5">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.2">
+
+                        <TextView
+                            android:id="@+id/notification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Notification"
+                            android:textSize="@dimen/text_size_sixteen"
+                            android:textColor="#000000"
+                            android:layout_centerHorizontal="true" />
+
+                    </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.2">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".9">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Phone Notification"
+                                        android:layout_centerVertical="true"
+                                        android:layout_centerHorizontal="true"
+                                        android:textColor="#000000"
+                                        android:textSize="@dimen/text_size_sixteen"/>
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".2">
+
+                                    <View
+                                        android:id="@+id/view"
+                                        android:layout_width="1dp"
+                                        android:layout_height="@dimen/layout_height_thirty"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="#000000" />
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".9">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="InApp Notification"
+                                        android:layout_centerVertical="true"
+                                        android:layout_centerHorizontal="true"
+                                        android:textColor="#000000"
+                                        android:textSize="@dimen/text_size_sixteen"/>
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="5">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.9">
+
+                                    <CheckBox
+                                        android:id="@+id/checkbox"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:id="@id/text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/checkbox"
+                                        android:layout_alignBottom="@+id/checkbox"
+                                        android:layout_alignStart="@+id/text1"
+                                        android:text="Friend Request" />
+
+                                    <CheckBox
+                                        android:id="@+id/checkbox1"
+                                        android:layout_below="@+id/checkbox"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:id="@+id/text1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/checkbox1"
+                                        android:layout_alignBottom="@+id/checkbox1"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_toEndOf="@+id/checkbox1"
+                                        android:text="Fence Breach" />
+
+                                    <CheckBox
+                                        android:id="@+id/checkbox2"
+                                        android:layout_below="@+id/checkbox1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:id="@+id/text2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/checkbox2"
+                                        android:layout_alignBottom="@+id/checkbox2"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_toEndOf="@+id/checkbox2"
+                                        android:text="OverSpeeding" />
+
+                                    <CheckBox
+                                        android:id="@+id/checkbox3"
+                                        android:layout_below="@+id/checkbox2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:id="@+id/text3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/checkbox3"
+                                        android:layout_alignBottom="@+id/checkbox3"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_toEndOf="@+id/checkbox3"
+                                        android:text="Tracking Me" />
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".2">
+
+                                    <View
+                                        android:id="@+id/view2"
+                                        android:layout_width="1dp"
+                                        android:layout_height="@dimen/layout_height_two_hundred"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_centerVertical="true"
+                                        android:background="#000000" />
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.9">
+
+                                    <CheckBox
+                                        android:id="@+id/checkbox4"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:id="@+id/text4"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/checkbox4"
+                                        android:layout_alignBottom="@+id/checkbox4"
+                                        android:layout_marginStart="@dimen/layout_margin_left_right_eight"
+                                        android:layout_toEndOf="@+id/checkbox5"
+                                        android:text="Friend Request" />
+
+                                    <CheckBox
+                                        android:id="@+id/checkbox5"
+                                        android:layout_below="@+id/checkbox4"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:id="@+id/text5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/checkbox5"
+                                        android:layout_alignBottom="@+id/checkbox5"
+                                        android:layout_marginStart="@dimen/layout_margin_left_right_eight"
+                                        android:layout_toEndOf="@+id/checkbox5"
+                                        android:text="Fence Breach" />
+
+                                    <CheckBox
+                                        android:id="@+id/checkbox6"
+                                        android:layout_below="@+id/checkbox5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:id="@+id/text6"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/checkbox6"
+                                        android:layout_alignBottom="@+id/checkbox6"
+                                        android:layout_marginStart="@dimen/layout_margin_left_right_eight"
+                                        android:layout_toEndOf="@+id/checkbox6"
+                                        android:text="OverSpeeding" />
+
+                                    <CheckBox
+                                        android:id="@+id/checkbox7"
+                                        android:layout_below="@+id/checkbox6"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <TextView
+                                        android:id="@+id/text7"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/checkbox7"
+                                        android:layout_alignBottom="@+id/checkbox7"
+                                        android:layout_marginStart="@dimen/layout_margin_left_right_eight"
+                                        android:layout_toEndOf="@+id/checkbox7"
+                                        android:text="Tracking Me" />
+
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+
+
+
+                     </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".3"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4.5"
+                    android:elevation="2dp"
+                    android:background="@drawable/myrect">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="4">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.2">
+
+                            <TextView
+                                android:id="@+id/fenceview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="Fence"
+                                android:textSize="@dimen/text_size_sixteen"
+                                android:textColor="#000000"
+                                android:layout_centerHorizontal="true" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.2">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".8">
+
+                                    <TextView
+                                        android:id="@+id/shape"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/text_size_twelve"
+                                        android:textColor="#000000"
+                                        android:text="Default Shape"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <Spinner
+                                        android:theme="@style/MatchSpinnerThemeshape"
+                                        android:spinnerMode="dropdown"
+                                        android:id="@+id/spinnerCustom2"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="match_parent"
+                                        android:entries="@array/shapes"
+                                        android:background="@android:drawable/btn_dropdown"
+                                        android:popupBackground="#ffffff"
+                                        android:overlapAnchor="false"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".2">
+
+
+                                </RelativeLayout>
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight=".2">
+
+                            <View
+                                android:id="@+id/view3"
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"
+                                android:background="#cccccc"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.5">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".8">
+
+                                    <TextView
+                                        android:id="@+id/radius"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_centerHorizontal="true"
+                                        android:textSize="@dimen/text_size_twelve"
+                                        android:textColor="#000000"
+                                        android:text="Default Radius"/>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight=".5"
+                                    android:focusableInTouchMode="true">
+
+                                    <EditText
+                                        android:id="@+id/editdefaultradius"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_centerVertical="true"
+                                        android:inputType="number"
+                                        android:hint="00"/>
+
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight=".5"/>
+
+            </LinearLayout>
+
+             </android.support.v4.widget.NestedScrollView>
+
+            </LinearLayout>
+
+          </RelativeLayout>
+
+    </LinearLayout>
+
+    </RelativeLayout>
+
+
+    </LinearLayout>
+
+<android.support.design.widget.NavigationView android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

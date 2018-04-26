@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">FamLinx</string>
+    <string name="fence_prompt">Fence</string>
+
+    <string-array name="fence_arrays">
+        <item>Home fence for kids</item>
+        <item>park fence for kids</item>
+        <item>Home fence for pets</item>
+        <item>park fence for pets</item>
+        <item>Home fence for adults</item>
+        <item>park fence for adults</item>
+        <item>default fence for kids</item>
+        <item>default fence for pets</item>
+    </string-array>
+
+    <string-array name="shapes">
+        <item>Circle</item>
+        <item>Square</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fitsSystemWindows="true" tools:openDrawer="start">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context=".MainActivity">
+        <!-- include your toolbar layout-->
+        <include layout="@layout/toolbar_group" />
+        <!-- Let's add fragment -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="20">
+
+
+                   <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="18">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <android.support.v4.widget.NestedScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fillViewport="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp"/>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/layout_height_hundred"
+                                        android:layout_marginLeft="@dimen/layout_margin_left_right_twenty"
+                                        android:layout_marginRight="@dimen/layout_margin_left_right_twenty"
+                                        android:orientation="horizontal"
+                                        android:background="@drawable/groups_bar">
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1.2">
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_thirty"
+                                                android:layout_height="@dimen/image_height_twenty_five"
+                                                android:layout_centerVertical="true"
+                                                android:layout_centerHorizontal="true"
+                                                android:background="@drawable/black_group_icon"/>
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".3"/>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="2.3">
+
+                                            <TextView
+                                                android:id="@+id/groupname"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="@dimen/layout_margin_top_ten"
+                                                android:text="Default"
+                                                android:textSize="18sp"/>
+
+                                            <TextView
+                                                android:id="@+id/groupmember"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@+id/groupname"
+                                                android:text="5 members in this circle"
+                                                android:textSize="@dimen/text_size_twelve"/>
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".3"/>
+
+                                        <RelativeLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight=".9">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:orientation="vertical"
+                                                android:weightSum="2.5">
+
+                                                <RelativeLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="0dp"
+                                                    android:layout_weight="2.5">
+
+                                                    <ImageView
+                                                        android:id="@+id/editgroup"
+                                                        android:layout_width="30dp"
+                                                        android:layout_height="30dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:clickable="true"
+                                                        android:background="@drawable/edit_icon"
+                                                        android:foreground="?android:attr/selectableItemBackground"/>
+
+                                                </RelativeLayout>
+
+                                            </LinearLayout>
+
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp"/>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp"
+                                    android:background="#c3c3c3c3"/>
+                                
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp"/>
+                                
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="160dp"
+                                    android:orientation="vertical">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="60dp">
+
+                                        <ImageView
+                                            android:layout_width="60dp"
+                                            android:layout_height="60dp"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_centerVertical="true"
+                                            android:background="@drawable/circle"/>
+
+                                     <ImageView
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_centerVertical="true"
+                                            android:layout_centerHorizontal="true"
+                                            android:background="@drawable/black_group_icon"/>
+
+
+                                        <ImageView
+                                            android:layout_width="60dp"
+                                            android:layout_height="35dp"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_alignParentBottom="true"
+                                            android:background="@drawable/layer"/>
+
+                                        <ImageView
+                                            android:layout_width="10dp"
+                                            android:layout_height="15dp"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_alignParentBottom="true"
+                                            android:backgroundTint="#ffffff"
+                                            android:background="@drawable/edit_icon"/>
+
+                                    </RelativeLayout>
+                                    
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="20dp"/>
+                                    
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="70dp"
+                                        android:focusableInTouchMode="true">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="vertical"
+                                            android:focusableInTouchMode="true">
+
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="30dp"
+                                                    android:text="Group Name"
+                                                    android:textSize="16sp"
+                                                    android:textColor="#000000"/>
+
+                                                <EditText
+                                                    android:layout_width="300dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="30dp"
+                                                    android:textSize="16sp"
+                                                    android:textColor="#000000"
+                                                    android:backgroundTint="#000000"
+                                                    android:hint="Default"/>
+
+                                        </LinearLayout>
+
+
+                                    </RelativeLayout>
+
+                                    
+                                </LinearLayout>
+                                
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="10dp"
+                                    android:background="#c3c3c3c3"/>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <android.support.v4.widget.NestedScrollView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fillViewport="true">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="30dp"
+                                        android:text="Members"
+                                        android:textSize="20sp"
+                                        android:textColor="#000000"/>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="100dp"
+                                                android:orientation="horizontal"
+                                                android:weightSum="4">
+
+                                            <RelativeLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="100dp"
+                                                android:layout_weight=".3"/>
+                                    
+                                            <RelativeLayout
+                                                android:layout_width="0dp"
+                                                android:layout_height="100dp"
+                                                android:layout_weight="1">
+
+                                                    <ImageView
+                                                        android:id="@+id/member_image"
+                                                        android:layout_width="60dp"
+                                                        android:layout_height="60dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/circle"/>
+
+                                                    <ImageView
+                                                        android:layout_width="40dp"
+                                                        android:layout_height="40dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/black_group_icon"/>
+
+                                                     <TextView
+                                                         android:id="@+id/text_member"
+                                                         android:layout_below="@+id/member_image"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                         android:layout_centerHorizontal="true"
+                                                        android:text="Member 1"/>
+
+                                            </RelativeLayout>
+
+                                             <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight=".3"/>
+
+                                             <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight="1">
+
+                                                    <ImageView
+                                                        android:id="@+id/member_image1"
+                                                        android:layout_width="60dp"
+                                                        android:layout_height="60dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/circle"/>
+
+                                                    <ImageView
+                                                        android:layout_width="40dp"
+                                                        android:layout_height="40dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/black_group_icon"/>
+
+                                                    <TextView
+                                                        android:id="@+id/text_member1"
+                                                        android:layout_below="@+id/member_image1"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:text="Member 1"/>
+
+                                                </RelativeLayout>
+
+                                             <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight=".3"/>
+
+                                             <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight="1">
+
+                                                    <ImageView
+                                                        android:id="@+id/member_image2"
+                                                        android:layout_width="60dp"
+                                                        android:layout_height="60dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/circle"/>
+
+                                                    <ImageView
+                                                        android:layout_width="40dp"
+                                                        android:layout_height="40dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/black_group_icon"/>
+
+                                                    <TextView
+                                                        android:id="@+id/text_member2"
+                                                        android:layout_below="@+id/member_image2"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:text="Member 1"/>
+
+                                                </RelativeLayout>
+
+                                             </LinearLayout>
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="100dp"
+                                                android:orientation="horizontal"
+                                                android:weightSum="4">
+
+                                                <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight=".3"/>
+
+                                                <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight="1">
+
+                                                    <ImageView
+                                                        android:id="@+id/member_image4"
+                                                        android:layout_width="60dp"
+                                                        android:layout_height="60dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/circle"/>
+
+                                                    <ImageView
+                                                        android:layout_width="40dp"
+                                                        android:layout_height="40dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/black_group_icon"/>
+
+                                                    <TextView
+                                                        android:id="@+id/text_member4"
+                                                        android:layout_below="@+id/member_image4"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:text="Member 1"/>
+
+                                                </RelativeLayout>
+
+                                                <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight=".3"/>
+
+                                                <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight="1">
+
+                                                    <ImageView
+                                                        android:id="@+id/member_image3"
+                                                        android:layout_width="60dp"
+                                                        android:layout_height="60dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/circle"/>
+
+                                                    <ImageView
+                                                        android:layout_width="40dp"
+                                                        android:layout_height="40dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/black_group_icon"/>
+
+                                                    <TextView
+                                                        android:id="@+id/text_member3"
+                                                        android:layout_below="@+id/member_image3"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:text="Member 1"/>
+
+                                                </RelativeLayout>
+
+                                                <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight=".3"/>
+
+                                                <RelativeLayout
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="100dp"
+                                                    android:layout_weight="1">
+
+                                                    <ImageView
+                                                        android:id="@+id/add_member_image"
+                                                        android:layout_width="60dp"
+                                                        android:layout_height="60dp"
+                                                        android:layout_centerVertical="true"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:background="@drawable/add_member_icon"/>
+
+                                                    <TextView
+                                                        android:id="@+id/add_member"
+                                                        android:layout_below="@+id/add_member_image"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:text="Add Member"/>
+
+                                                </RelativeLayout>
+
+                                            </LinearLayout>
+
+                                     </LinearLayout>
+
+                                    </android.support.v4.widget.NestedScrollView>
+                                </LinearLayout>
+
+                                </RelativeLayout>
+
+
+                           </LinearLayout>
+
+                        </android.support.v4.widget.NestedScrollView>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:background="#0095da"
+                    android:foreground="@drawable/ripple_effect"
+                    android:textColor="#ffffff"
+                    android:text="Update" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+       </LinearLayout>
+    <!--
+    <android.support.design.widget.NavigationView android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header_main"
+            app:menu="@menu/activity_main_drawer" />-->
+
+</android.support.v4.widget.DrawerLayout>

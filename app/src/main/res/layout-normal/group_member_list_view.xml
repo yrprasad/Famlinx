@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="@dimen/layout_width_hundred"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.3">
+
+            <ImageView
+                android:id="@+id/member_type_image"
+                android:layout_width="@dimen/image_width_thirty"
+                android:layout_height="@dimen/image_height_thirty"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/layout_margin_top_five"/>
+
+            <ImageView
+                android:id="@+id/member_image"
+                android:layout_width="@dimen/image_width_sixty"
+                android:layout_height="@dimen/image_height_sixty"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".7">
+
+            <TextView
+                android:id="@+id/notif_row_member_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Member 1"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_size_sixteen"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
