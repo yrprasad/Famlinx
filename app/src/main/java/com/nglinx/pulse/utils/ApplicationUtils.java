@@ -7,8 +7,12 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
 
+import com.nglinx.pulse.R;
 import com.nglinx.pulse.constants.ApplicationConstants;
+import com.nglinx.pulse.models.AddressModel;
+import com.nglinx.pulse.models.DeviceModel;
 import com.nglinx.pulse.models.DeviceType;
+import com.nglinx.pulse.models.DeviceTypesModel;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.models.UserLoginModel;
@@ -20,7 +24,9 @@ import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
 import java.security.acl.Group;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -247,4 +253,87 @@ public class ApplicationUtils {
 
         return groupMembers;
     }
+
+    public static List<DeviceModel> getNonSensorDevices(final HashSet<DeviceModel> models) {
+
+        List<DeviceModel> nonSensorModels = new ArrayList<>();
+        for (DeviceModel model :
+                models) {
+            if (!model.getType().equals(DeviceType.SENSOR))
+                nonSensorModels.add(model);
+        }
+        return nonSensorModels;
+    }
+
+    public static List<DeviceTypesModel> getNonSensorDeviceTypes(final HashSet<DeviceTypesModel> models) {
+
+        List<DeviceTypesModel> nonSensorModels = new ArrayList<>();
+        for (DeviceTypesModel model :
+                models) {
+            if (!model.getType().equals(DeviceType.SENSOR))
+                nonSensorModels.add(model);
+        }
+        return nonSensorModels;
+    }
+
+    public static HashSet<DeviceTypesModel> updateDefaultValueIfDeviceDescIsNull(final HashSet<DeviceTypesModel> models) {
+
+        for (DeviceTypesModel model :
+                models) {
+            if (model.getSizes() == null) {
+                List<Integer> sizes = new ArrayList<>(3);
+                sizes.add(1);
+                sizes.add(2);
+                sizes.add(3);
+                model.setSizes(sizes);
+            }
+
+            if (model.getDescription() == null) {
+                List<String> description = new ArrayList<>(3);
+                description.add(model.getName() + "Description1");
+                description.add(model.getName() + "Description2");
+                description.add(model.getName() + "Description3");
+                model.setDescription(description);
+            }
+
+            if (model.getCare() == null) {
+                List<String> care = new ArrayList<>(3);
+                care.add(model.getName() + "Care1");
+                care.add(model.getName() + "Care2");
+                care.add(model.getName() + "Care3");
+                model.setCare(care);
+            }
+
+            if (model.getType().equals(DeviceType.A9)) {
+                model.setCost(10);
+            } else if (model.getType().equals(DeviceType.V7)) {
+                model.setCost(11);
+            } else if (model.getType().equals(DeviceType.V16)) {
+                model.setCost(12);
+            } else if (model.getType().equals(DeviceType.MQTT)) {
+                model.setCost(13);
+            }
+        }
+        return models;
+    }
+
+
+    public static int getDeviceCost(DeviceType deviceType) {
+        if (deviceType.equals(DeviceType.A9)) {
+            return 10;
+        } else if (deviceType.equals(DeviceType.V7)) {
+            return 11;
+        } else if (deviceType.equals(DeviceType.V16)) {
+            return 12;
+        } else if (deviceType.equals(DeviceType.MQTT)) {
+            return 13;
+        }
+        return 0;
+    }
+
+    public static String getAddress(AddressModel addressModel) {
+        String address = addressModel.getLocation() + "," + addressModel.getStreet() + "," + addressModel.getLandmark();
+        return address;
+    }
+
 }

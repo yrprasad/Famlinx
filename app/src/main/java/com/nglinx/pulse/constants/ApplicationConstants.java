@@ -72,4 +72,8 @@ public class ApplicationConstants {
     public static final String SIDE_MENU_HOME= "Home";
 
     public static final String DUMMY_USER_CLEAR_ID = "1a";
+
+    public static final String BUY_NOW_DESC_BULLET_PREFIX = "         •   ";
+
+    public static final int SHIPPING_COST = 20;
 }

@@ -10,12 +10,12 @@
             android:title="Sharing" />
         <!--<item android:id="@+id/nav_fence"
             android:title="Fence" />-->
-        <!--<<item android:id="@+id/nav_device"
+        <item android:id="@+id/nav_device"
             android:title="Device" />
-        <item android:id="@+id/nav_profile"
-            android:title="Profile" />
         <item android:id="@+id/nav_buynow"
-            android:title="Buy Now" />
+              android:title="Buy Now" />
+        <!--<item android:id="@+id/nav_profile"
+            android:title="Profile" />
         <item android:id="@+id/nav_changepassword"
               android:title="Change Password" />
         <item android:id="@+id/nav_login"

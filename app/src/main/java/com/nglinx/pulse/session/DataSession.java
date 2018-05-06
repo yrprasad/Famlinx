@@ -4,12 +4,15 @@ import android.content.Context;
 import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.nglinx.pulse.models.AddressModel;
+import com.nglinx.pulse.models.DeviceTypesModel;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.models.InviteModel;
 import com.nglinx.pulse.models.UserModel;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -20,11 +23,15 @@ public class DataSession {
     private static DataSession myObj;
     private List<InviteModel> pendingInvites;
     private List<InviteModel> trackingMeInvites;
+    private AddressModel selectedAddress;
+
+    ArrayList<DeviceTypesModel> deviceTypesList;
 
     public static DataSession getInstance() {
 
         if (myObj == null) {
             myObj = new DataSession();
+
         }
         return myObj;
     }
@@ -367,4 +374,19 @@ public class DataSession {
         this.trackingMeInvites = trackingMeInvites;
     }
 
+    public ArrayList<DeviceTypesModel> getDeviceTypesList() {
+        return deviceTypesList;
+    }
+
+    public void setDeviceTypesList(ArrayList<DeviceTypesModel> deviceTypesList) {
+        this.deviceTypesList = deviceTypesList;
+    }
+
+    public AddressModel getSelectedAddress() {
+        return selectedAddress;
+    }
+
+    public void setSelectedAddress(AddressModel selectedAddress) {
+        this.selectedAddress = selectedAddress;
+    }
 }

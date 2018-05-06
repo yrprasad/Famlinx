@@ -5,6 +5,7 @@ import com.nglinx.pulse.models.ChildUserModel;
 import com.nglinx.pulse.models.DeviceActivateModel;
 import com.nglinx.pulse.models.DeviceModel;
 import com.nglinx.pulse.models.DeviceType;
+import com.nglinx.pulse.models.DeviceTypesModel;
 import com.nglinx.pulse.models.FenceModel;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
@@ -112,6 +113,10 @@ public interface ApiEndpointInterface {
     @PUT("/api/devices")
     void purchaseDevice(@Query("type") DeviceType type, @Body DeviceModel device, Callback<ResponseDto<DeviceModel>> cb);
 
+    //GET Device Types APIs
+    @GET("/api/devices/types")
+    void getDeviceTypes(Callback<ResponseDto<DeviceTypesModel>> cb);
+
     @GET("/api/devices/{deviceId}")
     void getDevice(@Path("deviceId") String deviceId, Callback<ResponseDto<DeviceModel>> cb);
 
@@ -122,7 +127,7 @@ public interface ApiEndpointInterface {
     void returnDevice(@Path("deviceId") String deviceId, Callback<ResponseDto<DeviceModel>> cb);
 
     @GET("/api/devices")
-    void listMyDevices(@Query("type") String deviceType, Callback<ResponseDto<DeviceModel>> cb);
+    void listMyDevices(Callback<ResponseDto<DeviceModel>> cb);
 
     @POST("/api/devices/{deviceId}/activate")
     void activateDevice(@Path("deviceId") String deviceId, @Body DeviceActivateModel device, Callback<ResponseDto<DeviceModel>> cb);
@@ -155,5 +160,9 @@ public interface ApiEndpointInterface {
     //Get Users
     @GET("/api/users")
     void getFilteredUsers(@Query("username") String username, Callback<ResponseDto<UserModel>> cb);
+
+    //List All Devices
+    @GET("/api/inventory/devices")
+    void listAllDevices(Callback<ResponseDto<DeviceModel>> cb);
 
 }

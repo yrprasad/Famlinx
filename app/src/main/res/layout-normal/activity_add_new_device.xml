@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="5"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="320dp">
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="320dp"
+                android:background="@drawable/rounded_rectangle_bg"
+                android:layout_centerInParent="true"
+                android:id="@+id/relativeLayout">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"/>
+
+                    <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="Name The Device"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+                    
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:focusableInTouchMode="true">
+
+                        <EditText
+                            android:layout_width="230dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="30dp"
+                            android:background="#ffffff"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:hint="Kids"/>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="Activation Code"
+                            android:textSize="16sp"
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:focusableInTouchMode="true">
+
+                        <EditText
+                            android:layout_width="230dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="30dp"
+                            android:background="#ffffff"
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:hint="abc123456"/>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="Select A Member Profile"
+                            android:textSize="16sp"
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+
+                        <Spinner
+                            android:theme="@style/devicespinnerstyletheme"
+                            android:id="@+id/spinner"
+                            android:spinnerMode="dropdown"
+                            android:layout_marginStart="30dp"
+                            android:layout_width="230dp"
+                            android:layout_height="30dp"
+                            android:entries="@array/add_device"
+                            android:prompt="@string/member_prompt"
+                            android:background="@drawable/spinner_background"
+                            android:popupBackground="#ffffff"/>
+
+                        <!--<Spinner
+                            android:theme="@style/devicespinnerstyletheme"
+                            android:id="@+id/spinner1"
+                            android:layout_marginStart="30dp"
+                            android:layout_width="230dp"
+                            android:layout_height="match_parent"
+                            android:entries="@array/add_device"
+                            android:prompt="@string/member_prompt"
+                            android:background="#ffffff"
+                            android:popupBackground="#ffffff"
+                            android:overlapAnchor="false"/>-->
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+
+                        <Button
+                            android:id="@+id/create_member"
+                            android:layout_width="110dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="30dp"
+                            android:text="Create Member Profile"
+                            android:textSize="10sp"
+                            android:background="@drawable/button_rounded_add"/>
+
+                        <Button
+                            android:id="@+id/submit"
+                            android:layout_width="110dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="20dp"
+                            android:text="Submit"
+                            android:textSize="10sp"
+                            android:layout_toEndOf="@+id/create_member"
+                            android:background="@drawable/button_rounded_add"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

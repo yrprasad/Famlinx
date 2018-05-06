@@ -70,6 +70,14 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.nav_device:
+                Intent intent4 = new Intent(this, DeviceCatelogActivity.class);
+                startActivity(intent4);
+                return true;
+            case R.id.nav_buynow:
+                Intent intent6 = new Intent(this, BuyNowActivity.class);
+                startActivity(intent6);
+                return true;
             /*case R.id.nav_group:
                 Intent intent1 = new Intent(this, CreateGroupActivty.class);
                 startActivity(intent1);
@@ -78,17 +86,9 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 Intent intent3 = new Intent(this, FenceActivity.class);
                 startActivity(intent3);
                 return true;*/
-            /*case R.id.nav_device:
-                Intent intent4 = new Intent(this, DeviceCatelogActivity.class);
-                startActivity(intent4);
-                return true;
-            case R.id.nav_profile:
+            /*case R.id.nav_profile:
                 Intent intent5 = new Intent(this, ProfileActivity.class);
                 startActivity(intent5);
-                return true;
-            case R.id.nav_buynow:
-                Intent intent6 = new Intent(this, BuyNowActivity.class);
-                startActivity(intent6);
                 return true;
             case R.id.nav_changepassword:
                 Intent intent7 = new Intent(this, ChangePasswordActivity.class);
