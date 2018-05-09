@@ -1,52 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_notifications_detail"
     android:layout_width="match_parent"
-    android:layout_marginBottom="5dp"
-    android:layout_marginTop="5dp"
-    android:gravity="center"
-    android:orientation="horizontal"
-    android:weightSum="4"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/l1"
-        android:layout_width="326dp"
-        android:layout_height="544dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="1.14"
-        android:gravity="left"
-        android:orientation="vertical"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:weightSum="1">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <ImageView
+            android:id="@+id/selected_notification_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/img1"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/selected_notification_image"
+            android:layout_marginTop="10dp"
+            android:background="#cecece"/>
 
         <TextView
             android:id="@+id/notif_detail_date"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#edeeee"
-            android:ellipsize="end"
-            android:gravity="left"
-            android:maxLines="1"
-            android:text="Speed"
-            android:textColor="#FF383838"
-            android:textSize="12sp"
-            android:textStyle="normal|italic"/>
+            android:layout_below="@+id/line"
+            android:layout_marginTop="10dp"
+            android:text="Hide Notification"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:foreground="@drawable/ripple_effect"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/notif_detail_message"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#edeeee"
-            android:fadeScrollbars="false"
-            android:gravity="left"
-            android:inputType="textMultiLine"
-            android:text="CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
-            android:textColor="#FF383838"
-            android:textSize="@dimen/place_autocomplete_progress_size"
-            android:textStyle="bold"
-            />
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/notif_detail_date"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:foreground="@drawable/ripple_effect"
+            android:gravity="center_horizontal"
+            android:text="Turn Off Notification from this device"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"/>
+
+
+    </RelativeLayout>
+
 
 </LinearLayout>

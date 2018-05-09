@@ -76,7 +76,7 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
         holder.notif_row_date = (TextView) convertView.findViewById(R.id.notif_row_date);
         holder.notif_row_message = (TextView) convertView.findViewById(R.id.notif_row_message);
 
-        holder.iv_delete_notification = (ImageView) convertView.findViewById(R.id.iv_delete_notification);
+        /*holder.iv_delete_notification = (ImageView) convertView.findViewById(R.id.iv_delete_notification);
         holder.iv_delete_notification.setTag(holder.modelHolder);
         holder.iv_delete_notification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +92,7 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
             public void onClick(View v) {
                 ((NotificationActivity)context).onItemClick(holder.iv_view_notification, position, 0);
             }
-        });
+        });*/
 
         // Populate the data into the template view using the data object
 
