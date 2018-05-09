@@ -76,4 +76,9 @@ public class ApplicationConstants {
     public static final String BUY_NOW_DESC_BULLET_PREFIX = "         •   ";
 
     public static final int SHIPPING_COST = 20;
+
+    public static final String FAILED_ITEM_COUNT_STR = "failedItemsCount";
+    public static final String TOTAL_ITEM_COUNT_STR = "totalItemsCount";
+    public static final String TOTAL_ORDER_COST_STR = "failedOrderTotalCost";
+
 }

@@ -94,8 +94,6 @@ public class SelectAddressActivity extends AppCompatActivity {
         if (null == ds.getSelectedAddress()) {
             Toast.makeText(this, "Select any address", Toast.LENGTH_SHORT).show();
         } else {
-            AddressModel addressModel = (AddressModel) lv_addresses.getSelectedItem();
-            ds.setSelectedAddress(addressModel);
             Intent intent4 = new Intent(this, CartActivity.class);
             startActivity(intent4);
             finish();

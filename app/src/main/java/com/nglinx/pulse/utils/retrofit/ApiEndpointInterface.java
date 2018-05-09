@@ -4,6 +4,7 @@ package com.nglinx.pulse.utils.retrofit;
 import com.nglinx.pulse.models.ChildUserModel;
 import com.nglinx.pulse.models.DeviceActivateModel;
 import com.nglinx.pulse.models.DeviceModel;
+import com.nglinx.pulse.models.DeviceOrderModel;
 import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.DeviceTypesModel;
 import com.nglinx.pulse.models.FenceModel;
@@ -165,4 +166,7 @@ public interface ApiEndpointInterface {
     @GET("/api/inventory/devices")
     void listAllDevices(Callback<ResponseDto<DeviceModel>> cb);
 
+    //Place device order.
+    @PUT("/api/devices/orders")
+    void createDeviceOrder(@Query("type") DeviceType type, @Body DeviceOrderModel device, Callback<ResponseDto<DeviceOrderModel>> cb);
 }

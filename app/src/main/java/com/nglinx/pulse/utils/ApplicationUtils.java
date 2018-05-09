@@ -11,6 +11,7 @@ import com.nglinx.pulse.R;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.AddressModel;
 import com.nglinx.pulse.models.DeviceModel;
+import com.nglinx.pulse.models.DeviceStatus;
 import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.DeviceTypesModel;
 import com.nglinx.pulse.models.GroupMemberModel;
@@ -26,8 +27,10 @@ import java.security.acl.Group;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import retrofit.client.Header;
@@ -334,6 +337,37 @@ public class ApplicationUtils {
     public static String getAddress(AddressModel addressModel) {
         String address = addressModel.getLocation() + "," + addressModel.getStreet() + "," + addressModel.getLandmark();
         return address;
+    }
+
+    public static Map<DeviceType, Integer> getAvailableDeviceCount(ArrayList<DeviceModel> deviceTypesModelsList) {
+
+        Map<DeviceType, Integer> availableDevices = new HashMap<>();
+
+        //Initialize all the device types count to 0.
+        for (DeviceType deviceType :
+                DeviceType.values()) {
+            availableDevices.put(deviceType, 0);
+        }
+
+        //Count the actual devices availability and count the same.
+        for (DeviceModel model:
+        deviceTypesModelsList) {
+            if((model.getStatus().equals(DeviceStatus.CREATED)) || (model.getStatus().equals(DeviceStatus.RETURNED)))
+            {
+                availableDevices.put(model.getType(), availableDevices.get(model.getType()).intValue() + 1 );
+            }
+        }
+        return availableDevices;
+    }
+
+    public static int getTotalOrderCount(ArrayList<DeviceTypesModel> deviceTypesModelsList)
+    {
+        int count = 0;
+        for (DeviceTypesModel device:
+        deviceTypesModelsList) {
+            count += device.getCount();
+        }
+        return count;
     }
 
 }

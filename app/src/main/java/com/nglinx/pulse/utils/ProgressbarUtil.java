@@ -24,6 +24,20 @@ public class ProgressbarUtil {
         return mProgressDialog;
     }
 
+    public static ProgressDialog getProgressBar(final Context context, final String message) {
+
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+        mProgressDialog.setMessage(message);
+        mProgressDialog.setCancelable(false);
+        return mProgressDialog;
+    }
+
+    public static void startProgressBar(final ProgressDialog progressBar) {
+        progressBar.show();
+    }
+
     public static ProgressDialog startProgressBar(final Context context) {
         return startProgressBar(context, "Loading...");
     }

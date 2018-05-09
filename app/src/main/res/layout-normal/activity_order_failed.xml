@@ -168,13 +168,14 @@
                                                     android:text="Item(s)"/>
 
                                                 <TextView
+                                                    android:id="@+id/tv_failed_count_item"
                                                     android:layout_width="0dp"
                                                     android:layout_height="match_parent"
+                                                    android:layout_marginRight="20dp"
                                                     android:layout_weight="1"
                                                     android:gravity="right"
-                                                    android:layout_marginRight="20dp"
-                                                    android:textColor="#000000"
-                                                    android:text="1"/>
+                                                    android:text="1"
+                                                    android:textColor="#000000"/>
 
 
                                             </LinearLayout>
@@ -206,13 +207,14 @@
                                                     android:text="Order Number"/>
 
                                                 <TextView
+                                                    android:id="@+id/tv_order_number"
                                                     android:layout_width="0dp"
                                                     android:layout_height="match_parent"
+                                                    android:layout_marginRight="20dp"
                                                     android:layout_weight="1"
                                                     android:gravity="right"
-                                                    android:layout_marginRight="20dp"
-                                                    android:textColor="#000000"
-                                                    android:text="675896"/>
+                                                    android:text="675896"
+                                                    android:textColor="#000000"/>
 
 
                                             </LinearLayout>
@@ -244,13 +246,14 @@
                                                     android:text="Date"/>
 
                                                 <TextView
+                                                    android:id="@+id/tv_order_date"
                                                     android:layout_width="0dp"
                                                     android:layout_height="match_parent"
+                                                    android:layout_marginRight="20dp"
                                                     android:layout_weight="1"
                                                     android:gravity="right"
-                                                    android:layout_marginRight="20dp"
-                                                    android:textColor="#000000"
-                                                    android:text="06-04-2018"/>
+                                                    android:text="06-04-2018"
+                                                    android:textColor="#000000"/>
 
 
                                             </LinearLayout>
@@ -282,13 +285,14 @@
                                                     android:text="Address"/>
 
                                                 <TextView
+                                                    android:id="@+id/tv_address"
                                                     android:layout_width="0dp"
                                                     android:layout_height="match_parent"
+                                                    android:layout_marginRight="20dp"
                                                     android:layout_weight="1"
                                                     android:gravity="right"
-                                                    android:layout_marginRight="20dp"
-                                                    android:textColor="#000000"
-                                                    android:text="Indira Nagar Bangalore..."/>
+                                                    android:text="Indira Nagar Bangalore..."
+                                                    android:textColor="#000000"/>
 
 
                                             </LinearLayout>
@@ -321,14 +325,15 @@
                                                     android:text="Amount"/>
 
                                                 <TextView
+                                                    android:id="@+id/tv_order_value"
                                                     android:layout_width="0dp"
                                                     android:layout_height="match_parent"
+                                                    android:layout_marginRight="20dp"
                                                     android:layout_weight="1"
                                                     android:gravity="right"
-                                                    android:layout_marginRight="20dp"
-                                                    android:textStyle="bold"
+                                                    android:text="$20"
                                                     android:textColor="#000000"
-                                                    android:text="$20"/>
+                                                    android:textStyle="bold"/>
 
 
                                             </LinearLayout>
@@ -400,7 +405,8 @@
                                         android:layout_height="40dp"
                                         android:layout_centerHorizontal="true"
                                         android:text="Retry"
-                                        android:background="@drawable/button_rounded"/>
+                                        android:background="@drawable/button_rounded"
+                                        android:onClick="OnRetryOrderClickHandler"/>
 
                                     <TextView
                                         android:layout_width="match_parent"
@@ -408,7 +414,8 @@
                                         android:layout_alignParentBottom="true"
                                         android:gravity="center"
                                         android:textColor="#0094da"
-                                        android:text="Go To Home"/>
+                                        android:text="Go To Home"
+                                        android:onClick="OnGoToHomeOrderClickHandler"/>
 
 
                                 </RelativeLayout>

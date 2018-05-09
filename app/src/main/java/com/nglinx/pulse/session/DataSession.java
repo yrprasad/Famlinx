@@ -5,6 +5,7 @@ import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.nglinx.pulse.models.AddressModel;
+import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.DeviceTypesModel;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
@@ -14,6 +15,7 @@ import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import retrofit.client.Header;
@@ -24,8 +26,8 @@ public class DataSession {
     private List<InviteModel> pendingInvites;
     private List<InviteModel> trackingMeInvites;
     private AddressModel selectedAddress;
-
     ArrayList<DeviceTypesModel> deviceTypesList;
+    Map<DeviceType, Integer> availableDevices;
 
     public static DataSession getInstance() {
 
@@ -388,5 +390,13 @@ public class DataSession {
 
     public void setSelectedAddress(AddressModel selectedAddress) {
         this.selectedAddress = selectedAddress;
+    }
+
+    public Map<DeviceType, Integer> getAvailableDevices() {
+        return availableDevices;
+    }
+
+    public void setAvailableDevices(Map<DeviceType, Integer> availableDevices) {
+        this.availableDevices = availableDevices;
     }
 }

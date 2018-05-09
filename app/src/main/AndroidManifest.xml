@@ -51,6 +51,8 @@
         <activity android:name="com.nglinx.pulse.activity.CartActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.AddAddressActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.SelectAddressActivity"></activity>
+        <activity android:name="com.nglinx.pulse.activity.OrderFailedActivity"></activity>
+        <activity android:name="com.nglinx.pulse.activity.OrderSuccessActivity"></activity>
 
         <!--<activity android:name=".mainClasses.RetroResponse"></activity>-->
         <service android:name=".activity.AuthenticateIntentService"></service>
