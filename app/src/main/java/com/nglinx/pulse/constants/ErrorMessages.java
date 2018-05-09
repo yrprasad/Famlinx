@@ -6,4 +6,6 @@ public class ErrorMessages {
 
     public static final String INVALID_USERNAME_PASSWORF = "Invalid username or password!";
 
+    public static final String CHANGE_PASSWORD_SUCCESS = "Successfully Changed the Password.";
+    public static final String CHANGE_PASSWORD_FAILURE = "Failed to Change the Password.";
 }

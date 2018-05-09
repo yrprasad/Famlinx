@@ -169,4 +169,7 @@ public interface ApiEndpointInterface {
     //Place device order.
     @PUT("/api/devices/orders")
     void createDeviceOrder(@Query("type") DeviceType type, @Body DeviceOrderModel device, Callback<ResponseDto<DeviceOrderModel>> cb);
+
+    @POST("/api/updatepassword/")
+    void updatePassword(@Body UserLoginModel userLoginModel, Callback<ResponseDto<UserModel>> cb);
 }
