@@ -17,9 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
 import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -340,17 +338,14 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
         @Override
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-
-            GroupMemberModel selectedMember = groupsMembersList.get(position);
-
-            final String group_member_id = selectedMember.getId();
-            final String group_member_name = selectedMember.getName();
+            final String group_member_id = groupsMembersList.get(position).getId();
+            final String group_member_name = groupsMembersList.get(position).getName();
 
             ds.setSelectedGroupMember(group_member_id, group_member_name);
             SharedPrefUtility.saveSelectedGroupMember(getApplicationContext(), group_member_id, group_member_name);
 
             if (!ds.getSelected_group_id().equals("0")) {
-                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, MemberSettingsActivity.class);
                 startActivityForResult(intent, ApplicationConstants.SETTINGS_PAGE_REQUEST_CODE);
                 return true;
             }

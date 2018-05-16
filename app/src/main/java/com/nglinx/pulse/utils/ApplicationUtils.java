@@ -14,6 +14,7 @@ import com.nglinx.pulse.models.DeviceModel;
 import com.nglinx.pulse.models.DeviceStatus;
 import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.DeviceTypesModel;
+import com.nglinx.pulse.models.FenceModel;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.models.UserLoginModel;
@@ -350,24 +351,31 @@ public class ApplicationUtils {
         }
 
         //Count the actual devices availability and count the same.
-        for (DeviceModel model:
-        deviceTypesModelsList) {
-            if((model.getStatus().equals(DeviceStatus.CREATED)) || (model.getStatus().equals(DeviceStatus.RETURNED)))
-            {
-                availableDevices.put(model.getType(), availableDevices.get(model.getType()).intValue() + 1 );
+        for (DeviceModel model :
+                deviceTypesModelsList) {
+            if ((model.getStatus().equals(DeviceStatus.CREATED)) || (model.getStatus().equals(DeviceStatus.RETURNED))) {
+                availableDevices.put(model.getType(), availableDevices.get(model.getType()).intValue() + 1);
             }
         }
         return availableDevices;
     }
 
-    public static int getTotalOrderCount(ArrayList<DeviceTypesModel> deviceTypesModelsList)
-    {
+    public static int getTotalOrderCount(ArrayList<DeviceTypesModel> deviceTypesModelsList) {
         int count = 0;
-        for (DeviceTypesModel device:
-        deviceTypesModelsList) {
+        for (DeviceTypesModel device :
+                deviceTypesModelsList) {
             count += device.getCount();
         }
         return count;
+    }
+
+    public static FenceModel getFenceModeById(final List<FenceModel> fenceModels, final String fenceId) {
+        for (FenceModel fenceModel :
+                fenceModels) {
+            if (fenceModel.getId().equalsIgnoreCase(fenceId))
+                return fenceModel;
+        }
+        return null;
     }
 
 }

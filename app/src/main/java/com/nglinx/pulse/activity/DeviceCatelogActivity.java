@@ -487,9 +487,9 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
             @Override
             public void onSuccess() {
                 if ((models != null) && (models.size() > 0)) {
-                    notificationList.clear();
-                    notificationList.addAll(models);
-                    Collections.sort((List<NotificationModel>) notificationList);
+                    childProfilesList.clear();
+                    childProfilesList.addAll(models);
+                    Collections.sort((List<NotificationModel>) childProfilesList);
                     adapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
                 }

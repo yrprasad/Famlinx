@@ -2,10 +2,12 @@ package com.nglinx.pulse.activity;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +23,13 @@ import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
 public class SignupActivity extends AppCompatActivity {
 
-    TextView tv_email;
-    TextView tv_username;
-    TextView tv_phone;
+    AutoCompleteTextView tv_email;
+    AutoCompleteTextView tv_username;
+    AutoCompleteTextView tv_phone;
     AutoCompleteTextView tv_name;
     AutoCompleteTextView tv_password;
     AutoCompleteTextView tv_retypePassword;
+    CheckBox checkbox_terms;
 
     private String str_username, str_password, str_confirmpassword, str_name, str_email, str_phone;
 
@@ -40,15 +43,30 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     protected void initializeIcons() {
-        tv_email = (TextView) findViewById(R.id.tv_email);
-        tv_username = (TextView) findViewById(R.id.tv_username);
-        tv_phone = (TextView) findViewById(R.id.tv_phone);
+        tv_email = (AutoCompleteTextView) findViewById(R.id.tv_email);
+        tv_username = (AutoCompleteTextView) findViewById(R.id.tv_username);
+        tv_phone = (AutoCompleteTextView) findViewById(R.id.tv_phone);
         tv_name = (AutoCompleteTextView) findViewById(R.id.tv_name);
         tv_password = (AutoCompleteTextView) findViewById(R.id.tv_password);
         tv_retypePassword = (AutoCompleteTextView) findViewById(R.id.tv_retypePassword);
+        checkbox_terms  = (CheckBox) findViewById(R.id.checkbox_terms);
+    }
+
+
+    public void onCancelClick(View v) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void onSignUpClick(View v) {
+
+        if(!checkbox_terms.isChecked())
+        {
+            DialogUtils.diaplayInfoDialog(SignupActivity.this, "Please accept the Terms and Conditions to Proceed");
+            return;
+        }
+
         str_username = tv_username.getText().toString().trim();
         str_password = tv_password.getText().toString().trim();
         str_confirmpassword = tv_retypePassword.getText().toString().trim();
@@ -105,5 +123,11 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void onTermsAndConditionClick(View v) {
+        Intent intent = new Intent(this, TermsAndConditionsActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

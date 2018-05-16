@@ -40,6 +40,18 @@
 
     </string-array>
 
+	<string name="user_type_promt">Shapes</string>
+	
+	<string-array name="user_type">
+        <item>-- User Type --</item>
+        <item>Tracking Device</item>
+        <item>IOS App</item>
+        <item>Android App</item>
+        <item>Web App</item>
+
+    </string-array>
+
+
     <string-array name="shapes">
         <item>Circle</item>
         <item>Rectangle</item>

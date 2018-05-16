@@ -82,6 +82,10 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 Intent intent7 = new Intent(this, ChangePasswordActivity.class);
                 startActivity(intent7);
                 return true;
+            case R.id.nav_profile:
+                Intent intent5 = new Intent(this, MemberProfileActivity.class);
+                startActivity(intent5);
+                return true;
             /*case R.id.nav_group:
                 Intent intent1 = new Intent(this, CreateGroupActivty.class);
                 startActivity(intent1);
@@ -90,10 +94,7 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 Intent intent3 = new Intent(this, FenceActivity.class);
                 startActivity(intent3);
                 return true;*/
-            /*case R.id.nav_profile:
-                Intent intent5 = new Intent(this, ProfileActivity.class);
-                startActivity(intent5);
-                return true;
+            /*
 
             case R.id.nav_login:
                 Intent intent8 = new Intent(this, LoginActivity.class);
@@ -101,7 +102,7 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 return true;
 
             case R.id.nav_settings:
-                Intent intent10 = new Intent(this, SettingsActivity.class);
+                Intent intent10 = new Intent(this, MemberSettingsActivity.class);
                 startActivity(intent10);
                 return true;
             case R.id.nav_signup:

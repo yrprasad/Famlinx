@@ -43,7 +43,7 @@
         <activity android:name="com.nglinx.pulse.activity.ChangePasswordActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.LoginActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.NotificationActivity"></activity>
-        <activity android:name="com.nglinx.pulse.activity.SettingsActivity"></activity>
+        <activity android:name="com.nglinx.pulse.activity.MemberSettingsActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.SignupActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.NotificationsDetailActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.CreateGroupActivty"></activity>
@@ -53,6 +53,8 @@
         <activity android:name="com.nglinx.pulse.activity.SelectAddressActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.OrderFailedActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.OrderSuccessActivity"></activity>
+        <activity android:name="com.nglinx.pulse.activity.TermsAndConditionsActivity"></activity>
+        <activity android:name="com.nglinx.pulse.activity.MemberProfileActivity"></activity>
 
         <!--<activity android:name=".mainClasses.RetroResponse"></activity>-->
         <service android:name=".activity.AuthenticateIntentService"></service>

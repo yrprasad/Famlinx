@@ -68,6 +68,7 @@
     <dimen name="button_width_two_eighty">280dp</dimen>
     <dimen name="button_width_two_fifty">250dp</dimen>
     <dimen name="button_width_two_twenty">220dp</dimen>
+    <dimen name="button_width_one_ten">110dp</dimen>
 
 
     <!-- Button Height -->
@@ -145,6 +146,8 @@
     <dimen name="text_padding_twenty">20dp</dimen>
     <dimen name="text_padding_ten">10dp</dimen>
     <dimen name="text_padding_five">5dp</dimen>
+
+    <dimen name="places_heading2_size">17dp</dimen>
 
 </resources>
 

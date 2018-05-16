@@ -205,7 +205,7 @@
                                             android:layout_weight="4">
 
                                             <TextView
-                                                android:id="@+id/member_name"
+                                                android:id="@+id/notif_row_type"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:text="Jhon Doe"
@@ -216,7 +216,7 @@
                                                 android:id="@+id/member_detail"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_below="@+id/member_name"
+                                                android:layout_below="@+id/notif_row_type"
                                                 android:text="jhon.doe@gmail.com"
                                                 android:textAlignment="center"
                                                 android:textSize="@dimen/text_size_eight"/>
@@ -1143,13 +1143,15 @@
     </LinearLayout>
 
 
-      <android.support.design.widget.NavigationView android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/nav_header_main"
-            app:menu="@menu/activity_main_drawer" />
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:visibility="gone"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer"/>
 
     <!--    <android.support.design.widget.NavigationView android:id="@+id/nav_view1"
             android:layout_width="wrap_content"

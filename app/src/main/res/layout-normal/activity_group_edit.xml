@@ -90,7 +90,7 @@
                                             android:layout_weight="2.3">
 
                                             <TextView
-                                                android:id="@+id/groupname"
+                                                android:id="@+id/tv_profile_name"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginTop="@dimen/layout_margin_top_ten"
@@ -101,7 +101,7 @@
                                                 android:id="@+id/groupmember"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:layout_below="@+id/groupname"
+                                                android:layout_below="@+id/tv_profile_name"
                                                 android:text="5 members in this circle"
                                                 android:textSize="@dimen/text_size_twelve"/>
 
