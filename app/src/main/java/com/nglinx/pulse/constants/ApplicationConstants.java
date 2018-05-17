@@ -1,5 +1,8 @@
 package com.nglinx.pulse.constants;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+
 public class ApplicationConstants {
 
     public static final String GROUP_STATUS_ACTIVE = "ACTIVE";
@@ -81,4 +84,6 @@ public class ApplicationConstants {
     public static final String TOTAL_ITEM_COUNT_STR = "totalItemsCount";
     public static final String TOTAL_ORDER_COST_STR = "failedOrderTotalCost";
 
+    public static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
+            new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
 }

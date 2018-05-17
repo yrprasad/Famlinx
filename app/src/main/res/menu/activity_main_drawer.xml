@@ -10,8 +10,9 @@
         <item
             android:id="@+id/nav_sharing"
             android:title="Sharing"/>
-        <!--<item android:id="@+id/nav_fence"
-            android:title="Fence" />-->
+        <item android:id="@+id/nav_fence"
+              android:title="Fence" />
+        <!---->
         <item
             android:id="@+id/nav_device"
             android:title="Device"/>

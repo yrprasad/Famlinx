@@ -151,7 +151,7 @@ public class MemberProfileActivity extends AbstractActivity implements SwipeRefr
                             @Override
                             public void onFailure() {
                                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
-                                DialogUtils.diaplayDialog(MemberProfileActivity.this, "Failed to delete the Notification", errorMsg);
+                                DialogUtils.diaplayDialog(MemberProfileActivity.this, "Failed to delete the Profile", errorMsg);
                             }
                         });
                     }

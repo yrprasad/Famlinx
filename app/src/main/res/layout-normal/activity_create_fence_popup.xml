@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:weightSum="5"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="300dp"
+                android:layout_height="320dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/rounded_rectangle_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Create Fence"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:focusableInTouchMode="true">
+
+                        <TextView
+                            android:id="@+id/tv_fence_name"
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="30dp"
+                            android:gravity="right|center_vertical"
+                            android:hint="000"
+                            android:inputType="number"
+                            android:text="Fence Name"
+                            android:textColor="#000000"
+                            android:textSize="14sp"/>
+
+                        <EditText
+                            android:id="@+id/et_fence_name"
+                            android:layout_width="140dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/tv_fence_name"
+                            android:background="#ffffff"
+                            android:entries="@array/speed"
+                            android:prompt="@string/speed_type_prompt"/>
+
+                        <!-- <TextView
+                            android:layout_width="110dp"
+                            android:layout_height="30dp"
+                            android:layout_toEndOf="@+id/speedlimit"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:text="Kmph/mph"/>
+-->
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_latitude"
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="30dp"
+                            android:gravity="right|center_vertical"
+                            android:hint="000"
+                            android:inputType="number"
+                            android:text="Latitude"
+                            android:textColor="#000000"
+                            android:textSize="14sp"/>
+
+                        <EditText
+                            android:id="@+id/et_latitude"
+                            android:layout_width="140dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/tv_latitude"
+                            android:background="#ffffff"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true">
+
+                        <TextView
+                            android:id="@+id/tv_longitude"
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="30dp"
+                            android:gravity="right|center_vertical"
+                            android:hint="000"
+                            android:inputType="number"
+                            android:text="Latitude"
+                            android:textColor="#000000"
+                            android:textSize="14sp"/>
+
+                        <EditText
+                            android:id="@+id/et_longitude"
+                            android:layout_width="140dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/tv_longitude"
+                            android:background="#ffffff"
+                            android:entries="@array/speed"
+                            android:prompt="@string/speed_type_prompt"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="30dp"
+                            android:gravity="right|center_vertical"
+                            android:hint="000"
+                            android:inputType="number"
+                            android:text="Address"
+                            android:textColor="#000000"
+                            android:textSize="14sp"/>
+
+                        <EditText
+                            android:id="@+id/et_address"
+                            android:layout_width="140dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/tv_address"
+                            android:background="#ffffff"
+                            android:entries="@array/speed"
+                            android:prompt="@string/speed_type_prompt"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+
+                        <TextView
+                            android:id="@+id/tv_radius"
+                            android:layout_width="80dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="30dp"
+                            android:gravity="right|center_vertical"
+                            android:hint="000"
+                            android:inputType="number"
+                            android:text="Radius"
+                            android:textColor="#000000"
+                            android:textSize="14sp"/>
+
+                        <EditText
+                            android:id="@+id/et_radius"
+                            android:layout_width="140dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/tv_radius"
+                            android:background="#ffffff"
+                            android:entries="@array/speed"
+                            android:prompt="@string/speed_type_prompt"/>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+
+                        <Button
+                            android:id="@+id/btn_create_fence"
+                            android:layout_width="110dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="30dp"
+                            android:background="@drawable/button_rounded_add"
+                            android:text="Create Fence"
+                            android:textSize="10sp"/>
+
+                        <Button
+                            android:id="@+id/btn_cancel"
+                            android:layout_width="110dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/btn_create_fence"
+                            android:background="@drawable/button_rounded_add"
+                            android:text="Cancel"
+                            android:textSize="10sp"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

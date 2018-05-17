@@ -86,14 +86,15 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 Intent intent5 = new Intent(this, MemberProfileActivity.class);
                 startActivity(intent5);
                 return true;
+            case R.id.nav_fence:
+                Intent intent3 = new Intent(this, FenceActivity.class);
+                startActivity(intent3);
+                return true;
             /*case R.id.nav_group:
                 Intent intent1 = new Intent(this, CreateGroupActivty.class);
                 startActivity(intent1);
                 return true;*/
-           /* case R.id.nav_fence:
-                Intent intent3 = new Intent(this, FenceActivity.class);
-                startActivity(intent3);
-                return true;*/
+           /* */
             /*
 
             case R.id.nav_login:

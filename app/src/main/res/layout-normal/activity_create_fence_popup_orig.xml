@@ -32,49 +32,9 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
-
-                    <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
-                        android:text="Name The Device"
-                        android:textSize="16sp"
-                        android:textColor="#000000"
-                        android:textStyle="bold"/>
-
-                </RelativeLayout>
-
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="10dp"/>
-                    
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:focusableInTouchMode="true">
-
-                        <EditText
-                            android:layout_width="230dp"
-                            android:layout_height="30dp"
-                            android:layout_marginStart="30dp"
-                            android:background="#ffffff"
-                            android:textColor="#000000"
-                            android:textSize="14sp"
-                            android:hint="Kids"/>
-
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"/>
+                        android:layout_height="20dp"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -84,7 +44,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="30dp"
-                            android:text="Activation Code"
+                            android:text="Speed Limit"
                             android:textSize="16sp"
                             android:textColor="#000000"
                             android:textStyle="bold"/>
@@ -101,14 +61,37 @@
                         android:focusableInTouchMode="true">
 
                         <EditText
-                            android:layout_width="230dp"
+                            android:id="@+id/tv_fence_name"
+                            android:layout_width="130dp"
                             android:layout_height="30dp"
                             android:layout_marginStart="30dp"
                             android:background="#ffffff"
                             android:textColor="#000000"
                             android:textSize="14sp"
-                            android:hint="abc123456"/>
+                            android:inputType="number"
+                            android:hint="000"/>
 
+                        <Spinner
+                            android:theme="@style/devicespinnerstyletheme"
+                            android:id="@+id/spinner1"
+                            android:spinnerMode="dropdown"
+                            android:layout_marginStart="10dp"
+                            android:layout_width="90dp"
+                            android:layout_height="30dp"
+                            android:layout_toEndOf="@+id/tv_fence_name"
+                            android:entries="@array/speed"
+                            android:prompt="@string/speed_type_prompt"
+                            android:background="@drawable/spinner_background"
+                            android:popupBackground="#ffffff"/>
+
+                       <!-- <TextView
+                            android:layout_width="110dp"
+                            android:layout_height="30dp"
+                            android:layout_toEndOf="@+id/speedlimit"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:text="Kmph/mph"/>
+-->
 
                     </RelativeLayout>
 
@@ -124,7 +107,49 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="30dp"
-                            android:text="Select A Member Profile"
+                            android:text="Shape"
+                            android:textSize="16sp"
+                            android:textColor="#000000"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:focusableInTouchMode="true">
+
+                        <Spinner
+                            android:theme="@style/devicespinnerstyletheme"
+                            android:id="@+id/spinner2"
+                            android:spinnerMode="dropdown"
+                            android:layout_marginStart="30dp"
+                            android:layout_width="230dp"
+                            android:layout_height="30dp"
+                            android:entries="@array/shapes"
+                            android:prompt="@string/shape_promt"
+                            android:background="@drawable/spinner_background"
+                            android:popupBackground="#ffffff"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:text="Radius"
                             android:textSize="16sp"
                             android:textColor="#000000"
                             android:textStyle="bold"/>
@@ -139,29 +164,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp">
 
-                        <Spinner
-                            android:theme="@style/devicespinnerstyletheme"
-                            android:id="@+id/spinner"
-                            android:spinnerMode="dropdown"
-                            android:layout_marginStart="30dp"
+                        <EditText
+                            android:id="@+id/radius"
                             android:layout_width="230dp"
                             android:layout_height="30dp"
-                            android:entries="@array/add_device"
-                            android:prompt="@string/member_prompt"
-                            android:background="@drawable/spinner_background"
-                            android:popupBackground="#ffffff"/>
-
-                        <!--<Spinner
-                            android:theme="@style/devicespinnerstyletheme"
-                            android:id="@+id/spinner1"
                             android:layout_marginStart="30dp"
-                            android:layout_width="230dp"
-                            android:layout_height="match_parent"
-                            android:entries="@array/add_device"
-                            android:prompt="@string/member_prompt"
                             android:background="#ffffff"
-                            android:popupBackground="#ffffff"
-                            android:overlapAnchor="false"/>-->
+                            android:textColor="#000000"
+                            android:textSize="14sp"
+                            android:inputType="number"
+                            android:hint="000"/>
 
 
                     </RelativeLayout>
@@ -179,7 +191,7 @@
                             android:layout_width="110dp"
                             android:layout_height="40dp"
                             android:layout_marginStart="30dp"
-                            android:text="Create Member Profile"
+                            android:text="Use Default Settings"
                             android:textSize="10sp"
                             android:background="@drawable/button_rounded_add"/>
 
@@ -188,7 +200,7 @@
                             android:layout_width="110dp"
                             android:layout_height="40dp"
                             android:layout_marginStart="20dp"
-                            android:text="Submit"
+                            android:text="Create Fence"
                             android:textSize="10sp"
                             android:layout_toEndOf="@+id/btn_create_fence"
                             android:background="@drawable/button_rounded_add"/>
