@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
@@ -151,19 +153,6 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
         });
 
         return deviceList;
-    }
-
-    void reloadIntent() {
-        Intent intent2 = new Intent(DeviceCatelogActivity.this, DeviceCatelogActivity.class);
-        startActivity(intent2);
-        finish();
-    }
-
-    class DeviceRefreshClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            reloadIntent();
-        }
     }
 
     /*class AddDeviceClickListener implements View.OnClickListener {
@@ -347,19 +336,15 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
                 .setNegativeButton(android.R.string.no, null).show();
     }
 
-    //TODO: Need to remove this dummy
     private void activateDevice(final DeviceModel selectedDevice1) {
-
-    }
-    /*private void activateDevice(final DeviceModel selectedDevice1) {
         actd_dialog = new Dialog(DeviceCatelogActivity.this);
         actd_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         actd_dialog.setCancelable(true);
 
-        actd_dialog.setContentView(R.layout.activity_activatedevice);
+        actd_dialog.setContentView(R.layout.activity_activate_device);
         actd_dialog.show();
 
-        actd_code = (EditText) actd_dialog.findViewById(R.id.actd_code);
+        actd_code = (EditText) actd_dialog.findViewById(R.id.et_code);
         String activationCode = actd_code.getText().toString();
         final DeviceActivateModel deviceActivateModel = new DeviceActivateModel();
         deviceActivateModel.setActivationCode(activationCode);
@@ -410,7 +395,7 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
                 actd_dialog.dismiss();
             }
         });
-    }*/
+    }
 
 
     private DeviceModel getItem(int position) {
@@ -431,24 +416,22 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
     //TODO: Need to remove thid dummy
     public void onDeviceManage(int position) {
 
-    }
-    /*public void onDeviceManage(int position) {
-
         selectedDevice = getItem(position);
 
-        md_dialog = new Dialog(DeviceCatelogActivity.this);
+        md_dialog = new Dialog(DeviceCatelogActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
         md_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         md_dialog.setCancelable(true);
+        md_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        md_dialog.setContentView(R.layout.activity_managedevice);
+        md_dialog.setContentView(R.layout.activity_manage_device);
         md_dialog.show();
 
-        md_udid_value = (TextView) md_dialog.findViewById(R.id.md_udid_value);
+        md_udid_value = (TextView) md_dialog.findViewById(R.id.et_udid);
 
         if (null != selectedDevice.getUdid())
             md_udid_value.setText(selectedDevice.getUdid());
 
-        md_username_value = (Spinner) md_dialog.findViewById(R.id.md_username_value);
+        md_username_value = (Spinner) md_dialog.findViewById(R.id.et_username);
 
         childProfileAdapter = new ArrayAdapter<ChildUserModel>(DeviceCatelogActivity.this, android.R.layout.simple_spinner_item, myChildProfiles);
         childProfileAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -467,7 +450,7 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
 
         md_btn_attach.setOnClickListener(attachDeviceClickListener);
         md_btn_detach.setOnClickListener(detachDeviceClickListener);
-    }*/
+    }
 
     public void onItemClick(View view, int position, long id) {
         long viewId = view.getId();
@@ -481,24 +464,7 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
     //TODO: Need to complete the function.
     @Override
     public void onRefresh() {
+        getChildProfiles();
         swipeRefreshLayout.setRefreshing(false);
-        /*ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-        apiEndpointInterface.getAllNotifications(DataSession.getInstance().getUserModel().getId(), new RetroResponse<NotificationModel>() {
-            @Override
-            public void onSuccess() {
-                if ((models != null) && (models.size() > 0)) {
-                    childProfilesList.clear();
-                    childProfilesList.addAll(models);
-                    Collections.sort((List<NotificationModel>) childProfilesList);
-                    adapter.notifyDataSetChanged();
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            }
-
-            @Override
-            public void onFailure() {
-                DialogUtils.diaplayFailureDialog(NotificationActivity.this, errorMsg);
-            }
-        });*/
     }
 }

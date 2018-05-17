@@ -61,7 +61,7 @@
                         android:focusableInTouchMode="true">
 
                         <EditText
-                            android:id="@+id/tv_fence_name"
+                            android:id="@+id/tv_code"
                             android:layout_width="130dp"
                             android:layout_height="30dp"
                             android:layout_marginStart="30dp"
@@ -78,7 +78,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_width="90dp"
                             android:layout_height="30dp"
-                            android:layout_toEndOf="@+id/tv_fence_name"
+                            android:layout_toEndOf="@+id/tv_code"
                             android:entries="@array/speed"
                             android:prompt="@string/speed_type_prompt"
                             android:background="@drawable/spinner_background"
@@ -187,7 +187,7 @@
                         android:layout_height="60dp">
 
                         <Button
-                            android:id="@+id/btn_create_fence"
+                            android:id="@+id/actd_btn_ok"
                             android:layout_width="110dp"
                             android:layout_height="40dp"
                             android:layout_marginStart="30dp"
@@ -202,7 +202,7 @@
                             android:layout_marginStart="20dp"
                             android:text="Create Fence"
                             android:textSize="10sp"
-                            android:layout_toEndOf="@+id/btn_create_fence"
+                            android:layout_toEndOf="@+id/actd_btn_ok"
                             android:background="@drawable/button_rounded_add"/>
 
                     </RelativeLayout>

@@ -2,7 +2,6 @@ package com.nglinx.pulse.activity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,7 +26,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -55,7 +53,6 @@ import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.PlaceAutocompleteAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.FenceModel;
-import com.nglinx.pulse.models.NotificationModel;
 import com.nglinx.pulse.utils.DialogUtils;
 import com.nglinx.pulse.utils.ProgressbarUtil;
 import com.nglinx.pulse.utils.circle.MapAreaManager;
@@ -562,7 +559,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         af_longitude = (TextView) dlg_af.findViewById(R.id.et_longitude);
         af_address = (TextView) dlg_af.findViewById(R.id.et_address);
 
-        addFence = (Button) dlg_af.findViewById(R.id.btn_create_fence);
+        addFence = (Button) dlg_af.findViewById(R.id.actd_btn_ok);
         cancel = (Button) dlg_af.findViewById(R.id.btn_cancel);
 
         af_radius.setText(String.valueOf((int) circleManager.getCircles().get(0).getRadius()));
@@ -749,8 +746,8 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         af_address = (TextView) dlg_af.findViewById(R.id.et_address);
         af_address.setText(selectedFence.getAddress());
 
-        editFence = (Button) dlg_af.findViewById(R.id.btn_edit_fence);
-        deleteFence = (Button) dlg_af.findViewById(R.id.btn_delete_fence);
+        editFence = (Button) dlg_af.findViewById(R.id.md_btn_attach);
+        deleteFence = (Button) dlg_af.findViewById(R.id.md_btn_detach);
         cancel = (Button) dlg_af.findViewById(R.id.btn_cancel_fence);
 
         cancel.setOnClickListener(new View.OnClickListener() {
