@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
 
     TextView tv_username;
     TextView tv_email;
+    ImageView menu_toolbar;
     View headerLayout;
 
     public void initializeParent() {
@@ -61,8 +63,10 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
         //Closing drawer on item click
         drawerLayout.closeDrawers();
 
-//        tv_username.setText(ds.getUserModel().getName());
-//        tv_email.setText(ds.getUserModel().getEmail());
+        TextView tv_username = headerLayout.findViewById(R.id.tv_username);
+        tv_username.setText(ds.getUserModel().getName());
+        TextView tv_email = headerLayout.findViewById(R.id.tv_email);
+        tv_email.setText(ds.getUserModel().getEmail());
 
         //Check to see which item was being clicked and perform appropriate action
         switch (menuItem.getItemId()) {

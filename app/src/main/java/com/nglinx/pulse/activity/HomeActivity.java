@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -81,7 +83,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     TextView tv_username_grouptabs;
     Button bt_addGroup;
     CreateGroupListener createGroupListener;
-    View headerLayout_groups;
+//    View headerLayout_groups;
 
     //Left Menu NavigationView
     TextView tv_username;
@@ -176,16 +178,16 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         lv_groups = (ListView) findViewById(R.id.lv_groups);
         lv_groups.setFastScrollEnabled(true);
 
-        nav_groups = (NavigationView) findViewById(R.id.nav_groups);
-        headerLayout_groups = nav_groups.getHeaderView(0);
+        LayoutInflater inflater = getLayoutInflater();
+        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.nav_header_group,lv_groups,false);
+        lv_groups.addHeaderView(header);
 
-        tv_username_grouptabs = (TextView) headerLayout_groups.findViewById(R.id.tv_username_grouptabs);
-        bt_addGroup = (Button) headerLayout_groups.findViewById(R.id.bt_addGroup);
+        tv_username_grouptabs = (TextView) header.findViewById(R.id.tv_username_grouptabs);
+        bt_addGroup = (Button) header.findViewById(R.id.bt_addGroup);
 
         sv_group_members = (HorizontalView) findViewById(R.id.sv_group_members);
 
         fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
 
         headerLayout = navigationView.getHeaderView(0);
         TextView tv_username = headerLayout.findViewById(R.id.tv_username);

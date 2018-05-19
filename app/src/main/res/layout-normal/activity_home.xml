@@ -873,8 +873,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:fitsSystemWindows="true"
-        android:visibility="visible"
-        app:headerLayout="@layout/nav_header_group">
+        android:visibility="visible">
 
         <ListView
             android:id="@+id/lv_groups"
@@ -885,8 +884,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:footerDividersEnabled="false"
-            android:headerDividersEnabled="false"
-            android:paddingTop="220dp"/>
+            android:headerDividersEnabled="false"/>
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
