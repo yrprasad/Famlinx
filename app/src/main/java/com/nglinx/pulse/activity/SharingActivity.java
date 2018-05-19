@@ -44,6 +44,9 @@ public class SharingActivity extends AbstractActivity {
 
         ds = DataSession.getInstance();
 
+        //Intialize all the Parent Abstract activities
+        initializeParent();
+
         initializeIcons();
 
         getAllInvites();

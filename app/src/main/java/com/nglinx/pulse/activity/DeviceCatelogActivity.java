@@ -86,6 +86,8 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_catelog);
 
+        initializeParent();
+
         initializeIcons();
 
         getChildProfiles();

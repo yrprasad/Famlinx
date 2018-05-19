@@ -63,6 +63,7 @@ public class BuyNowActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         // Get the view from activity_main.xml
         setContentView(R.layout.activity_buy_now);
+
         initializeParent();
 
         initializeIcons();

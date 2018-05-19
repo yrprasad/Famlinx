@@ -18,7 +18,9 @@
         android:orientation="vertical"
         tools:context=".activity.SharingActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_sharing"/>
+        <include
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_sharing"/>
         <!-- Let's add fragment -->
         <RelativeLayout
             android:layout_width="match_parent"

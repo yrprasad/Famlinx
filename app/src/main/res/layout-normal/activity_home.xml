@@ -18,7 +18,9 @@
         android:orientation="vertical"
         tools:context="com.nglinx.pulse.activity.HomeActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar"/>
+        <include
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar"/>
         <!-- Let's add fragment -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -593,6 +595,7 @@
                                                 android:background="@drawable/circle"/>
 
                                             <ImageView
+                                                android:id="@+id/tmp_fence_icon"
                                                 android:layout_width="@dimen/image_width_twenty"
                                                 android:layout_height="@dimen/image_height_twenty"
                                                 android:layout_centerHorizontal="true"
