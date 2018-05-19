@@ -1,22 +1,18 @@
 package com.nglinx.pulse.activity;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.models.ResponseDto;
@@ -41,7 +37,7 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
 
     TextView tv_username;
     TextView tv_email;
-    ImageView menu_toolbar;
+    Toolbar inc_toolbar;
     View headerLayout;
 
     public void initializeParent() {
@@ -50,8 +46,18 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
         ds = DataSession.getInstance();
         restEndpoint = RetroUtils.getApiEndPoint(getApplicationContext());
-
         headerLayout = navigationView.getHeaderView(0);
+
+        inc_toolbar = (Toolbar) findViewById(R.id.inc_toolbar);
+
+        ImageView iv = (ImageView)inc_toolbar.findViewById(R.id.menu_toolbar);
+        iv.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(Gravity.START);
+            }
+        });
+
     }
 
     @Override

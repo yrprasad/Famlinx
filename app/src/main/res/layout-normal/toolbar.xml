@@ -60,6 +60,7 @@
             android:layout_weight="2">
 
             <ImageView
+                android:id="@+id/groups_toolbar"
                 android:layout_width="@dimen/image_width_thirty_five"
                 android:layout_height="@dimen/image_height_twenty_two"
                 android:layout_centerVertical="true"

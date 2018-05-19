@@ -15,7 +15,9 @@
         android:fitsSystemWindows="true"
         tools:context="com.nglinx.pulse.activity.HomeActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_group" />
+        <include 
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_group" />
         <!-- Let's add fragment -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -1128,7 +1130,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:visibility="gone"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 

@@ -18,7 +18,9 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_fence"/>
+        <include 
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_fence"/>
         <!-- Let's add fragment -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -615,7 +617,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:visibility="gone"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 

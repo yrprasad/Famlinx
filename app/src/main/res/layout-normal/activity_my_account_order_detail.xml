@@ -18,7 +18,9 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_my_account"/>
+        <include 
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_my_account"/>
         <!-- Let's add fragment -->
         <RelativeLayout
             android:layout_width="match_parent"

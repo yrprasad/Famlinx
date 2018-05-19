@@ -15,7 +15,9 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_order" />
+        <include 
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_order" />
 
         <RelativeLayout
             android:layout_width="match_parent"

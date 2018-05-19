@@ -18,7 +18,9 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_cart"/>
+        <include 
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_cart"/>
 
         <LinearLayout
             android:id="@+id/frame"

@@ -15,7 +15,9 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_notification" />
+        <include 
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_notification" />
         <!-- Let's add fragment -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -1286,8 +1288,7 @@
                                                   android:layout_gravity="start"
                                                   android:fitsSystemWindows="true"
                                                   app:headerLayout="@layout/nav_header_main"
-                                                  app:menu="@menu/activity_main_drawer"
-                                                  android:visibility="gone"/>
+                                                  app:menu="@menu/activity_main_drawer"/>
 
     <!--   <android.support.design.widget.NavigationView android:id="@+id/nav_view1"
          android:layout_width="wrap_content"

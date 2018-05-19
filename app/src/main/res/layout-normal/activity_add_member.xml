@@ -15,7 +15,9 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_new_member" />
+        <include 
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_new_member" />
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

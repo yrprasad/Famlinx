@@ -12,7 +12,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import android.view.Window;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -214,6 +217,14 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         bt_addGroup.setOnClickListener(createGroupListener);
 
         tv_username_grouptabs.setText(ds.getUserModel().getName());
+
+        ImageView img_group_toolbar = (ImageView)inc_toolbar.findViewById(R.id.groups_toolbar);
+        img_group_toolbar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(Gravity.END);
+            }
+        });
     }
 
     private void initializeGroupMembers() {

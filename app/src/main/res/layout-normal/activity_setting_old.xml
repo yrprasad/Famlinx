@@ -18,7 +18,9 @@
         android:orientation="vertical"
         tools:context="com.nglinx.pulse.activity.HomeActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_setting"/>
+        <include 
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_setting"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
