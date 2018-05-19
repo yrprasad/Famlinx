@@ -1,6 +1,7 @@
 package com.nglinx.pulse.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
         holder.tv_prodile_email = (TextView) convertView.findViewById(R.id.tv_prodile_email);
         holder.tv_profile_udid = (TextView) convertView.findViewById(R.id.tv_profile_udid);
         holder.tv_profile_status = (TextView) convertView.findViewById(R.id.tv_profile_status);
+        holder.img_online_status = (ImageView) convertView.findViewById(R.id.img_online_status);
 
         holder.btn_profile_delete = (ImageView) convertView.findViewById(R.id.btn_profile_delete);
         holder.btn_profile_delete.setTag(holder.modelHolder);
@@ -106,8 +108,18 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
         if ((model != null) && (model.getUdid() != null))
             holder.tv_profile_udid.setText(model.getUdid());
 
-        if ((model != null) && (model.getStatus() != null))
-            holder.tv_profile_status.setText(String.valueOf(model.getStatus()));
+        if ((model != null) && (model.getStatus() != null)) {
+            if(model.getStatus().equals(1))
+            {
+                holder.tv_profile_status.setText("Active");
+                holder.img_online_status.setBackgroundResource(R.drawable.circle_green);
+            } else
+            {
+                holder.tv_profile_status.setText("InActive");
+                holder.img_online_status.setBackgroundResource(R.drawable.circle_red);
+            }
+
+        }
 
         convertView.setTag(holder);
         // Return the completed view to render on screen
@@ -124,5 +136,6 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
 
         public ImageView btn_profile_delete;
         public ImageView btn_profile_view;
+        public ImageView img_online_status;
     }
 }

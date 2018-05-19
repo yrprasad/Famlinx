@@ -75,8 +75,8 @@ public class MemberProfileActivity extends AbstractActivity implements SwipeRefr
             public void onSuccess() {
                 if ((models != null) && (models.size() > 0)) {
                     childProfilesList.clear();
-                    childProfilesList.addAll(models);
                     Collections.sort((List<ChildUserModel>) childProfilesList);
+                    childProfilesList.addAll(models);
                     adapter.notifyDataSetChanged();
                     ProgressbarUtil.stopProgressBar(mProgressDialog1);
                 }
@@ -100,8 +100,8 @@ public class MemberProfileActivity extends AbstractActivity implements SwipeRefr
             public void onSuccess() {
                 if ((models != null) && (models.size() > 0)) {
                     childProfilesList.clear();
-                    childProfilesList.addAll(models);
                     Collections.sort((List<ChildUserModel>) childProfilesList);
+                    childProfilesList.addAll(models);
                     adapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
                 }

@@ -125,7 +125,7 @@
                             android:orientation="horizontal">
 
                             <ImageView
-                                android:id="@+id/online_status"
+                                android:id="@+id/img_online_status"
                                 android:layout_width="0dp"
                                 android:layout_height="8dp"
                                 android:layout_weight=".05"
