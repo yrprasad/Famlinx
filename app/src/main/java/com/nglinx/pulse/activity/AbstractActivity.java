@@ -50,6 +50,11 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
 
         inc_toolbar = (Toolbar) findViewById(R.id.inc_toolbar);
 
+        TextView tv_username = headerLayout.findViewById(R.id.tv_username);
+        tv_username.setText(ds.getUserModel().getName());
+        TextView tv_email = headerLayout.findViewById(R.id.tv_email);
+        tv_email.setText(ds.getUserModel().getEmail());
+
         ImageView iv = (ImageView)inc_toolbar.findViewById(R.id.menu_toolbar);
         iv.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -69,14 +74,14 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
         //Closing drawer on item click
         drawerLayout.closeDrawers();
 
-        TextView tv_username = headerLayout.findViewById(R.id.tv_username);
-        tv_username.setText(ds.getUserModel().getName());
-        TextView tv_email = headerLayout.findViewById(R.id.tv_email);
-        tv_email.setText(ds.getUserModel().getEmail());
-
         //Check to see which item was being clicked and perform appropriate action
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
+                //IF the home option is explicitly selected, clear the selected group and selected member
+                ds.clearSelectedGroupMember();
+                ds.clearSelectedGroup();
+                SharedPrefUtility.clearSelectedGroup(getApplicationContext());
+                SharedPrefUtility.clearSelectedGroupMember(getApplicationContext());
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
                 return true;
@@ -144,6 +149,11 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
     }
 
     private void SignOutApi() {
+
+        ds.clearSelectedGroupMember();
+        ds.clearSelectedGroup();
+        SharedPrefUtility.clearSelectedGroup(getApplicationContext());
+        SharedPrefUtility.clearSelectedGroupMember(getApplicationContext());
 
         final ProgressDialog mProgressDialog = ProgressbarUtil.startProgressBar(this, "Signing Out...");
         restEndpoint.logout(new Callback<ResponseDto<UserModel>>() {

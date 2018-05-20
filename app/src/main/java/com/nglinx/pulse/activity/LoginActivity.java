@@ -1,15 +1,14 @@
 /*
- /*
- * Copyright (c) 2018 NGLinx Private Limited. All rights reserved.
- *
- * The copyright to the computer software herein is the property of
- * Openwave Systems Inc. The software may be used and/or copied only
- * with the written permission of NGLinx Private Limited. or in accordance
- * with the terms and conditions stipulated in the agreement/contract
- * under which the software has been supplied.
- *
- * $Id:$
- */
+* Copyright (c) 2018 NGLinx Private Limited. All rights reserved.
+*
+* The copyright to the computer software herein is the property of
+* Openwave Systems Inc. The software may be used and/or copied only
+* with the written permission of NGLinx Private Limited. or in accordance
+* with the terms and conditions stipulated in the agreement/contract
+* under which the software has been supplied.
+*
+* $Id:$
+*/
 package com.nglinx.pulse.activity;
 
 import android.app.ProgressDialog;
@@ -130,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
     }*/
 
     public void onForgotPasswordClick(View V) {
-        /*Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivty.class);
+        /*Intent intent = new Intent(getApplicationContext(), ForgotPas*forswordActivty.class);
         startActivity(intent);
         finish();*/
         Toast.makeText(getApplicationContext(), "This option is still under development", Toast.LENGTH_LONG).show();

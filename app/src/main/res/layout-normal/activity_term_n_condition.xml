@@ -38,9 +38,9 @@
                 android:layout_weight="7"
                 android:background="#0095da"
                 android:foreground="@drawable/ripple_effect"
-                android:text="Back"
+                android:text="Ok"
                 android:textColor="#ffffff"
-                android:onClick="onBackButtonClick"/>
+                android:onClick="onOkClick"/>
 
 
         </LinearLayout>

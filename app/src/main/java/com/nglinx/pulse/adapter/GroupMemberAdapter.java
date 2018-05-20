@@ -90,10 +90,10 @@ public class GroupMemberAdapter extends ArrayAdapter<GroupMemberModel> {
             holder.name.setText(first_name);
             holder.member_image.setImageResource(R.drawable.img1);
 
-            if (ApplicationUtils.isMobileUser(selectedMember))
-                holder.member_type_image.setImageResource(R.drawable.mobile_icon);
-            else
+            if (ApplicationUtils.isDeviceUser(selectedMember))
                 holder.member_type_image.setImageResource(R.drawable.watch_icon);
+            else
+                holder.member_type_image.setImageResource(R.drawable.mobile_icon);
         }
         return convertView;
     }

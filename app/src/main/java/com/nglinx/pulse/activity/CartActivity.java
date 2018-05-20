@@ -154,11 +154,9 @@ public class CartActivity extends AppCompatActivity {
             String orderErrorString = checkIfRequiredDevicesAvailable();
             if ((orderErrorString == null) || (orderErrorString.isEmpty())) {
                 final int deviceOrderCount = ApplicationUtils.getTotalOrderCount(deviceTypesModelsList);
-                if(deviceOrderCount > 0)
-                {
+                if (deviceOrderCount > 0) {
                     placeOrder(deviceOrderCount);
-                }else
-                {
+                } else {
                     DialogUtils.diaplayInfoDialog(CartActivity.this, "Select device to order");
                 }
             } else {
@@ -171,7 +169,6 @@ public class CartActivity extends AppCompatActivity {
 
     //TODO: Need a API for future to order multiple devices at one shot.
     private void placeOrder(final int deviceOrderCount) {
-
 
 
         final List<Integer> successDeviceOrderSummary = new ArrayList<>();

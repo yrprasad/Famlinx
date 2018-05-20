@@ -5,40 +5,28 @@
         <item
             android:id="@+id/nav_home"
             android:title="Home"/>
-        <!--<item android:id="@+id/nav_group"
-            android:title="D-Create Group" />-->
-        <item
-            android:id="@+id/nav_sharing"
-            android:title="Sharing"/>
-        <item android:id="@+id/nav_fence"
-              android:title="Fence" />
-        <!---->
-        <item
-            android:id="@+id/nav_device"
-            android:title="Device"/>
         <item
             android:id="@+id/nav_buynow"
             android:title="Buy Now"/>
         <item
-            android:id="@+id/nav_changepassword"
-            android:title="Change Password"/>
+            android:id="@+id/nav_notification"
+            android:title="Notifications"/>
+        <item android:id="@+id/nav_fence"
+              android:title="Fence" />
+        <item
+            android:id="@+id/nav_sharing"
+            android:title="Sharing"/>
+        <item
+            android:id="@+id/nav_device"
+            android:title="Device"/>
         <item
             android:id="@+id/nav_profile"
             android:title="Profiles"/>
-        <!--
-        <item android:id="@+id/nav_login"
-              android:title="Login" />-->
         <item
-            android:id="@+id/nav_notification"
-            android:title="Notifications"/>
-        <!--<item android:id="@+id/nav_settings"
-              android:title="Settings" />
-        <item android:id="@+id/nav_signup"
-              android:title="Sign Up" />-->
+            android:id="@+id/nav_changepassword"
+            android:title="Change Password"/>
         <item
             android:id="@+id/nav_signout"
             android:title="Sign Out"/>
-
     </group>
-
 </menu>

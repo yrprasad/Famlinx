@@ -290,7 +290,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-            GroupModel selectedGroup = groupAdapter.getItem(position);
+            GroupModel selectedGroup = groupAdapter.getItem(position - 1);
 
             activateItemsOnTrackMemberSelect();
             drawerLayout.closeDrawers();
@@ -300,8 +300,6 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
             ds.clearSelectedGroupMember();
             SharedPrefUtility.saveSelectedGroup(getApplicationContext(), selectedGroup.getId(), selectedGroup.getName());
             SharedPrefUtility.clearSelectedGroupMember(getApplicationContext());
-
-//            DropdownBtn.setText(groupname);
 
             //Display the selected group's members
             displaySelectedGroupMembers(selectedGroup);
@@ -559,8 +557,11 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 groupsList.addAll(ds.getUserModel().getGroups());
                 groupAdapter.notifyDataSetChanged();
                 groupMemberAdapter.notifyDataSetChanged();
-                int pos = getGroupPositionInList(groupsList, ds.getSelected_group_id());
-                lv_groups.performItemClick(groupAdapter.getView(pos, null, null), pos, pos);
+                if((ds.getSelected_group_id() != null) && (!ds.getSelected_group_id().equalsIgnoreCase("")))
+                {
+                    int pos = getGroupPositionInList(groupsList, ds.getSelected_group_id());
+                    lv_groups.performItemClick(groupAdapter.getView(pos, null, null), pos, pos);
+                }
             }
 
             @Override

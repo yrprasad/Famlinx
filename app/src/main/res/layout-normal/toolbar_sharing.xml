@@ -37,12 +37,15 @@
             android:layout_height="@dimen/layout_height_fourty"
             android:layout_weight="4">
 
-            <ImageView
-                android:layout_width="@dimen/image_width_twenty_five"
-                android:layout_height="@dimen/image_height_thirty"
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/notification_icon"/>
+                android:text="Sharing"
+                android:textSize="@dimen/text_size_twenty"
+                android:textColor="@android:color/white"/>
 
         </RelativeLayout>
 

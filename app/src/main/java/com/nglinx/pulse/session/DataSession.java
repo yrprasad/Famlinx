@@ -271,6 +271,11 @@ public class DataSession {
         this.selected_group_member_name = "";
     }
 
+    public void clearSelectedGroup() {
+        this.selected_group_id = "";
+        this.selected_group_name = "";
+    }
+
     public GroupMemberModel getMemberDetails(final String groupId, final String memberId) {
         for (GroupModel group :
                 getUserModel().getGroups()) {

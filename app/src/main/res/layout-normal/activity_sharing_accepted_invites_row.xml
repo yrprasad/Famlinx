@@ -100,7 +100,7 @@
                         android:layout_centerVertical="true"
                         android:clickable="true"
                         android:foreground="?attr/selectableItemBackground"
-                        android:src="@drawable/gps"
+                        android:src="@drawable/suspend"
                         android:onClick="suspendInviteHandler"/>
                 </RelativeLayout>
 
@@ -133,7 +133,7 @@
                         android:layout_centerVertical="true"
                         android:clickable="true"
                         android:foreground="?attr/selectableItemBackground"
-                        android:src="@drawable/phone"
+                        android:src="@drawable/revoke"
                         android:onClick="rejectInviteHandlerFromAcceptedInvites"/>
 
                 </RelativeLayout>

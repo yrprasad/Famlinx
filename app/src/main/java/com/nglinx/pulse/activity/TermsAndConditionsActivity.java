@@ -27,8 +27,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_term_n_condition);
     }
 
-
-    public void onTermsAndConditionClick(View v) {
+    public void onOkClick(View v) {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
         finish();

@@ -243,6 +243,19 @@ public class ApplicationUtils {
             return false;
     }
 
+    public static boolean isDeviceUser(final GroupMemberModel member) {
+        if ((member.getTrackingModel() != null) &&
+                (member.getTrackingModel().getType() != null) &&
+                ((member.getTrackingModel().getType() == DeviceType.A9) ||
+                        (member.getTrackingModel().getType() == DeviceType.V16) ||
+                        (member.getTrackingModel().getType() == DeviceType.V7) ||
+                        (member.getTrackingModel().getType() == DeviceType.MQTT) ||
+                        (member.getTrackingModel().getType() == DeviceType.SENSOR)))
+            return true;
+        else
+            return false;
+    }
+
     public static List<GroupMemberModel> getGroupMembersByGroupId(final List<GroupModel> groups, final String groupId) {
 
         List<GroupMemberModel> groupMembers = null;
