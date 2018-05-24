@@ -10,9 +10,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,9 +37,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.GroupAdapter;
 import com.nglinx.pulse.adapter.GroupMemberAdapter;
+import com.nglinx.pulse.adapter.NotificationsAdapter;
+import com.nglinx.pulse.adapter.ViewPagerAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
+import com.nglinx.pulse.models.NotificationModel;
 import com.nglinx.pulse.models.UserModel;
 import com.nglinx.pulse.service.BackendService;
 import com.nglinx.pulse.session.DataSession;
@@ -52,12 +57,22 @@ import com.nglinx.pulse.utils.retrofit.RetroUtils;
 import com.nglinx.pulse.utils.view.HorizontalView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class HomeActivity extends AbstractActivity implements LocationListener, GoogleMap.OnCameraChangeListener, GoogleMap.OnMyLocationButtonClickListener {
 
     public DrawerLayout drawerLayout;
+
+    //Pager
+    private static ViewPager mPager;
+    private static int currentPage = 0;
+    private static final Integer[] XMEN= {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
+    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
     //Group Details
     public ArrayList<GroupModel> groupsList;
@@ -107,6 +122,11 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     Timer timer_map_refresh;
     MapRefreshTimerTask mapRefreshTimerTask;
 
+    List<NotificationModel> notificationList;
+    NotificationsAdapter adapter;
+    private ListView notifications_lv;
+    private SwipeRefreshLayout swipeRefreshLayout_notifications;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,12 +151,47 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         //Initlize all the group members related things
         initializeGroupMembers();
 
+        //Initialize the notifications
+        initializeNotification();
+
         //Call to get the current location.
         getLocation();
 
         startTimerMapRefreshTask();
 
         refreshUserDetails();
+
+        initPager();
+    }
+
+
+    private void initPager() {
+
+        for(int i=0;i<XMEN.length;i++)
+            XMENArray.add(XMEN[i]);
+
+        mPager = (ViewPager) findViewById(R.id.pager1);
+        mPager.setAdapter(new ViewPagerAdapter(HomeActivity.this,XMENArray));
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(mPager);
+
+        // Auto start of viewpager
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == XMEN.length) {
+                    currentPage = 0;
+                }
+                mPager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 5000, 10000);
     }
 
     @Override
@@ -182,7 +237,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         lv_groups.setFastScrollEnabled(true);
 
         LayoutInflater inflater = getLayoutInflater();
-        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.nav_header_group,lv_groups,false);
+        ViewGroup header = (ViewGroup) inflater.inflate(R.layout.nav_header_group, lv_groups, false);
         lv_groups.addHeaderView(header);
 
         tv_username_grouptabs = (TextView) header.findViewById(R.id.tv_username_grouptabs);
@@ -218,8 +273,8 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
         tv_username_grouptabs.setText(ds.getUserModel().getName());
 
-        ImageView img_group_toolbar = (ImageView)inc_toolbar.findViewById(R.id.groups_toolbar);
-        img_group_toolbar.setOnClickListener(new View.OnClickListener(){
+        ImageView img_group_toolbar = (ImageView) inc_toolbar.findViewById(R.id.groups_toolbar);
+        img_group_toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(Gravity.END);
@@ -227,7 +282,35 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         });
     }
 
+    private void initializeNotification() {
+        notificationList = new ArrayList<NotificationModel>();
+        adapter = new NotificationsAdapter(HomeActivity.this, (ArrayList<NotificationModel>) notificationList);
+
+        notifications_lv = (ListView) findViewById(R.id.lv_notifications_home);
+
+        notificationList = new ArrayList<NotificationModel>();
+        adapter = new NotificationsAdapter(HomeActivity.this, (ArrayList<NotificationModel>) notificationList);
+
+        notifications_lv.setAdapter(adapter);
+        getNotifications(null);
+        notifications_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                onNotificationsClick(view);
+            }
+        });
+
+        swipeRefreshLayout_notifications = (SwipeRefreshLayout) findViewById(R.id.swipeToRefreshNotification);
+        swipeRefreshLayout_notifications.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getNotifications(swipeRefreshLayout_notifications);
+            }
+        });
+    }
+
     private void initializeGroupMembers() {
+
         //Initialize the group members array with empty list.
         groupsMembersList = new ArrayList<GroupMemberModel>();
 
@@ -557,10 +640,11 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 groupsList.addAll(ds.getUserModel().getGroups());
                 groupAdapter.notifyDataSetChanged();
                 groupMemberAdapter.notifyDataSetChanged();
-                if((ds.getSelected_group_id() != null) && (!ds.getSelected_group_id().equalsIgnoreCase("")))
-                {
+                if ((ds.getSelected_group_id() != null) && (!ds.getSelected_group_id().equalsIgnoreCase(""))) {
                     int pos = getGroupPositionInList(groupsList, ds.getSelected_group_id());
                     lv_groups.performItemClick(groupAdapter.getView(pos, null, null), pos, pos);
+                } else {
+                    listAllGroupMembers();
                 }
             }
 
@@ -572,6 +656,30 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         });
     }
 
+    private void listAllGroupMembers() {
+
+        List<GroupMemberModel> allMembers = new ArrayList<>();
+
+        //For each group
+        for (GroupModel groupModel :
+                ds.getUserModel().getGroups()) {
+            //For each group Member
+            for (GroupMemberModel memberModel:
+                 groupModel.getMembers()) {
+                if(!allMembers.contains(memberModel))
+                {
+                    allMembers.add(memberModel);
+                }
+            }
+        }
+
+        groupsMembersList.clear();
+
+        //Add all the group members
+        groupsMembersList.addAll(allMembers);
+        groupMemberAdapter.setArr2(groupsMembersList);
+        groupMemberAdapter.notifyDataSetChanged();
+    }
 
     private int getGroupPositionInList(ArrayList<GroupModel> groups, String groupId) {
         int pos = 0;
@@ -584,4 +692,65 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         }
         return pos;
     }
+
+    public void onNotificationsClick(View view) {
+        Intent intent9 = new Intent(this, NotificationActivity.class);
+        startActivity(intent9);
+        finish();
+    }
+
+    public void onFenceClick(View view) {
+        Intent intent9 = new Intent(this, FenceActivity.class);
+        startActivity(intent9);
+        finish();
+    }
+
+    public void onDeviceClick(View view) {
+        Intent intent9 = new Intent(this, DeviceCatelogActivity.class);
+        startActivity(intent9);
+        finish();
+    }
+
+
+    private void getNotifications(final SwipeRefreshLayout swipeRefreshLayout_notifications) {
+        ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
+        apiEndpointInterface.getAllNotifications(DataSession.getInstance().getUserModel().getId(), new RetroResponse<NotificationModel>() {
+            @Override
+            public void onSuccess() {
+                if ((models != null) && (models.size() > 0)) {
+                    notificationList.clear();
+                    notificationList.addAll(models);
+                    Collections.sort((List<NotificationModel>) notificationList);
+                    adapter.notifyDataSetChanged();
+                    if (null != swipeRefreshLayout_notifications)
+                        swipeRefreshLayout_notifications.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                DialogUtils.diaplayFailureDialog(HomeActivity.this, errorMsg);
+            }
+        });
+    }
+
+    public void initialzeDefaultHomeView(AdapterView<?> adapterView, View view, int position, long l) {
+
+        GroupModel selectedGroup = groupAdapter.getItem(position - 1);
+
+        activateItemsOnTrackMemberSelect();
+        drawerLayout.closeDrawers();
+
+        //Update the selected group details
+        ds.setSelectedGroup(selectedGroup.getId(), selectedGroup.getName());
+        ds.clearSelectedGroupMember();
+        SharedPrefUtility.saveSelectedGroup(getApplicationContext(), selectedGroup.getId(), selectedGroup.getName());
+        SharedPrefUtility.clearSelectedGroupMember(getApplicationContext());
+
+        //Display the selected group's members
+        displaySelectedGroupMembers(selectedGroup);
+//            DropdownBtn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.right_arrow, 0);
+    }
+
+
 }
