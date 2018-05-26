@@ -5,6 +5,8 @@ import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.nglinx.pulse.models.AddressModel;
+import com.nglinx.pulse.models.ChildUserModel;
+import com.nglinx.pulse.models.DeviceModel;
 import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.DeviceTypesModel;
 import com.nglinx.pulse.models.GroupMemberModel;
@@ -23,8 +25,14 @@ import retrofit.client.Header;
 public class DataSession {
 
     private static DataSession myObj;
+
     private List<InviteModel> pendingInvites;
     private List<InviteModel> trackingMeInvites;
+
+    private List<DeviceModel> devicesList;
+
+    private List<ChildUserModel> childProfilesList;
+
     private AddressModel selectedAddress;
     ArrayList<DeviceTypesModel> deviceTypesList;
     Map<DeviceType, Integer> availableDevices;
@@ -403,5 +411,31 @@ public class DataSession {
 
     public void setAvailableDevices(Map<DeviceType, Integer> availableDevices) {
         this.availableDevices = availableDevices;
+    }
+
+    public List<DeviceModel> getDevicesList() {
+        return devicesList;
+    }
+
+    public void setDevicesList(List<DeviceModel> devicesList) {
+        this.devicesList = devicesList;
+    }
+
+    public List<ChildUserModel> getChildProfilesList() {
+        return childProfilesList;
+    }
+
+    public void setChildProfilesList(List<ChildUserModel> childProfilesList) {
+        this.childProfilesList = childProfilesList;
+    }
+
+    public List<ChildUserModel> getUnAttachedChildUser() {
+        List<ChildUserModel> unAttachedChilUsers=new ArrayList<>();
+        for (ChildUserModel child:
+        childProfilesList) {
+            if(child.getStatus().equals(0))
+                unAttachedChilUsers.add(child);
+        }
+        return unAttachedChilUsers;
     }
 }

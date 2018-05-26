@@ -559,7 +559,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         af_longitude = (TextView) dlg_af.findViewById(R.id.et_longitude);
         af_address = (TextView) dlg_af.findViewById(R.id.et_address);
 
-        addFence = (Button) dlg_af.findViewById(R.id.actd_btn_ok);
+        addFence = (Button) dlg_af.findViewById(R.id.ep_btn_activate);
         cancel = (Button) dlg_af.findViewById(R.id.btn_cancel);
 
         af_radius.setText(String.valueOf((int) circleManager.getCircles().get(0).getRadius()));

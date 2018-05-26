@@ -173,7 +173,7 @@
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/btn_profile_view"
+                            android:id="@+id/btn_profile_edit"
                             android:layout_width="@dimen/image_width_twenty"
                             android:layout_height="@dimen/image_height_twenty"
                             android:layout_centerHorizontal="true"

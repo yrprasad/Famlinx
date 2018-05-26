@@ -1,11 +1,9 @@
 package com.nglinx.pulse.activity;
 
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,21 +13,15 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.android.gms.fitness.data.Application;
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.DeviceCatalogAdapter;
-import com.nglinx.pulse.adapter.NotificationsAdapter;
 import com.nglinx.pulse.models.ChildUserModel;
 import com.nglinx.pulse.models.DeviceActivateModel;
 import com.nglinx.pulse.models.DeviceModel;
-import com.nglinx.pulse.models.DeviceType;
-import com.nglinx.pulse.models.NotificationModel;
 import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.utils.ApplicationUtils;
 import com.nglinx.pulse.utils.DialogUtils;
@@ -39,7 +31,6 @@ import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefreshLayout.OnRefreshListener {
@@ -351,7 +342,7 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
         final DeviceActivateModel deviceActivateModel = new DeviceActivateModel();
         deviceActivateModel.setActivationCode(activationCode);
 
-        actd_btn_ok = (Button) actd_dialog.findViewById(R.id.actd_btn_ok);
+        actd_btn_ok = (Button) actd_dialog.findViewById(R.id.ep_btn_activate);
         actd_btn_cancel = (Button) actd_dialog.findViewById(R.id.actd_btn_cancel);
 
         actd_btn_ok.setOnClickListener(new View.OnClickListener() {

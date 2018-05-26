@@ -154,18 +154,9 @@ public class ChildUserModel implements Comparable<ChildUserModel> {
     @Override
     public int compareTo(ChildUserModel model) {
 
-        if ((model.getUdid() == null) || (this.getCreatedDate() == null))
-            return 0;
-
-        try {
-            Date date2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(model.getCreatedDate());
-            Date date1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(this.getCreatedDate());
-            if (date1.compareTo(date2) > 0)
-                return 1;
-            else
-                return -1;
-        } catch (ParseException e) {
-        }
-        return 0;
+        if (model.getUsername().compareTo(this.getUsername()) > 0)
+            return 1;
+        else
+            return -1;
     }
 }

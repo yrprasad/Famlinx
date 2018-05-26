@@ -146,6 +146,11 @@ public interface ApiEndpointInterface {
     @PUT("/api/users/{ownerUuid}/child")
     void createChildUser(@Path("ownerUuid") String ownerUuid, @Body ChildUserModel childUser, Callback<ResponseDto<ChildUserModel>> cb);
 
+    //Child Profile related APIs
+    @POST("/api/confirm/")
+    void activateChildUser(@Body UserModel userModel, Callback<ResponseDto<UserModel>> cb);
+
+
     @GET("/api/users/{ownerUuid}/child")
     void getAllChildUser(@Path("ownerUuid") String ownerUuid, Callback<ResponseDto<ChildUserModel>> cb);
 

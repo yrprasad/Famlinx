@@ -9,22 +9,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nglinx.pulse.R;
-import com.nglinx.pulse.activity.MemberProfileActivity;
+import com.nglinx.pulse.activity.DeviceActivity;
 import com.nglinx.pulse.models.ChildUserModel;
+import com.nglinx.pulse.session.DataSession;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
+public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
 
-    private ViewHolder holder = null;
+    private MemberProfileAdapter.ViewHolder holder = null;
 
-    private ArrayList<ChildUserModel> arr2;
+    private List<ChildUserModel> arr2;
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
     private LayoutInflater mInflater;
     private Context context;
 
-    public MemberProfileAdapter(Context context, ArrayList<ChildUserModel> users) {
+    public ProfilesFragmentAdapter(Context context, List<ChildUserModel> users) {
         super(context, 0, users);
         this.context = context;
         mInflater = (LayoutInflater) context
@@ -49,7 +50,7 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
 
     @Override
     public ChildUserModel getItem(int position) {
-        return arr2.get(position);
+        return DataSession.getInstance().getChildProfilesList().get(position);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
         // Get the data item for this position
         ChildUserModel model = getItem(position);
 
-        final ViewHolder holder = new ViewHolder();
+        final MemberProfileAdapter.ViewHolder holder = new MemberProfileAdapter.ViewHolder();
         holder.modelHolder = model;
 
         // Check if an existing view is being reused, otherwise inflate the view
@@ -83,7 +84,7 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
         holder.btn_profile_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MemberProfileActivity) context).onItemClick(holder.btn_profile_delete, position, 0);
+                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_delete, position, 0);
             }
         });
 
@@ -92,7 +93,7 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
         holder.btn_profile_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MemberProfileActivity) context).onItemClick(holder.btn_profile_edit, position, 0);
+                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_edit, position, 0);
             }
         });
 
@@ -134,7 +135,7 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
         public TextView tv_profile_status;
 
         public ImageView btn_profile_delete;
-        public ImageView btn_profile_edit;
+        public ImageView btn_profile_view;
         public ImageView img_online_status;
     }
 }

@@ -3,19 +3,16 @@ package com.nglinx.pulse.activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.MemberProfileAdapter;
 import com.nglinx.pulse.models.ChildUserModel;
-import com.nglinx.pulse.models.NotificationModel;
 import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.utils.DialogUtils;
 import com.nglinx.pulse.utils.ProgressbarUtil;
@@ -167,7 +164,7 @@ public class MemberProfileActivity extends AbstractActivity implements SwipeRefr
         long viewId = view.getId();
         if (viewId == R.id.btn_profile_delete) {
             deleteChildProfileClickHandler(view);
-        } else if (viewId == R.id.btn_profile_view) {
+        } else if (viewId == R.id.btn_profile_edit) {
             viewChildProfileClickHandler(view);
         }
     }

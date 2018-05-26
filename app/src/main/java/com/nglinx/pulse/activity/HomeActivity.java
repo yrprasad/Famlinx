@@ -71,7 +71,8 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     //Pager
     private static ViewPager mPager;
     private static int currentPage = 0;
-    private static final Integer[] XMEN= {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
+//    private static final Integer[] XMEN= {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
+    private static final Integer[] XMEN= {R.drawable.image_1};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
     //Group Details

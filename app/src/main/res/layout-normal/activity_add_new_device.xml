@@ -175,7 +175,7 @@
                         android:layout_height="60dp">
 
                         <Button
-                            android:id="@+id/actd_btn_ok"
+                            android:id="@+id/ep_btn_activate"
                             android:layout_width="110dp"
                             android:layout_height="40dp"
                             android:layout_marginStart="30dp"
@@ -190,7 +190,7 @@
                             android:layout_marginStart="20dp"
                             android:text="Submit"
                             android:textSize="10sp"
-                            android:layout_toEndOf="@+id/actd_btn_ok"
+                            android:layout_toEndOf="@+id/ep_btn_activate"
                             android:background="@drawable/button_rounded_add"/>
 
                     </RelativeLayout>

@@ -12,6 +12,9 @@ public class ApplicationConstants {
     public static String SHARING_PENDING_INVITES_HEADER = "Pending Invites";
     public static String SHARING_TRACKING_ME_HEADER = "Tracking Me";
 
+    public static String DEVICES_DEVICE_HEADER = "Devices";
+    public static String DEVICES_MEMBER_PROFILES_HEADER = "PROFILES";
+
     public static int SHARING_PENDING_INVITES_INDEX = 0;
     public static int SHARING_TRACKING_ME_INDEX = 1;
 
@@ -83,6 +86,8 @@ public class ApplicationConstants {
     public static final String FAILED_ITEM_COUNT_STR = "failedItemsCount";
     public static final String TOTAL_ITEM_COUNT_STR = "totalItemsCount";
     public static final String TOTAL_ORDER_COST_STR = "failedOrderTotalCost";
+
+    public static final String CHILD_PROFILE_SELECTED_USERID = "selectedChildProfile";
 
     public static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
             new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));

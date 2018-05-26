@@ -81,7 +81,7 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
         holder.iv_delete_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NotificationActivity)context).onItemClick(holder.iv_delete_notification, position, 0);
+                ((NotificationActivity)context).onProfileItemClick(holder.iv_delete_notification, position, 0);
             }
         });
 
@@ -90,7 +90,7 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
         holder.iv_view_notification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((NotificationActivity)context).onItemClick(holder.iv_view_notification, position, 0);
+                ((NotificationActivity)context).onProfileItemClick(holder.iv_view_notification, position, 0);
             }
         });*/
 

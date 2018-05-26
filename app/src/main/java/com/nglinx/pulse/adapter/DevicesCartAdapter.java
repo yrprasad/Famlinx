@@ -95,7 +95,7 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceTypesModel> {
         /*holder.tv_cart_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CartActivity)context).onItemClick(holder.tv_cart_minus, position, 0);
+                ((CartActivity)context).onProfileItemClick(holder.tv_cart_minus, position, 0);
             }
         });*/
 

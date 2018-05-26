@@ -185,7 +185,7 @@ public class NotificationActivity extends AbstractActivity implements SwipeRefre
         startActivity(intent);
     }
 
-   /* public void onItemClick(View view, int position, long id) {
+   /* public void onProfileItemClick(View view, int position, long id) {
         long viewId = view.getId();
         if (viewId == R.id.iv_delete_notification) {
             deleteNotificationClickHandler(view);
