@@ -18,7 +18,7 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
         <!-- include your toolbar layout-->
-        <include
+        <include 
             android:id="@+id/inc_toolbar"
             layout="@layout/toolbar_fence"/>
         <!-- Let's add fragment -->
@@ -52,17 +52,27 @@
                             android:layout_height="0dp"
                             android:layout_weight="2">
 
-                            <Spinner
+                            <!--<Spinner
                                 android:id="@+id/spinner_fence"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/fence_spinner_background"
+                                android:background="#00405d"
                                 android:entries="@array/fence_arrays"
                                 android:overlapAnchor="false"
                                 android:popupBackground="#00405d"
                                 android:prompt="@string/fence_prompt"
-                                android:theme="@style/MatchSpinnerTheme"/>
+                                android:theme="@style/MatchSpinnerTheme"/>-->
 
+                            <Spinner
+                                android:id="@+id/spinner_fence"
+                                android:theme="@style/MatchSpinnerTheme"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:entries="@array/fence_arrays"
+                                android:prompt="@string/fence_prompt"
+                                android:background="@drawable/fence_spinner_background"
+                                android:popupBackground="#00405d"
+                                android:overlapAnchor="false"/>
 
                         </RelativeLayout>
 
@@ -140,8 +150,47 @@
                         android:id="@+id/frame9"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center_vertical"
                         android:orientation="vertical"
                         android:weightSum="20">
+
+                        <Button
+                            android:id="@+id/ms_ok_create_fence"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="22dp"
+                            android:layout_marginTop="22dp"
+                            android:background="@drawable/add_icon"
+                            android:backgroundTint="#868383"
+                            android:clickable="true"
+                            android:paddingTop="@dimen/nav_header_vertical_spacing"
+                            android:visibility="visible"
+                            android:onClick="on_ms_add_fence_click"/>
+
+                        <Button
+                            android:id="@+id/ms_edit_fence"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="22dp"
+                            android:layout_marginTop="22dp"
+                            android:background="@drawable/edit_icon"
+                            android:backgroundTint="#ffffff"
+                            android:clickable="true"
+                            android:onClick="onFenceEdit"
+                            android:paddingTop="@dimen/nav_header_vertical_spacing"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_fence_action"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/ms_ok_create_fence"
+                            android:layout_gravity="end"
+                            android:layout_marginRight="22dp"
+                            android:text="Create Fence"
+                            android:textSize="@dimen/text_size_eight"/>
 
                         <RelativeLayout
                             android:id="@+id/frame10"
@@ -238,7 +287,7 @@
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
                                                         android:text="Locate Me"
-                                                        android:textSize="12sp"/>
+                                                        android:textSize="10sp"/>
 
                                                 </RelativeLayout>
 
@@ -285,6 +334,27 @@
                                             android:layout_height="match_parent"
                                             android:layout_weight="7">
 
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:orientation="vertical"
+                                                android:weightSum="6">
+
+                                                <RelativeLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="0dp"
+                                                    android:layout_weight="3">
+
+
+                                                </RelativeLayout>
+
+                                                <RelativeLayout
+                                                    android:id="@+id/blank"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="0dp"
+                                                    android:layout_weight="3">
+                                                </RelativeLayout>
+                                            </LinearLayout>
                                         </RelativeLayout>
 
                                         <RelativeLayout
@@ -292,6 +362,111 @@
                                             android:layout_width="0dp"
                                             android:layout_height="match_parent"
                                             android:layout_weight="3">
+
+                                            <RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="match_parent"
+                                                    android:orientation="vertical"
+                                                    android:weightSum="5">
+
+                                                    <RelativeLayout
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="0dp"
+                                                        android:layout_weight="3.5">
+
+                                                        <ImageView
+                                                            android:id="@+id/fence_bg_bar"
+                                                            android:layout_width="10dp"
+                                                            android:layout_height="match_parent"
+                                                            android:layout_alignParentTop="true"
+                                                            android:layout_centerHorizontal="true"
+                                                            android:background="@drawable/fence_bg_bar"
+                                                            android:visibility="invisible"/>
+
+                                                    </RelativeLayout>
+
+                                                </LinearLayout>
+
+                                            </RelativeLayout>
+
+                                            <!--<RelativeLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:visibility="gone">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="match_parent"
+                                                    android:orientation="vertical"
+                                                    android:weightSum="6">
+
+                                                    <RelativeLayout
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="0dp"
+                                                        android:layout_weight=".9">
+
+                                                        <ImageView
+                                                            android:id="@+id/ms_park_fence"
+                                                            android:layout_width="@dimen/image_width_thirty"
+                                                            android:layout_height="@dimen/image_height_thirty"
+                                                            android:layout_alignParentTop="true"
+                                                            android:layout_centerHorizontal="true"
+                                                            android:background="@drawable/park_fence"
+                                                            android:onClick="onAddFenceFloatingBtnClick"
+                                                            android:visibility="invisible"/>
+
+                                                    </RelativeLayout>
+
+                                                    <RelativeLayout
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="0dp"
+                                                        android:layout_weight=".2"/>
+
+                                                    <RelativeLayout
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="0dp"
+                                                        android:layout_weight=".9">
+
+                                                        <ImageView
+                                                            android:id="@+id/ms_school_fence"
+                                                            android:layout_width="@dimen/image_width_thirty"
+                                                            android:layout_height="@dimen/image_height_thirty"
+                                                            android:layout_alignParentTop="true"
+                                                            android:layout_centerHorizontal="true"
+                                                            android:background="@drawable/school_fence"
+                                                            android:visibility="invisible"/>
+
+                                                    </RelativeLayout>
+
+                                                    <RelativeLayout
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="0dp"
+                                                        android:layout_weight=".2"/>
+
+                                                    <RelativeLayout
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="0dp"
+                                                        android:layout_weight=".9">
+
+                                                        <ImageView
+                                                            android:id="@+id/ms_home_fence"
+                                                            android:layout_width="@dimen/image_width_thirty"
+                                                            android:layout_height="@dimen/image_height_thirty"
+                                                            android:layout_alignParentTop="true"
+                                                            android:layout_centerHorizontal="true"
+                                                            android:background="@drawable/home_fence"
+                                                            android:visibility="invisible"/>
+
+                                                    </RelativeLayout>
+
+
+                                                </LinearLayout>
+
+                                            </RelativeLayout>-->
 
                                             <LinearLayout
                                                 android:id="@+id/frame32"
@@ -304,7 +479,8 @@
                                                     android:id="@+id/frame33"
                                                     android:layout_width="match_parent"
                                                     android:layout_height="0dp"
-                                                    android:layout_weight="2.5">
+                                                    android:layout_weight="2.5"
+                                                    >
                                                 </RelativeLayout>
 
                                                 <RelativeLayout
@@ -319,8 +495,7 @@
                                                         android:layout_height="@dimen/image_height_fifty"
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
-                                                        android:background="@drawable/create_geo_fence"
-                                                        android:onClick="onAddFenceFloatingBtnClick"/>
+                                                        android:background="@drawable/fence"/>
 
                                                 </RelativeLayout>
 
@@ -332,14 +507,6 @@
                                                     android:layout_alignParentTop="true"
                                                     android:layout_weight="0.5">
 
-                                                    <TextView
-                                                        android:id="@+id/textView13"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_centerHorizontal="true"
-                                                        android:layout_centerVertical="true"
-                                                        android:text="Create"
-                                                        android:textSize="12sp"/>
 
                                                 </RelativeLayout>
 
@@ -358,7 +525,7 @@
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
                                                         android:text="Geo Fence"
-                                                        android:textSize="12sp"/>
+                                                        android:textSize="@dimen/text_size_ten"/>
 
                                                 </RelativeLayout>
 
@@ -372,41 +539,13 @@
 
                             </LinearLayout>
 
-                            <Button
-                                android:id="@+id/ms_ok_create_fence"
-                                android:layout_width="120dp"
-                                android:layout_height="40dp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_alignParentStart="true"
-                                android:layout_marginLeft="70dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/button_rounded_add"
-                                android:onClick="on_ms_add_fence_click"
-                                android:text="place fence"
-                                android:textColor="@android:color/white"
-                                android:visibility="gone"/>
-
-                            <Button
-                                android:id="@+id/ms_create_fence_cancel"
-                                android:layout_width="120dp"
-                                android:layout_height="40dp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="70dp"
-                                android:background="@drawable/button_rounded_add"
-                                android:onClick="on_ms_cancel_fence_click"
-                                android:text="cancel"
-                                android:textColor="@android:color/white"
-                                android:visibility="gone"/>
-
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:id="@+id/frame23"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
-                            >
+                            android:layout_weight="1">
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -426,7 +565,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:visibility="gone"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
+
 </android.support.v4.widget.DrawerLayout>
 

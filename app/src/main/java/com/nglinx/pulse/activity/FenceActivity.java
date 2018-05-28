@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -15,7 +16,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -53,6 +56,7 @@ import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.PlaceAutocompleteAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.FenceModel;
+import com.nglinx.pulse.models.SettingsModel;
 import com.nglinx.pulse.utils.DialogUtils;
 import com.nglinx.pulse.utils.ProgressbarUtil;
 import com.nglinx.pulse.utils.circle.MapAreaManager;
@@ -76,22 +80,11 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
     ArrayAdapter<FenceModel> fenceAdapter;
     FenceModel selectedFence;
 
-    boolean isOptionsOpen = false;
-
-    //Fence option related
-    ImageView ms_park_fence;
-    ImageView ms_school_fence;
-    ImageView ms_home_fence;
-    TextView tv_park_fence;
-    TextView tv_school_fence;
-    TextView tv_home_fence;
-
     ImageView ms_fence_options;
-    ImageView fence_bg_bar;
-    Animation pulse_options_open, pulse_options_close;
 
-    Button msEditFence, msOkCreateFence;
-    TextView tv_fence_action;
+    Button msOkCreateFence, msCancelCreateFence;
+//    Button msEditFence;
+//    TextView tv_fence_action;
 
     //Location related
     protected LocationManager locationManager;
@@ -109,8 +102,6 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
     ImageView ms_location_pointer;
     private PlaceAutocompleteAdapter mAdapter;
 
-    FenceOptionClickListener fenceOptionClickListener;
-
     private MapAreaManager circleManager;
 
     //Add Fence Dialog Attributes
@@ -121,7 +112,9 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
 
     AddFenceClickListener addFenceListener;
     EditFenceClickListener editFenceListener;
-    DeleteFenceClickListener deleteFenceListener;
+    /*DeleteFenceClickListener deleteFenceListener;*/
+
+    Toolbar inc_toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -141,35 +134,36 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
 
     protected void initializeIcons() {
         spinner_fence = (Spinner) findViewById(R.id.spinner_fence);
-        pulse_options_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse_options_open);
-        pulse_options_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse_options_close);
-
-        ms_park_fence = (ImageView) findViewById(R.id.ms_park_fence);
-        ms_school_fence = (ImageView) findViewById(R.id.ms_school_fence);
-        ms_home_fence = (ImageView) findViewById(R.id.ms_home_fence);
-
-        tv_park_fence = (TextView) findViewById(R.id.tv_park_fence);
-        tv_school_fence = (TextView) findViewById(R.id.tv_school_fence);
-        tv_home_fence = (TextView) findViewById(R.id.tv_home_fence);
 
         ms_fence_options = (ImageView) findViewById(R.id.ms_fence_options);
-        fence_bg_bar = (ImageView) findViewById(R.id.fence_bg_bar);
-
-        fenceOptionClickListener = new FenceOptionClickListener();
-        ms_fence_options.setOnClickListener(fenceOptionClickListener);
 
         msOkCreateFence = (Button)
                 findViewById(R.id.ms_ok_create_fence);
 
-        msEditFence = (Button)
-                findViewById(R.id.ms_edit_fence);
+        msCancelCreateFence = (Button)
+                findViewById(R.id.ms_create_fence_cancel);
 
-        tv_fence_action = (TextView)
-                findViewById(R.id.tv_fence_action);
+        inc_toolbar = (Toolbar) findViewById(R.id.inc_toolbar);
+
+        ImageView img_myFences = (ImageView) inc_toolbar.findViewById(R.id.img_myFences);
+        img_myFences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FenceActivity.this, MyFencesActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+       /* msEditFence = (Button)
+                findViewById(R.id.ms_edit_fence);*/
+
+        /*tv_fence_action = (TextView)
+                findViewById(R.id.tv_fence_action);*/
 
         addFenceListener = new AddFenceClickListener();
         editFenceListener = new EditFenceClickListener();
-        deleteFenceListener = new DeleteFenceClickListener();
+//        deleteFenceListener = new DeleteFenceClickListener();
     }
 
     private void initializeFenceItems() {
@@ -243,6 +237,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                 myFences.add(getEmptyFence());
                 myFences.addAll(models);
                 Collections.sort((List<FenceModel>) myFences);
+                ds.setFenceList(myFences);
                 fenceAdapter.notifyDataSetChanged();
             }
 
@@ -280,11 +275,10 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         if (selectedFence.getId().equals("0")) {
             showMyLocation();
         } else {
-
-            closeFenceOptions();
-            msEditFence.setVisibility(View.VISIBLE);
-            tv_fence_action.setText("Edit Fence");
+//            msEditFence.setVisibility(View.VISIBLE);
+//            tv_fence_action.setText("Edit Fence");
             msOkCreateFence.setVisibility(View.GONE);
+            msCancelCreateFence.setVisibility(View.GONE);
 
             double lat = Double.parseDouble(selectedFence.getLatitude());
             double lon = Double.parseDouble(selectedFence.getLongitude());
@@ -415,71 +409,17 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         showMyLocation();
     }
 
-
-    private void openFenceOptions() {
-        ms_park_fence.startAnimation(pulse_options_open);
-        tv_park_fence.startAnimation(pulse_options_open);
-        ms_park_fence.setClickable(true);
-
-        ms_school_fence.startAnimation(pulse_options_open);
-        tv_school_fence.startAnimation(pulse_options_open);
-        ms_school_fence.setClickable(true);
-
-        ms_home_fence.startAnimation(pulse_options_open);
-        tv_home_fence.startAnimation(pulse_options_open);
-        ms_home_fence.setClickable(true);
-
-        ms_park_fence.setVisibility(View.VISIBLE);
-        ms_school_fence.setVisibility(View.VISIBLE);
-        ms_home_fence.setVisibility(View.VISIBLE);
-        fence_bg_bar.setVisibility(View.VISIBLE);
-        isOptionsOpen = true;
-    }
-
-    private void closeFenceOptions() {
-        ms_park_fence.startAnimation(pulse_options_close);
-        tv_park_fence.startAnimation(pulse_options_close);
-        ms_park_fence.setClickable(false);
-
-        ms_school_fence.startAnimation(pulse_options_close);
-        tv_school_fence.startAnimation(pulse_options_close);
-        ms_school_fence.setClickable(false);
-
-        ms_home_fence.startAnimation(pulse_options_close);
-        tv_home_fence.startAnimation(pulse_options_close);
-        ms_home_fence.setClickable(false);
-
-        ms_park_fence.setVisibility(View.INVISIBLE);
-        ms_school_fence.setVisibility(View.INVISIBLE);
-        ms_home_fence.setVisibility(View.INVISIBLE);
-        fence_bg_bar.setVisibility(View.INVISIBLE);
-        isOptionsOpen = false;
-    }
-
-    class FenceOptionClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View view) {
-
-            if (isOptionsOpen) {
-                closeFenceOptions();
-            } else {
-                openFenceOptions();
-            }
-        }
-    }
-
-
     public void onAddFenceFloatingBtnClick(View v) {
 
         if ((null != circleManager) && (circleManager.getCircles().size() > 0)) {
             circleManager.getCircles().get(0).deleteCircle();
         }
         googleMap.clear();
-        closeFenceOptions();
         spinner_fence.setSelection(0);
-        msEditFence.setVisibility(View.GONE);
+//        msEditFence.setVisibility(View.GONE);
         msOkCreateFence.setVisibility(View.VISIBLE);
-        tv_fence_action.setText("Create Fence");
+        msCancelCreateFence.setVisibility(View.VISIBLE);
+//        tv_fence_action.setText("Create Fence");
 
         circleManager = new MapAreaManager(googleMap,
                 4, Color.RED, Color.HSVToColor(70, new float[]{1, 1, 200}), //styling
@@ -503,8 +443,9 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                     @Override
                     public void onDeleteCircle(MapAreaWrapper draggableCircle) {
                         Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
-                        msEditFence.setVisibility(View.VISIBLE);
+//                        msEditFence.setVisibility(View.VISIBLE);
                         msOkCreateFence.setVisibility(View.GONE);
+                        msCancelCreateFence.setVisibility(View.GONE);
                     }
 
                     @Override
@@ -534,12 +475,18 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                 });
 
         circleManager.createFence(present_latLng);
-        msEditFence.setVisibility(View.GONE);
+//        msEditFence.setVisibility(View.GONE);
         msOkCreateFence.setVisibility(View.VISIBLE);
+        msCancelCreateFence.setVisibility(View.VISIBLE);
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(present_latLng, ds.getZoom()));
     }
 
+    public void on_ms_cancel_fence_click(View v) {
+        Intent intent7 = new Intent(this, FenceActivity.class);
+        startActivity(intent7);
+        finish();
+    }
 
     public void on_ms_add_fence_click(View v) {
 
@@ -613,6 +560,19 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                                     getFenceList();
                                     if (dlg_af != null)
                                         dlg_af.dismiss();
+
+                                    new AlertDialog.Builder(FenceActivity.this)
+                                            .setTitle("Add Fence")
+                                            .setMessage("Do you want to apply fence " + af_fence.getText() + " to users?")
+                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                public void onClick(final DialogInterface dialog, int whichButton) {
+                                                    Intent intent7 = new Intent(FenceActivity.this, ApplyFenceActivity.class);
+                                                    intent7.putExtra(ApplicationConstants.SELECTED_FENCE, fenceModel.getId());
+                                                    startActivity(intent7);
+                                                    finish();
+                                                }
+                                            }).setNegativeButton(android.R.string.no, null).show();
                                     DialogUtils.diaplaySuccessDialog(FenceActivity.this, "Fence " + af_fence.getText() + " created successfully");
                                 }
 
@@ -758,6 +718,6 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         });
 
         editFence.setOnClickListener(editFenceListener);
-        deleteFence.setOnClickListener(deleteFenceListener);
+//        deleteFence.setOnClickListener(deleteFenceListener);
     }
 }

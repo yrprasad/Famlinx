@@ -42,6 +42,10 @@ public class ProgressbarUtil {
         return startProgressBar(context, "Loading...");
     }
 
+    public static ProgressDialog startProgressBarWithCustomMessage(final Context context, final String mesage) {
+        return startProgressBar(context, mesage);
+    }
+
     public static void stopProgressBar(ProgressDialog mProgressDialog) {
 //        if (mProgressDialog.isShowing())
 //            mProgressDialog.dismiss();

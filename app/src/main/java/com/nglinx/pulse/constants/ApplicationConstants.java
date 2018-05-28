@@ -87,6 +87,8 @@ public class ApplicationConstants {
     public static final String TOTAL_ITEM_COUNT_STR = "totalItemsCount";
     public static final String TOTAL_ORDER_COST_STR = "failedOrderTotalCost";
 
+    public static final String SELECTED_FENCE = "SelectedFence";
+
     public static final String CHILD_PROFILE_SELECTED_USERID = "selectedChildProfile";
 
     public static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(

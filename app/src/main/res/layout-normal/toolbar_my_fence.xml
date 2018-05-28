@@ -18,7 +18,6 @@
             android:layout_weight="2">
 
             <ImageView
-                android:id="@+id/menu_toolbar"
                 android:layout_width="@dimen/image_width_twenty_five"
                 android:layout_height="@dimen/image_height_fifteen"
                 android:layout_centerVertical="true"
@@ -30,26 +29,29 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/layout_height_thirty"
-            android:layout_weight="3.2"/>
+            android:layout_weight="3"/>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/layout_height_fourty"
-            android:layout_weight="4">
+            android:layout_weight="5">
 
-            <ImageView
-                android:layout_width="@dimen/image_width_thirty"
-                android:layout_height="@dimen/layout_height_thirty"
-                android:layout_centerHorizontal="true"
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:background="@drawable/notification_icon"/>
-
+                android:layout_centerHorizontal="true"
+                android:text="My fence"
+                android:textSize="@dimen/text_size_twenty"
+                android:textColor="@android:color/white"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/layout_height_thirty"
-            android:layout_weight="3.3"/>
+            android:layout_weight="2.5"/>
 
         <RelativeLayout
             android:layout_width="0dp"
@@ -57,8 +59,7 @@
             android:layout_weight="2">
 
             <ImageView
-                android:id="@+id/img_myFences"
-                android:layout_width="@dimen/image_width_thirty_five"
+                android:layout_width="@dimen/image_height_thirty_five"
                 android:layout_height="@dimen/image_height_thirty"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"

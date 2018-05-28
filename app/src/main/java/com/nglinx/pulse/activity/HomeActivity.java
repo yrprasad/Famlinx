@@ -69,10 +69,10 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     public DrawerLayout drawerLayout;
 
     //Pager
-    private static ViewPager mPager;
-    private static int currentPage = 0;
+    private ViewPager mPager;
+    private int currentPage = 0;
 //    private static final Integer[] XMEN= {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
-    private static final Integer[] XMEN= {R.drawable.image_1};
+    private static final Integer[] XMEN = {};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
     //Group Details
@@ -162,11 +162,11 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
         refreshUserDetails();
 
-        initPager();
+//        initPager();
     }
 
 
-    private void initPager() {
+    /*private void initPager() {
 
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);
@@ -183,8 +183,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 if (currentPage == XMEN.length) {
                     currentPage = 0;
                 }
-                mPager.setCurrentItem(currentPage++, true);
-            }
+             }
         };
         Timer swipeTimer = new Timer();
         swipeTimer.schedule(new TimerTask() {
@@ -193,7 +192,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 handler.post(Update);
             }
         }, 5000, 10000);
-    }
+    }*/
 
     @Override
     public void onPause() {

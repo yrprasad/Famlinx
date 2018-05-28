@@ -75,8 +75,8 @@ public class GroupMemberModel {
         this.username = username;
     }
 
-    @Override
-    public String toString() {
+
+    public String toString1() {
         return "GroupMemberModel{" +
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
@@ -86,5 +86,10 @@ public class GroupMemberModel {
                 ", image='" + image + '\'' +
                 ", trackingModel=" + trackingModel +
                 '}';
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

@@ -9,6 +9,7 @@ import com.nglinx.pulse.models.ChildUserModel;
 import com.nglinx.pulse.models.DeviceModel;
 import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.DeviceTypesModel;
+import com.nglinx.pulse.models.FenceModel;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.models.InviteModel;
@@ -32,6 +33,8 @@ public class DataSession {
     private List<DeviceModel> devicesList;
 
     private List<ChildUserModel> childProfilesList;
+
+    List<FenceModel> fenceList = null;
 
     private AddressModel selectedAddress;
     ArrayList<DeviceTypesModel> deviceTypesList;
@@ -437,5 +440,27 @@ public class DataSession {
                 unAttachedChilUsers.add(child);
         }
         return unAttachedChilUsers;
+    }
+
+    public List<FenceModel> getFenceList() {
+        return fenceList;
+    }
+
+    public void setFenceList(List<FenceModel> fenceList) {
+        this.fenceList = fenceList;
+    }
+
+    public FenceModel getFenceById(final String fenceId)
+    {
+        if(fenceList == null)
+            return null;
+
+        for (FenceModel fence:
+             fenceList) {
+            if(fence.getId().equalsIgnoreCase(fenceId))
+                return fence;
+        }
+
+        return null;
     }
 }

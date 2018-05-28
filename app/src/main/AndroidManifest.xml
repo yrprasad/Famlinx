@@ -57,6 +57,8 @@
         <activity android:name="com.nglinx.pulse.activity.MemberProfileActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.DeviceActivity"></activity>
         <activity android:name="com.nglinx.pulse.activity.EditProfileActivity"></activity>
+        <activity android:name="com.nglinx.pulse.activity.ApplyFenceActivity"></activity>
+        <activity android:name="com.nglinx.pulse.activity.MyFencesActivity"></activity>
 
         <!--<activity android:name=".mainClasses.RetroResponse"></activity>-->
         <service android:name=".activity.AuthenticateIntentService"></service>
