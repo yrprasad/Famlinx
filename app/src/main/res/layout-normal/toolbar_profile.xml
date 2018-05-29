@@ -54,7 +54,7 @@
             android:layout_height="@dimen/layout_height_thirty"
             android:layout_weight="2.8"/>
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/layout_height_fourty"
             android:layout_weight="2">
@@ -66,7 +66,7 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/grouparrow"/>
 
-        </RelativeLayout>
+        </RelativeLayout>-->
 
     </LinearLayout>
 

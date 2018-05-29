@@ -25,12 +25,15 @@ import com.nglinx.pulse.session.SharedPrefUtility;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
 import java.security.acl.Group;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -181,6 +184,7 @@ public class ApplicationUtils {
         String dateFormat = "EEE MMM dd HH:mm:ss Z yyyy";
         SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 
+        TimeZone t = TimeZone.getDefault();
         formatter.setTimeZone(TimeZone.getDefault());
         formatter.applyPattern(dateFormat);
 
@@ -389,6 +393,22 @@ public class ApplicationUtils {
                 return fenceModel;
         }
         return null;
+    }
+
+    public static String convertFormatByTimeZone(final String oldDate) {
+        DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
+        DateFormat targetFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+        targetFormat.setTimeZone(TimeZone.getDefault());
+
+        try {
+            Date date = originalFormat.parse(oldDate);
+            targetFormat.setTimeZone(TimeZone.getDefault());
+            String formattedDate = targetFormat.format(date);
+            return formattedDate;
+        } catch (Exception e) {
+            return oldDate;
+        }
+
     }
 
 }

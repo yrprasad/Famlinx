@@ -153,7 +153,6 @@ public class ChildUserModel implements Comparable<ChildUserModel> {
 
     @Override
     public int compareTo(ChildUserModel model) {
-
         if (model.getUsername().compareTo(this.getUsername()) > 0)
             return 1;
         else

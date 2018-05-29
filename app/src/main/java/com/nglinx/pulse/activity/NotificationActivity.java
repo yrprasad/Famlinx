@@ -134,14 +134,16 @@ public class NotificationActivity extends AbstractActivity implements SwipeRefre
         final NotificationModel iModel = (NotificationModel) v.getTag();
         new AlertDialog.Builder(NotificationActivity.this)
                 .setTitle("Accept Invite")
-                .setMessage("Do you want to delete this invite ?")
+                .setMessage("Do you want to delete this Notification ?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(NotificationActivity.this);
                         ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-                        apiEndpointInterface.deleteNotification(DataSession.getInstance().getUserModel().getId(), iModel.getId(), new RetroResponse<NotificationModel>() {
+
+                        //TODO:Need to change the parameters order in the backend
+                        apiEndpointInterface.deleteNotification(iModel.getId(), DataSession.getInstance().getUserModel().getId(), new RetroResponse<NotificationModel>() {
                             @Override
                             public void onSuccess() {
                                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
@@ -157,7 +159,6 @@ public class NotificationActivity extends AbstractActivity implements SwipeRefre
                                                 Log.e("info", "OK");
                                                 //TODO: Refresh
                                                 swipeRefreshLayout.setRefreshing(true);
-                                                // directly call onRefresh() method
                                                 onRefresh();
                                             }
                                         });

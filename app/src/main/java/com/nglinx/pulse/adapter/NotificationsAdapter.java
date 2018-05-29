@@ -1,7 +1,9 @@
 package com.nglinx.pulse.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -9,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nglinx.pulse.R;
+import com.nglinx.pulse.activity.MyFencesActivity;
 import com.nglinx.pulse.activity.NotificationActivity;
 import com.nglinx.pulse.models.NotificationModel;
+import com.nglinx.pulse.utils.ApplicationUtils;
 
 import java.util.ArrayList;
 
@@ -75,6 +79,21 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
         holder.notif_row_type = (TextView) convertView.findViewById(R.id.notif_row_type);
         holder.notif_row_date = (TextView) convertView.findViewById(R.id.notif_row_date);
         holder.notif_row_message = (TextView) convertView.findViewById(R.id.notif_row_message);
+        holder.options = (ImageView) convertView.findViewById(R.id.optionsMenu);
+
+        holder.options.setTag(holder);
+        holder.options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                view.setTag(holder.modelHolder);
+                view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        showPopupMenu(view);
+                    }
+                });
+            }
+        });
 
         /*holder.iv_delete_notification = (ImageView) convertView.findViewById(R.id.iv_delete_notification);
         holder.iv_delete_notification.setTag(holder.modelHolder);
@@ -100,7 +119,10 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
             holder.notif_row_type.setText(notificationModel.getType().toString());
 
         if((notificationModel != null) && (notificationModel.getCreatedDate() != null))
-            holder.notif_row_date.setText(notificationModel.getCreatedDate());
+        {
+            String localTimeZoneFormat = ApplicationUtils.convertFormatByTimeZone(notificationModel.getCreatedDate());
+            holder.notif_row_date.setText(localTimeZoneFormat);
+        }
 
         if((notificationModel.getMessage() != null) && ((notificationModel.getMessage().length() != 0)))
         {
@@ -125,5 +147,26 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
 
         public ImageView iv_delete_notification;
         public ImageView iv_view_notification;
+
+        public ImageView options;
+    }
+
+
+    private void showPopupMenu(final View view) {
+        PopupMenu popup = new PopupMenu(context, view);
+        popup.getMenuInflater().inflate(R.menu.activity_menu_notifications, popup.getMenu());
+        popup.show();
+
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_delete_notifications:
+                        ((NotificationActivity) context).deleteNotificationClickHandler(view);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 }

@@ -229,6 +229,7 @@
             android:foreground="?android:attr/selectableItemBackground">
 
             <ImageView
+                android:id="@+id/optionsMenu"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"

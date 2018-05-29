@@ -102,10 +102,6 @@ public class DeviceActivity extends AbstractActivity {
 
         initializeIcons();
 
-        getChildProfiles();
-
-        getDevices();
-
         refreshList();
     }
 
@@ -137,6 +133,10 @@ public class DeviceActivity extends AbstractActivity {
                 childProfilesList.addAll(models);
                 Collections.sort(childProfilesList);
                 ds.setChildProfilesList(childProfilesList);
+                synchronized (this) {
+                    devicesAdapter.notifyDataSetChanged();
+                }
+
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
             }
 
@@ -160,6 +160,9 @@ public class DeviceActivity extends AbstractActivity {
                 devicesList.clear();
                 devicesList.addAll(ApplicationUtils.getNonSensorDevices(models));
                 ds.setDevicesList(devicesList);
+                synchronized (this) {
+                    devicesAdapter.notifyDataSetChanged();
+                }
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
             }
 
@@ -176,7 +179,7 @@ public class DeviceActivity extends AbstractActivity {
     public void refreshList() {
         getChildProfiles();
         getDevices();
-        devicesAdapter.notifyDataSetChanged();
+
     }
 
     public void onDeviceEdit(int position) {
@@ -568,7 +571,9 @@ public class DeviceActivity extends AbstractActivity {
             public void onSuccess() {
                 devicesList.clear();
                 devicesList.addAll(ApplicationUtils.getNonSensorDevices(models));
-                devicesAdapter.notifyDataSetChanged();
+                synchronized (this) {
+                    devicesAdapter.notifyDataSetChanged();
+                }
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
             }
 

@@ -10,7 +10,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -38,7 +37,6 @@ import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.GroupAdapter;
 import com.nglinx.pulse.adapter.GroupMemberAdapter;
 import com.nglinx.pulse.adapter.NotificationsAdapter;
-import com.nglinx.pulse.adapter.ViewPagerAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
@@ -62,8 +60,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import me.relex.circleindicator.CircleIndicator;
-
 public class HomeActivity extends AbstractActivity implements LocationListener, GoogleMap.OnCameraChangeListener, GoogleMap.OnMyLocationButtonClickListener {
 
     public DrawerLayout drawerLayout;
@@ -71,7 +67,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     //Pager
     private ViewPager mPager;
     private int currentPage = 0;
-//    private static final Integer[] XMEN= {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
+    //    private static final Integer[] XMEN= {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
     private static final Integer[] XMEN = {};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
@@ -426,7 +422,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 sendTrackReqToSelectedMember();
 
                 //Update the user tracking location on map
-                displaySelectedMember();
+                displaySelectedMember(selectedMember);
             }
         }
 
@@ -467,27 +463,31 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         });
     }
 
-    private void displaySelectedMember() {
+    private void displaySelectedMember(GroupMemberModel selectedMember) {
         final String selectedGroupId = ds.getSelected_group_id();
         final String selectedMemberGroupId = ds.getSelected_group_member_id();
 
+        GroupMemberModel member = null;
         if ((!selectedGroupId.equals("")) && (!selectedMemberGroupId.equals(""))) {
-            final GroupMemberModel member = ds.getMemberDetails(selectedGroupId, selectedMemberGroupId);
-            if (member != null) {
+            member = ds.getMemberDetails(selectedGroupId, selectedMemberGroupId);
+        } else if (null != selectedMember) {
+            member = selectedMember;
+        }
 
-                if (member.getStatus().equalsIgnoreCase("0")) {
-                    DialogUtils.diaplayDialog(HomeActivity.this, "Invite Request Pending", "User not accepted the invite");
-                } else if (member.getTrackingModel() == null) {
-                    DialogUtils.diaplayDialog(HomeActivity.this, "Failed to get User Location", "Failed to get User Location");
-                } else if ((member.getTrackingModel().getLatitude() == null) || (member.getTrackingModel().getLongitude() == null)) {
-                    DialogUtils.diaplayDialog(HomeActivity.this, "Failed to get User Location", "User not logged-in");
-                } else {
-                    SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        if (member != null) {
+            activateItemsOnTrackMemberSelect();
+            if (member.getStatus().equalsIgnoreCase("0")) {
+                DialogUtils.diaplayDialog(HomeActivity.this, "Invite Request Pending", "User not accepted the invite");
+            } else if (member.getTrackingModel() == null) {
+                DialogUtils.diaplayDialog(HomeActivity.this, "Failed to get User Location", "Failed to get User Location");
+            } else if ((member.getTrackingModel().getLatitude() == null) || (member.getTrackingModel().getLongitude() == null)) {
+                DialogUtils.diaplayDialog(HomeActivity.this, "Failed to get User Location", "User not logged-in");
+            } else {
+                SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-                    //Ensure synchronization.
-                    synchronized (this) {
-                        mapUtils.updateMemberLocationOnMap(getApplicationContext(), fm, member);
-                    }
+                //Ensure synchronization.
+                synchronized (this) {
+                    mapUtils.updateMemberLocationOnMap(getApplicationContext(), fm, member);
                 }
             }
         }
@@ -611,7 +611,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    displaySelectedMember();
+                    displaySelectedMember(null);
                 }
             });
         }
@@ -664,10 +664,9 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         for (GroupModel groupModel :
                 ds.getUserModel().getGroups()) {
             //For each group Member
-            for (GroupMemberModel memberModel:
-                 groupModel.getMembers()) {
-                if(!allMembers.contains(memberModel))
-                {
+            for (GroupMemberModel memberModel :
+                    groupModel.getMembers()) {
+                if (!allMembers.contains(memberModel)) {
                     allMembers.add(memberModel);
                 }
             }
@@ -706,7 +705,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     }
 
     public void onDeviceClick(View view) {
-        Intent intent9 = new Intent(this, DeviceCatelogActivity.class);
+        Intent intent9 = new Intent(this, DeviceActivity.class);
         startActivity(intent9);
         finish();
     }
