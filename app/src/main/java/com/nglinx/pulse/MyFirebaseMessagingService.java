@@ -1,25 +1,34 @@
-package com.nglinx.pulse.service;
+package com.nglinx.pulse;
 
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.utils.retrofit.ApiEndpointInterface;
 import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.TimerTask;
 
-public class BackendService extends TimerTask {
+/**
+ * Created by yelisetr on 4/10/2017.
+ */
 
-    DataSession ds = DataSession.getInstance();
+public class MyFirebaseMessagingService extends FirebaseMessagingService {
+
+    DataSession ds = null;
+
+    public MyFirebaseMessagingService() {
+        ds = DataSession.getInstance();
+    }
 
     @Override
-    public void run() {
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-        System.out.println("Location Fetched" + currentDateTimeString);
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+
+        if ((ds == null) || (ds.getUserModel() == null) || (null == ds.getUserModel().getLocation())) {
+            return;
+        }
         final String latitude = ds.getUserModel().getLocation().getLatitude();
         final String longitude = ds.getUserModel().getLocation().getLongitude();
 
@@ -31,6 +40,8 @@ public class BackendService extends TimerTask {
                 System.out.println("Successfully updated the location details to server");
                 List<GroupModel> groupsList = new ArrayList<GroupModel>(models);
                 ds.getUserModel().setGroups(groupsList);
+                ds.getUserModel().getLocation().setLatitude(latitude);
+                ds.getUserModel().getLocation().setLongitude(longitude);
             }
 
             @Override

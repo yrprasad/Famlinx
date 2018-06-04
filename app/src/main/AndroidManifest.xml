@@ -21,6 +21,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_CONTACTS"></uses-permission>
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:icon="@mipmap/app_launcher"
@@ -64,7 +65,7 @@
         <service android:name=".activity.AuthenticateIntentService"></service>
 
         <receiver
-            android:name="com.nglinx.pulse.gcm.GcmBroadcastReceiver"
+            android:name="com.nglinx.pulse.utils.gcm.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -85,6 +86,18 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCz4ebyKcYmZoC8Vuy5lAyXs-30mS3DWBI" />
+
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+            </intent-filter>
+        </service>
+
+        <service android:name=".MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"></action>
+            </intent-filter>
+        </service>
 
     </application>
     <supports-screens

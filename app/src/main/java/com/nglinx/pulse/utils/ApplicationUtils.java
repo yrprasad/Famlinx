@@ -397,7 +397,7 @@ public class ApplicationUtils {
 
     public static String convertFormatByTimeZone(final String oldDate) {
         DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
-        DateFormat targetFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+        DateFormat targetFormat = new SimpleDateFormat("dd-MMM-yy HH:mm");
         targetFormat.setTimeZone(TimeZone.getDefault());
 
         try {

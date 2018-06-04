@@ -152,6 +152,7 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
 
         ds.clearSelectedGroupMember();
         ds.clearSelectedGroup();
+//        DataSession.clearSessionData();
         SharedPrefUtility.clearSelectedGroup(getApplicationContext());
         SharedPrefUtility.clearSelectedGroupMember(getApplicationContext());
 

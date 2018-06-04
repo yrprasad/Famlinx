@@ -167,7 +167,7 @@
                                 android:background="#0095da"
                                 android:foreground="@drawable/ripple_effect"
                                 android:onClick="onSASelectClickHandler"
-                                android:text="Select address"
+                                android:text="Shipping address"
                                 android:textColor="#ffffff"
                                 android:layout_weight="1"/>
 

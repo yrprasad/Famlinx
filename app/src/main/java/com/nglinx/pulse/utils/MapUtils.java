@@ -85,7 +85,7 @@ public class MapUtils {
                     googleMap.animateCamera(cu);
 
                 } else {
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(memberLocation));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(memberLocation, 150));
                     googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
                 }
 

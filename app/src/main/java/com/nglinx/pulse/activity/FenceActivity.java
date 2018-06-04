@@ -178,6 +178,13 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         getFenceList();
     }
 
+    private FenceModel getDummyFence()
+    {
+        FenceModel fenceModel = new FenceModel();
+        fenceModel.setId("0");
+        fenceModel.setName("Select Fence");
+    }
+
     private void initializeLocationItems() {
         geocoder = new Geocoder(this, Locale.getDefault());
 
@@ -363,7 +370,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         }
     };
 
-    @Override
+        @Override
     public void onCameraIdle() {
         present_address = null;
         present_latLng = null;
@@ -432,17 +439,17 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
 
                     @Override
                     public void onResizeCircleEnd(MapAreaWrapper draggableCircle) {
-                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCreateCircle(MapAreaWrapper draggableCircle) {
-                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onDeleteCircle(MapAreaWrapper draggableCircle) {
-                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
 //                        msEditFence.setVisibility(View.VISIBLE);
                         msOkCreateFence.setVisibility(View.GONE);
                         msCancelCreateFence.setVisibility(View.GONE);
@@ -450,27 +457,27 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
 
                     @Override
                     public void onMoveCircleEnd(MapAreaWrapper draggableCircle) {
-                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onMoveCircleStart(MapAreaWrapper draggableCircle) {
-                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onResizeCircleStart(MapAreaWrapper draggableCircle) {
-                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onMinRadius(MapAreaWrapper draggableCircle) {
-                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onMaxRadius(MapAreaWrapper draggableCircle) {
-                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_LONG).show();
+//                        Toast.makeText(FenceActivity.this, "" + draggableCircle, Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -510,9 +517,22 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         cancel = (Button) dlg_af.findViewById(R.id.btn_cancel);
 
         af_radius.setText(String.valueOf((int) circleManager.getCircles().get(0).getRadius()));
-        af_latitude.setText(String.valueOf(present_latLng.latitude));
-        af_longitude.setText(String.valueOf(present_latLng.longitude));
-        af_address.setText(present_address.getSubLocality() + "," + present_address.getLocality() + "," + present_address.getCountryName());
+        af_latitude.setText(String.format("%.4f",present_latLng.latitude));
+        af_longitude.setText(String.format("%.4f",present_latLng.longitude));
+
+        String address = "";
+        if (present_address != null) {
+            if (present_address.getSubLocality() != null) {
+                address += present_address.getSubLocality() + ",";
+            }
+            if (present_address.getLocality() != null) {
+                address += present_address.getLocality() + ",";
+            }
+            if (present_address.getCountryName() != null) {
+                address += present_address.getCountryName();
+            }
+        }
+        af_address.setText(address);
         addFence.setOnClickListener(addFenceListener);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -565,14 +585,14 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                                             .setTitle("Add Fence")
                                             .setMessage("Do you want to apply fence " + af_fence.getText() + " to users?")
                                             .setIcon(android.R.drawable.ic_dialog_alert)
-                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                                 public void onClick(final DialogInterface dialog, int whichButton) {
                                                     Intent intent7 = new Intent(FenceActivity.this, ApplyFenceActivity.class);
                                                     intent7.putExtra(ApplicationConstants.SELECTED_FENCE, fenceModel.getId());
                                                     startActivity(intent7);
                                                     finish();
                                                 }
-                                            }).setNegativeButton(android.R.string.no, null).show();
+                                            }).setNegativeButton(R.string.no, null).show();
                                     DialogUtils.diaplaySuccessDialog(FenceActivity.this, "Fence " + af_fence.getText() + " created successfully");
                                 }
 

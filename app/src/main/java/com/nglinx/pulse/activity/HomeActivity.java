@@ -100,6 +100,8 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     CreateGroupListener createGroupListener;
 //    View headerLayout_groups;
 
+    boolean canGetLocation = false;
+
     //Left Menu NavigationView
     TextView tv_username;
 
@@ -159,6 +161,11 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         refreshUserDetails();
 
 //        initPager();
+
+        Timer timer = new Timer();
+        ds.setContext(getApplicationContext());
+        BackendService backendService = new BackendService();
+        timer.schedule(backendService, 5000, 10000);
     }
 
 
@@ -422,7 +429,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 sendTrackReqToSelectedMember();
 
                 //Update the user tracking location on map
-                displaySelectedMember(selectedMember);
+                displaySelectedMember(selectedMember, true);
             }
         }
 
@@ -463,7 +470,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         });
     }
 
-    private void displaySelectedMember(GroupMemberModel selectedMember) {
+    private void displaySelectedMember(GroupMemberModel selectedMember, boolean isPopUpRequired) {
         final String selectedGroupId = ds.getSelected_group_id();
         final String selectedMemberGroupId = ds.getSelected_group_member_id();
 
@@ -477,11 +484,14 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         if (member != null) {
             activateItemsOnTrackMemberSelect();
             if (member.getStatus().equalsIgnoreCase("0")) {
-                DialogUtils.diaplayDialog(HomeActivity.this, "Invite Request Pending", "User not accepted the invite");
+                if (isPopUpRequired)
+                    DialogUtils.diaplayDialog(HomeActivity.this, "Invite Request Pending", "User not accepted the invite");
             } else if (member.getTrackingModel() == null) {
-                DialogUtils.diaplayDialog(HomeActivity.this, "Failed to get User Location", "Failed to get User Location");
+                if (isPopUpRequired)
+                    DialogUtils.diaplayDialog(HomeActivity.this, "Failed to get User Location", "Failed to get User Location");
             } else if ((member.getTrackingModel().getLatitude() == null) || (member.getTrackingModel().getLongitude() == null)) {
-                DialogUtils.diaplayDialog(HomeActivity.this, "Failed to get User Location", "User not logged-in");
+                if (isPopUpRequired)
+                    DialogUtils.diaplayDialog(HomeActivity.this, "Failed to get User Location", "User not logged-in");
             } else {
                 SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
@@ -492,6 +502,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
             }
         }
     }
+
 
     //Gets the latest Self location and updates the location in DataSession and map if no user is selected
     @Override
@@ -538,7 +549,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         }
     }
 
-    //Get the location and request for location updates in regular intervals
+    /*//Get the location and request for location updates in regular intervals
     public Location getLocation() {
         try {
 
@@ -586,6 +597,73 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
             e.printStackTrace();
         }
         return location;
+    }*/
+
+    public Location getLocation() {
+        try {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+            } else {
+
+                locationManager = (LocationManager) getApplicationContext()
+                        .getSystemService(LOCATION_SERVICE);
+
+                // getting GPS status
+                isGPSEnabled = locationManager
+                        .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                // getting network status
+                isNetworkEnabled = locationManager
+                        .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+                if (!isGPSEnabled && !isNetworkEnabled) {
+                    // no network provider is enabled
+                } else {
+                    this.canGetLocation = true;
+                    // First get location from Network Provider
+                    if (isNetworkEnabled) {
+                        locationManager.requestLocationUpdates(
+                                LocationManager.NETWORK_PROVIDER,
+                                0,
+                                0, this);
+                        Log.d("Network", "Network");
+                        if (locationManager != null) {
+                            location = locationManager
+                                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                            if (location != null) {
+                                double latitude = location.getLatitude();
+                                double longitude = location.getLongitude();
+                                ds.setLocation(location);
+                            }
+                        }
+                    }
+                    // if GPS Enabled get lat/long using GPS Services
+                    if (isGPSEnabled) {
+                        if (location == null) {
+                            locationManager.requestLocationUpdates(
+                                    LocationManager.GPS_PROVIDER,
+                                    0,
+                                    0, this);
+
+                            Log.d("GPS Enabled", "GPS Enabled");
+                            if (locationManager != null) {
+                                location = locationManager
+                                        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                if (location != null) {
+                                    double latitude = location.getLatitude();
+                                    double longitude = location.getLongitude();
+                                    ds.setLocation(location);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return location;
     }
 
     @Override
@@ -611,7 +689,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    displaySelectedMember(null);
+                    displaySelectedMember(null, false);
                 }
             });
         }
@@ -642,7 +720,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 groupMemberAdapter.notifyDataSetChanged();
                 if ((ds.getSelected_group_id() != null) && (!ds.getSelected_group_id().equalsIgnoreCase(""))) {
                     int pos = getGroupPositionInList(groupsList, ds.getSelected_group_id());
-                    lv_groups.performItemClick(groupAdapter.getView(pos, null, null), pos, pos);
+                    lv_groups.performItemClick(groupAdapter.getView(pos, null, null), pos + 1, pos);
                 } else {
                     listAllGroupMembers();
                 }

@@ -338,7 +338,7 @@
                                             android:layout_height="40dp"
                                             android:background="#0095da"
                                             android:foreground="@drawable/ripple_effect"
-                                            android:text="Select Address"
+                                            android:text="Shipping Address"
                                             android:textColor="#ffffff"
                                             android:textSize="12sp"
                                             android:onClick="onCartSelectAddressButtonClick"/>

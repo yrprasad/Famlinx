@@ -15,9 +15,9 @@ public class DevicesAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
-        if (position == 0) {
+        if (position == 1) {
             fragment = new DevicesFragment();
-        } else if (position == 1) {
+        } else if (position == 0) {
             fragment = new ProfilesFragment();
         }
         return fragment;
@@ -30,9 +30,9 @@ public class DevicesAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (position == 0) {
+        if (position == 1) {
             return ApplicationConstants.DEVICES_DEVICE_HEADER;
-        } else if (position == 1) {
+        } else if (position == 0) {
             return ApplicationConstants.DEVICES_MEMBER_PROFILES_HEADER;
         }
         return null;

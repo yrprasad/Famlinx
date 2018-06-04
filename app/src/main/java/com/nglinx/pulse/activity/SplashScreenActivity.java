@@ -60,6 +60,7 @@ public class SplashScreenActivity extends Activity {
             }
         };
 
+        DataSession.getInstance().clearDataSession(getApplicationContext());
         ds = DataSession.getInstance();
 
         // Start the timer

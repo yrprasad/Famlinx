@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "85497968061",
+    "firebase_url": "https://famlinx-cdf4b.firebaseio.com",
+    "project_id": "famlinx-cdf4b",
+    "storage_bucket": "famlinx-cdf4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85497968061:android:ac7330625ac48486",
+        "android_client_info": {
+          "package_name": "com.nglinx.pulse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85497968061-nqeo15k9dh5te2snb1bg8gigv2pcgr1h.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "85497968061-nqeo15k9dh5te2snb1bg8gigv2pcgr1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGhCbJzz1zS-zQhzg3mVGL-OKZvRV-ewE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

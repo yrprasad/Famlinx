@@ -18,9 +18,9 @@ public class SharingAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
-        if (position == 0) {
+        if (position == 1) {
             fragment = new SharingPendingInvitesFragment();
-        } else if (position == 1) {
+        } else if (position == 0) {
             fragment = new SharingTrackingMeFragment();
         }
         return fragment;
@@ -33,9 +33,9 @@ public class SharingAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (position == 0) {
+        if (position == 1) {
             return ApplicationConstants.SHARING_PENDING_INVITES_HEADER;
-        } else if (position == 1) {
+        } else if (position == 0) {
             return ApplicationConstants.SHARING_TRACKING_ME_HEADER;
         }
         return null;

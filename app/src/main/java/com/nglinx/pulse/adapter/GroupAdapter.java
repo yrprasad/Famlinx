@@ -41,6 +41,10 @@ public class GroupAdapter extends ArrayAdapter<GroupModel> {
 
     @Override
     public GroupModel getItem(int position) {
+
+        if(position < 0)
+            return null;
+
         if(position >= arr1.size())
             return  null;
         return arr1.get(position);

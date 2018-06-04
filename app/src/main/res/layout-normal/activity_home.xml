@@ -750,7 +750,7 @@
                                                 android:layout_centerHorizontal="true"
                                                 android:layout_centerVertical="true"
                                                 android:gravity="center"
-                                                android:text="Device"
+                                                android:text="Manage Profiles"
                                                 android:textSize="10dp"/>
                                         </RelativeLayout>
 
@@ -904,7 +904,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:fitsSystemWindows="true"
-        android:visibility="visible">
+        >
 
         <ListView
             android:id="@+id/lv_groups"

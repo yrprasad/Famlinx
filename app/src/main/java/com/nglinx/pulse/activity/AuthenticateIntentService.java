@@ -41,13 +41,13 @@ public class AuthenticateIntentService extends IntentService {
 
         final ResultReceiver receiver = intent.getParcelableExtra("receiver");
 
+        DataSession.getInstance().clearSessionDetails();
+
         final UserLoginModel userLoginModel = ApplicationUtils.getUserLoginModelForAuthenticate();
 
         receiver.send(ApplicationConstants.STATUS_RUNNING, Bundle.EMPTY);
 
         final Bundle bundle = new Bundle();
-
-        DataSession.getInstance().clearSessionDetails();
 
         ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
         apiEndpointInterface.authenticate(userLoginModel, new RetroResponse<UserModel>(getApplicationContext()) {

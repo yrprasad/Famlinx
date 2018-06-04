@@ -3,6 +3,7 @@ package com.nglinx.pulse.session;
 import android.content.Context;
 import android.location.Location;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.android.gms.maps.model.LatLng;
 import com.nglinx.pulse.models.AddressModel;
 import com.nglinx.pulse.models.ChildUserModel;
@@ -59,7 +60,7 @@ public class DataSession {
         isGPSEnabled = false;
         isNetworkEnabled = false;
         canGetLocation = false;
-        //appKey = FirebaseInstanceId.getInstance().getToken();
+        appKey = FirebaseInstanceId.getInstance().getToken();
     }
 
     private String username;
@@ -351,7 +352,7 @@ public class DataSession {
 
     public void clearDataSession(final Context context) {
         this.myObj = null;
-        SharedPrefUtility.clearprofile(context);
+//        SharedPrefUtility.clearprofile(context);
     }
 
     public boolean isShowMyLocation() {
@@ -373,7 +374,6 @@ public class DataSession {
     public LatLng getMylatLng() {
         return mylatLng;
     }
-
 
 
     public List<InviteModel> getPendingInvites() {
@@ -433,10 +433,10 @@ public class DataSession {
     }
 
     public List<ChildUserModel> getUnAttachedChildUser() {
-        List<ChildUserModel> unAttachedChilUsers=new ArrayList<>();
-        for (ChildUserModel child:
-        childProfilesList) {
-            if(child.getStatus().equals(0))
+        List<ChildUserModel> unAttachedChilUsers = new ArrayList<>();
+        for (ChildUserModel child :
+                childProfilesList) {
+            if (child.getStatus().equals(0))
                 unAttachedChilUsers.add(child);
         }
         return unAttachedChilUsers;
@@ -450,14 +450,13 @@ public class DataSession {
         this.fenceList = fenceList;
     }
 
-    public FenceModel getFenceById(final String fenceId)
-    {
-        if(fenceList == null)
+    public FenceModel getFenceById(final String fenceId) {
+        if (fenceList == null)
             return null;
 
-        for (FenceModel fence:
-             fenceList) {
-            if(fence.getId().equalsIgnoreCase(fenceId))
+        for (FenceModel fence :
+                fenceList) {
+            if (fence.getId().equalsIgnoreCase(fenceId))
                 return fence;
         }
 

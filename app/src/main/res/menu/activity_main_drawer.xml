@@ -18,7 +18,7 @@
             android:title="Sharing"/>
         <item
             android:id="@+id/nav_device"
-            android:title="Device"/>
+            android:title="Manage Profiles"/>
        <!-- <item
             android:id="@+id/nav_profile"
             android:title="Profiles"/>-->

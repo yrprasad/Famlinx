@@ -784,7 +784,7 @@
                                                 android:layout_centerVertical="true"
                                                 android:background="#0095da"
                                                 android:foreground="@drawable/ripple_effect"
-                                                android:text="Continue"
+                                                android:text="Go To Cart"
                                                 android:onClick="onCartContinueButtonClick"
                                                 android:textColor="#ffffff"/>
                                         </LinearLayout>
