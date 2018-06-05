@@ -34,6 +34,7 @@ public class OrderFailedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_failed);
         initializeIcons();
         displayData();
+        ds.clearDeviceTypes();
     }
 
     //Initialize all the icons on this screen and Navigation Menu screens

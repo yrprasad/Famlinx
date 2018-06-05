@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.models.GroupMemberModel;
+import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.utils.ApplicationUtils;
+import com.nglinx.pulse.viewholders.GroupMemberViewHolder;
 
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ import java.util.ArrayList;
  */
 public class GroupMemberAdapter extends ArrayAdapter<GroupMemberModel> {
 
-    private ViewHolder holder = null;
+    private GroupMemberViewHolder holder = null;
 
     private ArrayList<GroupMemberModel> arr2;
     private static final int TYPE_ITEM = 0;
@@ -65,45 +67,52 @@ public class GroupMemberAdapter extends ArrayAdapter<GroupMemberModel> {
         View view = null;
         convertView = null;
 
-        GroupMemberModel selectedMember = arr2.get(position);
+        GroupMemberModel memberModel = arr2.get(position);
 
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.group_member_list_view, null);
-            holder = new ViewHolder();
+            holder = new GroupMemberViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.notif_row_member_name);
             holder.member_image = (ImageView) convertView.findViewById(R.id.member_image);
             holder.member_type_image = (ImageView) convertView.findViewById(R.id.member_type_image);
+            holder.img_online = (ImageView) convertView.findViewById(R.id.img_online);
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (GroupMemberViewHolder) convertView.getTag();
         }
 
 		/*if(groupMembers.get(position).isFlag){
             // show button here
 		}*/
         int count = arr2.size();
-        if (ApplicationUtils.isDummyMember(selectedMember)) {
+        if (ApplicationUtils.isDummyMember(memberModel)) {
             holder.member_image.setImageResource(R.drawable.add_icon);
             holder.name.setText("Add User");
         } else {
-            String first_name = ApplicationUtils.getUserFistName(selectedMember.getName());
+            String first_name = ApplicationUtils.getUserFistName(memberModel.getName());
             holder.name.setText(first_name);
             holder.member_image.setImageResource(R.drawable.img1);
 
-            if (ApplicationUtils.isDeviceUser(selectedMember))
+            if (ApplicationUtils.isDeviceUser(memberModel))
                 holder.member_type_image.setImageResource(R.drawable.watch_icon);
             else
                 holder.member_type_image.setImageResource(R.drawable.mobile_icon);
+
+            if (memberModel.getId().equalsIgnoreCase(DataSession.getInstance().getSelected_group_member_id())) {
+                holder.img_online.setVisibility(View.VISIBLE);
+            } else {
+                holder.img_online.setVisibility(View.GONE);
+            }
         }
         return convertView;
     }
 
-
-    public static class ViewHolder {
+   /* public static class ViewHolder {
         public TextView name;
         ImageView member_image;
         ImageView member_type_image;
-    }
+        ImageView img_online;
+    }*/
 
     public void setArr2(ArrayList<GroupMemberModel> arr2) {
         this.arr2 = arr2;

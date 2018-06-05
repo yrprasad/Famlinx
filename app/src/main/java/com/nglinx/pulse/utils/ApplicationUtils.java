@@ -115,7 +115,7 @@ public class ApplicationUtils {
 
     public static String constructMemberTitle(UserTrackingModel userTrackingModel) {
         String time = getTimeByLocalTimeZone(userTrackingModel.getModifiedTime());
-        String title = "Time : " + time;
+        String title = "Time : " + convertFormatByTimeZone(time);;
 
         if (userTrackingModel != null) {
             /*if ((userTrackingModel.getAlert_status() != null) && (userTrackingModel.getAlert_status() == 0)) {
@@ -408,7 +408,21 @@ public class ApplicationUtils {
         } catch (Exception e) {
             return oldDate;
         }
+    }
 
+    public static FenceModel getEmptyFence() {
+        FenceModel emptyFence = new FenceModel();
+        emptyFence.setName("Select Fence");
+        emptyFence.setId("0");
+        return emptyFence;
+    }
+
+    public static GroupMemberModel getEmptyGroupMemberAllMembers() {
+        GroupMemberModel memberModel = new GroupMemberModel();
+        memberModel.setName("All Members");
+        memberModel.setUsername("All Members");
+        memberModel.setId("0");
+        return memberModel;
     }
 
 }

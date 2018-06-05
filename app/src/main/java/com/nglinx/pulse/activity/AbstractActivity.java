@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +63,16 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 drawerLayout.openDrawer(Gravity.START);
             }
         });
+
+        RelativeLayout menu_toolbar_layout = (RelativeLayout)inc_toolbar.findViewById(R.id.menu_toolbar_layout);
+        menu_toolbar_layout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(Gravity.START);
+            }
+        });
+
+
 
     }
 

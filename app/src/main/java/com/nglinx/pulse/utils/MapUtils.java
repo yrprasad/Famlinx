@@ -72,7 +72,6 @@ public class MapUtils {
                 if (DataSession.getInstance().isShowMyLocation()) {
                     if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                         return;
-                    googleMap.setMyLocationEnabled(true);
                     LatLngBounds.Builder builder = new LatLngBounds.Builder();
                     builder.include(marker.getPosition());
                     marker.showInfoWindow();
@@ -83,12 +82,14 @@ public class MapUtils {
                     CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(builder.build(), 150);
                     googleMap.moveCamera(cu);
                     googleMap.animateCamera(cu);
-
+                    googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 } else {
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(memberLocation, 150));
                     googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+                    googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 }
 
+                googleMap.setMyLocationEnabled(true);
                 googleMap.setInfoWindowAdapter(new CustomInfoViewAdaptor(context, member.getTrackingModel()));
                 googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 googleMap.setIndoorEnabled(false);

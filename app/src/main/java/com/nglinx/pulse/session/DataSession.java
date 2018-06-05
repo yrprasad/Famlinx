@@ -2,6 +2,7 @@ package com.nglinx.pulse.session;
 
 import android.content.Context;
 import android.location.Location;
+import android.view.View;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.android.gms.maps.model.LatLng;
@@ -27,6 +28,16 @@ import retrofit.client.Header;
 public class DataSession {
 
     private static DataSession myObj;
+
+    private boolean isHomePageOn;
+
+    public boolean isHomePageOn() {
+        return isHomePageOn;
+    }
+
+    public void setHomePageOn(boolean homePageOn) {
+        isHomePageOn = homePageOn;
+    }
 
     private List<InviteModel> pendingInvites;
     private List<InviteModel> trackingMeInvites;
@@ -71,11 +82,20 @@ public class DataSession {
 
     private TimeZone localTimeZone;
 
+    public View getSelected_member_view() {
+        return selected_member_view;
+    }
+
+    public void setSelected_member_view(View selected_member_view) {
+        this.selected_member_view = selected_member_view;
+    }
+
     private String selected_group_id;
 
     private String selected_group_name;
 
     private String selected_group_member_id;
+    private View selected_member_view;
 
     private float zoom;
 
@@ -398,6 +418,10 @@ public class DataSession {
 
     public void setDeviceTypesList(ArrayList<DeviceTypesModel> deviceTypesList) {
         this.deviceTypesList = deviceTypesList;
+    }
+
+    public void clearDeviceTypes() {
+        this.deviceTypesList = null;
     }
 
     public AddressModel getSelectedAddress() {

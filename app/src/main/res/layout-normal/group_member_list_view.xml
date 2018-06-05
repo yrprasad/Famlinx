@@ -23,6 +23,15 @@
                 android:layout_marginTop="@dimen/layout_margin_top_five"/>
 
             <ImageView
+                android:id="@+id/img_online"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/member_type_image"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/online"
+                android:visibility="gone"/>
+
+            <ImageView
                 android:id="@+id/member_image"
                 android:layout_width="@dimen/image_width_sixty"
                 android:layout_height="@dimen/image_height_sixty"

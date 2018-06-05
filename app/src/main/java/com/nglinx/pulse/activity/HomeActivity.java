@@ -53,6 +53,7 @@ import com.nglinx.pulse.utils.retrofit.ApiEndpointInterface;
 import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
 import com.nglinx.pulse.utils.view.HorizontalView;
+import com.nglinx.pulse.viewholders.GroupMemberViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -125,6 +126,8 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     NotificationsAdapter adapter;
     private ListView notifications_lv;
     private SwipeRefreshLayout swipeRefreshLayout_notifications;
+
+    TextView tv_toolbar_groupname;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -283,6 +286,8 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 drawerLayout.openDrawer(Gravity.END);
             }
         });
+
+        tv_toolbar_groupname = (TextView) inc_toolbar.findViewById(R.id.tv_toolbar_groupname);
     }
 
     private void initializeNotification() {
@@ -377,6 +382,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
             GroupModel selectedGroup = groupAdapter.getItem(position - 1);
+            tv_toolbar_groupname.setText(selectedGroup.getName());
 
             activateItemsOnTrackMemberSelect();
             drawerLayout.closeDrawers();
@@ -412,8 +418,19 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
 
     class GroupMemberClickListener implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+
+
+
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+           /* View previousSelectedMember = ds.getSelected_member_view();
+
+            if (previousSelectedMember != null) {
+                GroupMemberViewHolder viewHolder = (GroupMemberViewHolder) previousSelectedMember.getTag();
+                if (viewHolder != null)
+                    viewHolder.img_online.setVisibility(View.GONE);
+            }*/
 
             GroupMemberModel selectedMember = groupsMembersList.get(position);
 
@@ -423,6 +440,17 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 finish();
             } else {
                 ds.setSelected_group_member_id(selectedMember.getId());
+
+                /*GroupMemberViewHolder viewHolder = (GroupMemberViewHolder) view.getTag();
+                if(viewHolder!=null)
+                {
+                    viewHolder.img_online.setVisibility(View.VISIBLE);
+                    viewHolder.name.setText("Test");
+                    ds.setSelected_member_view(view);
+                }*/
+
+                groupMemberAdapter.notifyDataSetChanged();
+
                 SharedPrefUtility.saveSelectedGroupMemberId(getApplicationContext(), selectedMember.getId());
 
                 //Send track request to the member.
@@ -829,5 +857,16 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 //            DropdownBtn.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.right_arrow, 0);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ds.setHomePageOn(true);
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ds.setHomePageOn(false);
+
+    }
 }

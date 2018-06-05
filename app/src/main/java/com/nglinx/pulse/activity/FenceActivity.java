@@ -57,6 +57,7 @@ import com.nglinx.pulse.adapter.PlaceAutocompleteAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.FenceModel;
 import com.nglinx.pulse.models.SettingsModel;
+import com.nglinx.pulse.utils.ApplicationUtils;
 import com.nglinx.pulse.utils.DialogUtils;
 import com.nglinx.pulse.utils.ProgressbarUtil;
 import com.nglinx.pulse.utils.circle.MapAreaManager;
@@ -178,13 +179,6 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         getFenceList();
     }
 
-    private FenceModel getDummyFence()
-    {
-        FenceModel fenceModel = new FenceModel();
-        fenceModel.setId("0");
-        fenceModel.setName("Select Fence");
-    }
-
     private void initializeLocationItems() {
         geocoder = new Geocoder(this, Locale.getDefault());
 
@@ -241,7 +235,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
             public void onSuccess() {
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
                 myFences.clear();
-                myFences.add(getEmptyFence());
+                myFences.add(ApplicationUtils.getEmptyFence());
                 myFences.addAll(models);
                 Collections.sort((List<FenceModel>) myFences);
                 ds.setFenceList(myFences);
@@ -257,13 +251,6 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                 DialogUtils.diaplayErrorDialog(FenceActivity.this, errorMsg);
             }
         });
-    }
-
-    private FenceModel getEmptyFence() {
-        FenceModel emptyFence = new FenceModel();
-        emptyFence.setName("");
-        emptyFence.setId("0");
-        return emptyFence;
     }
 
     private void showMyLocation() {

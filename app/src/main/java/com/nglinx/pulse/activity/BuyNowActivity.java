@@ -152,7 +152,6 @@ public class BuyNowActivity extends AbstractActivity {
 
                 //Initialize the Cart
                 ds.setDeviceTypesList(deviceTypesList);
-
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
             }
 

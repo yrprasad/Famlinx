@@ -32,6 +32,7 @@ public class OrderSuccessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_placed);
         initializeIcons();
         displayData();
+        ds.clearDeviceTypes();
     }
 
     //Initialize all the icons on this screen and Navigation Menu screens

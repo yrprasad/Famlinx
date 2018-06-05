@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -37,6 +38,11 @@ public class SharingFragmentAdapter extends ArrayAdapter {
         ImageView suspendMember;
         ImageView acceptMember;
         ImageView rejectMember;
+        RelativeLayout reject_member_layout_trackingme;
+        RelativeLayout suspend_member_layout_trackingme;
+
+        RelativeLayout reject_member_layout_pendinginvites;
+        RelativeLayout accept_member_layout_pendinginvites;
     }
 
     public SharingFragmentAdapter(ArrayList data, Context context, int listType) {
@@ -66,17 +72,27 @@ public class SharingFragmentAdapter extends ArrayAdapter {
             if (listType == ApplicationConstants.SHARING_PENDING_INVITES_INDEX) {
                 convertView = inflater.inflate(R.layout.activity_sharing_pending_invites_row, parent, false);
                 viewHolder.modelHolder = inviteModel;
+
                 viewHolder.acceptMember = (ImageView) convertView.findViewById(R.id.accept_member);
                 viewHolder.rejectMember = (ImageView) convertView.findViewById(R.id.reject_member);
+                viewHolder.accept_member_layout_pendinginvites = (RelativeLayout) convertView.findViewById(R.id.accept_member_layout_pendinginvites);
+                viewHolder.reject_member_layout_pendinginvites = (RelativeLayout) convertView.findViewById(R.id.reject_member_layout_pendinginvites);
+
                 viewHolder.acceptMember.setTag(viewHolder.modelHolder);
                 viewHolder.rejectMember.setTag(viewHolder.modelHolder);
+                viewHolder.accept_member_layout_pendinginvites.setTag(viewHolder.modelHolder);
+                viewHolder.reject_member_layout_pendinginvites.setTag(viewHolder.modelHolder);
             } else if (listType == ApplicationConstants.SHARING_TRACKING_ME_INDEX) {
                 convertView = inflater.inflate(R.layout.activity_sharing_accepted_invites_row, parent, false);
                 viewHolder.modelHolder = inviteModel;
                 viewHolder.suspendMember = (ImageView) convertView.findViewById(R.id.suspend_member);
                 viewHolder.rejectMember = (ImageView) convertView.findViewById(R.id.reject_member);
+                viewHolder.suspend_member_layout_trackingme = (RelativeLayout) convertView.findViewById(R.id.suspend_member_layout_trackingme);
+                viewHolder.reject_member_layout_trackingme = (RelativeLayout) convertView.findViewById(R.id.reject_member_layout_trackingme);
                 viewHolder.suspendMember.setTag(viewHolder.modelHolder);
                 viewHolder.rejectMember.setTag(viewHolder.modelHolder);
+                viewHolder.suspend_member_layout_trackingme.setTag(viewHolder.modelHolder);
+                viewHolder.reject_member_layout_trackingme.setTag(viewHolder.modelHolder);
             }
 
             viewHolder.notif_row_member_name = (TextView) convertView.findViewById(R.id.notif_row_member_name);

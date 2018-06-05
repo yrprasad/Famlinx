@@ -20,6 +20,7 @@ import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.models.SettingsModel;
 import com.nglinx.pulse.session.DataSession;
+import com.nglinx.pulse.utils.ApplicationUtils;
 import com.nglinx.pulse.utils.DialogUtils;
 import com.nglinx.pulse.utils.ProgressbarUtil;
 import com.nglinx.pulse.utils.retrofit.ApiEndpointInterface;
@@ -99,6 +100,7 @@ public class ApplyFenceActivity extends AppCompatActivity {
                 selectedGroupMember = null;
                 groupMembers = selectedGroup.getMembers();
                 groupMemberAdapter.clear();
+                groupMembers.add(ApplicationUtils.getEmptyGroupMemberAllMembers());
                 groupMemberAdapter.addAll(groupMembers);
                 groupMemberAdapter.notifyDataSetChanged();
             }
@@ -124,6 +126,12 @@ public class ApplyFenceActivity extends AppCompatActivity {
     }
 
     public void callApplyFence(final FenceModel fenceModel, final GroupModel group, final GroupMemberModel member) {
+
+        if(member.getId().equalsIgnoreCase("0"))
+        {
+            //This is a dummy group
+            return;
+        }
 
         final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(ApplyFenceActivity.this);
         ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
@@ -204,6 +212,12 @@ public class ApplyFenceActivity extends AppCompatActivity {
         //if no group selected,  throw error Dialog
         if ((null == selectedGroup) && (null == selectedGroupMember)) {
             DialogUtils.diaplayErrorDialog(ApplyFenceActivity.this, "Select group and member");
+            return;
+        }
+
+        //If both group and member selected, apply to that member
+        if ((null != selectedGroup) && (null != selectedGroup) && (selectedGroupMember.getId().equalsIgnoreCase("0"))) {
+            applyFenceToGroup(selectedFence, selectedGroup);
             return;
         }
 

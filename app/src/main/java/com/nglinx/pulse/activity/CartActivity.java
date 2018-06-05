@@ -69,8 +69,11 @@ public class CartActivity extends AppCompatActivity {
         if (null != ds.getSelectedAddress())
             tv_selectedAddress.setText(ApplicationUtils.getAddress(ds.getSelectedAddress()));
 
-        tv_total_cost.setText(String.valueOf(0));
-        tv_total_pay.setText(String.valueOf(0));
+        int totalCost = getCartTotalCost();
+        int totalPayable = getCartTotalPayable(totalCost);
+
+        tv_total_cost.setText(String.valueOf(totalCost));
+        tv_total_pay.setText(String.valueOf(totalPayable));
 
         getAvailableDeviceCount();
     }

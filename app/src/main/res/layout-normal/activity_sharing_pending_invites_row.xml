@@ -88,9 +88,11 @@
                 android:weightSum="2.5">
 
                 <RelativeLayout
+                    android:id="@+id/reject_member_layout_pendinginvites"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".8">
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:onClick="rejectInviteHandlerFromPendingInvites">
 
                     <ImageView
                         android:id="@+id/reject_member"
@@ -100,8 +102,18 @@
                         android:layout_centerVertical="true"
                         android:clickable="true"
                         android:foreground="?attr/selectableItemBackground"
-                        android:src="@drawable/delete"
-                        android:onClick="rejectInviteHandlerFromPendingInvites"/>
+                        android:onClick="rejectInviteHandlerFromPendingInvites"
+                        android:src="@drawable/delete"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/reject_member"
+                        android:text="Reject"
+                        android:textAlignment="center"
+                        android:layout_marginTop="20dp"
+                        android:textSize="@dimen/text_size_ten"/>
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -119,10 +131,11 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/accept_member_layout_pendinginvites"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".8">
-
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:onClick="acceptInviteHandler">
 
                     <ImageView
                         android:id="@+id/accept_member"
@@ -132,8 +145,17 @@
                         android:layout_centerVertical="true"
                         android:clickable="true"
                         android:foreground="?attr/selectableItemBackground"
-                        android:src="@drawable/accept"
-                        android:onClick="acceptInviteHandler"/>
+                        android:onClick="acceptInviteHandler"
+                        android:src="@drawable/accept"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/accept_member"
+                        android:layout_marginTop="20dp"
+                        android:text="Accept"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/text_size_ten"/>
                 </RelativeLayout>
             </LinearLayout>
 

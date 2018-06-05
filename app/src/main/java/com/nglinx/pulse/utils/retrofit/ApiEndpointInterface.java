@@ -54,7 +54,7 @@ public interface ApiEndpointInterface {
     void getUserByName(@Path("userName") String userName, Callback<ResponseDto<UserModel>> cb);
 
     @GET("/api/users/{ownerUuid}/groups")
-    void getGroups(@Path("ownerUuid") String ownerUuid, @Query("userType") String userType, Callback<ResponseDto<GroupModel>> cb);
+    void getGroups(@Path("ownerUuid") String ownerUuid, Callback<ResponseDto<GroupModel>> cb);
 
     @GET("/api/users/{ownerUuid}/groups")
     void getGroups(@Path("ownerUuid") String ownerUuid, @Query("latitude") String latitude, @Query("longitude") String longitude, Callback<ResponseDto<GroupModel>> cb);
