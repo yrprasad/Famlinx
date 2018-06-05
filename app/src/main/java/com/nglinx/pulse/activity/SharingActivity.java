@@ -118,7 +118,7 @@ public class SharingActivity extends AbstractActivity {
         final InviteModel iModel = (InviteModel) v.getTag();
         new AlertDialog.Builder(SharingActivity.this)
                 .setTitle("Accept Invite")
-                .setMessage("Do you want to accept invite from " + iModel.getEmail())
+                .setMessage("Do you want to accept invite " + iModel.getName() + "[" + iModel.getToName() + "]")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -162,7 +162,7 @@ public class SharingActivity extends AbstractActivity {
         final InviteModel iModel = (InviteModel) v.getTag();
         new AlertDialog.Builder(SharingActivity.this)
                 .setTitle("Reject Invite")
-                .setMessage("Do you want to reject invite from " + iModel.getEmail())
+                .setMessage("Do you want to reject invite " + iModel.getName() + "[" + iModel.getToName() + "]")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -208,7 +208,7 @@ public class SharingActivity extends AbstractActivity {
         final InviteModel iModel = (InviteModel) v.getTag();
         new AlertDialog.Builder(SharingActivity.this)
                 .setTitle("Suspend Tracking")
-                .setMessage("Do you want to suspend tracking by " + iModel.getEmail())
+                .setMessage("Do you want to suspend invite " + iModel.getName() + "[" + iModel.getToName() + "]")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 

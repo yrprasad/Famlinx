@@ -54,7 +54,7 @@
                                 android:id="@+id/lt_adds"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="6"
+                                android:layout_weight="6.5"
                                 android:visibility="visible"
                                 tools:context=".SampleCarouselViewActivity">
 
@@ -102,7 +102,7 @@
                     android:id="@+id/lt_members_detail"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="6"
+                    android:layout_weight="7"
                     android:visibility="visible">
 
                     <LinearLayout
@@ -601,7 +601,8 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="2">
+                                    android:layout_weight="1.5"
+                                    android:onClick="onFenceClick">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -655,7 +656,8 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="2">
+                                    android:layout_weight="1.5"
+                                    android:onClick="onNotificationsClick">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -708,14 +710,15 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="2">
+                                    android:layout_weight="1.5">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:layout_marginTop="5dp"
                                         android:orientation="vertical"
-                                        android:weightSum="2">
+                                        android:weightSum="2"
+                                        android:onClick="onDeviceClick">
 
                                         <RelativeLayout
                                             android:layout_width="match_parent"
@@ -752,6 +755,61 @@
                                                 android:gravity="center"
                                                 android:text="Manage Profiles"
                                                 android:textSize="10dp"/>
+                                        </RelativeLayout>
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.5"
+                                    android:onClick="onBuyNowClick">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="5dp"
+                                        android:orientation="vertical"
+                                        android:weightSum="2">
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1.5">
+
+                                            <View
+                                                android:layout_width="@dimen/image_width_fifty"
+                                                android:layout_height="@dimen/image_height_fifty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/circle"/>
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_twenty"
+                                                android:layout_height="@dimen/image_height_twenty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/cart"
+                                                android:onClick="onBuyNowClick"/>
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight=".5">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:gravity="center"
+                                                android:text="Buy Now"
+                                                android:textSize="@dimen/text_size_ten"/>
                                         </RelativeLayout>
 
                                     </LinearLayout>
@@ -833,7 +891,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1.5"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -894,7 +952,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:visibility="gone"
+        android:visibility="visible"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 

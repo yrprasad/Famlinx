@@ -15,7 +15,7 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
         <!-- include your toolbar layout-->
-        <include layout="@layout/toolbar_fence" />
+        <include layout="@layout/toolbar_apply_fence" />
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -134,7 +134,7 @@
                                             <ImageView
                                                 android:layout_width="50dp"
                                                 android:layout_height="40dp"
-                                                android:background="@drawable/hexagon_grey_shape"
+                                                android:background="@drawable/hexagon_shape"
                                                 android:layout_centerVertical="true"
                                                 android:layout_centerHorizontal="true"/>
 
@@ -144,7 +144,7 @@
                                                 android:text="Tu"
                                                 android:layout_centerHorizontal="true"
                                                 android:layout_centerVertical="true"
-                                                android:textColor="@android:color/black"/>
+                                                android:textColor="@android:color/white"/>
 
                                         </RelativeLayout>
 
@@ -158,7 +158,7 @@
                                             <ImageView
                                                 android:layout_width="50dp"
                                                 android:layout_height="40dp"
-                                                android:background="@drawable/hexagon_grey_shape"
+                                                android:background="@drawable/hexagon_shape"
                                                 android:layout_centerVertical="true"
                                                 android:layout_centerHorizontal="true"/>
 
@@ -168,7 +168,7 @@
                                                 android:text="We"
                                                 android:layout_centerHorizontal="true"
                                                 android:layout_centerVertical="true"
-                                                android:textColor="@android:color/black"/>
+                                                android:textColor="@android:color/white"/>
 
 
                                         </RelativeLayout>
@@ -207,7 +207,7 @@
                                             <ImageView
                                                 android:layout_width="50dp"
                                                 android:layout_height="40dp"
-                                                android:background="@drawable/hexagon_grey_shape"
+                                                android:background="@drawable/hexagon_shape"
                                                 android:layout_centerVertical="true"
                                                 android:layout_centerHorizontal="true"/>
 
@@ -217,7 +217,7 @@
                                                 android:text="Fr"
                                                 android:layout_centerHorizontal="true"
                                                 android:layout_centerVertical="true"
-                                                android:textColor="@android:color/black"/>
+                                                android:textColor="@android:color/white"/>
 
                                         </RelativeLayout>
 
@@ -231,7 +231,7 @@
                                             <ImageView
                                                 android:layout_width="50dp"
                                                 android:layout_height="40dp"
-                                                android:background="@drawable/hexagon_grey_shape"
+                                                android:background="@drawable/hexagon_shape"
                                                 android:layout_centerVertical="true"
                                                 android:layout_centerHorizontal="true"/>
 
@@ -241,7 +241,7 @@
                                                 android:text="Sa"
                                                 android:layout_centerHorizontal="true"
                                                 android:layout_centerVertical="true"
-                                                android:textColor="@android:color/black"/>
+                                                android:textColor="@android:color/white"/>
 
                                         </RelativeLayout>
 
@@ -370,7 +370,7 @@
                                             android:layout_weight="1"
                                             android:focusableInTouchMode="true">
 
-                                            <EditText
+                                            <TextView
                                                 android:id="@+id/textClock"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
@@ -403,7 +403,7 @@
                                             android:layout_weight="1"
                                             android:focusableInTouchMode="true">
 
-                                            <EditText
+                                            <TextView
                                                 android:id="@+id/textClock1"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"

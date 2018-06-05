@@ -43,7 +43,7 @@
             android:layout_weight="4">
 
             <TextView
-                android:id="@+id/notif_row_member_name"
+                android:id="@+id/invites_row1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jhon Doe"
@@ -51,19 +51,19 @@
                 android:textSize="@dimen/text_size_twelve"/>
 
             <TextView
-                android:id="@+id/notif_row_member_detail"
+                android:id="@+id/invites_row2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/notif_row_member_name"
+                android:layout_below="@+id/invites_row1"
                 android:text="jhon.doe@gmail.com"
                 android:textAlignment="center"
                 android:textSize="@dimen/text_size_twelve"/>
 
             <TextView
-                android:id="@+id/invite_time"
+                android:id="@+id/invites_row3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/notif_row_member_detail"
+                android:layout_below="@+id/invites_row2"
                 android:text="Sent you a request - 1 hour ago"
                 android:textAlignment="center"
                 android:textSize="@dimen/text_size_ten"/>

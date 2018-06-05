@@ -1,11 +1,8 @@
 package com.nglinx.pulse.service;
 
-import android.app.ProgressDialog;
-
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.session.DataSession;
-import com.nglinx.pulse.utils.ProgressbarUtil;
 import com.nglinx.pulse.utils.retrofit.ApiEndpointInterface;
 import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;

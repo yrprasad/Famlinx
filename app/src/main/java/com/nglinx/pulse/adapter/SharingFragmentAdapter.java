@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.InviteModel;
-import com.nglinx.pulse.models.NotificationModel;
+import com.nglinx.pulse.utils.ApplicationUtils;
 
 
 /**
@@ -31,9 +31,10 @@ public class SharingFragmentAdapter extends ArrayAdapter {
 
     // View lookup cache
     private static class ViewHolder {
-        TextView notif_row_member_name;
-        TextView notif_row_member_detail;
-        TextView invite_time;
+        TextView invites_row1;
+        TextView invites_row2;
+        TextView invites_row3;
+
         InviteModel modelHolder;
         ImageView suspendMember;
         ImageView acceptMember;
@@ -82,6 +83,16 @@ public class SharingFragmentAdapter extends ArrayAdapter {
                 viewHolder.rejectMember.setTag(viewHolder.modelHolder);
                 viewHolder.accept_member_layout_pendinginvites.setTag(viewHolder.modelHolder);
                 viewHolder.reject_member_layout_pendinginvites.setTag(viewHolder.modelHolder);
+
+                viewHolder.invites_row1 = (TextView) convertView.findViewById(R.id.invites_row1);
+                viewHolder.invites_row2 = (TextView) convertView.findViewById(R.id.invites_row2);
+                viewHolder.invites_row3 = (TextView) convertView.findViewById(R.id.invites_row3);
+
+                InviteModel model = getItem(position);
+                viewHolder.invites_row1.setText("User: " + model.getName() + "(" + model.getEmail() + ")");
+                viewHolder.invites_row2.setText("requests " + getItem(position).getToName() + "tracking");
+                viewHolder.invites_row3.setText(ApplicationUtils.getTimeByLocalTimeZone(getItem(position).getDate()));
+
             } else if (listType == ApplicationConstants.SHARING_TRACKING_ME_INDEX) {
                 convertView = inflater.inflate(R.layout.activity_sharing_accepted_invites_row, parent, false);
                 viewHolder.modelHolder = inviteModel;
@@ -93,21 +104,19 @@ public class SharingFragmentAdapter extends ArrayAdapter {
                 viewHolder.rejectMember.setTag(viewHolder.modelHolder);
                 viewHolder.suspend_member_layout_trackingme.setTag(viewHolder.modelHolder);
                 viewHolder.reject_member_layout_trackingme.setTag(viewHolder.modelHolder);
+
+                viewHolder.invites_row1 = (TextView) convertView.findViewById(R.id.invites_row1);
+                viewHolder.invites_row2 = (TextView) convertView.findViewById(R.id.invites_row2);
+                viewHolder.invites_row3 = (TextView) convertView.findViewById(R.id.invites_row3);
+
+                viewHolder.invites_row1.setText("User: " + getItem(position).getName());
+                viewHolder.invites_row2.setText("Tracking: " + getItem(position).getToName());
+                viewHolder.invites_row3.setText(ApplicationUtils.getTimeByLocalTimeZone(getItem(position).getDate()));
             }
-
-            viewHolder.notif_row_member_name = (TextView) convertView.findViewById(R.id.notif_row_member_name);
-            viewHolder.notif_row_member_detail = (TextView) convertView.findViewById(R.id.notif_row_member_detail);
-            viewHolder.invite_time = (TextView) convertView.findViewById(R.id.invite_time);
-
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
-        viewHolder.notif_row_member_name.setText(getItem(position).getName());
-        viewHolder.notif_row_member_detail.setText(getItem(position).getEmail());
-        viewHolder.invite_time.setText(getItem(position).getDate());
 
         // Return the completed view to render on screen
         return convertView;

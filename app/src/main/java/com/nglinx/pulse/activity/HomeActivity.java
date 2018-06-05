@@ -810,6 +810,12 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         finish();
     }
 
+    public void onBuyNowClick(View view) {
+        Intent intent9 = new Intent(this, BuyNowActivity.class);
+        startActivity(intent9);
+        finish();
+    }
+
     public void onDeviceClick(View view) {
         Intent intent9 = new Intent(this, DeviceActivity.class);
         startActivity(intent9);
