@@ -111,10 +111,12 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/activate_device_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:gravity="center">
+                android:gravity="center"
+                >
 
 
                 <LinearLayout
@@ -126,10 +128,10 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1">
+                        android:layout_weight="2.5">
 
                         <ImageView
-                            android:id="@+id/img_edit_device"
+                            android:id="@+id/img_activate_device"
                             android:layout_width="@dimen/image_width_twenty"
                             android:layout_height="@dimen/image_height_twenty"
                             android:layout_centerHorizontal="true"
@@ -138,12 +140,24 @@
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"/>
 
+                        <TextView
+                            android:id="@+id/tv_activate_device"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/img_activate_device"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:text="Activate Device"
+                            android:layout_marginTop="10dp"
+                            android:textSize="@dimen/text_size_sixteen"/>
+
                     </RelativeLayout>
 
-                    <RelativeLayout
+                    <!--<RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight=".5">
+                        android:layout_weight=".5"
+                        android:visibility="gone">
 
 
                         <View
@@ -160,7 +174,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@+id/img_manage_device"
@@ -172,7 +187,7 @@
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"/>
 
-                    </RelativeLayout>
+                    </RelativeLayout>-->
 
 
                 </LinearLayout>

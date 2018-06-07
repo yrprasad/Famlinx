@@ -306,6 +306,26 @@
                                                     android:layout_width="match_parent"
                                                     android:layout_height="0dp"
                                                     android:layout_weight="2.5">
+
+                                                    <ImageView
+                                                        android:id="@+id/ms_apply_fence"
+                                                        android:layout_width="@dimen/image_width_fifty"
+                                                        android:layout_height="@dimen/image_height_fifty"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:layout_centerVertical="true"
+                                                        android:background="@drawable/park_fence"
+                                                        android:onClick="onApplyFenceFloatingBtnClick"/>
+
+                                                    <TextView
+                                                        android:id="@+id/tv_apply_fence"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_centerHorizontal="true"
+                                                        android:layout_centerVertical="true"
+                                                        android:text="Apply this Fence"
+                                                        android:layout_below="@+id/ms_apply_fence"
+                                                        android:textSize="12sp"/>
+
                                                 </RelativeLayout>
 
                                                 <RelativeLayout
@@ -339,7 +359,7 @@
                                                         android:layout_height="wrap_content"
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
-                                                        android:text="Create"
+                                                        android:text="Create New"
                                                         android:textSize="12sp"/>
 
                                                 </RelativeLayout>

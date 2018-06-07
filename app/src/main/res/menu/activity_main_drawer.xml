@@ -12,7 +12,7 @@
             android:id="@+id/nav_notification"
             android:title="Notifications"/>
         <item android:id="@+id/nav_fence"
-              android:title="Fence" />
+              android:title="Geo-Fence" />
         <item
             android:id="@+id/nav_sharing"
             android:title="Sharing"/>

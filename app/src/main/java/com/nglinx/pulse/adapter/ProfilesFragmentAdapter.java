@@ -79,12 +79,12 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
         holder.tv_profile_status = (TextView) convertView.findViewById(R.id.tv_profile_status);
         holder.img_online_status = (ImageView) convertView.findViewById(R.id.img_online_status);
 
-        holder.btn_profile_delete = (ImageView) convertView.findViewById(R.id.btn_profile_delete);
-        holder.btn_profile_delete.setTag(holder.modelHolder);
-        holder.btn_profile_delete.setOnClickListener(new View.OnClickListener() {
+        holder.btn_profile_manage = (ImageView) convertView.findViewById(R.id.btn_profile_manage);
+        holder.btn_profile_manage.setTag(holder.modelHolder);
+        holder.btn_profile_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_delete, position, 0);
+                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_manage, position, 0);
             }
         });
 

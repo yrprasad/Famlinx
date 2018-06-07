@@ -1,16 +1,88 @@
 package com.nglinx.pulse.models;
 
-import java.util.List;
-
 public class SettingsModel {
+
+    public class NotificationsEnablers {
+        boolean speedNotification;
+        boolean fenceNotification;
+        boolean batteryNotification;
+
+        public NotificationsEnablers() {
+            speedNotification = true;
+            fenceNotification = true;
+            batteryNotification = true;
+        }
+
+        public boolean isSpeedNotification() {
+            return speedNotification;
+        }
+
+        public void setSpeedNotification(boolean speedNotification) {
+            this.speedNotification = speedNotification;
+        }
+
+        public boolean isFenceNotification() {
+            return fenceNotification;
+        }
+
+        public void setFenceNotification(boolean fenceNotification) {
+            this.fenceNotification = fenceNotification;
+        }
+
+        public boolean isBatteryNotification() {
+            return batteryNotification;
+        }
+
+        public void setBatteryNotification(boolean batteryNotification) {
+            this.batteryNotification = batteryNotification;
+        }
+    }
+
+    public class MinMax {
+        boolean enabled;
+        Integer min;
+        Integer max;
+
+        public MinMax() {
+            super();
+        }
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public Integer getMin() {
+            return min;
+        }
+
+        public void setMin(Integer min) {
+            this.min = min;
+        }
+
+        public Integer getMax() {
+            return max;
+        }
+
+        public void setMax(Integer max) {
+            this.max = max;
+        }
+
+        @Override
+        public String toString() {
+            return "MinMax [enabled=" + enabled + ", min=" + min + ", max=" + max + "]";
+        }
+    }
 
     public class Speed {
         boolean enabled;
         Integer limit;
 
         public Speed() {
-            enabled = false;
-            limit = 0;
+            super();
         }
 
         public Speed(boolean enabled, Integer limit) {
@@ -34,6 +106,11 @@ public class SettingsModel {
         public void setLimit(Integer limit) {
             this.limit = limit;
         }
+
+        @Override
+        public String toString() {
+            return "Speed [enabled=" + enabled + ", limit=" + limit + "]";
+        }
     }
 
     ;
@@ -42,10 +119,8 @@ public class SettingsModel {
         boolean enabled;
         String id;
 
-        public Fence()
-        {
-            enabled = false;
-            id = null;
+        public Fence() {
+            super();
         }
 
         public Fence(boolean enabled, String id) {
@@ -85,6 +160,10 @@ public class SettingsModel {
 
     private String member_uuid;
 
+    private MinMax level;
+
+    private MinMax flow;
+
     private Speed speed;
 
     private Fence fence;
@@ -95,7 +174,11 @@ public class SettingsModel {
 
     private boolean lowBattery;
 
-    private List<String> notifyUsers;
+    private String notifyUsers;
+
+    private NotificationsEnablers emailNotifications;
+
+    private NotificationsEnablers phoneNotifications;
 
     public Speed getSpeed() {
         return speed;
@@ -137,11 +220,11 @@ public class SettingsModel {
         this.lowBattery = lowbattery;
     }
 
-    public List<String> getNotifyUsers() {
+    public String getNotifyUsers() {
         return notifyUsers;
     }
 
-    public void setNotifyUsers(List<String> notifyUsers) {
+    public void setNotifyUsers(String notifyUsers) {
         this.notifyUsers = notifyUsers;
     }
 
@@ -161,16 +244,37 @@ public class SettingsModel {
         this.member_uuid = member_uuid;
     }
 
-    public SettingsModel() {
-        super();
-        speed = new Speed();
-        fence = new Fence();
+    public MinMax getLevel() {
+        return level;
     }
 
-    public SettingsModel(String group_owner_uuid, String member_uuid,
-                         Speed speed, Fence fence, boolean loop, boolean tamper,
-                         boolean lowbattery, List<String> notifyUsers) {
+    public void setLevel(MinMax level) {
+        this.level = level;
+    }
+
+    public MinMax getFlow() {
+        return flow;
+    }
+
+    public void setFlow(MinMax flow) {
+        this.flow = flow;
+    }
+
+    public SettingsModel() {
         super();
+        level = new MinMax();
+        flow = new MinMax();
+        speed = new Speed();
+        fence = new Fence();
+        emailNotifications = new NotificationsEnablers();
+        phoneNotifications = new NotificationsEnablers();
+    }
+
+    public SettingsModel(String group_owner_uuid, String member_uuid, Speed speed, Fence fence, boolean loop,
+                         boolean tamper, boolean lowbattery, String notifyUsers) {
+        super();
+        level = new MinMax();
+        flow = new MinMax();
         this.group_owner_uuid = group_owner_uuid;
         this.member_uuid = member_uuid;
         this.speed = speed;
@@ -181,20 +285,35 @@ public class SettingsModel {
         this.notifyUsers = notifyUsers;
     }
 
-    @Override
-    public String toString() {
-        return "SettingsModel [group_owner_uuid=" + group_owner_uuid
-                + ", member_uuid=" + member_uuid + ", speed=" + speed
-                + ", fence=" + fence + ", loop=" + loop + ", tamper=" + tamper
-                + ", lowbattery=" + lowBattery + ", notifyUsers=" + notifyUsers
-                + "]";
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public NotificationsEnablers getEmailNotifications() {
+        return emailNotifications;
+    }
+
+    public void setEmailNotifications(NotificationsEnablers emailNotifications) {
+        this.emailNotifications = emailNotifications;
+    }
+
+    public NotificationsEnablers getPhoneNotifications() {
+        return phoneNotifications;
+    }
+
+    public void setPhoneNotifications(NotificationsEnablers phoneNotifications) {
+        this.phoneNotifications = phoneNotifications;
+    }
+
+    @Override
+    public String toString() {
+        return "SettingsModel [group_owner_uuid=" + group_owner_uuid + ", name=" + name + ", member_uuid="
+                + member_uuid + ", level=" + level + ", flow=" + flow + ", speed=" + speed + ", fence=" + fence
+                + ", loop=" + loop + ", tamper=" + tamper + ", lowBattery=" + lowBattery + ", notifyUsers="
+                + notifyUsers + "]";
     }
 }

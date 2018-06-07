@@ -89,6 +89,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         if (null != selectedUser.getUdid())
             et_associated_with.setText(selectedUser.getUdid());
+        else
+            et_associated_with.setText("NA");
 
         if (null != selectedUser.getType())
             et_member_type.setText(selectedUser.getType().toString());
@@ -162,7 +164,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         new AlertDialog.Builder(EditProfileActivity.this)
                 .setTitle("Delete Profile")
-                .setMessage("Do you want to delete the profile " + et_ep_username + " ?")
+                .setMessage("Do you want to delete the profile " + et_ep_username.getText() + " ?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 

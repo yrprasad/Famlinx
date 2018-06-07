@@ -91,7 +91,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     private RelativeLayout lt_members_detail;
     private RelativeLayout lt_views;
     private RelativeLayout lt_members;
-    private RelativeLayout lt_search_bar;
+//    private RelativeLayout lt_search_bar;
     private WebView webView;
     SupportMapFragment fm;
 
@@ -234,7 +234,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         lt_members_detail = (RelativeLayout) findViewById(R.id.lt_members_detail);
         lt_views = (RelativeLayout) findViewById(R.id.lt_views);
         lt_members = (RelativeLayout) findViewById(R.id.lt_members);
-        lt_search_bar = (RelativeLayout) findViewById(R.id.lt_search_bar);
+//        lt_search_bar = (RelativeLayout) findViewById(R.id.lt_search_bar);
 
         webView = (WebView) findViewById(R.id.wv_sensors);
         webView.setVisibility(View.GONE);
@@ -340,7 +340,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         lt_members_detail.setVisibility(View.VISIBLE);
         lt_views.setVisibility(View.VISIBLE);
         lt_members.setVisibility(View.VISIBLE);
-        lt_search_bar.setVisibility(View.VISIBLE);
+//        lt_search_bar.setVisibility(View.VISIBLE);
         webView.setVisibility(View.GONE);
         fm.getView().setVisibility(View.GONE);
     }
@@ -352,7 +352,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         lt_members_detail.setVisibility(View.GONE);
         lt_views.setVisibility(View.GONE);
         lt_members.setVisibility(View.VISIBLE);
-        lt_search_bar.setVisibility(View.VISIBLE);
+//        lt_search_bar.setVisibility(View.VISIBLE);
         fm.getView().setVisibility(View.VISIBLE);
         webView.setVisibility(View.GONE);
     }
@@ -364,7 +364,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         lt_members_detail.setVisibility(View.GONE);
         lt_views.setVisibility(View.GONE);
         lt_members.setVisibility(View.GONE);
-        lt_search_bar.setVisibility(View.GONE);
+//        lt_search_bar.setVisibility(View.GONE);
         webView.setVisibility(View.GONE);
         fm.getView().setVisibility(View.VISIBLE);
     }

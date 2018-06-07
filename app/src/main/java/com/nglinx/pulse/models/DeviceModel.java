@@ -110,11 +110,15 @@ public class DeviceModel {
         this.features = features;
     }
 
-    @Override
-    public String toString() {
+    public String toString1() {
         return "DeviceModel [id=" + id + ", udid=" + udid + ", userId=" + userId + ", attachedUserName=" + attachedUserName
                 + ", status=" + status + ", activated=" + activated + ", activationCode=" + activationCode
                 + ", createdDate=" + createdDate + ", modifiedDate=" + modifiedDate + ", type=" + type + ", features="
                 + features + "]";
+    }
+
+    @Override
+    public String toString() {
+        return udid;
     }
 }

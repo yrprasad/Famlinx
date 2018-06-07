@@ -170,33 +170,40 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1">
+                        android:layout_weight="1.2">
 
                         <ImageView
                             android:id="@+id/btn_profile_edit"
                             android:layout_width="@dimen/image_width_twenty"
                             android:layout_height="@dimen/image_height_twenty"
                             android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
                             android:background="@drawable/edit_icon"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"/>
+
+                        <TextView
+                            android:layout_centerHorizontal="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/btn_profile_edit"
+                            android:text="Edit"
+                            android:textSize="12dp"/>
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight=".3">
+                        android:layout_weight=".1">
 
 
                         <View
                             android:layout_width="fill_parent"
-                            android:layout_marginLeft="@dimen/layout_margin_left_right_eight"
-                            android:layout_marginRight="@dimen/layout_margin_left_right_eight"
+                            android:layout_height="1dp"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:layout_height="1dp"
+                            android:layout_marginLeft="@dimen/layout_margin_left_right_eight"
+                            android:layout_marginRight="@dimen/layout_margin_left_right_eight"
                             android:background="#000000"/>
 
                     </RelativeLayout>
@@ -204,17 +211,25 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1">
+                        android:layout_weight="1.2">
 
                         <ImageView
-                            android:id="@+id/btn_profile_delete"
+                            android:id="@+id/btn_profile_manage"
                             android:layout_width="@dimen/image_width_twenty"
                             android:layout_height="@dimen/image_height_twenty"
+                            android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/delete"
+                            android:background="@drawable/man_user"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"/>
+
+                        <TextView
+                            android:layout_centerHorizontal="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/btn_profile_manage"
+                            android:text="Manage"
+                            android:textSize="12dp"/>
 
                     </RelativeLayout>
 

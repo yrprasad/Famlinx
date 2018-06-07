@@ -10,8 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,7 +32,7 @@ import java.util.List;
 
 public class MemberSettingsActivity extends AppCompatActivity {
 
-//    RadioButton rb_miles;
+    //    RadioButton rb_miles;
 //    RadioButton rb_kms;
 //    EditText et_speed_limit;
     Spinner spinner_fence;
@@ -57,7 +55,13 @@ public class MemberSettingsActivity extends AppCompatActivity {
     SeekBar.OnSeekBarChangeListener speedseekBarChangeListener = null;
     SpeedToggleChangeListener speedToggleChangeListener = null;
 
-    CheckBox  checkbox_battery1;
+    CheckBox cb_phone_fence;
+    CheckBox cb_phone_speed;
+    CheckBox cb_phone_battery;
+
+    CheckBox cb_email_fence;
+    CheckBox cb_email_speed;
+    CheckBox cb_email_battery;
 
     public MemberSettingsActivity() {
         intent = new Intent();
@@ -120,7 +124,13 @@ public class MemberSettingsActivity extends AppCompatActivity {
         speed_seekbar.setOnSeekBarChangeListener(speedseekBarChangeListener);
         speed_toggle.setOnCheckedChangeListener(speedToggleChangeListener);
 
-        checkbox_battery1 = (CheckBox) findViewById(R.id.checkbox_battery1);
+        cb_phone_fence = (CheckBox) findViewById(R.id.cb_phone_fence);
+        cb_phone_speed = (CheckBox) findViewById(R.id.cb_phone_speed);
+        cb_phone_battery = (CheckBox) findViewById(R.id.cb_phone_battery);
+
+        cb_email_fence = (CheckBox) findViewById(R.id.cb_email_fence);
+        cb_email_speed = (CheckBox) findViewById(R.id.cb_email_speed);
+        cb_email_battery = (CheckBox) findViewById(R.id.cb_email_battery);
     }
 
 
@@ -199,15 +209,47 @@ public class MemberSettingsActivity extends AppCompatActivity {
             spinner_fence.setSelection(fenceAdapter.getPosition(emptyFence));
         }
 
-        if (settingsModel.isLowBattery() == true) {
-            checkbox_battery1.setChecked(true);
+        if (settingsModel.getEmailNotifications() != null) {
+            cb_email_fence.setChecked(settingsModel.getEmailNotifications().isFenceNotification());
+        } else {
+            cb_email_fence.setChecked(true);
+        }
+
+        if (settingsModel.getEmailNotifications() != null) {
+            cb_email_speed.setChecked(settingsModel.getEmailNotifications().isSpeedNotification());
+        } else {
+            cb_email_speed.setChecked(true);
+        }
+
+        if (settingsModel.getEmailNotifications() != null) {
+            cb_email_battery.setChecked(settingsModel.getEmailNotifications().isBatteryNotification());
+        } else {
+            cb_email_battery.setChecked(true);
+        }
+
+
+        if (settingsModel.getPhoneNotifications() != null) {
+            cb_phone_fence.setChecked(settingsModel.getPhoneNotifications().isFenceNotification());
+        } else {
+            cb_phone_fence.setChecked(true);
+        }
+
+        if (settingsModel.getPhoneNotifications() != null) {
+            cb_phone_speed.setChecked(settingsModel.getPhoneNotifications().isSpeedNotification());
+        } else {
+            cb_phone_speed.setChecked(true);
+        }
+
+        if (settingsModel.getPhoneNotifications() != null) {
+            cb_phone_battery.setChecked(settingsModel.getPhoneNotifications().isBatteryNotification());
+        } else {
+            cb_phone_battery.setChecked(true);
         }
     }
 
 
     public void onSaveSettings(View v) {
 
-        boolean saveSettings = true;
         System.out.println("Settings Activity Save Button Clicked");
 
         if (!speed_text.getText().equals("")) {
@@ -217,10 +259,6 @@ public class MemberSettingsActivity extends AppCompatActivity {
             settingsModel.getSpeed().setEnabled(false);
             settingsModel.getSpeed().setLimit(0);
         }
-//        settingsModel.setLoop(loop_toggle.isChecked());
-//        settingsModel.setTamper(tamper_toggle.isChecked());
-        settingsModel.setLowBattery(checkbox_battery1.isChecked());
-
         if ((spinner_fence.getSelectedItem() == getEmptyFence())) {
             settingsModel.getFence().setEnabled(false);
             settingsModel.getFence().setId(getEmptyFence().getId());
@@ -230,8 +268,36 @@ public class MemberSettingsActivity extends AppCompatActivity {
             settingsModel.getFence().setId(fenceModel.getId());
         }
 
-        if (saveSettings == false)
-            return;
+        if (cb_email_fence.isChecked())
+            settingsModel.getEmailNotifications().setFenceNotification(true);
+        else
+            settingsModel.getEmailNotifications().setFenceNotification(false);
+
+        if (cb_email_speed.isChecked())
+            settingsModel.getEmailNotifications().setSpeedNotification(true);
+        else
+            settingsModel.getEmailNotifications().setSpeedNotification(false);
+
+        if (cb_email_battery.isChecked())
+            settingsModel.getEmailNotifications().setBatteryNotification(true);
+        else
+            settingsModel.getEmailNotifications().setBatteryNotification(false);
+
+
+        if (cb_phone_fence.isChecked())
+            settingsModel.getPhoneNotifications().setFenceNotification(true);
+        else
+            settingsModel.getPhoneNotifications().setFenceNotification(false);
+
+        if (cb_phone_speed.isChecked())
+            settingsModel.getPhoneNotifications().setSpeedNotification(true);
+        else
+            settingsModel.getPhoneNotifications().setSpeedNotification(false);
+
+        if (cb_phone_battery.isChecked())
+            settingsModel.getPhoneNotifications().setBatteryNotification(true);
+        else
+            settingsModel.getPhoneNotifications().setBatteryNotification(false);
 
         //Get the Member Details
         final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(MemberSettingsActivity.this);

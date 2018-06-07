@@ -17,9 +17,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.DevicesAdapter;
@@ -44,22 +44,22 @@ public class DeviceActivity extends AbstractActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    DevicesAdapter devicesAdapter;
 
     List<DeviceModel> devicesList;
     List<ChildUserModel> childProfilesList;
 
+    DevicesAdapter devicesAdapter;
+
     DataSession ds;
 
     DeviceModel selectedDevice;
+    ChildUserModel selectedProfile;
 
     //Manage Device Dialog attributes
     Dialog md_dialog;
     Dialog ap_dialog;
     TextView md_udid_value;
     Spinner md_username_value;
-    Button md_btn_attach, md_btn_detach, md_btn_cancel;
-    ImageView btn_add_profile;
 
     //Activate Device
     Dialog actd_dialog;
@@ -84,8 +84,7 @@ public class DeviceActivity extends AbstractActivity {
 
     ArrayAdapter<ChildUserModel> childProfileAdapter;
 
-    AttachDeviceClickListener attachDeviceClickListener;
-    DetachDeviceClickListener detachDeviceClickListener;
+    Toolbar inc_toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +119,24 @@ public class DeviceActivity extends AbstractActivity {
         devicesAdapter = new DevicesAdapter(getSupportFragmentManager());
         viewPager.setAdapter(devicesAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        inc_toolbar = (Toolbar) findViewById(R.id.inc_toolbar);
+
+        ImageView btn_add_profile = (ImageView) inc_toolbar.findViewById(R.id.btn_add_profile);
+        btn_add_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addProfileClickHandler();
+            }
+        });
+
+        RelativeLayout layout_add_profile = (RelativeLayout) inc_toolbar.findViewById(R.id.layout_add_profile);
+        layout_add_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addProfileClickHandler();
+            }
+        });
     }
 
     private List<ChildUserModel> getChildProfiles() {
@@ -201,56 +218,29 @@ public class DeviceActivity extends AbstractActivity {
         return ds.getChildProfilesList().get(position);
     }
 
-    public void onDeviceManage(int position) {
 
-        selectedDevice = getItem(position);
-
-        md_dialog = new Dialog(DeviceActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
-        md_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        md_dialog.setCancelable(true);
-        md_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        md_dialog.setContentView(R.layout.activity_manage_device);
-        md_dialog.show();
-
-        md_udid_value = (TextView) md_dialog.findViewById(R.id.et_udid);
-
-        if (null != selectedDevice.getUdid())
-            md_udid_value.setText(selectedDevice.getUdid());
-
-        md_username_value = (Spinner) md_dialog.findViewById(R.id.et_username);
-
-        childProfileAdapter = new ArrayAdapter<ChildUserModel>(DeviceActivity.this, android.R.layout.simple_spinner_item, ds.getUnAttachedChildUser());
-        childProfileAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        md_username_value.setAdapter(childProfileAdapter);
-
-        md_btn_attach = (Button) md_dialog.findViewById(R.id.md_btn_attach);
-        md_btn_detach = (Button) md_dialog.findViewById(R.id.md_btn_detach);
-        md_btn_cancel = (Button) md_dialog.findViewById(R.id.md_btn_cancel);
-        btn_add_profile = (ImageView) md_dialog.findViewById(R.id.btn_add_profile);
-
-        if (null == selectedDevice.getAttachedUserName() || (selectedDevice.getAttachedUserName().length() == 0)) {
-            //User is not attached to any user. Deactivate the detach button
-            md_btn_detach.setVisibility(View.GONE);
-            btn_add_profile.setVisibility(View.VISIBLE);
-        } else {
-            //User is attached to some user. Deactivate the Attach Button
-            md_btn_attach.setVisibility(View.GONE);
-            btn_add_profile.setVisibility(View.GONE);
-        }
-
-        md_btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                md_dialog.dismiss();
-            }
-        });
-
-        md_btn_attach.setOnClickListener(attachDeviceClickListener);
-        md_btn_detach.setOnClickListener(detachDeviceClickListener);
+    public void buyDeviceClickHandler(View view) {
+        Intent intent4 = new Intent(this, BuyNowActivity.class);
+        startActivity(intent4);
+        finish();
     }
 
-    public void addProfileClickHandler(View view) {
+    public void checkForAttach() {
+        new AlertDialog.Builder(DeviceActivity.this)
+                .setTitle("Activate Device")
+                .setMessage("Do you want to attach Profile: " + selectedProfile.getName() + " to device ?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(final DialogInterface dialog, int whichButton) {
+                        attachDevice();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
+
+    public void addProfileClickHandler() {
         //Open the new Dialog to add a new Profile
         ap_dialog = new Dialog(DeviceActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
         ap_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -263,7 +253,7 @@ public class DeviceActivity extends AbstractActivity {
         et_profile_name = (EditText) ap_dialog.findViewById(R.id.et_profile_name);
         ad_profile_ok = (Button) ap_dialog.findViewById(R.id.ad_profile_ok);
         ad_profile_cancel = (Button) ap_dialog.findViewById(R.id.ad_profile_cancel);
-        md_btn_cancel.setOnClickListener(new View.OnClickListener() {
+        ad_profile_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ap_dialog.dismiss();
@@ -299,11 +289,13 @@ public class DeviceActivity extends AbstractActivity {
                                     apiEndpointInterface.createChildUser(ds.getUserModel().getId(), childUserModel, new RetroResponse<ChildUserModel>() {
                                         @Override
                                         public void onSuccess() {
+                                            selectedProfile = model;
                                             ProgressbarUtil.stopProgressBar(mProgressDialog1);
                                             getChildProfiles();
                                             DialogUtils.diaplaySuccessDialog(DeviceActivity.this, "Member Profile created successfully. Check activation mail");
                                             if (ap_dialog != null)
                                                 ap_dialog.dismiss();
+                                            checkForAttach();
                                         }
 
                                         @Override
@@ -320,14 +312,16 @@ public class DeviceActivity extends AbstractActivity {
         });
     }
 
-    public void onDeviceItemClick(View view, int position, long id) {
-        long viewId = view.getId();
+    public void onDeviceActivateClick(View view, int position, long id) {
+        /*long viewId = view.getId();
         if (viewId == R.id.img_manage_device) {
-            onDeviceManage(position);
+            onProfileManage(position);
         } else if (viewId == R.id.img_edit_device) {
             onDeviceEdit(position);
         }
-        Toast.makeText(this, "Clicked on item", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Clicked on item", Toast.LENGTH_SHORT).show();*/
+        DeviceModel model = getItem(position);
+        activateDevice(model);
     }
 
     private void deactivateDevice(final DeviceModel selectedDevice1) {
@@ -443,11 +437,11 @@ public class DeviceActivity extends AbstractActivity {
         @Override
         public void onClick(View view) {
 
-            final ChildUserModel selectedChild = (ChildUserModel) md_username_value.getSelectedItem();
+            selectedDevice = (DeviceModel) spinner_devices.getSelectedItem();
 
             new AlertDialog.Builder(DeviceActivity.this)
                     .setTitle("Attach Device")
-                    .setMessage("Do you want to attach Device " + selectedDevice.getUdid() + " to " + selectedChild.getUsername())
+                    .setMessage("Do you want to attach Device " + selectedDevice.getUdid() + " to " + selectedProfile.getUsername())
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -456,7 +450,7 @@ public class DeviceActivity extends AbstractActivity {
                             final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(DeviceActivity.this);
 
                             ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-                            apiEndpointInterface.attachDevice(selectedDevice.getId(), selectedChild.getUsername(), selectedDevice, new RetroResponse<DeviceModel>() {
+                            apiEndpointInterface.attachDevice(selectedDevice.getId(), selectedProfile.getUsername(), selectedDevice, new RetroResponse<DeviceModel>() {
                                 @Override
                                 public void onSuccess() {
                                     ProgressbarUtil.stopProgressBar(mProgressDialog1);
@@ -483,7 +477,9 @@ public class DeviceActivity extends AbstractActivity {
         @Override
         public void onClick(View view) {
 
-            final ChildUserModel selectedChild = (ChildUserModel) md_username_value.getSelectedItem();
+            String attachedDeviceUdid = selectedProfile.getUdid();
+
+            final DeviceModel deviceModel = ApplicationUtils.getDeviceByUdid(attachedDeviceUdid, ds.getDevicesList());
 
             new AlertDialog.Builder(DeviceActivity.this)
                     .setTitle("Detach Device")
@@ -496,7 +492,7 @@ public class DeviceActivity extends AbstractActivity {
                             final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(DeviceActivity.this);
 
                             ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-                            apiEndpointInterface.detachDevice(selectedDevice.getId(), selectedDevice, new RetroResponse<DeviceModel>() {
+                            apiEndpointInterface.detachDevice(deviceModel.getId(), new DeviceModel(), new RetroResponse<DeviceModel>() {
                                 @Override
                                 public void onSuccess() {
                                     ProgressbarUtil.stopProgressBar(mProgressDialog1);
@@ -571,6 +567,7 @@ public class DeviceActivity extends AbstractActivity {
             public void onSuccess() {
                 devicesList.clear();
                 devicesList.addAll(ApplicationUtils.getNonSensorDevices(models));
+                ds.setDevicesList(devicesList);
                 synchronized (this) {
                     devicesAdapter.notifyDataSetChanged();
                 }
@@ -587,10 +584,151 @@ public class DeviceActivity extends AbstractActivity {
         return devicesList;
     }
 
+    TextView tv_profile;
+    Spinner spinner_devices;
+    Button md_btn_attach, md_btn_detach, md_btn_cancel;
+    ImageView btn_buy_device;
+    AttachDeviceClickListener attachDeviceClickListener;
+    DetachDeviceClickListener detachDeviceClickListener;
+
+    ArrayAdapter<DeviceModel> devicesAdapterForManagerProfile;
+
+    private ChildUserModel getChildProfile(int position) {
+        return ds.getChildProfilesList().get(position);
+    }
+
+    public void attachDevice() {
+        md_dialog = new Dialog(DeviceActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        md_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        md_dialog.setCancelable(true);
+        md_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        md_dialog.setContentView(R.layout.activity_manage_attach_device);
+        md_dialog.show();
+
+        tv_profile = (TextView) md_dialog.findViewById(R.id.tv_profile);
+        spinner_devices = (Spinner) md_dialog.findViewById(R.id.spinner_udid);
+
+        if (null != selectedProfile.getName())
+            tv_profile.setText(selectedProfile.getName());
+
+        List<DeviceModel> availableDevicesToAttach = ds.getAvailableDevicesToAttach();
+
+        devicesAdapterForManagerProfile = new ArrayAdapter<DeviceModel>(DeviceActivity.this, android.R.layout.simple_spinner_item, availableDevicesToAttach);
+        devicesAdapterForManagerProfile.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_devices.setAdapter(devicesAdapterForManagerProfile);
+
+        md_btn_attach = (Button) md_dialog.findViewById(R.id.md_btn_attach);
+        md_btn_cancel = (Button) md_dialog.findViewById(R.id.md_btn_cancel);
+        btn_buy_device = (ImageView) md_dialog.findViewById(R.id.btn_buy_device);
+
+        md_btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                md_dialog.dismiss();
+            }
+        });
+
+        md_btn_attach.setOnClickListener(attachDeviceClickListener);
+    }
+
+    public void detachDevice() {
+        md_dialog = new Dialog(DeviceActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        md_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        md_dialog.setCancelable(true);
+        md_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        md_dialog.setContentView(R.layout.activity_manage_detach_device);
+        md_dialog.show();
+
+        tv_profile = (TextView) md_dialog.findViewById(R.id.tv_profile);
+
+        TextView tv_udid = (TextView) md_dialog.findViewById(R.id.tv_udid);
+
+        if (null != selectedProfile.getName())
+            tv_profile.setText(selectedProfile.getName());
+
+        tv_udid.setText(selectedProfile.getUdid());
+
+        md_btn_detach = (Button) md_dialog.findViewById(R.id.md_btn_detach);
+        md_btn_cancel = (Button) md_dialog.findViewById(R.id.md_btn_cancel);
+
+        md_btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                md_dialog.dismiss();
+            }
+        });
+
+        md_btn_detach.setOnClickListener(detachDeviceClickListener);
+    }
+
+
+    public void onProfileManage(int position) {
+
+        selectedProfile = getChildProfile(position);
+        if (null == selectedProfile.getUdid() || (selectedProfile.getUdid().length() == 0)) {
+            //Device is not attached.  Show pop up to attach the device
+            attachDevice();
+        } else {
+            //Device is attached. Shw pop to detach the device.
+            detachDevice();
+        }
+
+        /*md_dialog = new Dialog(DeviceActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        md_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        md_dialog.setCancelable(true);
+        md_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        md_dialog.setContentView(R.layout.activity_manage_device);
+        md_dialog.show();
+
+        tv_profile = (TextView) md_dialog.findViewById(R.id.tv_profile);
+        spinner_devices = (Spinner) md_dialog.findViewById(R.id.spinner_udid);
+
+        if (null != selectedProfile.getName())
+            tv_profile.setText(selectedProfile.getName());
+
+        List<DeviceModel> availableDevicesToAttach = ds.getAvailableDevicesToAttach();
+
+        devicesAdapterForManagerProfile = new ArrayAdapter<DeviceModel>(DeviceActivity.this, android.R.layout.simple_spinner_item, availableDevicesToAttach);
+        devicesAdapterForManagerProfile.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_devices.setAdapter(devicesAdapterForManagerProfile);
+
+        md_btn_attach = (Button) md_dialog.findViewById(R.id.md_btn_attach);
+        md_btn_detach = (Button) md_dialog.findViewById(R.id.md_btn_detach);
+        md_btn_cancel = (Button) md_dialog.findViewById(R.id.md_btn_cancel);
+        btn_buy_device = (ImageView) md_dialog.findViewById(R.id.btn_buy_device);
+
+        if (null == selectedProfile.getUdid() || (selectedProfile.getUdid().length() == 0)) {
+            //User is not attached to any user. Deactivate the detach button
+            md_btn_detach.setVisibility(View.GONE);
+
+            if ((availableDevicesToAttach == null) || (availableDevicesToAttach.size() == 0)) {
+                md_btn_attach.setClickable(false);
+                md_btn_attach.setEnabled(false);
+            }
+        } else {
+            //User is attached to some user. Deactivate the Attach Button
+            md_btn_attach.setVisibility(View.GONE);
+            spinner_devices.setClickable(false);
+        }
+
+        md_btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                md_dialog.dismiss();
+            }
+        });
+
+        md_btn_attach.setOnClickListener(attachDeviceClickListener);
+        md_btn_detach.setOnClickListener(detachDeviceClickListener);*/
+    }
+
     public void onProfileItemClick(View view, int position, long id) {
         long viewId = view.getId();
-        if (viewId == R.id.btn_profile_delete) {
-            activateChildProfileClickHandler(view, position);
+        if (viewId == R.id.btn_profile_manage) {
+            onProfileManage(position);
         } else if (viewId == R.id.btn_profile_edit) {
             editChildProfileClickHandler(view);
         }

@@ -78,12 +78,12 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
         holder.tv_profile_status = (TextView) convertView.findViewById(R.id.tv_profile_status);
         holder.img_online_status = (ImageView) convertView.findViewById(R.id.img_online_status);
 
-        holder.btn_profile_delete = (ImageView) convertView.findViewById(R.id.btn_profile_delete);
-        holder.btn_profile_delete.setTag(holder.modelHolder);
-        holder.btn_profile_delete.setOnClickListener(new View.OnClickListener() {
+        holder.btn_profile_manage = (ImageView) convertView.findViewById(R.id.btn_profile_manage);
+        holder.btn_profile_manage.setTag(holder.modelHolder);
+        holder.btn_profile_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MemberProfileActivity) context).onItemClick(holder.btn_profile_delete, position, 0);
+                ((MemberProfileActivity) context).onItemClick(holder.btn_profile_manage, position, 0);
             }
         });
 
@@ -133,7 +133,7 @@ public class MemberProfileAdapter extends ArrayAdapter<ChildUserModel> {
         public TextView tv_profile_udid;
         public TextView tv_profile_status;
 
-        public ImageView btn_profile_delete;
+        public ImageView btn_profile_manage;
         public ImageView btn_profile_edit;
         public ImageView img_online_status;
     }

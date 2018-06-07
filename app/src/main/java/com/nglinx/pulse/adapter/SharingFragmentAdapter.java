@@ -90,8 +90,8 @@ public class SharingFragmentAdapter extends ArrayAdapter {
 
                 InviteModel model = getItem(position);
                 viewHolder.invites_row1.setText("User: " + model.getName() + "(" + model.getEmail() + ")");
-                viewHolder.invites_row2.setText("requests " + getItem(position).getToName() + "tracking");
-                viewHolder.invites_row3.setText(ApplicationUtils.getTimeByLocalTimeZone(getItem(position).getDate()));
+                viewHolder.invites_row2.setText("requests tracking of " + getItem(position).getToName());
+                viewHolder.invites_row3.setText(ApplicationUtils.convertFormatByTimeZone(getItem(position).getDate()));
 
             } else if (listType == ApplicationConstants.SHARING_TRACKING_ME_INDEX) {
                 convertView = inflater.inflate(R.layout.activity_sharing_accepted_invites_row, parent, false);
@@ -111,7 +111,7 @@ public class SharingFragmentAdapter extends ArrayAdapter {
 
                 viewHolder.invites_row1.setText("User: " + getItem(position).getName());
                 viewHolder.invites_row2.setText("Tracking: " + getItem(position).getToName());
-                viewHolder.invites_row3.setText(ApplicationUtils.getTimeByLocalTimeZone(getItem(position).getDate()));
+                viewHolder.invites_row3.setText(ApplicationUtils.convertFormatByTimeZone(getItem(position).getDate()));
             }
             convertView.setTag(viewHolder);
         } else {

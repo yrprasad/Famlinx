@@ -37,7 +37,7 @@
                     android:id="@+id/wv_sensors"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="15.5"
+                    android:layout_weight="17"
                     android:visibility="gone"/>
 
                 <fragment
@@ -45,7 +45,7 @@
                     class="com.google.android.gms.maps.SupportMapFragment"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="15.5"
+                    android:layout_weight="17"
                     android:visibility="gone"/>
 
                 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -886,7 +886,7 @@
                     </RelativeLayout>
                 </RelativeLayout>-->
 
-                <RelativeLayout
+                <!--<RelativeLayout
                     android:id="@+id/lt_search_bar"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -938,7 +938,7 @@
                     </LinearLayout>
 
 
-                </RelativeLayout>
+                </RelativeLayout>-->
 
             </LinearLayout>
 
@@ -952,7 +952,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:visibility="visible"
+        android:visibility="gone"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 

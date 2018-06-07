@@ -122,7 +122,6 @@
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentBottom="true"
                                         android:layout_alignStart="@+id/name"
-                                        android:hint="Member 1"
                                         android:textColor="#000000"
                                         android:textColorHint="#000000"/>
 
@@ -148,7 +147,6 @@
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/tv_phone"
                                         android:layout_marginStart="25dp"
-                                        android:hint="Member 1"
                                         android:textColor="#000000"
                                         android:textColorHint="#000000"/>
 
@@ -173,7 +171,6 @@
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/phone"
                                         android:layout_marginStart="25dp"
-                                        android:hint="9999999999"
                                         android:inputType="number"
                                         android:textColor="#000000"
                                         android:textColorHint="#000000"/>
@@ -183,15 +180,16 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="60dp">
+                                    android:layout_height="60dp"
+                                    android:visibility="gone">
 
                                     <TextView
                                         android:id="@+id/associated"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="28dp"
-                                        android:textColor="#000000"
-                                        android:text="Associated With"/>
+                                        android:text="Associated With"
+                                        android:textColor="#000000"/>
 
                                     <EditText
                                         android:id="@+id/et_parent_name"
@@ -199,7 +197,6 @@
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/associated"
                                         android:layout_marginStart="25dp"
-                                        android:hint="9999999999"
                                         android:inputType="number"
                                         android:textColor="#000000"
                                         android:textColorHint="#000000"/>
@@ -208,15 +205,16 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="60dp">
+                                    android:layout_height="60dp"
+                                    android:visibility="gone">
 
                                     <TextView
                                         android:id="@+id/member_type"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="28dp"
-                                        android:textColor="#000000"
-                                        android:text="Member Type"/>
+                                        android:text="Member Type"
+                                        android:textColor="#000000"/>
 
                                     <EditText
                                         android:id="@+id/et_user_type"
@@ -224,11 +222,14 @@
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/member_type"
                                         android:layout_marginStart="25dp"
-                                        android:hint="9999999999"
                                         android:inputType="number"
                                         android:textColor="#000000"
                                         android:textColorHint="#000000"/>
                                 </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="45dp"/>
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"

@@ -114,8 +114,8 @@ public class ApplicationUtils {
     }
 
     public static String constructMemberTitle(UserTrackingModel userTrackingModel) {
-        String time = getTimeByLocalTimeZone(userTrackingModel.getModifiedTime());
-        String title = "Time : " + convertFormatByTimeZone(time);;
+        String time = convertFormatByTimeZone(userTrackingModel.getModifiedTime());
+        String title = "Time : " + convertFormatByTimeZone(time);
 
         if (userTrackingModel != null) {
             /*if ((userTrackingModel.getAlert_status() != null) && (userTrackingModel.getAlert_status() == 0)) {
@@ -423,6 +423,18 @@ public class ApplicationUtils {
         memberModel.setUsername("All Members");
         memberModel.setId("0");
         return memberModel;
+    }
+
+    public static DeviceModel getDeviceByUdid(final String deviceUdid, List<DeviceModel> devices) {
+        if (null == deviceUdid)
+            return null;
+
+        for (DeviceModel device :
+                devices) {
+            if (device.getUdid().equalsIgnoreCase(deviceUdid))
+                return device;
+        }
+        return null;
     }
 
 }

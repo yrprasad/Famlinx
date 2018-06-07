@@ -61,7 +61,7 @@
                         android:focusableInTouchMode="true">
 
                         <TextView
-                            android:id="@+id/tv_udid"
+                            android:id="@+id/spinner_udid"
                             android:layout_width="70dp"
                             android:layout_height="30dp"
                             android:layout_marginStart="20dp"
@@ -77,7 +77,7 @@
                             android:layout_width="140dp"
                             android:layout_height="30dp"
                             android:layout_marginStart="30dp"
-                            android:layout_toEndOf="@+id/tv_udid"
+                            android:layout_toEndOf="@+id/spinner_udid"
                             android:background="#ffffff"
                             android:prompt="@string/speed_type_prompt"/>
 

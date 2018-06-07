@@ -4,11 +4,12 @@ import android.content.Context;
 import android.location.Location;
 import android.view.View;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.nglinx.pulse.models.AddressModel;
 import com.nglinx.pulse.models.ChildUserModel;
 import com.nglinx.pulse.models.DeviceModel;
+import com.nglinx.pulse.models.DeviceStatus;
 import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.DeviceTypesModel;
 import com.nglinx.pulse.models.FenceModel;
@@ -464,6 +465,19 @@ public class DataSession {
                 unAttachedChilUsers.add(child);
         }
         return unAttachedChilUsers;
+    }
+
+
+    public List<DeviceModel> getAvailableDevicesToAttach() {
+        List<DeviceModel> deviceModels = new ArrayList<>();
+        for (DeviceModel deviceModel :
+                devicesList) {
+            if ((deviceModel.getStatus().equals(DeviceStatus.PURCHASED)) ||
+                    (deviceModel.getStatus().equals(DeviceStatus.DETACHED)) ||
+                    (deviceModel.getStatus().equals(DeviceStatus.SHIPPED)))
+                deviceModels.add(deviceModel);
+        }
+        return deviceModels;
     }
 
     public List<FenceModel> getFenceList() {

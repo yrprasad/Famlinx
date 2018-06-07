@@ -18,7 +18,12 @@ public class BackendService extends TimerTask {
     DataSession ds = DataSession.getInstance();
 
     private void sendTrackRequest() {
-        if (ds.isHomePageOn()) {
+        if (ds.isHomePageOn() &&
+                (ds.getSelected_group_id() != null) &&
+                (!ds.getSelected_group_id().equalsIgnoreCase("")) &&
+                (ds.getSelected_group_member_id() != null) &&
+                (!ds.getSelected_group_member_id().equalsIgnoreCase(""))) {
+
             ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(DataSession.getInstance().getContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
             apiEndpointInterface.trackMember(ds.getUserModel().getId(), ds.getSelected_group_id(), ds.getSelected_group_member_id(), new RetroResponse<GroupMemberModel>() {
                 @Override

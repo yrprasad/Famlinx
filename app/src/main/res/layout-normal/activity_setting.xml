@@ -602,7 +602,7 @@
                                                         android:layout_height="wrap_content"
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
-                                                        android:text="InApp Notification"
+                                                        android:text="Email Notification"
                                                         android:textColor="#000000"
                                                         android:textSize="@dimen/text_size_sixteen"/>
                                                 </RelativeLayout>
@@ -628,21 +628,7 @@
                                                     android:layout_weight="0.9">
 
                                                     <CheckBox
-                                                        android:id="@+id/checkbox_terms"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"/>
-
-                                                    <TextView
-                                                        android:id="@id/text"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox_terms"
-                                                        android:layout_alignBottom="@+id/checkbox_terms"
-                                                        android:layout_alignStart="@+id/text1"
-                                                        android:text="Friend Request"/>
-
-                                                    <CheckBox
-                                                        android:id="@+id/checkbox1"
+                                                        android:id="@+id/cb_phone_fence"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_below="@+id/checkbox_terms"/>
@@ -651,58 +637,42 @@
                                                         android:id="@+id/text1"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox1"
-                                                        android:layout_alignBottom="@+id/checkbox1"
+                                                        android:layout_alignBaseline="@+id/cb_phone_fence"
+                                                        android:layout_alignBottom="@+id/cb_phone_fence"
                                                         android:layout_marginStart="8dp"
-                                                        android:layout_toEndOf="@+id/checkbox1"
+                                                        android:layout_toEndOf="@+id/cb_phone_fence"
                                                         android:text="Fence Breach"/>
 
                                                     <CheckBox
-                                                        android:id="@+id/checkbox2"
+                                                        android:id="@+id/cb_phone_speed"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_below="@+id/checkbox1"/>
+                                                        android:layout_below="@+id/cb_phone_fence"/>
 
                                                     <TextView
                                                         android:id="@+id/text2"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox2"
-                                                        android:layout_alignBottom="@+id/checkbox2"
+                                                        android:layout_alignBaseline="@+id/cb_phone_speed"
+                                                        android:layout_alignBottom="@+id/cb_phone_speed"
                                                         android:layout_marginStart="8dp"
-                                                        android:layout_toEndOf="@+id/checkbox2"
+                                                        android:layout_toEndOf="@+id/cb_phone_speed"
                                                         android:text="OverSpeeding"/>
 
                                                     <CheckBox
-                                                        android:id="@+id/checkbox3"
+                                                        android:id="@+id/cb_phone_battery"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_below="@+id/checkbox2"/>
-
-                                                    <TextView
-                                                        android:id="@+id/text3"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox3"
-                                                        android:layout_alignBottom="@+id/checkbox3"
-                                                        android:layout_marginStart="8dp"
-                                                        android:layout_toEndOf="@+id/checkbox3"
-                                                        android:text="Tracking Me"/>
-
-                                                    <CheckBox
-                                                        android:id="@+id/checkbox_battery"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_below="@+id/checkbox3"/>
+                                                        android:layout_below="@+id/cb_phone_speed"/>
 
                                                     <TextView
                                                         android:id="@+id/battery_notification"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox_battery"
-                                                        android:layout_alignBottom="@+id/checkbox_battery"
+                                                        android:layout_alignBaseline="@+id/cb_phone_battery"
+                                                        android:layout_alignBottom="@+id/cb_phone_battery"
                                                         android:layout_marginStart="8dp"
-                                                        android:layout_toEndOf="@+id/checkbox_battery"
+                                                        android:layout_toEndOf="@+id/cb_phone_battery"
                                                         android:text="Low Battery"/>
 
 
@@ -730,22 +700,7 @@
                                                     android:layout_weight="0.9">
 
                                                     <CheckBox
-                                                        android:id="@+id/checkbox4"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"/>
-
-                                                    <TextView
-                                                        android:id="@+id/text4"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox4"
-                                                        android:layout_alignBottom="@+id/checkbox4"
-                                                        android:layout_marginStart="@dimen/layout_margin_left_right_eight"
-                                                        android:layout_toEndOf="@+id/checkbox5"
-                                                        android:text="Friend Request"/>
-
-                                                    <CheckBox
-                                                        android:id="@+id/checkbox5"
+                                                        android:id="@+id/cb_email_fence"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_below="@+id/checkbox4"/>
@@ -754,58 +709,42 @@
                                                         android:id="@+id/text5"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox5"
-                                                        android:layout_alignBottom="@+id/checkbox5"
+                                                        android:layout_alignBaseline="@+id/cb_email_fence"
+                                                        android:layout_alignBottom="@+id/cb_email_fence"
                                                         android:layout_marginStart="@dimen/layout_margin_left_right_eight"
-                                                        android:layout_toEndOf="@+id/checkbox5"
+                                                        android:layout_toEndOf="@+id/cb_email_fence"
                                                         android:text="Fence Breach"/>
 
                                                     <CheckBox
-                                                        android:id="@+id/checkbox6"
+                                                        android:id="@+id/cb_email_speed"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_below="@+id/checkbox5"/>
+                                                        android:layout_below="@+id/cb_email_fence"/>
 
                                                     <TextView
                                                         android:id="@+id/text6"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox6"
-                                                        android:layout_alignBottom="@+id/checkbox6"
+                                                        android:layout_alignBaseline="@+id/cb_email_speed"
+                                                        android:layout_alignBottom="@+id/cb_email_speed"
                                                         android:layout_marginStart="@dimen/layout_margin_left_right_eight"
-                                                        android:layout_toEndOf="@+id/checkbox6"
+                                                        android:layout_toEndOf="@+id/cb_email_speed"
                                                         android:text="OverSpeeding"/>
 
                                                     <CheckBox
-                                                        android:id="@+id/checkbox7"
+                                                        android:id="@+id/cb_email_battery"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_below="@+id/checkbox6"/>
-
-                                                    <TextView
-                                                        android:id="@+id/text7"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox7"
-                                                        android:layout_alignBottom="@+id/checkbox7"
-                                                        android:layout_marginStart="@dimen/layout_margin_left_right_eight"
-                                                        android:layout_toEndOf="@+id/checkbox7"
-                                                        android:text="Tracking Me"/>
-
-                                                    <CheckBox
-                                                        android:id="@+id/checkbox_battery1"
-                                                        android:layout_width="wrap_content"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_below="@+id/checkbox7"/>
+                                                        android:layout_below="@+id/cb_email_speed"/>
 
                                                     <TextView
                                                         android:id="@+id/battery_notification1"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
-                                                        android:layout_alignBaseline="@+id/checkbox_battery1"
-                                                        android:layout_alignBottom="@+id/checkbox_battery1"
+                                                        android:layout_alignBaseline="@+id/cb_email_battery"
+                                                        android:layout_alignBottom="@+id/cb_email_battery"
                                                         android:layout_marginStart="8dp"
-                                                        android:layout_toEndOf="@+id/checkbox_battery1"
+                                                        android:layout_toEndOf="@+id/cb_email_battery"
                                                         android:text="Low Battery"/>
 
 

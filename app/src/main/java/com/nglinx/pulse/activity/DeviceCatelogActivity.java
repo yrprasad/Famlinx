@@ -424,7 +424,7 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
         if (null != selectedDevice.getUdid())
             md_udid_value.setText(selectedDevice.getUdid());
 
-        md_username_value = (Spinner) md_dialog.findViewById(R.id.et_username);
+        md_username_value = (Spinner) md_dialog.findViewById(R.id.spinner_udid);
 
         childProfileAdapter = new ArrayAdapter<ChildUserModel>(DeviceCatelogActivity.this, android.R.layout.simple_spinner_item, myChildProfiles);
         childProfileAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -447,11 +447,13 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
 
     public void onItemClick(View view, int position, long id) {
         long viewId = view.getId();
-        if (viewId == R.id.img_manage_device) {
-            onDeviceManage(position);
-        } else if (viewId == R.id.img_edit_device) {
-            onDeviceEdit(position);
+        DeviceModel model = getItem(position);
+        if (viewId == R.id.img_activate_device) {
+            activateDevice(model);
         }
+        /*else if (viewId == R.id.img_edit_device) {
+            onDeviceEdit(position);
+        }*/
     }
 
     //TODO: Need to complete the function.

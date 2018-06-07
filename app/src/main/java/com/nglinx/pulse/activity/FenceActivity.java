@@ -82,8 +82,11 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
     FenceModel selectedFence;
 
     ImageView ms_fence_options;
+    ImageView ms_apply_fence;
+    TextView tv_apply_fence;
 
     Button msOkCreateFence, msCancelCreateFence;
+
 //    Button msEditFence;
 //    TextView tv_fence_action;
 
@@ -137,6 +140,8 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         spinner_fence = (Spinner) findViewById(R.id.spinner_fence);
 
         ms_fence_options = (ImageView) findViewById(R.id.ms_fence_options);
+        ms_apply_fence = (ImageView) findViewById(R.id.ms_apply_fence);
+        tv_apply_fence = (TextView) findViewById(R.id.tv_apply_fence);
 
         msOkCreateFence = (Button)
                 findViewById(R.id.ms_ok_create_fence);
@@ -268,7 +273,12 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
 
         if (selectedFence.getId().equals("0")) {
             showMyLocation();
+            ms_apply_fence.setVisibility(View.GONE);
+            tv_apply_fence.setVisibility(View.GONE);
         } else {
+            ms_apply_fence.setVisibility(View.VISIBLE);
+            tv_apply_fence.setVisibility(View.VISIBLE);
+
 //            msEditFence.setVisibility(View.VISIBLE);
 //            tv_fence_action.setText("Edit Fence");
             msOkCreateFence.setVisibility(View.GONE);
@@ -357,7 +367,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         }
     };
 
-        @Override
+    @Override
     public void onCameraIdle() {
         present_address = null;
         present_latLng = null;
@@ -403,7 +413,17 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         showMyLocation();
     }
 
+    public void onApplyFenceFloatingBtnClick(View v) {
+        Intent intent7 = new Intent(FenceActivity.this, ApplyFenceActivity.class);
+        intent7.putExtra(ApplicationConstants.SELECTED_FENCE, selectedFence.getId());
+        startActivity(intent7);
+        finish();
+    }
+
     public void onAddFenceFloatingBtnClick(View v) {
+
+        ms_apply_fence.setVisibility(View.GONE);
+        tv_apply_fence.setVisibility(View.GONE);
 
         if ((null != circleManager) && (circleManager.getCircles().size() > 0)) {
             circleManager.getCircles().get(0).deleteCircle();
@@ -504,8 +524,8 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         cancel = (Button) dlg_af.findViewById(R.id.btn_cancel);
 
         af_radius.setText(String.valueOf((int) circleManager.getCircles().get(0).getRadius()));
-        af_latitude.setText(String.format("%.4f",present_latLng.latitude));
-        af_longitude.setText(String.format("%.4f",present_latLng.longitude));
+        af_latitude.setText(String.format("%.4f", present_latLng.latitude));
+        af_longitude.setText(String.format("%.4f", present_latLng.longitude));
 
         String address = "";
         if (present_address != null) {

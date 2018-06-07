@@ -68,7 +68,15 @@ public class DeviceCatalogAdapter extends ArrayAdapter<DeviceModel> {
 
         tv_status_state.setText(statusState);
 
-        final ImageView img_edit_device = (ImageView) convertView.findViewById(R.id.img_edit_device);
+        final ImageView img_activate_device = (ImageView) convertView.findViewById(R.id.img_activate_device);
+        img_activate_device.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((DeviceCatelogActivity) context).onItemClick(img_activate_device, position, 0);
+            }
+        });
+
+        /*final ImageView img_edit_device = (ImageView) convertView.findViewById(R.id.img_edit_device);
         img_edit_device.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +90,7 @@ public class DeviceCatalogAdapter extends ArrayAdapter<DeviceModel> {
             public void onClick(View v) {
                 ((DeviceCatelogActivity) context).onItemClick(img_manage_device, position, 1);
             }
-        });
+        });*/
 
         // Return the completed view to render on screen
         return convertView;

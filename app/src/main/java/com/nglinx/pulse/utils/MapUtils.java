@@ -74,7 +74,6 @@ public class MapUtils {
                         return;
                     LatLngBounds.Builder builder = new LatLngBounds.Builder();
                     builder.include(marker.getPosition());
-                    marker.showInfoWindow();
                     double dlatitude = Double.valueOf(DataSession.getInstance().getUserModel().getLocation().getLatitude());
                     double dlongitude = Double.valueOf(DataSession.getInstance().getUserModel().getLocation().getLongitude());
                     builder.include(new LatLng(dlatitude, dlongitude));
@@ -93,6 +92,7 @@ public class MapUtils {
                 googleMap.setInfoWindowAdapter(new CustomInfoViewAdaptor(context, member.getTrackingModel()));
                 googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 googleMap.setIndoorEnabled(false);
+                marker.showInfoWindow();
             }
         });
     }

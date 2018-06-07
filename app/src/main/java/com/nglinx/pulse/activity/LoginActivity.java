@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     String regid = "dummy";
 
     void initializeIcons() {
-        et_username = (AutoCompleteTextView) findViewById(R.id.et_username);
+        et_username = (AutoCompleteTextView) findViewById(R.id.spinner_udid);
         et_password = (TextInputEditText) findViewById(R.id.et_password);
         btnLogin = (Button) findViewById(R.id.bt_login);
         bt_forgotpassword = (TextView) findViewById(R.id.bt_forgotpassword);

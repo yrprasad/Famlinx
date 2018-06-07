@@ -101,7 +101,7 @@
                             android:theme="@style/TextLabel">
 
                             <AutoCompleteTextView
-                                android:id="@+id/et_username"
+                                android:id="@+id/spinner_udid"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/layout_margin_left_ten"

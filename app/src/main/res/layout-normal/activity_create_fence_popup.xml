@@ -113,7 +113,7 @@
                             android:textColor="#000000"
                             android:textSize="14sp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/et_latitude"
                             android:layout_width="140dp"
                             android:layout_height="30dp"
@@ -144,7 +144,7 @@
                             android:textColor="#000000"
                             android:textSize="14sp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/et_longitude"
                             android:layout_width="140dp"
                             android:layout_height="30dp"
@@ -176,7 +176,7 @@
                             android:textColor="#000000"
                             android:textSize="14sp"/>
 
-                        <EditText
+                        <TextView
                             android:id="@+id/et_address"
                             android:layout_width="140dp"
                             android:layout_height="100dp"
