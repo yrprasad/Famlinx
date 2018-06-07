@@ -1,6 +1,8 @@
 package com.nglinx.pulse.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +78,7 @@ public class DeviceFragmentAdapter extends ArrayAdapter<DeviceModel> {
             tv_activate_device.setVisibility(View.GONE);
         } else
         {
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.inactive_row));
             img_activate_device.setVisibility(View.VISIBLE);
             tv_activate_device.setVisibility(View.VISIBLE);
             activate_device_layout.setVisibility(View.VISIBLE);

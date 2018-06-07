@@ -118,11 +118,6 @@ public class ApplicationUtils {
         String title = "Time : " + convertFormatByTimeZone(time);
 
         if (userTrackingModel != null) {
-            /*if ((userTrackingModel.getAlert_status() != null) && (userTrackingModel.getAlert_status() == 0)) {
-                title += "\n" + "Status: Active";
-            } else {
-                title += "\n" + "Status: InActive";
-            }*/
 
 //            if ((userTrackingModel.getBattery() != null) && (userTrackingModel.getUserType() == UserType.device)) {
             if (userTrackingModel.getBattery() != null) {
@@ -433,6 +428,23 @@ public class ApplicationUtils {
                 devices) {
             if (device.getUdid().equalsIgnoreCase(deviceUdid))
                 return device;
+        }
+        return null;
+    }
+
+    public static GroupModel getGroupIdOfSelectedMember(final String selectedMemberId, List<GroupModel> groups) {
+        if (null == selectedMemberId)
+            return null;
+
+        for (GroupModel groupModel :
+                groups) {
+            for (GroupMemberModel groupMemberModel:
+                 groupModel.getMembers()) {
+                if(groupMemberModel.getId().equalsIgnoreCase(selectedMemberId))
+                {
+                    return  groupModel;
+                }
+            }
         }
         return null;
     }

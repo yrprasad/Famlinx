@@ -1,11 +1,13 @@
 package com.nglinx.pulse.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nglinx.pulse.R;
@@ -79,7 +81,9 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
         holder.tv_profile_status = (TextView) convertView.findViewById(R.id.tv_profile_status);
         holder.img_online_status = (ImageView) convertView.findViewById(R.id.img_online_status);
 
+        RelativeLayout layout_profile_manage= (RelativeLayout) convertView.findViewById(R.id.layout_profile_manage);
         holder.btn_profile_manage = (ImageView) convertView.findViewById(R.id.btn_profile_manage);
+
         holder.btn_profile_manage.setTag(holder.modelHolder);
         holder.btn_profile_manage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +91,23 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
                 ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_manage, position, 0);
             }
         });
+        layout_profile_manage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_manage, position, 0);
+            }
+        });
 
+        RelativeLayout layout_profile_edit= (RelativeLayout) convertView.findViewById(R.id.layout_profile_edit);
         holder.btn_profile_edit = (ImageView) convertView.findViewById(R.id.btn_profile_edit);
         holder.btn_profile_edit.setTag(holder.modelHolder);
         holder.btn_profile_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_edit, position, 0);
+            }
+        });
+        layout_profile_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_edit, position, 0);
@@ -105,8 +122,12 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
         if ((model != null) && (model.getEmail() != null))
             holder.tv_prodile_email.setText(model.getEmail());
 
-        if ((model != null) && (model.getUdid() != null))
+        if ((model != null) && (model.getUdid() != null)) {
             holder.tv_profile_udid.setText(model.getUdid());
+        } else
+        {
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.inactive_row));
+        }
 
         if ((model != null) && (model.getStatus() != null)) {
             if(model.getStatus().equals(1))

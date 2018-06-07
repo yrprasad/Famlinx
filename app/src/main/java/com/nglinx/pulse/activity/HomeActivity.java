@@ -91,7 +91,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     private RelativeLayout lt_members_detail;
     private RelativeLayout lt_views;
     private RelativeLayout lt_members;
-//    private RelativeLayout lt_search_bar;
+    //    private RelativeLayout lt_search_bar;
     private WebView webView;
     SupportMapFragment fm;
 
@@ -419,20 +419,16 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
     class GroupMemberClickListener implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
-
-
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-           /* View previousSelectedMember = ds.getSelected_member_view();
-
-            if (previousSelectedMember != null) {
-                GroupMemberViewHolder viewHolder = (GroupMemberViewHolder) previousSelectedMember.getTag();
-                if (viewHolder != null)
-                    viewHolder.img_online.setVisibility(View.GONE);
-            }*/
-
             GroupMemberModel selectedMember = groupsMembersList.get(position);
+
+            if ((null == ds.getSelected_group_id()) || (ds.getSelected_group_id().equalsIgnoreCase(""))) {
+                GroupModel group = ApplicationUtils.getGroupIdOfSelectedMember(selectedMember.getId(), ds.getUserModel().getGroups());
+                ds.setSelected_group_id(group.getId());
+                ds.setSelected_group_name(group.getName());
+            }
 
             if (selectedMember.getId().equals("")) {
                 Intent intent = new Intent(getApplicationContext(), AddMemberActivity.class);
@@ -440,14 +436,6 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 finish();
             } else {
                 ds.setSelected_group_member_id(selectedMember.getId());
-
-                /*GroupMemberViewHolder viewHolder = (GroupMemberViewHolder) view.getTag();
-                if(viewHolder!=null)
-                {
-                    viewHolder.img_online.setVisibility(View.VISIBLE);
-                    viewHolder.name.setText("Test");
-                    ds.setSelected_member_view(view);
-                }*/
 
                 groupMemberAdapter.notifyDataSetChanged();
 
