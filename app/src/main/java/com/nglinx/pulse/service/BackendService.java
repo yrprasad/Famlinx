@@ -3,6 +3,7 @@ package com.nglinx.pulse.service;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.session.DataSession;
+import com.nglinx.pulse.utils.ApplicationUtils;
 import com.nglinx.pulse.utils.retrofit.ApiEndpointInterface;
 import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
@@ -19,13 +20,17 @@ public class BackendService extends TimerTask {
 
     private void sendTrackRequest() {
         if (ds.isHomePageOn() &&
-                (ds.getSelected_group_id() != null) &&
-                (!ds.getSelected_group_id().equalsIgnoreCase("")) &&
                 (ds.getSelected_group_member_id() != null) &&
                 (!ds.getSelected_group_member_id().equalsIgnoreCase(""))) {
 
+            String groupId = ds.getSelected_group_id();
+            if ((null == groupId) || (groupId.equalsIgnoreCase(""))) {
+                GroupModel group = ApplicationUtils.getGroupOfSelectedMember(ds.getSelected_group_member_id(), ds.getUserModel().getGroups());
+                groupId = group.getId();
+            }
+
             ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(DataSession.getInstance().getContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-            apiEndpointInterface.trackMember(ds.getUserModel().getId(), ds.getSelected_group_id(), ds.getSelected_group_member_id(), new RetroResponse<GroupMemberModel>() {
+            apiEndpointInterface.trackMember(ds.getUserModel().getId(), groupId, ds.getSelected_group_member_id(), new RetroResponse<GroupMemberModel>() {
                 @Override
                 public void onSuccess() {
                 }

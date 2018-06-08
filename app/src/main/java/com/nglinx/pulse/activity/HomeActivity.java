@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -37,6 +38,7 @@ import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.GroupAdapter;
 import com.nglinx.pulse.adapter.GroupMemberAdapter;
 import com.nglinx.pulse.adapter.NotificationsAdapter;
+import com.nglinx.pulse.adapter.ViewPagerAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
@@ -61,6 +63,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class HomeActivity extends AbstractActivity implements LocationListener, GoogleMap.OnCameraChangeListener, GoogleMap.OnMyLocationButtonClickListener {
 
     public DrawerLayout drawerLayout;
@@ -69,7 +73,9 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     private ViewPager mPager;
     private int currentPage = 0;
     //    private static final Integer[] XMEN= {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
-    private static final Integer[] XMEN = {};
+
+    private static final Integer[] XMEN= {R.drawable.cradle2, R.drawable.cradle1};
+//    private static final Integer[] XMEN = {};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
     //Group Details
@@ -163,7 +169,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
         refreshUserDetails();
 
-//        initPager();
+        initPager();
 
         Timer timer = new Timer();
         ds.setContext(getApplicationContext());
@@ -172,7 +178,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     }
 
 
-    /*private void initPager() {
+    private void initPager() {
 
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);
@@ -198,7 +204,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 handler.post(Update);
             }
         }, 5000, 10000);
-    }*/
+    }
 
     @Override
     public void onPause() {
@@ -423,12 +429,6 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
             GroupMemberModel selectedMember = groupsMembersList.get(position);
-
-            if ((null == ds.getSelected_group_id()) || (ds.getSelected_group_id().equalsIgnoreCase(""))) {
-                GroupModel group = ApplicationUtils.getGroupIdOfSelectedMember(selectedMember.getId(), ds.getUserModel().getGroups());
-                ds.setSelected_group_id(group.getId());
-                ds.setSelected_group_name(group.getName());
-            }
 
             if (selectedMember.getId().equals("")) {
                 Intent intent = new Intent(getApplicationContext(), AddMemberActivity.class);

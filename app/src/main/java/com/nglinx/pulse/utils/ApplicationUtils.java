@@ -432,7 +432,7 @@ public class ApplicationUtils {
         return null;
     }
 
-    public static GroupModel getGroupIdOfSelectedMember(final String selectedMemberId, List<GroupModel> groups) {
+    public static GroupModel getGroupOfSelectedMember(final String selectedMemberId, List<GroupModel> groups) {
         if (null == selectedMemberId)
             return null;
 

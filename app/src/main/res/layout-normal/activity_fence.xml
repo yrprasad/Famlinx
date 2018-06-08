@@ -405,7 +405,7 @@
                                 android:onClick="on_ms_add_fence_click"
                                 android:text="Create Fence"
                                 android:textColor="@android:color/white"
-                                android:visibility="visible"/>
+                                android:visibility="gone"/>
 
                             <Button
                                 android:id="@+id/ms_create_fence_cancel"
@@ -418,7 +418,7 @@
                                 android:onClick="on_ms_cancel_fence_click"
                                 android:text="cancel"
                                 android:textColor="@android:color/white"
-                                android:visibility="visible"/>
+                                android:visibility="gone"/>
 
                         </RelativeLayout>
 
