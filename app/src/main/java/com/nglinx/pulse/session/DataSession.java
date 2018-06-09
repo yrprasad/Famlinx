@@ -54,6 +54,7 @@ public class DataSession {
     ArrayList<DeviceTypesModel> deviceTypesList;
     Map<DeviceType, Integer> availableDevices;
     ArrayList<DeviceCartModel> devicesCart;
+    FenceModel selectedFence;
 
     public static DataSession getInstance() {
 
@@ -513,5 +514,13 @@ public class DataSession {
 
     public void setDevicesCart(ArrayList<DeviceCartModel> devicesCart) {
         this.devicesCart = devicesCart;
+    }
+
+    public FenceModel getSelectedFence() {
+        return selectedFence;
+    }
+
+    public void setSelectedFence(FenceModel selectedFence) {
+        this.selectedFence = selectedFence;
     }
 }

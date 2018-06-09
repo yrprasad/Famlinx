@@ -596,6 +596,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                                             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                                 public void onClick(final DialogInterface dialog, int whichButton) {
                                                     Intent intent7 = new Intent(FenceActivity.this, ApplyFenceActivity.class);
+                                                    ds.setSelectedFence(fenceModel);
                                                     intent7.putExtra(ApplicationConstants.SELECTED_FENCE, fenceModel.getId());
                                                     startActivity(intent7);
                                                     finish();

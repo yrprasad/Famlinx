@@ -63,6 +63,11 @@ public class ApplyFenceActivity extends AppCompatActivity {
         ds = DataSession.getInstance();
         String selectedFenceId = getIntent().getExtras().getString(ApplicationConstants.SELECTED_FENCE);
         selectedFence = ds.getFenceById(selectedFenceId);
+        if(selectedFence == null)
+        {
+            //If the refresh is late, it may not available in the list of fences.
+            selectedFence = ds.getSelectedFence();
+        }
 
         initializeIcons();
     }
