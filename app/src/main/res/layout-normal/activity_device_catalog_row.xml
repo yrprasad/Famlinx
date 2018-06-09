@@ -22,7 +22,7 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5">
+                android:layout_weight="1">
 
                 <ImageView
                     android:layout_width="@dimen/image_width_seventy"
@@ -43,11 +43,13 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2">
+                android:layout_weight="2.5">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:orientation="vertical"
                     android:weightSum="5">
 
@@ -91,7 +93,23 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="2">
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/tv_expiry_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/text_size_twelve"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
 
                         <TextView
                             android:id="@+id/tv_status_state"
@@ -147,8 +165,8 @@
                             android:layout_below="@+id/img_activate_device"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="Activate Device"
                             android:layout_marginTop="10dp"
+                            android:text="Activate"
                             android:textSize="@dimen/text_size_sixteen"/>
 
                     </RelativeLayout>

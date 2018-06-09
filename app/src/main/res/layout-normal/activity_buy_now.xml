@@ -481,7 +481,8 @@
                                         <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="0dp"
-                                            android:layout_weight="1.5">
+                                            android:layout_weight="1.5"
+                                            android:visibility="gone">
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"
@@ -575,7 +576,7 @@
                                         <RelativeLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="0dp"
-                                            android:layout_weight="1.2">
+                                            android:layout_weight="1.8">
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"
@@ -592,7 +593,7 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_centerVertical="true"
-                                                        android:text="Area Code"
+                                                        android:text="Rental Days"
                                                         android:textSize="@dimen/text_size_sixteen"
                                                         android:textStyle="bold"/>
 
@@ -609,14 +610,15 @@
                                                     android:layout_weight="1.9"
                                                     android:focusableInTouchMode="true">
 
-                                                    <EditText
-                                                        android:layout_width="wrap_content"
+                                                    <NumberPicker
+                                                        android:id="@+id/et_rental_days"
+                                                        android:layout_width="75dp"
                                                         android:layout_height="wrap_content"
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
                                                         android:digits="0123456789"
-                                                        android:hint="24442"
-                                                        android:inputType="phone"
+                                                        android:hint="0"
+                                                        android:inputType="number"
                                                         android:textSize="@dimen/text_size_fourteen"/>
 
 
@@ -637,7 +639,7 @@
                                             android:layout_height="0dp"
                                             android:layout_alignParentStart="true"
                                             android:layout_alignParentTop="true"
-                                            android:layout_weight="1.2">
+                                            android:layout_weight="1.8">
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"
@@ -654,7 +656,7 @@
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
                                                         android:layout_centerVertical="true"
-                                                        android:text="Quantity"
+                                                        android:text="Quantity   "
                                                         android:textSize="@dimen/text_size_sixteen"
                                                         android:textStyle="bold"/>
 
@@ -668,7 +670,7 @@
                                                 <RelativeLayout
                                                     android:layout_width="0dp"
                                                     android:layout_height="match_parent"
-                                                    android:layout_weight="2">
+                                                    android:layout_weight="1.9">
 
                                                     <LinearLayout
                                                         android:layout_width="match_parent"
@@ -676,7 +678,7 @@
                                                         android:orientation="horizontal"
                                                         android:weightSum="3">
 
-                                                        <RelativeLayout
+                                                        <!--<RelativeLayout
                                                             android:layout_width="0dp"
                                                             android:layout_height="match_parent"
                                                             android:layout_weight=".4">
@@ -694,7 +696,7 @@
                                                                 android:textSize="@dimen/text_size_eighteen"/>
 
 
-                                                        </RelativeLayout>
+                                                        </RelativeLayout>-->
 
                                                         <RelativeLayout
                                                             android:layout_width="0dp"
@@ -702,7 +704,7 @@
                                                             android:layout_weight="1.8"
                                                             android:focusableInTouchMode="true">
 
-                                                            <EditText
+                                                            <NumberPicker
                                                                 android:id="@+id/tv_device_count_value"
                                                                 android:layout_width="wrap_content"
                                                                 android:layout_height="wrap_content"
@@ -710,13 +712,13 @@
                                                                 android:layout_centerVertical="true"
                                                                 android:digits="0123456789"
                                                                 android:hint="0"
-                                                                android:inputType="phone"
+                                                                android:inputType="number"
                                                                 android:textSize="@dimen/text_size_fourteen"/>
 
 
                                                         </RelativeLayout>
 
-                                                        <RelativeLayout
+                                                        <!--<RelativeLayout
                                                             android:layout_width="0dp"
                                                             android:layout_height="match_parent"
                                                             android:layout_weight=".4">
@@ -734,7 +736,7 @@
                                                                 android:textSize="@dimen/text_size_eighteen"/>
 
 
-                                                        </RelativeLayout>
+                                                        </RelativeLayout>-->
 
 
                                                     </LinearLayout>
@@ -747,6 +749,11 @@
 
                                         </RelativeLayout>
 
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight=".5"/>
+
                                         <LinearLayout
                                             android:layout_width="match_parent"
                                             android:layout_height="0dp"
@@ -757,10 +764,10 @@
                                             <Button
                                                 android:id="@+id/buy_button"
                                                 android:layout_width="0dp"
-                                                android:layout_weight="1"
                                                 android:layout_height="30dp"
                                                 android:layout_alignParentStart="true"
                                                 android:layout_centerVertical="true"
+                                                android:layout_weight="1"
                                                 android:background="#0095da"
                                                 android:foreground="@drawable/ripple_effect"
                                                 android:onClick="onDeviceCountToCartButtonClick"
@@ -770,22 +777,22 @@
                                             <View
                                                 android:id="@+id/view"
                                                 android:layout_width="1dp"
+                                                android:layout_height="match_parent"
                                                 android:layout_centerHorizontal="true"
                                                 android:layout_centerVertical="true"
-                                                android:layout_height="match_parent"
-                                                android:background="#ffffff" />
+                                                android:background="#ffffff"/>
 
                                             <Button
                                                 android:id="@+id/cart_continue"
                                                 android:layout_width="0dp"
-                                                android:layout_weight="1"
                                                 android:layout_height="30dp"
                                                 android:layout_alignParentStart="true"
                                                 android:layout_centerVertical="true"
+                                                android:layout_weight="1"
                                                 android:background="#0095da"
                                                 android:foreground="@drawable/ripple_effect"
-                                                android:text="Go To Cart"
                                                 android:onClick="onCartContinueButtonClick"
+                                                android:text="Go To Cart"
                                                 android:textColor="#ffffff"/>
                                         </LinearLayout>
                                     </LinearLayout>
@@ -817,7 +824,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:visibility="gone"
+        android:visibility="visible"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 

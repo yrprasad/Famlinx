@@ -1,8 +1,12 @@
 package com.nglinx.pulse.models;
 
+import android.support.annotation.NonNull;
+
+import com.nglinx.pulse.utils.ApplicationUtils;
+
 import java.util.List;
 
-public class GroupModel {
+public class GroupModel implements Comparable<GroupModel>{
 
     private String id;
 
@@ -91,4 +95,9 @@ public class GroupModel {
         this.ownerUuid = ownerUuid;
     }
 
+
+    @Override
+    public int compareTo(@NonNull GroupModel model) {
+        return ApplicationUtils.compareDatesInFormat(this.id, model.getId());
+    }
 }

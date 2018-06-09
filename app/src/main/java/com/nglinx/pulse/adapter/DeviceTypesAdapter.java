@@ -74,7 +74,7 @@ public class DeviceTypesAdapter extends ArrayAdapter<DeviceTypesModel> {
             holder = new ViewHolder();
             holder.img_device_type = (ImageView) convertView.findViewById(R.id.img_device_type);
             holder.tv_device_type = (TextView) convertView.findViewById(R.id.tv_device_type);
-            holder.tv_isavailable = (TextView) convertView.findViewById(R.id.tv_isavailable);
+            holder.tv_order_type = (TextView) convertView.findViewById(R.id.tv_order_type);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -101,15 +101,14 @@ public class DeviceTypesAdapter extends ArrayAdapter<DeviceTypesModel> {
 
         holder.tv_device_type.setText(selectedMember.getName().toString());
 
-        //TODO: Need to remove the hard coded value
-        holder.tv_isavailable.setText("Available");
+        holder.tv_order_type.setText(selectedMember.getOrderType().toString());
 
         return convertView;
     }
 
 
     public static class ViewHolder {
-        public TextView tv_device_type, tv_isavailable;
+        public TextView tv_device_type, tv_order_type;
         public ImageView img_device_type;
     }
 

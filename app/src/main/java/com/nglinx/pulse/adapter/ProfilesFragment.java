@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.activity.DeviceActivity;
-import com.nglinx.pulse.activity.SharingActivity;
 import com.nglinx.pulse.session.DataSession;
 
 import java.util.ArrayList;

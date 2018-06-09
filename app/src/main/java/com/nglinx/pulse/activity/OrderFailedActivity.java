@@ -35,6 +35,7 @@ public class OrderFailedActivity extends AppCompatActivity {
         initializeIcons();
         displayData();
         ds.clearDeviceTypes();
+        ds.clearDeviceOrders();
     }
 
     //Initialize all the icons on this screen and Navigation Menu screens

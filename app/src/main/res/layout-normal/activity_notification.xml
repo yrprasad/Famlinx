@@ -887,9 +887,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:weightSum="10"
+                        android:background="#00405D"
                         android:orientation="horizontal"
-                        android:background="#00405D">
+                        android:weightSum="10">
 
                         <HorizontalScrollView
                             android:layout_width="match_parent"
@@ -1231,9 +1231,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:weightSum="10"
+                        android:background="#002333"
                         android:orientation="horizontal"
-                        android:background="#002333">
+                        android:weightSum="10">
 
                         <RelativeLayout
                             android:layout_width="0dp"
@@ -1264,8 +1264,8 @@
                                 android:layout_alignParentTop="true"
                                 android:backgroundTint="@android:color/transparent"
                                 android:inputType="textPersonName"
-                                android:textColor="#ffffff"
                                 android:text="Search"
+                                android:textColor="#ffffff"
                                 android:textSize="@dimen/text_size_twelve"/>
                         </RelativeLayout>
 
@@ -1288,6 +1288,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:visibility="visible"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 

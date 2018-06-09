@@ -76,10 +76,15 @@ public class MapAreaWrapper {
         	radiusMarker.setIcon(BitmapDescriptorFactory.fromResource(radiusDrawableId));
         }
 
+        radiusMarker.setTitle("Hold and Drag");
+        radiusMarker.showInfoWindow();
+
         cancelMarker = map.addMarker(new MarkerOptions()
                 .position(MapAreasUtils.toCancelLatLng(center, radiusMeters))
                 .anchor(resizeDrawableAnchorU, resizeDrawableAnchorV)
                 .draggable(true));
+
+        cancelMarker.setTitle("Cancel");
 
         if (cancelDrawableId != -1) {
             cancelMarker.setIcon(BitmapDescriptorFactory.fromResource(cancelDrawableId));

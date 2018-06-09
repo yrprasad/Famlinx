@@ -239,7 +239,9 @@
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
                                                         android:text="Locate Me"
-                                                        android:textSize="12sp"/>
+                                                        android:textColor="@color/cast_expanded_controller_background_color"
+                                                        android:textSize="12sp"
+                                                        android:textStyle="bold"/>
 
                                                 </RelativeLayout>
 
@@ -320,11 +322,13 @@
                                                         android:id="@+id/tv_apply_fence"
                                                         android:layout_width="wrap_content"
                                                         android:layout_height="wrap_content"
+                                                        android:layout_below="@+id/ms_apply_fence"
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
                                                         android:text="Apply this Fence"
-                                                        android:layout_below="@+id/ms_apply_fence"
-                                                        android:textSize="12sp"/>
+                                                        android:textColor="@color/cast_expanded_controller_background_color"
+                                                        android:textSize="12sp"
+                                                        android:textStyle="bold"/>
 
                                                 </RelativeLayout>
 
@@ -360,7 +364,9 @@
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
                                                         android:text="Create New"
-                                                        android:textSize="12sp"/>
+                                                        android:textColor="@color/cast_expanded_controller_background_color"
+                                                        android:textSize="12sp"
+                                                        android:textStyle="bold"/>
 
                                                 </RelativeLayout>
 
@@ -379,7 +385,9 @@
                                                         android:layout_centerHorizontal="true"
                                                         android:layout_centerVertical="true"
                                                         android:text="Geo Fence"
-                                                        android:textSize="12sp"/>
+                                                        android:textColor="@color/cast_expanded_controller_background_color"
+                                                        android:textSize="12sp"
+                                                        android:textStyle="bold"/>
 
                                                 </RelativeLayout>
 
@@ -447,7 +455,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:visibility="gone"
+        android:visibility="visible"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 </android.support.v4.widget.DrawerLayout>

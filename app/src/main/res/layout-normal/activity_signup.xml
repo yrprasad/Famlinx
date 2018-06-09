@@ -113,7 +113,7 @@
                                     android:layout_marginLeft="@dimen/layout_margin_left_ten"
                                     android:background="@android:color/transparent"
                                     android:hint="Email"
-                                    android:inputType="text"
+                                    android:inputType="textEmailAddress"
                                     android:textColor="#ffffff"
                                     android:textColorHint="#ffffff"
                                     android:theme="@style/TextLabel"/>
@@ -428,7 +428,7 @@
                                     android:layout_marginLeft="@dimen/layout_margin_left_ten"
                                     android:background="@android:color/transparent"
                                     android:hint="+91-1234567890"
-                                    android:inputType="number"
+                                    android:inputType="phone"
                                     android:textColor="#ffffff"
                                     android:textColorHint="#ffffff"
                                     android:theme="@style/TextLabel"/>

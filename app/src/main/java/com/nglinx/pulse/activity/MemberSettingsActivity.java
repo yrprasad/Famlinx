@@ -306,7 +306,9 @@ public class MemberSettingsActivity extends AppCompatActivity {
             @Override
             public void onSuccess() {
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
-                DialogUtils.diaplaySuccessDialog(MemberSettingsActivity.this, "Successfully saved the Member Settings");
+//                DialogUtils.diaplaySuccessDialog(MemberSettingsActivity.this, "Successfully saved the Member Settings");
+                setResult(ApplicationConstants.SETTINGS_NORMAL_FINISH, intent);
+                finish();
             }
 
             @Override

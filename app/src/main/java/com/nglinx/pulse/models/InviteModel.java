@@ -1,6 +1,8 @@
 package com.nglinx.pulse.models;
 
-public class InviteModel {
+import com.nglinx.pulse.utils.ApplicationUtils;
+
+public class InviteModel implements Comparable<InviteModel> {
 
     private String id;
     private String uuid;
@@ -101,5 +103,10 @@ public class InviteModel {
                 ", date='" + date + '\'' +
                 ", status=" + status +
                 '}';
+    }
+
+    @Override
+    public int compareTo(InviteModel model) {
+        return ApplicationUtils.compareDatesInFormat(this.date, model.getDate());
     }
 }

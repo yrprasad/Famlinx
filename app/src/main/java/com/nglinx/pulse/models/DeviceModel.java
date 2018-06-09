@@ -1,9 +1,13 @@
 package com.nglinx.pulse.models;
 
+import android.support.annotation.NonNull;
+
 import com.nglinx.pulse.models.DeviceStatus;
 import com.nglinx.pulse.models.DeviceType;
+import com.nglinx.pulse.utils.ApplicationUtils;
 
-public class DeviceModel {
+public class DeviceModel implements Comparable<DeviceModel>
+{
     // internal unique id
     private String id;
     // device unique id
@@ -17,6 +21,9 @@ public class DeviceModel {
     private String modifiedDate;
     private DeviceType type;
     private String features;
+    private Integer rentalDays;
+    private String expiryDate;
+    private DeviceOrderType deviceOrderType;
 
     public DeviceModel() {
         super();
@@ -110,6 +117,25 @@ public class DeviceModel {
         this.features = features;
     }
 
+    public Integer getRentalDays() {
+        return rentalDays;
+    }
+    public void setRentalDays(Integer rentalDays) {
+        this.rentalDays = rentalDays;
+    }
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+    public DeviceOrderType getDeviceOrderType() {
+        return deviceOrderType;
+    }
+    public void setDeviceOrderType(DeviceOrderType deviceOrderType) {
+        this.deviceOrderType = deviceOrderType;
+    }
+
     public String toString1() {
         return "DeviceModel [id=" + id + ", udid=" + udid + ", userId=" + userId + ", attachedUserName=" + attachedUserName
                 + ", status=" + status + ", activated=" + activated + ", activationCode=" + activationCode
@@ -120,5 +146,10 @@ public class DeviceModel {
     @Override
     public String toString() {
         return udid;
+    }
+
+    @Override
+    public int compareTo(@NonNull DeviceModel deviceModel) {
+        return ApplicationUtils.compareDatesInFormat(this.createdDate, deviceModel.createdDate);
     }
 }

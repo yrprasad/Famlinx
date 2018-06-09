@@ -93,4 +93,6 @@ public class ApplicationConstants {
 
     public static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
             new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
+
+    public static final int GRACE_PERIOD_TO_ACTIVATION = 7;
 }

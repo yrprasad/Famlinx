@@ -1,16 +1,10 @@
 package com.nglinx.pulse.utils;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkInfo;
-import android.os.Build;
-import android.util.Log;
-
-import com.nglinx.pulse.R;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.AddressModel;
+import com.nglinx.pulse.models.DeviceCartModel;
 import com.nglinx.pulse.models.DeviceModel;
+import com.nglinx.pulse.models.DeviceOrderType;
 import com.nglinx.pulse.models.DeviceStatus;
 import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.DeviceTypesModel;
@@ -21,14 +15,12 @@ import com.nglinx.pulse.models.UserLoginModel;
 import com.nglinx.pulse.models.UserTrackingModel;
 import com.nglinx.pulse.models.UserType;
 import com.nglinx.pulse.session.DataSession;
-import com.nglinx.pulse.session.SharedPrefUtility;
-import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
-import java.security.acl.Group;
-import java.sql.Time;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,6 +37,8 @@ import retrofit.client.Header;
  */
 
 public class ApplicationUtils {
+
+    public static final String TF_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
     public static UserLoginModel getUserLoginModelForAuthenticate() {
         final UserLoginModel userLoginModel = new UserLoginModel();
@@ -281,13 +275,36 @@ public class ApplicationUtils {
         return nonSensorModels;
     }
 
-    public static List<DeviceTypesModel> getNonSensorDeviceTypes(final HashSet<DeviceTypesModel> models) {
+    public static List<DeviceTypesModel> getNonSensorDeviceTypesForBuy(final HashSet<DeviceTypesModel> models) {
 
         List<DeviceTypesModel> nonSensorModels = new ArrayList<>();
         for (DeviceTypesModel model :
                 models) {
-            if (!model.getType().equals(DeviceType.SENSOR))
-                nonSensorModels.add(model);
+            if (!model.getType().equals(DeviceType.SENSOR)) {
+                DeviceTypesModel tmpModel = new DeviceTypesModel();
+                tmpModel.setName(model.getName());
+                tmpModel.setType(model.getType());
+                tmpModel.setCost(model.getCost());
+                tmpModel.setOrderType(DeviceOrderType.BUY);
+                nonSensorModels.add(tmpModel);
+            }
+        }
+        return nonSensorModels;
+    }
+
+    public static List<DeviceTypesModel> getNonSensorDeviceTypesForRent(final HashSet<DeviceTypesModel> models) {
+
+        List<DeviceTypesModel> nonSensorModels = new ArrayList<>();
+        for (DeviceTypesModel model :
+                models) {
+            if (!model.getType().equals(DeviceType.SENSOR)) {
+                DeviceTypesModel tmpModel = new DeviceTypesModel();
+                tmpModel.setName(model.getName());
+                tmpModel.setType(model.getType());
+                tmpModel.setCost(model.getCost());
+                tmpModel.setOrderType(DeviceOrderType.RENT);
+                nonSensorModels.add(tmpModel);
+            }
         }
         return nonSensorModels;
     }
@@ -372,9 +389,9 @@ public class ApplicationUtils {
         return availableDevices;
     }
 
-    public static int getTotalOrderCount(ArrayList<DeviceTypesModel> deviceTypesModelsList) {
+    public static int getTotalOrderCount(ArrayList<DeviceCartModel> deviceTypesModelsList) {
         int count = 0;
-        for (DeviceTypesModel device :
+        for (DeviceCartModel device :
                 deviceTypesModelsList) {
             count += device.getCount();
         }
@@ -449,4 +466,49 @@ public class ApplicationUtils {
         return null;
     }
 
+
+    public static String addDaysToDate(final String dateStr, final Integer days) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat(TF_YYYY_MM_DD_HH_MM_SS);
+        Calendar c = Calendar.getInstance();
+        try {
+            // Setting the date to the given date
+            c.setTime(sdf.parse(dateStr));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        // Number of Days to add
+        c.add(Calendar.DAY_OF_MONTH, days);
+        // Date after adding the days to the given date
+        String newDate = sdf.format(c.getTime());
+
+        return newDate;
+    }
+
+    public static int compareDatesInFormat(final String firstDate, final String secondDate) {
+        if ((firstDate == null) || (secondDate == null))
+            return 0;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat(TF_YYYY_MM_DD_HH_MM_SS);
+
+            Date date1 = format.parse(firstDate);
+            Date date2 = format.parse(secondDate);
+
+            if (date1.compareTo(date2) <= 0)
+                return 1;
+            else
+                return -1;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public static int compareDatesInMillis(final String firstDate, final String secondDate) {
+        if(firstDate.compareTo(secondDate) < 0)
+            return -1;
+        else
+            return 1;
+    }
 }

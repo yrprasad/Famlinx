@@ -1,5 +1,7 @@
 package com.nglinx.pulse.models;
 
+import com.nglinx.pulse.utils.ApplicationUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -122,20 +124,7 @@ public class FenceModel implements Comparable<FenceModel> {
 
     @Override
     public int compareTo(FenceModel notificationModel) {
-
-        if ((notificationModel.getCreationDate() == null) || (this.getCreationDate() == null))
-            return 0;
-
-        try {
-            Date date2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(notificationModel.getCreationDate());
-            Date date1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(this.getCreationDate());
-            if (date1.compareTo(date2) > 0)
-                return 1;
-            else
-                return -1;
-        } catch (ParseException e) {
-        }
-        return 0;
+        return ApplicationUtils.compareDatesInFormat(this.creationDate, notificationModel.getCreationDate());
     }
 
 }

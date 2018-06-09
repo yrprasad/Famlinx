@@ -8,13 +8,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.DeviceTypesAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
-import com.nglinx.pulse.models.DeviceModel;
+import com.nglinx.pulse.models.DeviceCartModel;
+import com.nglinx.pulse.models.DeviceOrderType;
 import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.DeviceTypesModel;
 import com.nglinx.pulse.utils.ApplicationUtils;
@@ -31,7 +33,9 @@ public class BuyNowActivity extends AbstractActivity {
 
     HorizontalView hv_devices;
     DeviceTypesAdapter deviceTypesAdapter;
-    public ArrayList<DeviceTypesModel> deviceTypesList;
+    ArrayList<DeviceTypesModel> deviceTypesList;
+    ArrayList<DeviceCartModel> devicesCart;
+
     DeviceTypeClickListener deviceTypeClickListener;
 
     TextView tv_size_1;
@@ -53,8 +57,10 @@ public class BuyNowActivity extends AbstractActivity {
     ImageView img_mini_device_type_4;
 
     TextView tv_device_count_minus;
-    EditText tv_device_count_value;
+    NumberPicker tv_device_count_value;
     TextView tv_device_count_plus;
+
+    NumberPicker et_rental_days;
 
     DeviceTypesModel selectedMember;
 
@@ -69,8 +75,6 @@ public class BuyNowActivity extends AbstractActivity {
         initializeIcons();
 
         getDeviceTypes();
-
-//        getDeviceAvailableCount();
     }
 
     protected void initializeIcons() {
@@ -99,35 +103,22 @@ public class BuyNowActivity extends AbstractActivity {
         img_mini_device_type_3 = (ImageView) findViewById(R.id.img_mini_device_type_3);
         img_mini_device_type_4 = (ImageView) findViewById(R.id.img_mini_device_type_4);
 
-        tv_device_count_minus = (TextView) findViewById(R.id.tv_device_count_minus);
-        tv_device_count_value = (EditText) findViewById(R.id.tv_device_count_value);
-        tv_device_count_plus = (TextView) findViewById(R.id.tv_device_count_plus);
+//        tv_device_count_minus = (TextView) findViewById(R.id.tv_device_count_minus);
+        tv_device_count_value = (NumberPicker) findViewById(R.id.tv_device_count_value);
+        tv_device_count_value.setMinValue(0);
+        tv_device_count_value.setMaxValue(20);
+        tv_device_count_value.setWrapSelectorWheel(false);
+
+//        tv_device_count_plus = (TextView) findViewById(R.id.tv_device_count_plus);
+
+        et_rental_days = (NumberPicker) findViewById(R.id.et_rental_days);
+        et_rental_days.setMinValue(0);
+        et_rental_days.setMaxValue(20);
+        et_rental_days.setWrapSelectorWheel(false);
+//        et_rental_days.setText("0");
+
+        devicesCart = new ArrayList<DeviceCartModel>();
     }
-
-    /*private void getDeviceAvailableCount()
-    {
-        ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-        apiEndpointInterface.listAllDevices(new RetroResponse<DeviceModel>() {
-            @Override
-            public void onSuccess() {
-                deviceTypesList.clear();
-                ApplicationUtils.updateDefaultValueIfDeviceDescIsNull(models);
-                deviceTypesList.addAll(ApplicationUtils.getNonSensorDeviceTypes(models));
-                deviceTypesAdapter.notifyDataSetChanged();
-
-                //Initialize the Cart
-                ds.setDeviceTypesList(deviceTypesList);
-
-                ProgressbarUtil.stopProgressBar(mProgressDialog1);
-            }
-
-            @Override
-            public void onFailure() {
-                ProgressbarUtil.stopProgressBar(mProgressDialog1);
-                DialogUtils.diaplayFailureDialog(BuyNowActivity.this, errorMsg);
-            }
-        });
-    }*/
 
     private void getDeviceTypes() {
 
@@ -147,7 +138,8 @@ public class BuyNowActivity extends AbstractActivity {
             public void onSuccess() {
                 deviceTypesList.clear();
                 ApplicationUtils.updateDefaultValueIfDeviceDescIsNull(models);
-                deviceTypesList.addAll(ApplicationUtils.getNonSensorDeviceTypes(models));
+                deviceTypesList.addAll(ApplicationUtils.getNonSensorDeviceTypesForBuy(models));
+                deviceTypesList.addAll(ApplicationUtils.getNonSensorDeviceTypesForRent(models));
                 deviceTypesAdapter.notifyDataSetChanged();
 
                 //Initialize the Cart
@@ -222,53 +214,54 @@ public class BuyNowActivity extends AbstractActivity {
             img_mini_device_type_4.setImageResource(R.drawable.accept);
         }
 
-        tv_device_count_value.setText(String.valueOf(selectedMember.getCount()));
-    }
+        tv_device_count_value.setValue(0);
 
-    public void onDeviceCountMinusClick(View v) {
-
-        if (selectedMember == null) {
-            Toast.makeText(this, "Select the device", Toast.LENGTH_SHORT).show();
-            return;
+        if (selectedMember.getOrderType() == DeviceOrderType.BUY) {
+            et_rental_days.setEnabled(false);
+        } else {
+            et_rental_days.setValue(0);
+            et_rental_days.setEnabled(true);
         }
-
-        String strDeviceCount = tv_device_count_value.getText().toString();
-        int deviceCount = Integer.parseInt(strDeviceCount);
-        tv_device_count_value.setText(String.valueOf(deviceCount - 1));
-    }
-
-    public void onDeviceCountPlusClick(View v) {
-
-        if (selectedMember == null) {
-            Toast.makeText(this, "Select the device", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String strDeviceCount = tv_device_count_value.getText().toString();
-        int deviceCount = Integer.parseInt(strDeviceCount);
-        tv_device_count_value.setText(String.valueOf(deviceCount + 1));
     }
 
     public void onDeviceCountToCartButtonClick(View v) {
 
-//        ds.setDeviceTypesList(deviceTypesList);
-
         if (selectedMember == null) {
             Toast.makeText(this, "Select the device", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (selectedMember != null) {
-            int deviceCount = Integer.parseInt(tv_device_count_value.getText().toString());
-            selectedMember.setCount(deviceCount);
+        int deviceCount = tv_device_count_value.getValue();
+        if (deviceCount <= 0) {
+            Toast.makeText(this, "Select the count of device", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        int rentalDays = et_rental_days.getValue();
+
+        if(selectedMember.getOrderType() == DeviceOrderType.RENT) {
+            if (rentalDays <= 0) {
+                Toast.makeText(this, "Rental days cannot be zero", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        deviceCount = tv_device_count_value.getValue();
+
+        DeviceCartModel deviceCartModel = new DeviceCartModel();
+        deviceCartModel.setInfo(selectedMember);
+        deviceCartModel.setCount(deviceCount);
+        deviceCartModel.setRentalDays(rentalDays);
+
+        devicesCart.add(deviceCartModel);
+        ds.getDevicesCart().add(deviceCartModel);
+
+        Toast.makeText(this, "Added to Cart", Toast.LENGTH_SHORT).show();
     }
 
     public void onCartContinueButtonClick(View v) {
         ds.setDeviceTypesList(deviceTypesList);
         Intent intent = new Intent(this, CartActivity.class);
         startActivity(intent);
-        finish();
     }
-
 }

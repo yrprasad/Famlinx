@@ -12,21 +12,23 @@ import android.widget.TextView;
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.activity.CartActivity;
 import com.nglinx.pulse.activity.NotificationActivity;
+import com.nglinx.pulse.models.DeviceCartModel;
+import com.nglinx.pulse.models.DeviceOrderType;
 import com.nglinx.pulse.models.DeviceType;
-import com.nglinx.pulse.models.DeviceTypesModel;
+import com.nglinx.pulse.models.DeviceCartModel;
 
 import java.util.ArrayList;
 
-public class DevicesCartAdapter extends ArrayAdapter<DeviceTypesModel> {
+public class DevicesCartAdapter extends ArrayAdapter<DeviceCartModel> {
 
     private ViewHolder holder = null;
 
-    private ArrayList<DeviceTypesModel> arr2;
+    private ArrayList<DeviceCartModel> arr2;
 
     private LayoutInflater mInflater;
     private Context context;
 
-    public DevicesCartAdapter(Context context, ArrayList<DeviceTypesModel> users) {
+    public DevicesCartAdapter(Context context, ArrayList<DeviceCartModel> users) {
         super(context, 0, users);
         this.context = context;
         mInflater = (LayoutInflater) context
@@ -50,7 +52,7 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceTypesModel> {
     }
 
     @Override
-    public DeviceTypesModel getItem(int position) {
+    public DeviceCartModel getItem(int position) {
         return arr2.get(position);
     }
 
@@ -63,7 +65,7 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceTypesModel> {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         // Get the data item for this position
-        DeviceTypesModel deviceTypeModel = getItem(position);
+        DeviceCartModel deviceTypeModel = getItem(position);
 
         final ViewHolder holder = new ViewHolder();
         holder.modelHolder = deviceTypeModel;
@@ -80,7 +82,7 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceTypesModel> {
         holder.tv_cart_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CartActivity)context).onItemClick(holder.tv_cart_minus, holder.tv_cart_count, holder.tv_cart_cost, position, 0);
+                ((CartActivity) context).onItemClick(holder.tv_cart_minus, holder.tv_cart_count, holder.tv_cart_cost, position, 0);
             }
         });
 
@@ -88,7 +90,7 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceTypesModel> {
         holder.tv_cart_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CartActivity)context).onItemClick(holder.tv_cart_plus, holder.tv_cart_count, holder.tv_cart_cost, position, 0);
+                ((CartActivity) context).onItemClick(holder.tv_cart_plus, holder.tv_cart_count, holder.tv_cart_cost, position, 0);
             }
         });
 
@@ -104,7 +106,7 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceTypesModel> {
         return convertView;
     }
 
-    private void setValues(ViewHolder holder, DeviceTypesModel model) {
+    private void setValues(ViewHolder holder, DeviceCartModel model) {
         if (model.getType().equals(DeviceType.A9)) {
             holder.img_device_type.setImageResource(R.drawable.a9);
         } else if (model.getType().equals(DeviceType.V7)) {
@@ -116,9 +118,15 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceTypesModel> {
         }
 
         holder.tv_device_type.setText(model.getType().toString());
-        holder.tv_cart_device_desc.setText(model.getDescription().get(0));
         holder.tv_cart_count.setText(String.valueOf(model.getCount()));
         holder.tv_cart_cost.setText(String.valueOf(model.getCount() * model.getCost()));
+
+        if (model.getOrderType() == DeviceOrderType.BUY) {
+            holder.tv_cart_device_desc.setText("Rental Days : NA");
+        } else {
+            holder.tv_cart_device_desc.setText("Rental Days : " + model.getRentalDays());
+        }
+
     }
 
     private void initializeIcons(ViewHolder holder, View convertView) {
@@ -132,7 +140,7 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceTypesModel> {
     }
 
     public static class ViewHolder {
-        DeviceTypesModel modelHolder;
+        DeviceCartModel modelHolder;
 
         public ImageView img_device_type;
         public TextView tv_device_type;

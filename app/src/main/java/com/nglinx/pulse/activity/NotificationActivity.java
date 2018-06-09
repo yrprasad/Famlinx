@@ -77,13 +77,11 @@ public class NotificationActivity extends AbstractActivity implements SwipeRefre
         apiEndpointInterface.getAllNotifications(DataSession.getInstance().getUserModel().getId(), new RetroResponse<NotificationModel>() {
             @Override
             public void onSuccess() {
-                if ((models != null) && (models.size() > 0)) {
-                    notificationList.clear();
-                    notificationList.addAll(models);
-                    Collections.sort((List<NotificationModel>) notificationList);
-                    adapter.notifyDataSetChanged();
-                    ProgressbarUtil.stopProgressBar(mProgressDialog1);
-                }
+                notificationList.clear();
+                notificationList.addAll(models);
+                Collections.sort((List<NotificationModel>) notificationList);
+                adapter.notifyDataSetChanged();
+                ProgressbarUtil.stopProgressBar(mProgressDialog1);
             }
 
             @Override
@@ -102,13 +100,11 @@ public class NotificationActivity extends AbstractActivity implements SwipeRefre
         apiEndpointInterface.getAllNotifications(DataSession.getInstance().getUserModel().getId(), new RetroResponse<NotificationModel>() {
             @Override
             public void onSuccess() {
-                if ((models != null) && (models.size() > 0)) {
-                    notificationList.clear();
-                    notificationList.addAll(models);
-                    Collections.sort((List<NotificationModel>) notificationList);
-                    adapter.notifyDataSetChanged();
-                    swipeRefreshLayout.setRefreshing(false);
-                }
+                notificationList.clear();
+                notificationList.addAll(models);
+                Collections.sort((List<NotificationModel>) notificationList);
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override

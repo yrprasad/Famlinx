@@ -176,6 +176,7 @@ public class DeviceActivity extends AbstractActivity {
             public void onSuccess() {
                 devicesList.clear();
                 devicesList.addAll(ApplicationUtils.getNonSensorDevices(models));
+                Collections.sort(devicesList);
                 ds.setDevicesList(devicesList);
                 synchronized (this) {
                     devicesAdapter.notifyDataSetChanged();
@@ -196,7 +197,6 @@ public class DeviceActivity extends AbstractActivity {
     public void refreshList() {
         getChildProfiles();
         getDevices();
-
     }
 
     public void onDeviceEdit(int position) {
@@ -567,6 +567,7 @@ public class DeviceActivity extends AbstractActivity {
             public void onSuccess() {
                 devicesList.clear();
                 devicesList.addAll(ApplicationUtils.getNonSensorDevices(models));
+                Collections.sort(devicesList);
                 ds.setDevicesList(devicesList);
                 synchronized (this) {
                     devicesAdapter.notifyDataSetChanged();

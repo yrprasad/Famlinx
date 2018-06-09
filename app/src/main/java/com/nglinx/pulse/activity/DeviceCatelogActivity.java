@@ -31,6 +31,7 @@ import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefreshLayout.OnRefreshListener {
@@ -134,6 +135,7 @@ public class DeviceCatelogActivity extends AbstractActivity implements SwipeRefr
             public void onSuccess() {
                 deviceList.clear();
                 deviceList.addAll(ApplicationUtils.getNonSensorDevices(models));
+                Collections.sort(deviceList);
                 adapter.notifyDataSetChanged();
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
             }

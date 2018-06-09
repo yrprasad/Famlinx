@@ -24,6 +24,7 @@ import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SharingActivity extends AbstractActivity {
@@ -67,7 +68,9 @@ public class SharingActivity extends AbstractActivity {
                 trackingMe.clear();
                 pendingInvites.addAll(getInvitesByStatus(tmp, ApplicationConstants.SHARING_PENDING_INVITES_STATUS));
                 trackingMe.addAll(getInvitesByStatus(tmp, ApplicationConstants.SHARING_TRACKING_ME_STATUS));
+                Collections.sort(pendingInvites);
                 ds.setPendingInvites(pendingInvites);
+                Collections.sort(trackingMe);
                 ds.setTrackingMeInvites(trackingMe);
                 sharingAdapter.notifyDataSetChanged();
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);

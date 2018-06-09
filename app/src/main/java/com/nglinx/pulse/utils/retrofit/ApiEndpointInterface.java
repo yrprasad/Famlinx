@@ -175,6 +175,12 @@ public interface ApiEndpointInterface {
     @PUT("/api/devices/orders")
     void createDeviceOrder(@Query("type") DeviceType type, @Body DeviceOrderModel device, Callback<ResponseDto<DeviceOrderModel>> cb);
 
+    @PUT("/api/devices/rent")
+    void rentDeviceOrder(@Query("type") DeviceType type, @Query("rentPeriod") int rentalDays, @Body DeviceOrderModel device, Callback<ResponseDto<DeviceOrderModel>> cb);
+
     @POST("/api/updatepassword/")
     void updatePassword(@Body UserLoginModel userLoginModel, Callback<ResponseDto<UserModel>> cb);
+
+    @GET("/api/devices/myorders")
+    void listMyDeviceOrder(Callback<ResponseDto<DeviceOrderModel>> cb);
 }

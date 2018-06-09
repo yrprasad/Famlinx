@@ -6,7 +6,9 @@ import java.util.Date;
 
 public class NotificationModel implements Comparable<NotificationModel>{
 
-    public enum Type {ALERT, INFO} ;
+    public enum Type {
+        ALERT, INFO, SPEED_ALERT, FENCE_ALERT, BATTERY_ALERT;
+    };
 
     private String id;
     private String userId;

@@ -144,6 +144,10 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 Intent intent9 = new Intent(this, NotificationActivity.class);
                 startActivity(intent9);
                 return true;
+            case R.id.nav_myorders:
+                Intent intent5 = new Intent(this, MyOrdersActivity.class);
+                startActivity(intent5);
+                return true;
             case R.id.nav_signout:
                 SignOutApi();
                 return true;

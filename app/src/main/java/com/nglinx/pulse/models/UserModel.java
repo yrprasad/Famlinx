@@ -1,5 +1,6 @@
 package com.nglinx.pulse.models;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -191,6 +192,7 @@ public class UserModel {
     }
 
     public void setGroups(List<GroupModel> groups) {
+        Collections.sort(groups);
         this.groups = groups;
     }
 

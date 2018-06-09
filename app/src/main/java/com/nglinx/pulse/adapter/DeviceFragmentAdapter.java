@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.activity.DeviceActivity;
+import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.ChildUserModel;
 import com.nglinx.pulse.models.DeviceModel;
 import com.nglinx.pulse.utils.ApplicationUtils;
@@ -48,25 +49,29 @@ public class DeviceFragmentAdapter extends ArrayAdapter<DeviceModel> {
         TextView tv_device_udid = (TextView) convertView.findViewById(R.id.tv_device_udid);
         TextView tv_date_modified = (TextView) convertView.findViewById(R.id.tv_date_modified);
         TextView tv_status_state = (TextView) convertView.findViewById(R.id.tv_status_state);
-        // Populate the data into the template view using the data object
+        TextView tv_expiry_info =  (TextView) convertView.findViewById(R.id.tv_expiry_info);
 
-//        device_modified_date.setText(deviceModel.getModifiedDate());
         tv_device_udid.setText(deviceModel.getUdid());
         tv_date_modified.setText(ApplicationUtils.convertFormatByTimeZone(deviceModel.getModifiedDate()));
 
         String statusState = "";
-        if (deviceModel.isActivated())
+        if (deviceModel.isActivated()) {
             statusState = statusState.concat("Active");
-        else
-            statusState = statusState.concat("InActive");
-
-        final ChildUserModel userAttached = getAttachedProfileForDevice(deviceModel.getUdid());
-        if (null == userAttached)
-            statusState = statusState.concat(", " + "Not Attached.");
-        else
-            statusState = statusState.concat("Attached to " + userAttached.getUsername());
+            final ChildUserModel userAttached = getAttachedProfileForDevice(deviceModel.getUdid());
+            if (null == userAttached)
+                statusState = statusState.concat(", " + "Not Attached.");
+            else
+                statusState = statusState.concat("Attached to " + userAttached.getUsername());
+        }
+        else {
+            String dateForActivation=ApplicationUtils.addDaysToDate(deviceModel.getCreatedDate(), ApplicationConstants.GRACE_PERIOD_TO_ACTIVATION);
+            statusState = statusState.concat("InActive. Activate before " +
+                    ApplicationUtils.convertFormatByTimeZone(dateForActivation));
+        }
 
         tv_status_state.setText(statusState);
+
+        tv_expiry_info.setText("Expiry : " + ApplicationUtils.convertFormatByTimeZone(deviceModel.getExpiryDate()));
 
         final ImageView img_activate_device = (ImageView) convertView.findViewById(R.id.img_activate_device);
         final TextView tv_activate_device = (TextView) convertView.findViewById(R.id.tv_activate_device);

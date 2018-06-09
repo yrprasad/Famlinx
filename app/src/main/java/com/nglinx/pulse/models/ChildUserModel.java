@@ -1,8 +1,6 @@
 package com.nglinx.pulse.models;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.nglinx.pulse.utils.ApplicationUtils;
 
 public class ChildUserModel implements Comparable<ChildUserModel> {
 
@@ -153,9 +151,6 @@ public class ChildUserModel implements Comparable<ChildUserModel> {
 
     @Override
     public int compareTo(ChildUserModel model) {
-        if (model.getUsername().compareTo(this.getUsername()) > 0)
-            return 1;
-        else
-            return -1;
+        return ApplicationUtils.compareDatesInMillis(this.getCreatedDate(), model.getCreatedDate());
     }
 }

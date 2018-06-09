@@ -269,6 +269,8 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+        mAutocompleteView.clearListSelection();
+
         selectedFence = (FenceModel) spinner_fence.getSelectedItem();
 
         if (selectedFence.getId().equals("0")) {
@@ -279,8 +281,6 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
             ms_apply_fence.setVisibility(View.VISIBLE);
             tv_apply_fence.setVisibility(View.VISIBLE);
 
-//            msEditFence.setVisibility(View.VISIBLE);
-//            tv_fence_action.setText("Edit Fence");
             msOkCreateFence.setVisibility(View.GONE);
             msCancelCreateFence.setVisibility(View.GONE);
 
@@ -434,6 +434,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         msOkCreateFence.setVisibility(View.VISIBLE);
         msCancelCreateFence.setVisibility(View.VISIBLE);
 //        tv_fence_action.setText("Create Fence");
+
 
         circleManager = new MapAreaManager(googleMap,
                 4, Color.RED, Color.HSVToColor(70, new float[]{1, 1, 200}), //styling

@@ -117,6 +117,8 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
 
         if((notificationModel != null) && (notificationModel.getType() != null))
             holder.notif_row_type.setText(notificationModel.getType().toString());
+        else
+            holder.notif_row_type.setText(NotificationModel.Type.ALERT.toString());
 
         if((notificationModel != null) && (notificationModel.getCreatedDate() != null))
         {

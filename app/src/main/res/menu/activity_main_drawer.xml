@@ -11,17 +11,21 @@
         <item
             android:id="@+id/nav_notification"
             android:title="Notifications"/>
-        <item android:id="@+id/nav_fence"
-              android:title="Geo-Fence" />
+        <item
+            android:id="@+id/nav_fence"
+            android:title="Geo-Fence"/>
+        <item
+            android:id="@+id/nav_myorders"
+            android:title="My Orders"/>
         <item
             android:id="@+id/nav_sharing"
             android:title="Sharing"/>
         <item
             android:id="@+id/nav_device"
             android:title="Manage Profiles"/>
-       <!-- <item
-            android:id="@+id/nav_profile"
-            android:title="Profiles"/>-->
+        <!-- <item
+             android:id="@+id/nav_profile"
+             android:title="Profiles"/>-->
         <item
             android:id="@+id/nav_changepassword"
             android:title="Change Password"/>

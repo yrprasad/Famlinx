@@ -14,10 +14,10 @@ import android.widget.TextView;
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.DevicesCartAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
-import com.nglinx.pulse.models.DeviceModel;
 import com.nglinx.pulse.models.DeviceOrderModel;
+import com.nglinx.pulse.models.DeviceOrderType;
 import com.nglinx.pulse.models.DeviceType;
-import com.nglinx.pulse.models.DeviceTypesModel;
+import com.nglinx.pulse.models.DeviceCartModel;
 import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.utils.ApplicationUtils;
 import com.nglinx.pulse.utils.DialogUtils;
@@ -34,7 +34,7 @@ public class CartActivity extends AppCompatActivity {
 
     private ListView lv_cart;
 
-    ArrayList<DeviceTypesModel> deviceTypesModelsList;
+    ArrayList<DeviceCartModel> deviceCartModelsList;
     DevicesCartAdapter adapter;
 
     DataSession ds;
@@ -57,9 +57,9 @@ public class CartActivity extends AppCompatActivity {
     protected void initializeIcons() {
         ds = DataSession.getInstance();
         lv_cart = (ListView) findViewById(R.id.lv_cart);
-        deviceTypesModelsList = new ArrayList<>();
-        deviceTypesModelsList.addAll(ds.getDeviceTypesList());
-        adapter = new DevicesCartAdapter(CartActivity.this, deviceTypesModelsList);
+        deviceCartModelsList = new ArrayList<>();
+        deviceCartModelsList.addAll(ds.getDevicesCart());
+        adapter = new DevicesCartAdapter(CartActivity.this, deviceCartModelsList);
         lv_cart.setAdapter(adapter);
 
         tv_total_cost = (TextView) findViewById(R.id.tv_total_cost);
@@ -75,11 +75,11 @@ public class CartActivity extends AppCompatActivity {
         tv_total_cost.setText(String.valueOf(totalCost));
         tv_total_pay.setText(String.valueOf(totalPayable));
 
-        getAvailableDeviceCount();
+//        getAvailableDeviceCount();
     }
 
     public void onMinusClickCartHandler(View v, View countView, View costView) {
-        final DeviceTypesModel selectedNotifModel = (DeviceTypesModel) v.getTag();
+        final DeviceCartModel selectedNotifModel = (DeviceCartModel) v.getTag();
 
         if (selectedNotifModel.getCount() > 0) {
             selectedNotifModel.setCount(selectedNotifModel.getCount() - 1);
@@ -95,7 +95,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void onPlusClickCartHandler(View v, View countView, View costView) {
-        final DeviceTypesModel selectedNotifModel = (DeviceTypesModel) v.getTag();
+        final DeviceCartModel selectedNotifModel = (DeviceCartModel) v.getTag();
         selectedNotifModel.setCount(selectedNotifModel.getCount() + 1);
         ((EditText) countView).setText(String.valueOf(selectedNotifModel.getCount()));
         ((TextView) costView).setText(String.valueOf(selectedNotifModel.getCount() + selectedNotifModel.getCost()));
@@ -117,8 +117,8 @@ public class CartActivity extends AppCompatActivity {
 
     private int getCartTotalCost() {
         int totalCost = 0;
-        for (DeviceTypesModel model :
-                ds.getDeviceTypesList()) {
+        for (DeviceCartModel model :
+                ds.getDevicesCart()) {
             totalCost += model.getCost() * model.getCount();
         }
         return totalCost;
@@ -154,18 +154,18 @@ public class CartActivity extends AppCompatActivity {
             DialogUtils.diaplayInfoDialog(CartActivity.this, "Please select the address");
         } else {
             //Check if the required devices are present
-            String orderErrorString = checkIfRequiredDevicesAvailable();
-            if ((orderErrorString == null) || (orderErrorString.isEmpty())) {
-                final int deviceOrderCount = ApplicationUtils.getTotalOrderCount(deviceTypesModelsList);
-                if (deviceOrderCount > 0) {
-                    placeOrder(deviceOrderCount);
-                } else {
-                    DialogUtils.diaplayInfoDialog(CartActivity.this, "Select device to order");
-                }
+//            String orderErrorString = checkIfRequiredDevicesAvailable();
+//            if ((orderErrorString == null) || (orderErrorString.isEmpty())) {
+            final int deviceOrderCount = ApplicationUtils.getTotalOrderCount(deviceCartModelsList);
+            if (deviceOrderCount > 0) {
+                placeOrder(deviceOrderCount);
             } else {
+                DialogUtils.diaplayInfoDialog(CartActivity.this, "Select device to order");
+            }
+            /*} else {
                 orderErrorString += "Please modify the order accordingly";
                 DialogUtils.diaplayInfoDialog(CartActivity.this, orderErrorString);
-            }
+            }*/
         }
     }
 
@@ -194,81 +194,154 @@ public class CartActivity extends AppCompatActivity {
 
                         ProgressbarUtil.startProgressBar(mProgressDialog);
 
-                        for (DeviceTypesModel orderedDevice :
-                                deviceTypesModelsList) {
+                        for (DeviceCartModel orderedDevice :
+                                deviceCartModelsList) {
 
                             for (int i = 0; i < orderedDevice.getCount(); i++) {
                                 ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-                                apiEndpointInterface.createDeviceOrder(orderedDevice.getType(), new DeviceOrderModel(), new RetroResponse<DeviceOrderModel>() {
-                                    @Override
-                                    public void onSuccess() {
 
-                                        //Increment the success counter
-                                        successDeviceOrderSummary.set(0, successDeviceOrderSummary.get(0) + 1);
+                                if (orderedDevice.getOrderType() == DeviceOrderType.BUY) {
+                                    apiEndpointInterface.createDeviceOrder(orderedDevice.getType(), new DeviceOrderModel(), new RetroResponse<DeviceOrderModel>() {
+                                        @Override
+                                        public void onSuccess() {
 
-                                        synchronized (this) {
-                                            int totalOrderReponses = 0;
-                                            totalOrderReponses += successDeviceOrderSummary.get(0).intValue();
-                                            totalOrderReponses += failureDeviceOrderCount.get(0).intValue();
-                                            if ((deviceOrderCount <= totalOrderReponses)) {
-                                                ProgressbarUtil.stopProgressBar(mProgressDialog);
-                                                //All responses are received and last response is Success
-                                                if (failureDeviceOrderCount.get(0) > 0) {
-                                                    //Failure Case
-                                                    Intent intent4 = new Intent(getApplicationContext(), OrderFailedActivity.class);
-                                                    intent4.putExtra(ApplicationConstants.FAILED_ITEM_COUNT_STR, (deviceOrderCount - totalOrderReponses));
-                                                    intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
-                                                    startActivity(intent4);
-                                                    finish();
-                                                } else {
-                                                    //Success Case
-                                                    Intent intent4 = new Intent(getApplicationContext(), OrderSuccessActivity.class);
-                                                    intent4.putExtra(ApplicationConstants.TOTAL_ITEM_COUNT_STR, totalOrderReponses);
-                                                    intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
-                                                    startActivity(intent4);
-                                                    finish();
+                                            //Increment the success counter
+                                            successDeviceOrderSummary.set(0, successDeviceOrderSummary.get(0) + 1);
+
+                                            synchronized (this) {
+                                                int totalOrderReponses = 0;
+                                                totalOrderReponses += successDeviceOrderSummary.get(0).intValue();
+                                                totalOrderReponses += failureDeviceOrderCount.get(0).intValue();
+                                                if ((deviceOrderCount <= totalOrderReponses)) {
+                                                    ProgressbarUtil.stopProgressBar(mProgressDialog);
+                                                    //All responses are received and last response is Success
+                                                    if (failureDeviceOrderCount.get(0) > 0) {
+                                                        //Failure Case
+                                                        Intent intent4 = new Intent(getApplicationContext(), OrderFailedActivity.class);
+                                                        intent4.putExtra(ApplicationConstants.FAILED_ITEM_COUNT_STR, (deviceOrderCount - totalOrderReponses));
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
+                                                        startActivity(intent4);
+                                                        finish();
+                                                    } else {
+                                                        //Success Case
+                                                        Intent intent4 = new Intent(getApplicationContext(), OrderSuccessActivity.class);
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ITEM_COUNT_STR, totalOrderReponses);
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
+                                                        startActivity(intent4);
+                                                        finish();
+                                                    }
+
                                                 }
-
                                             }
+
                                         }
 
-                                    }
+                                        @Override
+                                        public void onFailure() {
 
-                                    @Override
-                                    public void onFailure() {
+                                            //Increment the Failure counter.
 
-                                        //Increment the Failure counter.
+                                            failureDeviceOrderCount.set(0, failureDeviceOrderCount.get(0) + 1);
+                                            synchronized (this) {
 
-                                        failureDeviceOrderCount.set(0, failureDeviceOrderCount.get(0) + 1);
-                                        synchronized (this) {
+                                                int totalOrderReponses = 0;
+                                                totalOrderReponses += successDeviceOrderSummary.get(0).intValue();
+                                                totalOrderReponses += failureDeviceOrderCount.get(0).intValue();
+                                                if ((deviceOrderCount <= totalOrderReponses)) {
+                                                    ProgressbarUtil.stopProgressBar(mProgressDialog);
 
-                                            int totalOrderReponses = 0;
-                                            totalOrderReponses += successDeviceOrderSummary.get(0).intValue();
-                                            totalOrderReponses += failureDeviceOrderCount.get(0).intValue();
-                                            if ((deviceOrderCount <= totalOrderReponses)) {
-                                                ProgressbarUtil.stopProgressBar(mProgressDialog);
+                                                    //All responses are received and last response is Failure
+                                                    if (failureDeviceOrderCount.get(0) > 0) {
+                                                        //Failure Case
+                                                        Intent intent4 = new Intent(getApplicationContext(), OrderFailedActivity.class);
+                                                        intent4.putExtra(ApplicationConstants.FAILED_ITEM_COUNT_STR, (deviceOrderCount - totalOrderReponses));
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
+                                                        startActivity(intent4);
+                                                        finish();
+                                                    } else {
+                                                        //Success Case
+                                                        Intent intent4 = new Intent(getApplicationContext(), OrderSuccessActivity.class);
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ITEM_COUNT_STR, totalOrderReponses);
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
+                                                        startActivity(intent4);
+                                                        finish();
+                                                    }
 
-                                                //All responses are received and last response is Failure
-                                                if (failureDeviceOrderCount.get(0) > 0) {
-                                                    //Failure Case
-                                                    Intent intent4 = new Intent(getApplicationContext(), OrderFailedActivity.class);
-                                                    intent4.putExtra(ApplicationConstants.FAILED_ITEM_COUNT_STR, (deviceOrderCount - totalOrderReponses));
-                                                    intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
-                                                    startActivity(intent4);
-                                                    finish();
-                                                } else {
-                                                    //Success Case
-                                                    Intent intent4 = new Intent(getApplicationContext(), OrderSuccessActivity.class);
-                                                    intent4.putExtra(ApplicationConstants.TOTAL_ITEM_COUNT_STR, totalOrderReponses);
-                                                    intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
-                                                    startActivity(intent4);
-                                                    finish();
                                                 }
-
                                             }
                                         }
-                                    }
-                                });
+                                    });
+                                } else {
+                                    apiEndpointInterface.rentDeviceOrder(orderedDevice.getType(), orderedDevice.getRentalDays(), new DeviceOrderModel(), new RetroResponse<DeviceOrderModel>() {
+                                        @Override
+                                        public void onSuccess() {
+
+                                            //Increment the success counter
+                                            successDeviceOrderSummary.set(0, successDeviceOrderSummary.get(0) + 1);
+
+                                            synchronized (this) {
+                                                int totalOrderReponses = 0;
+                                                totalOrderReponses += successDeviceOrderSummary.get(0).intValue();
+                                                totalOrderReponses += failureDeviceOrderCount.get(0).intValue();
+                                                if ((deviceOrderCount <= totalOrderReponses)) {
+                                                    ProgressbarUtil.stopProgressBar(mProgressDialog);
+                                                    //All responses are received and last response is Success
+                                                    if (failureDeviceOrderCount.get(0) > 0) {
+                                                        //Failure Case
+                                                        Intent intent4 = new Intent(getApplicationContext(), OrderFailedActivity.class);
+                                                        intent4.putExtra(ApplicationConstants.FAILED_ITEM_COUNT_STR, (deviceOrderCount - totalOrderReponses));
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
+                                                        startActivity(intent4);
+                                                        finish();
+                                                    } else {
+                                                        //Success Case
+                                                        Intent intent4 = new Intent(getApplicationContext(), OrderSuccessActivity.class);
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ITEM_COUNT_STR, totalOrderReponses);
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
+                                                        startActivity(intent4);
+                                                        finish();
+                                                    }
+
+                                                }
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onFailure() {
+                                            //Increment the Failure counter.
+                                            failureDeviceOrderCount.set(0, failureDeviceOrderCount.get(0) + 1);
+                                            synchronized (this) {
+
+                                                int totalOrderReponses = 0;
+                                                totalOrderReponses += successDeviceOrderSummary.get(0).intValue();
+                                                totalOrderReponses += failureDeviceOrderCount.get(0).intValue();
+                                                if ((deviceOrderCount <= totalOrderReponses)) {
+                                                    ProgressbarUtil.stopProgressBar(mProgressDialog);
+
+                                                    //All responses are received and last response is Failure
+                                                    if (failureDeviceOrderCount.get(0) > 0) {
+                                                        //Failure Case
+                                                        Intent intent4 = new Intent(getApplicationContext(), OrderFailedActivity.class);
+                                                        intent4.putExtra(ApplicationConstants.FAILED_ITEM_COUNT_STR, (deviceOrderCount - totalOrderReponses));
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
+                                                        startActivity(intent4);
+                                                        finish();
+                                                    } else {
+                                                        //Success Case
+                                                        Intent intent4 = new Intent(getApplicationContext(), OrderSuccessActivity.class);
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ITEM_COUNT_STR, totalOrderReponses);
+                                                        intent4.putExtra(ApplicationConstants.TOTAL_ORDER_COST_STR, Integer.parseInt(tv_total_pay.getText().toString()));
+                                                        startActivity(intent4);
+                                                        finish();
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+
                             }
                         }
                     }
@@ -276,7 +349,7 @@ public class CartActivity extends AppCompatActivity {
                 .setNegativeButton(android.R.string.no, null).show();
     }
 
-    private String checkIfRequiredDevicesAvailable() {
+    /*private String checkIfRequiredDevicesAvailable() {
 
         String orderErrorString = "";
 
@@ -284,8 +357,8 @@ public class CartActivity extends AppCompatActivity {
         Map<DeviceType, Integer> availableDevices = ds.getAvailableDevices();
 
         //Order count list Structure
-        for (DeviceTypesModel orderedDevice :
-                deviceTypesModelsList) {
+        for (DeviceCartModel orderedDevice :
+                deviceCartModelsList) {
             if (orderedDevice.getCount() > availableDevices.get(orderedDevice.getType()).intValue()) {
                 //This device is not available in store. Decrease the count.
                 orderErrorString += "Device type " + orderedDevice.getType() +
@@ -294,9 +367,9 @@ public class CartActivity extends AppCompatActivity {
         }
 
         return orderErrorString;
-    }
+    }*/
 
-    //TODO : Future. Need a new api to get the count of available devices to manage the order.
+    /*//TODO : Future. Need a new api to get the count of available devices to manage the order.
     //TODO: This may not work for the non admins.
     public void getAvailableDeviceCount() {
         final ArrayList<DeviceModel> devicesList = new ArrayList<>();
@@ -320,6 +393,6 @@ public class CartActivity extends AppCompatActivity {
                 DialogUtils.diaplayErrorDialog(CartActivity.this, errorMsg);
             }
         });
-    }
+    }*/
 
 }

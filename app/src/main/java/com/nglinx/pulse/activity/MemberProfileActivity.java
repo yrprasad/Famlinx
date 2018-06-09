@@ -90,6 +90,7 @@ public class MemberProfileActivity extends AbstractActivity implements SwipeRefr
             public void onSuccess() {
                 deviceList.clear();
                 deviceList.addAll(ApplicationUtils.getNonSensorDevices(models));
+                Collections.sort(deviceList);
                 ds.setDevicesList(deviceList);
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
             }

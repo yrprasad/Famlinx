@@ -33,6 +33,7 @@ public class OrderSuccessActivity extends AppCompatActivity {
         initializeIcons();
         displayData();
         ds.clearDeviceTypes();
+        ds.clearDeviceOrders();
     }
 
     //Initialize all the icons on this screen and Navigation Menu screens
@@ -59,11 +60,14 @@ public class OrderSuccessActivity extends AppCompatActivity {
     }
 
     public void OnViewOrdersClickHandler(View v) {
-        Toast.makeText(this, "This is TBD", Toast.LENGTH_SHORT).show();
+        Intent intent4 = new Intent(this, MyOrdersActivity.class);
+        startActivity(intent4);
+        finish();
     }
 
     public void OnGoToHomeOrderClickHandler(View v) {
         Intent intent4 = new Intent(this, HomeActivity.class);
         startActivity(intent4);
+        finish();
     }
 }

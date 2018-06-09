@@ -9,20 +9,28 @@ import java.util.List;
 public class DeviceTypesModel {
 
     private DeviceType type;
-
     private String name;
+    private int cost;
+    private DeviceOrderType orderType;
 
     private List<Integer> sizes;
-
     private List<String> description;
-
     private List<String> care;
-
-    private int cost;
-
-    //Added a new value to JSON to make this as a cart items.
-    //This parameter will not be received from server.
-    private int count;
+    public DeviceTypesModel()
+    {
+        sizes = new ArrayList<>(3);
+        sizes.add(1);
+        sizes.add(2);
+        sizes.add(3);
+        description = new ArrayList<>(3);
+        description.add(name + "Description1");
+        description.add(name + "Description2");
+        description.add(name + "Description3");
+        care = new ArrayList<>(3);
+        care.add(name + "Care1");
+        care.add(name + "Care2");
+        care.add(name + "Care3");
+    }
 
     public DeviceTypesModel(DeviceType type, String name) {
         super();
@@ -42,7 +50,6 @@ public class DeviceTypesModel {
         care.add(name + "Care3");
 
         cost = ApplicationUtils.getDeviceCost(type);
-        count = 0;
     }
 
     public DeviceType getType() {
@@ -93,12 +100,12 @@ public class DeviceTypesModel {
         this.cost = cost;
     }
 
-    public int getCount() {
-        return count;
+    public DeviceOrderType getOrderType() {
+        return orderType;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setOrderType(DeviceOrderType orderType) {
+        this.orderType = orderType;
     }
 
     @Override

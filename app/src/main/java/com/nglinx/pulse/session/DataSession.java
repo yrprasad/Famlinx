@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.nglinx.pulse.models.AddressModel;
 import com.nglinx.pulse.models.ChildUserModel;
+import com.nglinx.pulse.models.DeviceCartModel;
 import com.nglinx.pulse.models.DeviceModel;
 import com.nglinx.pulse.models.DeviceStatus;
 import com.nglinx.pulse.models.DeviceType;
@@ -52,12 +53,12 @@ public class DataSession {
     private AddressModel selectedAddress;
     ArrayList<DeviceTypesModel> deviceTypesList;
     Map<DeviceType, Integer> availableDevices;
+    ArrayList<DeviceCartModel> devicesCart;
 
     public static DataSession getInstance() {
 
         if (myObj == null) {
             myObj = new DataSession();
-
         }
         return myObj;
     }
@@ -73,6 +74,7 @@ public class DataSession {
         isNetworkEnabled = false;
         canGetLocation = false;
         appKey = FirebaseInstanceId.getInstance().getToken();
+        devicesCart = new ArrayList<>();
     }
 
     private String username;
@@ -425,6 +427,10 @@ public class DataSession {
         this.deviceTypesList = null;
     }
 
+    public void clearDeviceOrders() {
+        devicesCart.clear();
+    }
+
     public AddressModel getSelectedAddress() {
         return selectedAddress;
     }
@@ -499,5 +505,13 @@ public class DataSession {
         }
 
         return null;
+    }
+
+    public ArrayList<DeviceCartModel> getDevicesCart() {
+        return devicesCart;
+    }
+
+    public void setDevicesCart(ArrayList<DeviceCartModel> devicesCart) {
+        this.devicesCart = devicesCart;
     }
 }
