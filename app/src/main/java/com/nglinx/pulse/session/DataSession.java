@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.AddressModel;
 import com.nglinx.pulse.models.ChildUserModel;
 import com.nglinx.pulse.models.DeviceCartModel;
@@ -18,6 +19,7 @@ import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.models.InviteModel;
 import com.nglinx.pulse.models.UserModel;
+import com.nglinx.pulse.utils.ApplicationUtils;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
 
 import java.util.ArrayList;
@@ -43,6 +45,10 @@ public class DataSession {
 
     private List<InviteModel> pendingInvites;
     private List<InviteModel> trackingMeInvites;
+
+    private String defaultGroupId;
+
+    private GroupModel defaultGroup;
 
     private List<DeviceModel> devicesList;
 
@@ -522,5 +528,33 @@ public class DataSession {
 
     public void setSelectedFence(FenceModel selectedFence) {
         this.selectedFence = selectedFence;
+    }
+
+    public String getDefaultGroupId() {
+        return defaultGroupId;
+    }
+
+    public void setDefaultGroupId(String defaultGroupId) {
+        this.defaultGroupId = defaultGroupId;
+    }
+
+    public GroupModel getDefaultGroup() {
+        return defaultGroup;
+    }
+
+    public void setDefaultGroup(GroupModel defaultGroup) {
+        this.defaultGroup = defaultGroup;
+    }
+
+    public void fetchDefaultGroupDetails()
+    {
+        for (GroupModel groupModel:
+             userModel.getGroups()) {
+            if(groupModel.getName().equalsIgnoreCase(ApplicationConstants.DEFAULT_GROUP_NAME))
+            {
+                defaultGroup = groupModel;
+                defaultGroupId = groupModel.getId();
+            }
+        }
     }
 }

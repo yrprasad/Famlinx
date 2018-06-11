@@ -98,7 +98,7 @@ public class GroupAdapter extends ArrayAdapter<GroupModel> {
         return count;
     }
 
-    public static class ViewHolder {
+    public class ViewHolder {
         public TextView tv_groupname, tv_groupmember_count;
     }
 

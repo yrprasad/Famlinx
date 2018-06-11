@@ -109,7 +109,7 @@ public class MyFencesAdapter extends ArrayAdapter<FenceModel> {
         return convertView;
     }
 
-    public static class ViewHolder {
+    public class ViewHolder {
         FenceModel modelHolder;
 
         public TextView tv_myfence_fencename;

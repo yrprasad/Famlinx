@@ -30,7 +30,7 @@ public class SharingFragmentAdapter extends ArrayAdapter {
     private int listType;
 
     // View lookup cache
-    private static class ViewHolder {
+    private class ViewHolder {
         TextView invites_row1;
         TextView invites_row2;
         TextView invites_row3;

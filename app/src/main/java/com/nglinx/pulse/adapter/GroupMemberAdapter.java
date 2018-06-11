@@ -107,7 +107,7 @@ public class GroupMemberAdapter extends ArrayAdapter<GroupMemberModel> {
         return convertView;
     }
 
-   /* public static class ViewHolder {
+   /* public class ViewHolder {
         public TextView name;
         ImageView member_image;
         ImageView member_type_image;

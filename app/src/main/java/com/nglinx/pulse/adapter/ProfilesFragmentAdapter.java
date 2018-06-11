@@ -19,8 +19,6 @@ import java.util.List;
 
 public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
 
-    private MemberProfileAdapter.ViewHolder holder = null;
-
     private List<ChildUserModel> arr2;
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
@@ -66,7 +64,7 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
         // Get the data item for this position
         ChildUserModel model = getItem(position);
 
-        final MemberProfileAdapter.ViewHolder holder = new MemberProfileAdapter.ViewHolder();
+        final ViewHolder holder = new ViewHolder();
         holder.modelHolder = model;
 
         // Check if an existing view is being reused, otherwise inflate the view
@@ -147,7 +145,7 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
         return convertView;
     }
 
-    public static class ViewHolder {
+    /*public class ViewHolder {
         ChildUserModel modelHolder;
 
         public TextView tv_profile_name;
@@ -157,6 +155,19 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
 
         public ImageView btn_profile_delete;
         public ImageView btn_profile_view;
+        public ImageView img_online_status;
+    }*/
+
+    public class ViewHolder {
+        ChildUserModel modelHolder;
+
+        public TextView tv_profile_name;
+        public TextView tv_prodile_email;
+        public TextView tv_profile_udid;
+        public TextView tv_profile_status;
+
+        public ImageView btn_profile_manage;
+        public ImageView btn_profile_edit;
         public ImageView img_online_status;
     }
 }

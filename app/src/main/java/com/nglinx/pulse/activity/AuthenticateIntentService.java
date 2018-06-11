@@ -7,6 +7,7 @@ import android.os.ResultReceiver;
 import android.util.Log;
 
 import com.nglinx.pulse.constants.ApplicationConstants;
+import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.models.UserLoginModel;
 import com.nglinx.pulse.models.UserModel;
 import com.nglinx.pulse.session.DataSession;

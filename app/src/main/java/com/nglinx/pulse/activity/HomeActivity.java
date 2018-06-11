@@ -10,9 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -38,7 +36,6 @@ import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.GroupAdapter;
 import com.nglinx.pulse.adapter.GroupMemberAdapter;
 import com.nglinx.pulse.adapter.NotificationsAdapter;
-import com.nglinx.pulse.adapter.ViewPagerAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
@@ -55,7 +52,6 @@ import com.nglinx.pulse.utils.retrofit.ApiEndpointInterface;
 import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
 import com.nglinx.pulse.utils.view.HorizontalView;
-import com.nglinx.pulse.viewholders.GroupMemberViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,20 +59,17 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import me.relex.circleindicator.CircleIndicator;
-
 public class HomeActivity extends AbstractActivity implements LocationListener, GoogleMap.OnCameraChangeListener, GoogleMap.OnMyLocationButtonClickListener {
 
     public DrawerLayout drawerLayout;
 
     //Pager
-    private ViewPager mPager;
+//    private ViewPager mPager;
     private int currentPage = 0;
     //    private static final Integer[] XMEN= {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
 
-    private static final Integer[] XMEN= {R.drawable.cradle2, R.drawable.cradle1};
-//    private static final Integer[] XMEN = {};
-    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
+//    private final Integer[] XMEN= {R.drawable.cradle2};
+//    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
     //Group Details
     public ArrayList<GroupModel> groupsList;
@@ -169,7 +162,9 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
         refreshUserDetails();
 
-        initPager();
+//        initPager();
+
+        createDefaultGroupIfNotPresent();
 
         Timer timer = new Timer();
         ds.setContext(getApplicationContext());
@@ -178,7 +173,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     }
 
 
-    private void initPager() {
+    /*private void initPager() {
 
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);
@@ -204,7 +199,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 handler.post(Update);
             }
         }, 5000, 10000);
-    }
+    }*/
 
     @Override
     public void onPause() {
@@ -431,8 +426,8 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
             GroupMemberModel selectedMember = groupsMembersList.get(position);
 
             if (selectedMember.getId().equals("")) {
-                Intent intent = new Intent(getApplicationContext(), AddMemberActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(HomeActivity.this, AddMemberActivity.class);
+                startActivityForResult(intent, ApplicationConstants.ACTIVITY_SUCCESS_CODE);
                 finish();
             } else {
                 ds.setSelected_group_member_id(selectedMember.getId());
@@ -458,7 +453,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
             SharedPrefUtility.saveSelectedGroupMember(getApplicationContext(), group_member_id, group_member_name);
 
             if (!ds.getSelected_group_id().equals("0")) {
-                Intent intent = new Intent(HomeActivity.this, MemberSettingsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MemberSettingsActivity.class);
                 startActivityForResult(intent, ApplicationConstants.SETTINGS_PAGE_REQUEST_CODE);
                 return true;
             }
@@ -769,6 +764,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         groupsMembersList.clear();
 
         //Add all the group members
+        groupsMembersList.add(ApplicationUtils.getDummyGroupMember());
         groupsMembersList.addAll(allMembers);
         groupMemberAdapter.setArr2(groupsMembersList);
         groupMemberAdapter.notifyDataSetChanged();
@@ -787,29 +783,28 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     }
 
     public void onNotificationsClick(View view) {
-        Intent intent9 = new Intent(this, NotificationActivity.class);
+        Intent intent9 = new Intent(getApplicationContext(), NotificationActivity.class);
         startActivity(intent9);
         finish();
     }
 
     public void onFenceClick(View view) {
-        Intent intent9 = new Intent(this, FenceActivity.class);
+        Intent intent9 = new Intent(getApplicationContext(), FenceActivity.class);
         startActivity(intent9);
         finish();
     }
 
     public void onBuyNowClick(View view) {
-        Intent intent9 = new Intent(this, BuyNowActivity.class);
+        Intent intent9 = new Intent(getApplicationContext(), BuyNowActivity.class);
         startActivity(intent9);
         finish();
     }
 
     public void onDeviceClick(View view) {
-        Intent intent9 = new Intent(this, DeviceActivity.class);
+        Intent intent9 = new Intent(getApplicationContext(), DeviceActivity.class);
         startActivity(intent9);
         finish();
     }
-
 
     private void getNotifications(final SwipeRefreshLayout swipeRefreshLayout_notifications) {
         ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
@@ -862,5 +857,33 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         super.onStop();
         ds.setHomePageOn(false);
 
+    }
+
+    protected void createDefaultGroupIfNotPresent() {
+
+        DataSession.getInstance().fetchDefaultGroupDetails();
+
+        final DataSession ds = DataSession.getInstance();
+        if((ds.getDefaultGroupId() != null) && (!ds.getDefaultGroupId().equalsIgnoreCase("")))
+        {
+            return;
+        }
+
+        final GroupModel groupModel = new GroupModel();
+        groupModel.setName(ApplicationConstants.DEFAULT_GROUP_NAME);
+
+        ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
+        apiEndpointInterface.createGroup(ds.getUserModel().getId(), groupModel, new RetroResponse<GroupModel>(getApplicationContext()) {
+            @Override
+            public void onSuccess() {
+                ds.setDefaultGroupId(model.getId());
+                ds.setDefaultGroup(model);
+            }
+
+            @Override
+            public void onFailure() {
+                System.out.print("Failed to create group");
+            }
+        });
     }
 }

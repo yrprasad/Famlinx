@@ -139,7 +139,7 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceCartModel> {
         holder.tv_cart_cost = (TextView) convertView.findViewById(R.id.tv_cart_cost);
     }
 
-    public static class ViewHolder {
+    public class ViewHolder {
         DeviceCartModel modelHolder;
 
         public ImageView img_device_type;

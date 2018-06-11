@@ -29,7 +29,7 @@ import com.nglinx.pulse.utils.retrofit.RetroUtils;
  */
 
 public class RestApiUtils {
-    public static void sendTrackReqToSelectedMember(final Context context, final String userId, final String groupId, final String memberId) {
+    public void sendTrackReqToSelectedMember(final Context context, final String userId, final String groupId, final String memberId) {
         final ProgressDialog mProgressDialog2 = ProgressbarUtil.startProgressBar(context);
         ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(context, RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
         apiEndpointInterface.trackMember(userId, groupId, memberId, new RetroResponse<GroupMemberModel>() {

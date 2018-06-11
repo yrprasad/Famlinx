@@ -28,7 +28,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
     }
 
     public void onOkClick(View v) {
-        Intent intent = new Intent(this, SignupActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
         startActivity(intent);
         finish();
     }

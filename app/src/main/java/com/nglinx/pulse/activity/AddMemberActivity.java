@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nglinx.pulse.R;
@@ -31,7 +32,6 @@ public class AddMemberActivity extends AppCompatActivity {
 
     DataSession ds = null;
     Intent intent = null;
-    ArrayAdapter<FenceModel> fenceAdapter;
     AutoCompleteTextView membersAutoCompleteTextView;
     EditText nm_name_value, nm_username_value, nm_email_value, nm_phone_value, nm_usertype_value;
     Button nm_add_btn, nm_cancel_btn;
@@ -74,7 +74,7 @@ public class AddMemberActivity extends AppCompatActivity {
     //Initialize all the icons on this screen and Navigation Menu screens
     protected void initializeIcons() {
         membersAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.membersAutoCompleteTextView);
-        adapter = new AddMemberAdapter(this, android.R.layout.simple_dropdown_item_1line);
+        adapter = new AddMemberAdapter(AddMemberActivity.this, android.R.layout.simple_dropdown_item_1line);
 
         membersAutoCompleteTextView.setThreshold(3);
         membersAutoCompleteTextView.setAdapter(adapter);
@@ -94,9 +94,22 @@ public class AddMemberActivity extends AppCompatActivity {
             return;
         }
 
+        String groupId = null;
+        String groupName = null;
+        if ((null == ds.getSelected_group_id()) || (ds.getSelected_group_id().equalsIgnoreCase(""))) {
+            groupId = ds.getDefaultGroupId();
+            groupName = ds.getDefaultGroup().getName();
+        } else {
+            groupId = ds.getSelected_group_id();
+            groupName = ds.getSelected_group_name();
+        }
+
+        final String fGroupId = groupId;
+        final String fGroupName = groupName;
+
         new AlertDialog.Builder(AddMemberActivity.this)
                 .setTitle("Add Member")
-                .setMessage("Do you want to add member " + ds.getSelected_group_name() + " to group " + ds.getSelected_group_name())
+                .setMessage("Do you want to add member to group " + fGroupName)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -108,11 +121,13 @@ public class AddMemberActivity extends AppCompatActivity {
 
                         final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(AddMemberActivity.this);
                         ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-                        apiEndpointInterface.inviteMembers(ds.getUserModel().getId(), ds.getSelected_group_id(), memberModel, new RetroResponse<GroupMemberModel>() {
+                        apiEndpointInterface.inviteMembers(ds.getUserModel().getId(), fGroupId, memberModel, new RetroResponse<GroupMemberModel>() {
                             @Override
                             public void onSuccess() {
                                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
-                                DialogUtils.diaplaySuccessDialog(AddMemberActivity.this, "Member" + ds.getSelected_group_name() + " added successfully to group " + ds.getSelected_group_name());
+                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
 
                             @Override
@@ -130,7 +145,7 @@ public class AddMemberActivity extends AppCompatActivity {
     }
 
     public void cancelClickHandler(View v) {
-        Intent intent = new Intent(AddMemberActivity.this, HomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
         finish();
     }

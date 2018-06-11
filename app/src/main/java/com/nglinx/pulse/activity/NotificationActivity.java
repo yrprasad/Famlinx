@@ -118,7 +118,7 @@ public class NotificationActivity extends AbstractActivity implements SwipeRefre
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Intent intent = new Intent(NotificationActivity.this, NotificationsDetailActivity.class);
+            Intent intent = new Intent(getApplicationContext(), NotificationsDetailActivity.class);
             NotificationModel selectedNotifModel = (NotificationModel) notifications_lv.getItemAtPosition(i);
             intent.putExtra("NotifDateBundle", selectedNotifModel.getType().toString() + " : " + selectedNotifModel.getCreatedDate());
             intent.putExtra("NotifTextBundle", selectedNotifModel.getMessage());
@@ -175,7 +175,7 @@ public class NotificationActivity extends AbstractActivity implements SwipeRefre
     }
 
     public void viewNotificationClickHandler(View v) {
-        Intent intent = new Intent(NotificationActivity.this, NotificationsDetailActivity.class);
+        Intent intent = new Intent(getApplicationContext(), NotificationsDetailActivity.class);
         final NotificationModel selectedNotifModel = (NotificationModel) v.getTag();
         intent.putExtra("NotifDateBundle", selectedNotifModel.getType().toString() + " : " + selectedNotifModel.getCreatedDate());
         intent.putExtra("NotifTextBundle", selectedNotifModel.getMessage());

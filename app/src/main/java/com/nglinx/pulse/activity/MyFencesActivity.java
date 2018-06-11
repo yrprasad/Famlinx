@@ -138,7 +138,7 @@ public class MyFencesActivity extends AppCompatActivity implements SwipeRefreshL
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, int whichButton) {
-                        Intent intent7 = new Intent(MyFencesActivity.this, ApplyFenceActivity.class);
+                        Intent intent7 = new Intent(getApplicationContext(), ApplyFenceActivity.class);
                         intent7.putExtra(ApplicationConstants.SELECTED_FENCE, fenceModel.getId());
                         startActivity(intent7);
                         finish();

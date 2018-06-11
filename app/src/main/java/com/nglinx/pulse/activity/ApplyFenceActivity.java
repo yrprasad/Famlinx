@@ -241,7 +241,7 @@ public class ApplyFenceActivity extends AppCompatActivity {
     }
 
     public void onCancelClickHandler(View v) {
-        Intent intent7 = new Intent(this, FenceActivity.class);
+        Intent intent7 = new Intent(getApplicationContext(), FenceActivity.class);
         startActivity(intent7);
         finish();
     }

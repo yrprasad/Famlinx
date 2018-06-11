@@ -155,7 +155,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
         img_myFences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FenceActivity.this, MyFencesActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MyFencesActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -414,7 +414,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
     }
 
     public void onApplyFenceFloatingBtnClick(View v) {
-        Intent intent7 = new Intent(FenceActivity.this, ApplyFenceActivity.class);
+        Intent intent7 = new Intent(getApplicationContext(), ApplyFenceActivity.class);
         intent7.putExtra(ApplicationConstants.SELECTED_FENCE, selectedFence.getId());
         startActivity(intent7);
         finish();
@@ -498,7 +498,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
     }
 
     public void on_ms_cancel_fence_click(View v) {
-        Intent intent7 = new Intent(this, FenceActivity.class);
+        Intent intent7 = new Intent(getApplicationContext(), FenceActivity.class);
         startActivity(intent7);
         finish();
     }
@@ -595,7 +595,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                                             .setIcon(android.R.drawable.ic_dialog_alert)
                                             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                                 public void onClick(final DialogInterface dialog, int whichButton) {
-                                                    Intent intent7 = new Intent(FenceActivity.this, ApplyFenceActivity.class);
+                                                    Intent intent7 = new Intent(getApplicationContext(), ApplyFenceActivity.class);
                                                     ds.setSelectedFence(fenceModel);
                                                     intent7.putExtra(ApplicationConstants.SELECTED_FENCE, fenceModel.getId());
                                                     startActivity(intent7);

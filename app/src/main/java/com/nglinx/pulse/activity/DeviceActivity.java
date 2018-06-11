@@ -220,7 +220,7 @@ public class DeviceActivity extends AbstractActivity {
 
 
     public void buyDeviceClickHandler(View view) {
-        Intent intent4 = new Intent(this, BuyNowActivity.class);
+        Intent intent4 = new Intent(getApplicationContext(), BuyNowActivity.class);
         startActivity(intent4);
         finish();
     }
@@ -777,7 +777,7 @@ public class DeviceActivity extends AbstractActivity {
     public void editChildProfileClickHandler(View v) {
         final ChildUserModel iModel = (ChildUserModel) v.getTag();
 
-        Intent intent7 = new Intent(this, EditProfileActivity.class);
+        Intent intent7 = new Intent(getApplicationContext(), EditProfileActivity.class);
         intent7.putExtra(ApplicationConstants.CHILD_PROFILE_SELECTED_USERID, iModel.getId());
         startActivity(intent7);
         finish();

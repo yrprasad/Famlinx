@@ -76,7 +76,7 @@ public class SelectAddressAdapter extends ArrayAdapter<AddressModel> {
         return convertView;
     }
 
-    public static class ViewHolder {
+    public class ViewHolder {
         AddressModel modelHolder;
         public TextView tv_address;
     }

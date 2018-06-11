@@ -101,7 +101,7 @@ public class CreateGroupActivty extends AppCompatActivity {
     }
 
     public void cancelGroupClickHandler(View v) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
     }
 }

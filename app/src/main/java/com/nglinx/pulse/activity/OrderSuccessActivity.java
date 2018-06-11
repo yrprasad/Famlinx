@@ -60,13 +60,13 @@ public class OrderSuccessActivity extends AppCompatActivity {
     }
 
     public void OnViewOrdersClickHandler(View v) {
-        Intent intent4 = new Intent(this, MyOrdersActivity.class);
+        Intent intent4 = new Intent(getApplicationContext(), MyOrdersActivity.class);
         startActivity(intent4);
         finish();
     }
 
     public void OnGoToHomeOrderClickHandler(View v) {
-        Intent intent4 = new Intent(this, HomeActivity.class);
+        Intent intent4 = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent4);
         finish();
     }

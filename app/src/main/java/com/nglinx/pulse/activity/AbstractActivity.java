@@ -93,59 +93,35 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 ds.clearSelectedGroup();
                 SharedPrefUtility.clearSelectedGroup(getApplicationContext());
                 SharedPrefUtility.clearSelectedGroupMember(getApplicationContext());
-                Intent intent = new Intent(this, HomeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.nav_device:
-                Intent intent4 = new Intent(this, DeviceActivity.class);
+                Intent intent4 = new Intent(getApplicationContext(), DeviceActivity.class);
                 startActivity(intent4);
                 return true;
             case R.id.nav_buynow:
-                Intent intent6 = new Intent(this, BuyNowActivity.class);
+                Intent intent6 = new Intent(getApplicationContext(), BuyNowActivity.class);
                 startActivity(intent6);
                 return true;
             case R.id.nav_changepassword:
-                Intent intent7 = new Intent(this, ChangePasswordActivity.class);
+                Intent intent7 = new Intent(getApplicationContext(), ChangePasswordActivity.class);
                 startActivity(intent7);
                 return true;
-            /*case R.id.nav_profile:
-                Intent intent5 = new Intent(this, MemberProfileActivity.class);
-                startActivity(intent5);
-                return true;*/
             case R.id.nav_fence:
-                Intent intent3 = new Intent(this, FenceActivity.class);
+                Intent intent3 = new Intent(getApplicationContext(), FenceActivity.class);
                 startActivity(intent3);
                 return true;
-            /*case R.id.nav_group:
-                Intent intent1 = new Intent(this, CreateGroupActivty.class);
-                startActivity(intent1);
-                return true;*/
-           /* */
-            /*
-
-            case R.id.nav_login:
-                Intent intent8 = new Intent(this, LoginActivity.class);
-                startActivity(intent8);
-                return true;
-
-            case R.id.nav_settings:
-                Intent intent10 = new Intent(this, MemberSettingsActivity.class);
-                startActivity(intent10);
-                return true;
-            case R.id.nav_signup:
-                Intent intent11 = new Intent(this, SignupActivity.class);
-                startActivity(intent11);
-                return true;*/
             case R.id.nav_sharing:
-                Intent intent2 = new Intent(this, SharingActivity.class);
+                Intent intent2 = new Intent(getApplicationContext(), SharingActivity.class);
                 startActivity(intent2);
                 return true;
             case R.id.nav_notification:
-                Intent intent9 = new Intent(this, NotificationActivity.class);
+                Intent intent9 = new Intent(getApplicationContext(), NotificationActivity.class);
                 startActivity(intent9);
                 return true;
             case R.id.nav_myorders:
-                Intent intent5 = new Intent(this, MyOrdersActivity.class);
+                Intent intent5 = new Intent(getApplicationContext(), MyOrdersActivity.class);
                 startActivity(intent5);
                 return true;
             case R.id.nav_signout:
@@ -159,8 +135,6 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
     protected void startIntent(Class<?> cls) {
         Intent intent = new Intent(getApplicationContext(), cls);
         startActivity(intent);
-//        tv_username = (TextView) headerLayout.findViewById(R.id.tv_username);
-//        tv_email = (TextView) headerLayout.findViewById(R.id.tv_email);
     }
 
     private void SignOutApi() {

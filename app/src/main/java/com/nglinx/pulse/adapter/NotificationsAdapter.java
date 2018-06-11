@@ -14,6 +14,7 @@ import com.nglinx.pulse.R;
 import com.nglinx.pulse.activity.MyFencesActivity;
 import com.nglinx.pulse.activity.NotificationActivity;
 import com.nglinx.pulse.models.NotificationModel;
+import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.utils.ApplicationUtils;
 
 import java.util.ArrayList;
@@ -79,8 +80,8 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
         holder.notif_row_type = (TextView) convertView.findViewById(R.id.notif_row_type);
         holder.notif_row_date = (TextView) convertView.findViewById(R.id.notif_row_date);
         holder.notif_row_message = (TextView) convertView.findViewById(R.id.notif_row_message);
-        holder.options = (ImageView) convertView.findViewById(R.id.optionsMenu);
 
+        holder.options = (ImageView) convertView.findViewById(R.id.optionsMenu);
         holder.options.setTag(holder);
         holder.options.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +95,14 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
                 });
             }
         });
+
+        if(DataSession.getInstance().isHomePageOn())
+        {
+            holder.options.setVisibility(View.INVISIBLE);
+        } else
+        {
+            holder.options.setVisibility(View.VISIBLE);
+        }
 
         /*holder.iv_delete_notification = (ImageView) convertView.findViewById(R.id.iv_delete_notification);
         holder.iv_delete_notification.setTag(holder.modelHolder);
@@ -140,7 +149,7 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
         return convertView;
     }
 
-    public static class ViewHolder {
+    public class ViewHolder {
         NotificationModel modelHolder;
 
         public TextView notif_row_type;

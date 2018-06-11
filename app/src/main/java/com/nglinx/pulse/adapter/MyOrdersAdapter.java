@@ -102,7 +102,7 @@ public class MyOrdersAdapter extends ArrayAdapter<DeviceOrderModel> {
         return convertView;
     }
 
-    public static class ViewHolder {
+    public class ViewHolder {
         DeviceOrderModel modelHolder;
 
         public TextView tv_order_id;

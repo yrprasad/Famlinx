@@ -54,7 +54,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     public void onCancelClick(View v) {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
         finish();
     }
@@ -126,7 +126,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void onTermsAndConditionClick(View v) {
-        Intent intent = new Intent(this, TermsAndConditionsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), TermsAndConditionsActivity.class);
         startActivity(intent);
         finish();
     }

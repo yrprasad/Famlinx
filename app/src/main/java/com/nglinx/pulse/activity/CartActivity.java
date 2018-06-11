@@ -129,20 +129,20 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void onAddAddressCancelClickHandler(View v) {
-        Intent intent4 = new Intent(this, AddAddressActivity.class);
+        Intent intent4 = new Intent(getApplicationContext(), AddAddressActivity.class);
         startActivity(intent4);
         finish();
     }
 
     public void onCartSelectAddressButtonClick(View v) {
-        Intent intent4 = new Intent(this, SelectAddressActivity.class);
+        Intent intent4 = new Intent(getApplicationContext(), SelectAddressActivity.class);
         startActivity(intent4);
         finish();
     }
 
 
     public void onCartAddAddressButtonClick(View v) {
-        Intent intent4 = new Intent(this, AddAddressActivity.class);
+        Intent intent4 = new Intent(getApplicationContext(), AddAddressActivity.class);
         startActivity(intent4);
         finish();
     }

@@ -62,12 +62,12 @@ public class OrderFailedActivity extends AppCompatActivity {
     }
 
     public void OnRetryOrderClickHandler(View v) {
-        Intent intent4 = new Intent(this, BuyNowActivity.class);
+        Intent intent4 = new Intent(getApplicationContext(), BuyNowActivity.class);
         startActivity(intent4);
     }
 
     public void OnGoToHomeOrderClickHandler(View v) {
-        Intent intent4 = new Intent(this, HomeActivity.class);
+        Intent intent4 = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent4);
     }
 }

@@ -43,20 +43,23 @@ public class AddMemberAdapter extends ArrayAdapter implements Filterable {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
 
-                FilterResults filterResults = new FilterResults();
+                final FilterResults filterResults = new FilterResults();
+                final List<UserModel> userModels = new ArrayList<>();
+
                 if (constraint != null) {
                     try {
                         //get data from the web
                         String term = constraint.toString();
 
-                        final List<UserModel> userModels = new ArrayList<>();
                         ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(context, RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-
                         apiEndpointInterface.getFilteredUsers(term + "*", new RetroResponse<UserModel>() {
                             @Override
                             public void onSuccess() {
                                 members.clear();
                                 members.addAll(models);
+                                filterResults.values = userModels;
+                                filterResults.count = userModels.size();
+                                notifyDataSetChanged();
                             }
 
                             @Override
@@ -67,8 +70,6 @@ public class AddMemberAdapter extends ArrayAdapter implements Filterable {
 
                     } catch (Exception e) {
                     }
-                    filterResults.values = members;
-                    filterResults.count = members.size();
                 }
                 return filterResults;
             }

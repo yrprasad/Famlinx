@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 public class ApplicationConstants {
 
     public static final String GROUP_STATUS_ACTIVE = "ACTIVE";
-    public static String DEFAULT_GROUP_NAME = "Default";
+    public static String DEFAULT_GROUP_NAME = "Home";
     public static String DEFAULT_GROUP_ID = "0";
 
     public static String SHARING_PENDING_INVITES_HEADER = "Pending Invites";
@@ -25,6 +25,8 @@ public class ApplicationConstants {
     public static int SETTINGS_DELETE_MEMBER_FINISH = 2;
 
     public static int SETTINGS_PAGE_REQUEST_CODE = 1;
+
+    public static int ACTIVITY_SUCCESS_CODE = 1;
 
     public static String JSESSION_ID_HEADER = "JSESSIONID";
     public static String REMEMBER_ME_HEADER = "remember-me";

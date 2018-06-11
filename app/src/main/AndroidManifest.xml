@@ -76,8 +76,6 @@
                   android:screenOrientation="portrait"></activity>
         <activity android:name="com.nglinx.pulse.activity.TermsAndConditionsActivity"
                   android:screenOrientation="portrait"></activity>
-        <activity android:name="com.nglinx.pulse.activity.MemberProfileActivity"
-                  android:screenOrientation="portrait"></activity>
         <activity android:name="com.nglinx.pulse.activity.DeviceActivity"
                   android:screenOrientation="portrait"></activity>
         <activity android:name="com.nglinx.pulse.activity.EditProfileActivity"

@@ -107,7 +107,7 @@ public class DeviceTypesAdapter extends ArrayAdapter<DeviceTypesModel> {
     }
 
 
-    public static class ViewHolder {
+    public class ViewHolder {
         public TextView tv_device_type, tv_order_type;
         public ImageView img_device_type;
     }

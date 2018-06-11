@@ -261,7 +261,7 @@ public class BuyNowActivity extends AbstractActivity {
 
     public void onCartContinueButtonClick(View v) {
         ds.setDeviceTypesList(deviceTypesList);
-        Intent intent = new Intent(this, CartActivity.class);
+        Intent intent = new Intent(getApplication(), CartActivity.class);
         startActivity(intent);
     }
 }

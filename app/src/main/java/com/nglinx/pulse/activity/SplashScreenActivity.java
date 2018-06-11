@@ -40,7 +40,7 @@ public class SplashScreenActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
+        Fabric.with(getApplicationContext(), new Crashlytics());
 
         // Remove the Title Bar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -81,22 +81,22 @@ public class SplashScreenActivity extends Activity {
 
         //If Internet not present, return error.
         if (!InternetUtils.isConnectingToInternet(getApplicationContext())) {
-            DialogUtils.diaplayErrorDialog(SplashScreenActivity.this, ErrorMessages.NO_INTERNET_CONNECTION);
+            DialogUtils.diaplayErrorDialog(getApplicationContext(), ErrorMessages.NO_INTERNET_CONNECTION);
         } else {
 
             //If the user is not logged in previously, direct him to Sensor Screen screen.
             if (!SharedPrefUtility.isOneTimeLoggedIn(getApplicationContext())) {
                 ds.clearLoginRelatedInfo(getApplicationContext());
                 // Start MainActivity.class
-                Intent myIntent = new Intent(SplashScreenActivity.this,
+                Intent myIntent = new Intent(getApplicationContext(),
                         LoginActivity.class);
                 startActivity(myIntent);
                 finish();
             } else {
                 ds.setLoginRelatedInfoToDataSession(getApplicationContext());
 
-                final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(SplashScreenActivity.this, "Logging In...");
-                Intent intent = new Intent(Intent.ACTION_SYNC, null, this, AuthenticateIntentService.class);
+                final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(this, "Logging In...");
+                Intent intent = new Intent(Intent.ACTION_SYNC, null, getApplicationContext(), AuthenticateIntentService.class);
                 intent.putExtra("receiver", new ResultReceiver(new Handler()) {
                     @Override
                     protected void onReceiveResult(int resultCode, Bundle resultData) {
@@ -111,7 +111,7 @@ public class SplashScreenActivity extends Activity {
                                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
                                 ds.clearLoginRelatedInfo(getApplicationContext());
                                 SharedPrefUtility.clearprofile(getApplicationContext());
-                                DialogUtils.diaplayDialogAndStartIntentOnOk(SplashScreenActivity.this, "Error", (String) resultData.get(ApplicationConstants.ERROR_MSG), LoginActivity.class);
+                                DialogUtils.diaplayDialogAndStartIntentOnOk(getApplicationContext(), "Error", (String) resultData.get(ApplicationConstants.ERROR_MSG), LoginActivity.class);
                         }
                     }
                 });
