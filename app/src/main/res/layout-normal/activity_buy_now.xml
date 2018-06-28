@@ -18,7 +18,7 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
         <!-- include your toolbar layout-->
-        <include 
+        <include
             android:id="@+id/inc_toolbar"
             layout="@layout/toolbar_buy_now"/>
         <!-- Let's add fragment -->
@@ -50,7 +50,7 @@
                             android:layout_height="0dp"
                             android:layout_weight=".5"/>
 
-                        <RelativeLayout
+                        <!--<RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="5">
@@ -67,6 +67,304 @@
                                     android:layout_height="match_parent"
                                     android:fillViewport="true">
                                 </com.nglinx.pulse.utils.view.HorizontalView>
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>-->
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="5">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:weightSum="4"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:onClick="onA9BasicBuyClick">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:weightSum="5">
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="3">
+
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_eighty"
+                                                android:layout_height="@dimen/image_height_eighty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/circle"/>
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_seventy"
+                                                android:layout_height="@dimen/image_height_fifty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/teenage_device"/>
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:text="A9 - Basic"/>
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/ripple_effect"
+                                                android:clickable="true"
+                                                android:text="BUY"/>
+
+                                        </RelativeLayout>
+
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:onClick="onV7AdvancedBuyClick">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:weightSum="5">
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="3">
+
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_eighty"
+                                                android:layout_height="@dimen/image_height_eighty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/circle"/>
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_seventy"
+                                                android:layout_height="@dimen/image_height_fifty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/teenage_device"/>
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:text="V7-Advanced"/>
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/ripple_effect"
+                                                android:clickable="true"
+                                                android:text="BUY"/>
+
+                                        </RelativeLayout>
+
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:onClick="onA9BasicRentClick">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:weightSum="5"
+                                        android:orientation="vertical">
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="3">
+
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_eighty"
+                                                android:layout_height="@dimen/image_height_eighty"
+                                                android:background="@drawable/circle"
+                                                android:layout_centerVertical="true"
+                                                android:layout_centerHorizontal="true"/>
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_seventy"
+                                                android:layout_height="@dimen/image_height_fifty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/teenage_device"/>
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:text="A9-Basic"/>
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/ripple_effect"
+                                                android:clickable="true"
+                                                android:text="RENT"/>
+
+                                        </RelativeLayout>
+
+
+                                    </LinearLayout>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:onClick="onV7AdvancedRentClick">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:weightSum="5"
+                                        android:orientation="vertical">
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="3">
+
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_eighty"
+                                                android:layout_height="@dimen/image_height_eighty"
+                                                android:background="@drawable/circle"
+                                                android:layout_centerVertical="true"
+                                                android:layout_centerHorizontal="true"/>
+
+                                            <ImageView
+                                                android:layout_width="@dimen/image_width_seventy"
+                                                android:layout_height="@dimen/image_height_fifty"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/teenage_device"/>
+
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:text="V7-Advanced"/>
+
+                                        </RelativeLayout>
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="0dp"
+                                            android:layout_weight="1">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_centerHorizontal="true"
+                                                android:layout_centerVertical="true"
+                                                android:background="@drawable/ripple_effect"
+                                                android:clickable="true"
+                                                android:text="RENT"/>
+
+                                        </RelativeLayout>
+
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
 
                             </LinearLayout>
 
@@ -824,7 +1122,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:visibility="visible"
+        android:visibility="gone"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 

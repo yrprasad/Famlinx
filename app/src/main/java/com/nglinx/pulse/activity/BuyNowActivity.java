@@ -1,12 +1,10 @@
 package com.nglinx.pulse.activity;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -31,12 +29,12 @@ import java.util.ArrayList;
 
 public class BuyNowActivity extends AbstractActivity {
 
-    HorizontalView hv_devices;
-    DeviceTypesAdapter deviceTypesAdapter;
+    //    HorizontalView hv_devices;
+//    DeviceTypesAdapter deviceTypesAdapter;
     ArrayList<DeviceTypesModel> deviceTypesList;
     ArrayList<DeviceCartModel> devicesCart;
 
-    DeviceTypeClickListener deviceTypeClickListener;
+//    DeviceTypeClickListener deviceTypeClickListener;
 
     TextView tv_size_1;
     TextView tv_size_2;
@@ -79,11 +77,11 @@ public class BuyNowActivity extends AbstractActivity {
 
     protected void initializeIcons() {
         deviceTypesList = new ArrayList<>();
-        deviceTypesAdapter = new DeviceTypesAdapter(getApplicationContext(), deviceTypesList);
-        hv_devices = (HorizontalView) findViewById(R.id.hv_devices);
-        hv_devices.setAdapter(deviceTypesAdapter);
-        deviceTypeClickListener = new DeviceTypeClickListener();
-        hv_devices.setOnItemClickListener(deviceTypeClickListener);
+//        deviceTypesAdapter = new DeviceTypesAdapter(getApplicationContext(), deviceTypesList);
+//        hv_devices = (HorizontalView) findViewById(R.id.hv_devices);
+//        hv_devices.setAdapter(deviceTypesAdapter);
+//        deviceTypeClickListener = new DeviceTypeClickListener();
+//        hv_devices.setOnItemClickListener(deviceTypeClickListener);
 
         tv_size_1 = (TextView) findViewById(R.id.tv_size_1);
         tv_size_2 = (TextView) findViewById(R.id.tv_size_2);
@@ -127,7 +125,7 @@ public class BuyNowActivity extends AbstractActivity {
         if (ds.getDeviceTypesList() != null) {
             deviceTypesList.clear();
             deviceTypesList.addAll(ds.getDeviceTypesList());
-            deviceTypesAdapter.notifyDataSetChanged();
+//            deviceTypesAdapter.notifyDataSetChanged();
             return;
         }
 
@@ -140,7 +138,7 @@ public class BuyNowActivity extends AbstractActivity {
                 ApplicationUtils.updateDefaultValueIfDeviceDescIsNull(models);
                 deviceTypesList.addAll(ApplicationUtils.getNonSensorDeviceTypesForBuy(models));
                 deviceTypesList.addAll(ApplicationUtils.getNonSensorDeviceTypesForRent(models));
-                deviceTypesAdapter.notifyDataSetChanged();
+//                deviceTypesAdapter.notifyDataSetChanged();
 
                 //Initialize the Cart
                 ds.setDeviceTypesList(deviceTypesList);
@@ -239,7 +237,7 @@ public class BuyNowActivity extends AbstractActivity {
 
         int rentalDays = et_rental_days.getValue();
 
-        if(selectedMember.getOrderType() == DeviceOrderType.RENT) {
+        if (selectedMember.getOrderType() == DeviceOrderType.RENT) {
             if (rentalDays <= 0) {
                 Toast.makeText(this, "Rental days cannot be zero", Toast.LENGTH_SHORT).show();
                 return;
@@ -264,4 +262,42 @@ public class BuyNowActivity extends AbstractActivity {
         Intent intent = new Intent(getApplication(), CartActivity.class);
         startActivity(intent);
     }
+
+
+    public void onA9BasicBuyClick(View v) {
+        selectedMember = ApplicationUtils.getDeviceByType(deviceTypesList, DeviceType.A9);
+
+        if (selectedMember != null)
+            displaySelectedDeviceDetails(selectedMember);
+        else
+            Toast.makeText(this, "Unable to get the info", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onV7AdvancedBuyClick(View v) {
+        selectedMember = ApplicationUtils.getDeviceByType(deviceTypesList, DeviceType.V7);
+
+        if (selectedMember != null)
+            displaySelectedDeviceDetails(selectedMember);
+        else
+            Toast.makeText(this, "Unable to get the info", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onA9BasicRentClick(View v) {
+        selectedMember = ApplicationUtils.getDeviceByType(deviceTypesList, DeviceType.A9);
+
+        if (selectedMember != null)
+            displaySelectedDeviceDetails(selectedMember);
+        else
+            Toast.makeText(this, "Unable to get the info", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onV7AdvancedRentClick(View v) {
+        selectedMember = ApplicationUtils.getDeviceByType(deviceTypesList, DeviceType.V7);
+
+        if (selectedMember != null)
+            displaySelectedDeviceDetails(selectedMember);
+        else
+            Toast.makeText(this, "Unable to get the info", Toast.LENGTH_SHORT).show();
+    }
+
 }

@@ -427,7 +427,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginLeft="@dimen/layout_margin_left_ten"
                                     android:background="@android:color/transparent"
-                                    android:hint="+91-1234567890"
+                                    android:hint="Mobile"
                                     android:inputType="phone"
                                     android:textColor="#ffffff"
                                     android:textColorHint="#ffffff"

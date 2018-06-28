@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.GroupAdapter;
@@ -375,7 +376,6 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         ds.clearSelectedGroupMember();
         return true;
     }
-
 
     class GroupClickListener implements AdapterView.OnItemClickListener {
 

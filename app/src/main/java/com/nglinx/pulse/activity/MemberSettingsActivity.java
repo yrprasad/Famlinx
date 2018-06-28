@@ -1,10 +1,13 @@
 package com.nglinx.pulse.activity;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +21,9 @@ import android.widget.ToggleButton;
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.FenceModel;
+import com.nglinx.pulse.models.GroupMemberModel;
+import com.nglinx.pulse.models.GroupModel;
+import com.nglinx.pulse.models.NotificationModel;
 import com.nglinx.pulse.models.SettingsModel;
 import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.utils.ApplicationUtils;
@@ -149,7 +155,7 @@ public class MemberSettingsActivity extends AppCompatActivity {
             @Override
             public void onFailure() {
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
-                DialogUtils.diaplayDialog(MemberSettingsActivity.this, "Failed to get the Member Settings", errorMsg);
+                DialogUtils.diaplayErrorDialog(MemberSettingsActivity.this, "User Settings not found. User not yet accepted your invite");
             }
         });
     }
@@ -248,9 +254,55 @@ public class MemberSettingsActivity extends AppCompatActivity {
     }
 
 
+    public void onDeleteMember(View v) {
+
+        String groupId = ds.getSelected_group_id();
+        if ((null == groupId) || (groupId.equalsIgnoreCase(""))) {
+            GroupModel group = ApplicationUtils.getGroupOfSelectedMember(ds.getSelected_group_member_id(), ds.getUserModel().getGroups());
+            groupId = group.getId();
+        }
+
+        final String fGroupId = groupId;
+
+        new AlertDialog.Builder(MemberSettingsActivity.this)
+                .setTitle("Delete Member")
+                .setMessage("Do you want to delete member " + ds.getSelected_group_member_name())
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(MemberSettingsActivity.this);
+                        ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
+                        apiEndpointInterface.deleteMemerFromGroup(ds.getUserModel().getId(), fGroupId, ds.getSelected_group_member_id(), new RetroResponse<GroupMemberModel>() {
+                            @Override
+                            public void onSuccess() {
+                                ProgressbarUtil.stopProgressBar(mProgressDialog1);
+                                DialogUtils.diaplaySuccessDialog(MemberSettingsActivity.this, "Successfully deleted the member");
+                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure() {
+                                ProgressbarUtil.stopProgressBar(mProgressDialog1);
+                                DialogUtils.diaplayDialog(MemberSettingsActivity.this, "Failed to delete the member", errorMsg);
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
     public void onSaveSettings(View v) {
 
         System.out.println("Settings Activity Save Button Clicked");
+
+        if(settingsModel == null)
+        {
+            DialogUtils.diaplayErrorDialog(getApplicationContext(), "Cannot save settings. User not yet accepted your invite");
+            return;
+        }
 
         if (!speed_text.getText().equals("")) {
             settingsModel.getSpeed().setEnabled(true);

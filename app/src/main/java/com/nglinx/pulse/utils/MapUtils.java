@@ -67,7 +67,16 @@ public class MapUtils {
 
                 final GoogleMap googleMap = map;
                 googleMap.clear();
+
                 Marker marker = googleMap.addMarker(markerOptions);
+
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        DataSession.getInstance().switchDisplayInfoWindowEnabled();
+                        return true;
+                    }
+                });
 
                 if (DataSession.getInstance().isShowMyLocation()) {
                     if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -92,7 +101,9 @@ public class MapUtils {
                 googleMap.setInfoWindowAdapter(new CustomInfoViewAdaptor(context, member.getTrackingModel()));
                 googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 googleMap.setIndoorEnabled(false);
-                marker.showInfoWindow();
+
+                if (DataSession.getInstance().isDisplayInfoWindowEnabled())
+                    marker.showInfoWindow();
             }
         });
     }

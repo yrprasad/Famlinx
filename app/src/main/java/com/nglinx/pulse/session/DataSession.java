@@ -35,6 +35,8 @@ public class DataSession {
 
     private boolean isHomePageOn;
 
+    private boolean isDisplayInfoWindowEnabled;
+
     public boolean isHomePageOn() {
         return isHomePageOn;
     }
@@ -82,6 +84,7 @@ public class DataSession {
         canGetLocation = false;
         appKey = FirebaseInstanceId.getInstance().getToken();
         devicesCart = new ArrayList<>();
+        isDisplayInfoWindowEnabled = true;
     }
 
     private String username;
@@ -556,5 +559,17 @@ public class DataSession {
                 defaultGroupId = groupModel.getId();
             }
         }
+    }
+
+    public boolean isDisplayInfoWindowEnabled() {
+        return isDisplayInfoWindowEnabled;
+    }
+
+    public void setDisplayInfoWindowEnabled(boolean displayInfoWindowEnabled) {
+        isDisplayInfoWindowEnabled = displayInfoWindowEnabled;
+    }
+
+    public void switchDisplayInfoWindowEnabled() {
+        isDisplayInfoWindowEnabled = !isDisplayInfoWindowEnabled;
     }
 }

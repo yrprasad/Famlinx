@@ -1,5 +1,8 @@
 package com.nglinx.pulse.utils;
 
+import android.text.TextUtils;
+import android.util.Patterns;
+
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.AddressModel;
 import com.nglinx.pulse.models.DeviceCartModel;
@@ -28,6 +31,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit.client.Header;
 
@@ -510,5 +515,21 @@ public class ApplicationUtils {
             return -1;
         else
             return 1;
+    }
+
+    public static DeviceTypesModel getDeviceByType(ArrayList<DeviceTypesModel> devicesList,DeviceType deviceType) {
+        for (DeviceTypesModel device :
+                devicesList) {
+            if(device.getType().equals(deviceType))
+                return device;
+        }
+        return null;
+    }
+
+    public static boolean isValidPhoneNumber(CharSequence phoneNumber) {
+        if (!TextUtils.isEmpty(phoneNumber)) {
+            return Patterns.PHONE.matcher(phoneNumber).matches();
+        }
+        return false;
     }
 }

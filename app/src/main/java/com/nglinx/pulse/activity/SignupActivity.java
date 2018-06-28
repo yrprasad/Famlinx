@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.models.RegisterModel;
 import com.nglinx.pulse.models.UserType;
+import com.nglinx.pulse.utils.ApplicationUtils;
 import com.nglinx.pulse.utils.DialogUtils;
 import com.nglinx.pulse.utils.EmailValidator;
 import com.nglinx.pulse.utils.ProgressbarUtil;
@@ -94,6 +95,36 @@ public class SignupActivity extends AppCompatActivity {
             return;
         } else if (!str_password.equals(str_confirmpassword.toString())) {
             DialogUtils.diaplayErrorDialog(SignupActivity.this, "New Passwords does not match");
+            return;
+        }
+
+        if(!(new EmailValidator()).validate(str_email))
+        {
+            DialogUtils.diaplayErrorDialog(SignupActivity.this, "Invalid email address");
+            return;
+        }
+
+        if(!str_username.matches("[A-Za-z0-9_.]+"))
+        {
+            DialogUtils.diaplayErrorDialog(SignupActivity.this, "Invalid username. Allowed Characters are [A-Za-z0-9_.]");
+            return;
+        }
+
+        if(str_username.length() < 4)
+        {
+            DialogUtils.diaplayErrorDialog(SignupActivity.this, "Username should be minimum of 4 characters");
+            return;
+        }
+
+        if(str_name.length() < 4)
+        {
+            DialogUtils.diaplayErrorDialog(SignupActivity.this, "Name should be minimum of 4 characters");
+            return;
+        }
+
+        if(!ApplicationUtils.isValidPhoneNumber(str_phone))
+        {
+            DialogUtils.diaplayErrorDialog(SignupActivity.this, "Invalid Mobile Number");
             return;
         }
 
