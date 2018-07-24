@@ -97,4 +97,21 @@ public class ApplicationConstants {
             new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
 
     public static final int GRACE_PERIOD_TO_ACTIVATION = 7;
+
+    public static int ACTIVITY_ADD_MEMBER = 1;
+    public static int ACTIVITY_MEMBER_SETTINGS = 2;
+    public static int ACTIVITY_CREATE_GROUP = 3;
+    public static int ACTIVITY_EDIT_PROFILE = 4;
+    public static int ACTIVITY_ADD_ADDRESS = 5;
+    public static int ACTIVITY_SELECT_ADDRESS = 6;
+    public static int ACTIVITY_ORDER_SUCCESS = 7;
+    public static int ACTIVITY_ORDER_FAILURE = 8;
+    public static int ACTIVITY_APPLY_FENCE = 9;
+    public static int ACTIVITY_NOTIFICATION_DETAIL = 10;
+
+    public static int ACTIVITY_REFRESH_RESULT_CODE = 0;
+    public static int ACTIVITY_DONOT_REFRESH_RESULT_CODE = 1;
+
+    public static String ACTIVITY_RESULT_CODE = "RESULT_CODE";
+
 }

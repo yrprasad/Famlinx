@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.NotificationsAdapter;
+import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.NotificationModel;
 import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.utils.DialogUtils;
@@ -122,7 +123,7 @@ public class NotificationActivity extends AbstractActivity implements SwipeRefre
             NotificationModel selectedNotifModel = (NotificationModel) notifications_lv.getItemAtPosition(i);
             intent.putExtra("NotifDateBundle", selectedNotifModel.getType().toString() + " : " + selectedNotifModel.getCreatedDate());
             intent.putExtra("NotifTextBundle", selectedNotifModel.getMessage());
-            startActivity(intent);
+            startActivityForResult(intent, ApplicationConstants.ACTIVITY_NOTIFICATION_DETAIL);
         }
     }
 
@@ -179,7 +180,7 @@ public class NotificationActivity extends AbstractActivity implements SwipeRefre
         final NotificationModel selectedNotifModel = (NotificationModel) v.getTag();
         intent.putExtra("NotifDateBundle", selectedNotifModel.getType().toString() + " : " + selectedNotifModel.getCreatedDate());
         intent.putExtra("NotifTextBundle", selectedNotifModel.getMessage());
-        startActivity(intent);
+        startActivityForResult(intent, ApplicationConstants.ACTIVITY_NOTIFICATION_DETAIL);
     }
 
    /* public void onProfileItemClick(View view, int position, long id) {

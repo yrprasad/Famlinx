@@ -59,7 +59,7 @@
                                 android:background="@drawable/fence_spinner_background"
                                 android:entries="@array/fence_arrays"
                                 android:overlapAnchor="false"
-                                android:popupBackground="#00405d"
+                                android:popupBackground="#e4e7e9"
                                 android:prompt="@string/fence_prompt"
                                 android:textColor="#ffffff"
                                 android:theme="@style/MatchSpinnerTheme"/>

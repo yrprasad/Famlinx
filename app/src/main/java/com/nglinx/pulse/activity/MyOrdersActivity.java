@@ -76,8 +76,8 @@ public class MyOrdersActivity extends AbstractActivity implements SwipeRefreshLa
                     myOrdersList.addAll(models);
                     Collections.sort(myOrdersList);
                     adapter.notifyDataSetChanged();
-                    ProgressbarUtil.stopProgressBar(mProgressDialog1);
                 }
+                ProgressbarUtil.stopProgressBar(mProgressDialog1);
             }
 
             @Override

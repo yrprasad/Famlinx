@@ -107,13 +107,6 @@ public class GroupMemberAdapter extends ArrayAdapter<GroupMemberModel> {
         return convertView;
     }
 
-   /* public class ViewHolder {
-        public TextView name;
-        ImageView member_image;
-        ImageView member_type_image;
-        ImageView img_online;
-    }*/
-
     public void setArr2(ArrayList<GroupMemberModel> arr2) {
         this.arr2 = arr2;
     }

@@ -10,7 +10,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -37,6 +39,7 @@ import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.GroupAdapter;
 import com.nglinx.pulse.adapter.GroupMemberAdapter;
 import com.nglinx.pulse.adapter.NotificationsAdapter;
+import com.nglinx.pulse.adapter.ViewPagerAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
@@ -60,17 +63,19 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import me.relex.circleindicator.CircleIndicator;
+
 public class HomeActivity extends AbstractActivity implements LocationListener, GoogleMap.OnCameraChangeListener, GoogleMap.OnMyLocationButtonClickListener {
 
     public DrawerLayout drawerLayout;
 
     //Pager
-//    private ViewPager mPager;
+    private ViewPager mPager;
     private int currentPage = 0;
-    //    private static final Integer[] XMEN= {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4, R.drawable.image_5};
+//        private static final Integer[] XMEN= {R.drawable.cradle1, R.drawable.cradle2};
 
-//    private final Integer[] XMEN= {R.drawable.cradle2};
-//    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
+    private final Integer[] XMEN= {R.drawable.cradle2};
+    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
     //Group Details
     public ArrayList<GroupModel> groupsList;
@@ -91,7 +96,6 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     private RelativeLayout lt_members_detail;
     private RelativeLayout lt_views;
     private RelativeLayout lt_members;
-    //    private RelativeLayout lt_search_bar;
     private WebView webView;
     SupportMapFragment fm;
 
@@ -99,7 +103,6 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     TextView tv_username_grouptabs;
     Button bt_addGroup;
     CreateGroupListener createGroupListener;
-//    View headerLayout_groups;
 
     boolean canGetLocation = false;
 
@@ -111,13 +114,9 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     private MarkerOptions markerOptions;
     private LocationManager locationManager;
     private Location location;
-    Fragment mapFragment;
     MapUtils mapUtils;
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
-    //boolean canGetLocation = false;
-
-    BackendService backendService;
 
     Timer timer_map_refresh;
     MapRefreshTimerTask mapRefreshTimerTask;
@@ -163,7 +162,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
         refreshUserDetails();
 
-//        initPager();
+        initPager();
 
         createDefaultGroupIfNotPresent();
 
@@ -174,7 +173,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     }
 
 
-    /*private void initPager() {
+    private void initPager() {
 
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);
@@ -200,7 +199,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 handler.post(Update);
             }
         }, 5000, 10000);
-    }*/
+    }
 
     @Override
     public void onPause() {
@@ -427,8 +426,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
             if (selectedMember.getId().equals("")) {
                 Intent intent = new Intent(HomeActivity.this, AddMemberActivity.class);
-                startActivityForResult(intent, ApplicationConstants.ACTIVITY_SUCCESS_CODE);
-                finish();
+                startActivityForResult(intent, ApplicationConstants.ACTIVITY_ADD_MEMBER);
             } else {
                 ds.setSelected_group_member_id(selectedMember.getId());
 
@@ -454,7 +452,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
             if (!ds.getSelected_group_id().equals("0")) {
                 Intent intent = new Intent(getApplicationContext(), MemberSettingsActivity.class);
-                startActivityForResult(intent, ApplicationConstants.SETTINGS_PAGE_REQUEST_CODE);
+                startActivityForResult(intent, ApplicationConstants.ACTIVITY_MEMBER_SETTINGS);
                 return true;
             }
 
@@ -710,7 +708,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getApplicationContext(), CreateGroupActivty.class);
-            startActivity(intent);
+            startActivityForResult(intent, ApplicationConstants.ACTIVITY_CREATE_GROUP);
         }
     }
 
@@ -864,8 +862,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         DataSession.getInstance().fetchDefaultGroupDetails();
 
         final DataSession ds = DataSession.getInstance();
-        if((ds.getDefaultGroupId() != null) && (!ds.getDefaultGroupId().equalsIgnoreCase("")))
-        {
+        if ((ds.getDefaultGroupId() != null) && (!ds.getDefaultGroupId().equalsIgnoreCase(""))) {
             return;
         }
 
@@ -885,5 +882,20 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 System.out.print("Failed to create group");
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if ((requestCode == ApplicationConstants.ACTIVITY_ADD_MEMBER)
+                || (requestCode == ApplicationConstants.ACTIVITY_CREATE_GROUP)
+                || (requestCode == ApplicationConstants.ACTIVITY_MEMBER_SETTINGS)) {
+            if (resultCode == RESULT_OK) {
+                finish();
+                startActivity(getIntent());
+            }
+        }
     }
 }

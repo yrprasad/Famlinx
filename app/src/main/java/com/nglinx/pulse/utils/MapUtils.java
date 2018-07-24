@@ -74,6 +74,8 @@ public class MapUtils {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
                         DataSession.getInstance().switchDisplayInfoWindowEnabled();
+                        if(DataSession.getInstance().isDisplayInfoWindowEnabled())
+                            marker.showInfoWindow();
                         return true;
                     }
                 });

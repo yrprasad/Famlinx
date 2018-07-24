@@ -7,15 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.activity.CartActivity;
-import com.nglinx.pulse.activity.NotificationActivity;
 import com.nglinx.pulse.models.DeviceCartModel;
 import com.nglinx.pulse.models.DeviceOrderType;
 import com.nglinx.pulse.models.DeviceType;
-import com.nglinx.pulse.models.DeviceCartModel;
 
 import java.util.ArrayList;
 
@@ -85,9 +84,21 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceCartModel> {
                 ((CartActivity) context).onItemClick(holder.tv_cart_minus, holder.tv_cart_count, holder.tv_cart_cost, position, 0);
             }
         });
+        holder.rl_cart_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CartActivity) context).onItemClick(holder.tv_cart_minus, holder.tv_cart_count, holder.tv_cart_cost, position, 0);
+            }
+        });
 
         holder.tv_cart_plus.setTag(holder.modelHolder);
         holder.tv_cart_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CartActivity) context).onItemClick(holder.tv_cart_plus, holder.tv_cart_count, holder.tv_cart_cost, position, 0);
+            }
+        });
+        holder.rl_cart_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((CartActivity) context).onItemClick(holder.tv_cart_plus, holder.tv_cart_count, holder.tv_cart_cost, position, 0);
@@ -136,6 +147,11 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceCartModel> {
         holder.tv_cart_count = (EditText) convertView.findViewById(R.id.tv_cart_count);
         holder.tv_cart_minus = (TextView) convertView.findViewById(R.id.tv_cart_minus);
         holder.tv_cart_plus = (TextView) convertView.findViewById(R.id.tv_cart_plus);
+
+
+        holder.rl_cart_minus = (RelativeLayout) convertView.findViewById(R.id.rl_cart_minus);
+        holder.rl_cart_plus = (RelativeLayout) convertView.findViewById(R.id.rl_cart_plus);
+
         holder.tv_cart_cost = (TextView) convertView.findViewById(R.id.tv_cart_cost);
     }
 
@@ -145,8 +161,12 @@ public class DevicesCartAdapter extends ArrayAdapter<DeviceCartModel> {
         public ImageView img_device_type;
         public TextView tv_device_type;
         public TextView tv_cart_device_desc;
+
+        public RelativeLayout rl_cart_minus;
         public TextView tv_cart_minus;
         public EditText tv_cart_count;
+
+        public RelativeLayout rl_cart_plus;
         public TextView tv_cart_plus;
         public TextView tv_cart_cost;
     }

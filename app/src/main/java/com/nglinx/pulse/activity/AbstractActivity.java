@@ -95,34 +95,42 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 SharedPrefUtility.clearSelectedGroupMember(getApplicationContext());
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
+                finish();
                 return true;
             case R.id.nav_device:
                 Intent intent4 = new Intent(getApplicationContext(), DeviceActivity.class);
                 startActivity(intent4);
+                finish();
                 return true;
             case R.id.nav_buynow:
                 Intent intent6 = new Intent(getApplicationContext(), BuyNowActivity.class);
                 startActivity(intent6);
+                finish();
                 return true;
             case R.id.nav_changepassword:
                 Intent intent7 = new Intent(getApplicationContext(), ChangePasswordActivity.class);
                 startActivity(intent7);
+                finish();
                 return true;
             case R.id.nav_fence:
                 Intent intent3 = new Intent(getApplicationContext(), FenceActivity.class);
                 startActivity(intent3);
+                finish();
                 return true;
             case R.id.nav_sharing:
                 Intent intent2 = new Intent(getApplicationContext(), SharingActivity.class);
                 startActivity(intent2);
+                finish();
                 return true;
             case R.id.nav_notification:
                 Intent intent9 = new Intent(getApplicationContext(), NotificationActivity.class);
                 startActivity(intent9);
+                finish();
                 return true;
             case R.id.nav_myorders:
                 Intent intent5 = new Intent(getApplicationContext(), MyOrdersActivity.class);
                 startActivity(intent5);
+                finish();
                 return true;
             case R.id.nav_signout:
                 SignOutApi();
@@ -153,6 +161,7 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 ds.clearLoginRelatedInfo(getApplicationContext());
                 SharedPrefUtility.clearprofile(getApplicationContext());
                 startIntent(LoginActivity.class);
+                finish();
             }
 
             @Override
@@ -161,9 +170,14 @@ public class AbstractActivity extends AppCompatActivity implements NavigationVie
                 ds.clearLoginRelatedInfo(getApplicationContext());
                 SharedPrefUtility.clearprofile(getApplicationContext());
                 startIntent(LoginActivity.class);
+                finish();
             }
         });
     }
 
     protected void initializeIcons(){}
+
+    @Override
+    public void onBackPressed() {
+    }
 }

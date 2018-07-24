@@ -53,6 +53,12 @@ public class ApplyFenceActivity extends AppCompatActivity {
     FenceModel selectedFence;
 
     SettingsModel settingsModel = null;
+    Intent intent;
+
+    public ApplyFenceActivity()
+    {
+        intent = new Intent();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -241,8 +247,11 @@ public class ApplyFenceActivity extends AppCompatActivity {
     }
 
     public void onCancelClickHandler(View v) {
-        Intent intent7 = new Intent(getApplicationContext(), FenceActivity.class);
-        startActivity(intent7);
+        setResult(RESULT_CANCELED, intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

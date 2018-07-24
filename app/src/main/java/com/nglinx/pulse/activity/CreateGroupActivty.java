@@ -1,38 +1,23 @@
 package com.nglinx.pulse.activity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.nglinx.pulse.R;
-import com.nglinx.pulse.adapter.NotificationsAdapter;
 import com.nglinx.pulse.models.GroupModel;
-import com.nglinx.pulse.models.NotificationModel;
-import com.nglinx.pulse.models.UserModel;
 import com.nglinx.pulse.session.DataSession;
 import com.nglinx.pulse.utils.DialogUtils;
 import com.nglinx.pulse.utils.ProgressbarUtil;
 import com.nglinx.pulse.utils.retrofit.ApiEndpointInterface;
 import com.nglinx.pulse.utils.retrofit.RetroResponse;
 import com.nglinx.pulse.utils.retrofit.RetroUtils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class CreateGroupActivty extends AppCompatActivity {
 
@@ -41,8 +26,14 @@ public class CreateGroupActivty extends AppCompatActivity {
     EditText et_group_name;
     Button btn_create_group, btn_cancel;
     DataSession ds;
+    Intent intent;
 
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    public CreateGroupActivty()
+    {
+        intent = new Intent();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +92,11 @@ public class CreateGroupActivty extends AppCompatActivity {
     }
 
     public void cancelGroupClickHandler(View v) {
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        startActivity(intent);
+        setResult(RESULT_CANCELED, intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

@@ -57,10 +57,20 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="@dimen/layout_height_fourty"
-            android:layout_weight="2">
+            android:layout_height="@dimen/layout_height_thirty"
+            android:layout_weight="3">
 
-
+            <Button
+                android:id="@+id/btn_toolbar_cancel"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:textColor="@android:color/white"
+                android:text="Cancel"
+                android:textSize="10sp"
+                android:background="@drawable/header_background"/>
         </RelativeLayout>
 
     </LinearLayout>

@@ -115,8 +115,10 @@ public class AddAddressActivity extends AppCompatActivity {
     }
 
     public void onAddAddressCancelClickHandler(View v) {
-        Intent intent4 = new Intent(getApplicationContext(), CartActivity.class);
-        startActivity(intent4);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

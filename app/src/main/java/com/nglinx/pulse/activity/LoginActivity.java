@@ -129,10 +129,8 @@ public class LoginActivity extends AppCompatActivity {
     }*/
 
     public void onForgotPasswordClick(View V) {
-        /*Intent intent = new Intent(getApplicationContext(), ForgotPas*forswordActivty.class);
+        Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
         startActivity(intent);
-        finish();*/
-        Toast.makeText(getApplicationContext(), "This option is still under development", Toast.LENGTH_LONG).show();
     }
 
     @Override

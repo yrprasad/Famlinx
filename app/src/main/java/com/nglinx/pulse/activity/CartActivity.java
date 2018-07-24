@@ -39,9 +39,15 @@ public class CartActivity extends AppCompatActivity {
 
     DataSession ds;
 
-    TextView tv_total_cost, tv_total_pay;
+    TextView tv_total_cost, tv_total_pay, tv_shipping_cost;
 
     TextView tv_selectedAddress;
+    Intent intent;
+
+    public CartActivity()
+    {
+        intent = new Intent();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,7 @@ public class CartActivity extends AppCompatActivity {
 
         tv_total_cost = (TextView) findViewById(R.id.tv_total_cost);
         tv_total_pay = (TextView) findViewById(R.id.tv_total_pay);
+        tv_shipping_cost = (TextView) findViewById(R.id.tv_shipping_cost);
 
         tv_selectedAddress = (TextView) findViewById(R.id.tv_selectedAddress);
         if (null != ds.getSelectedAddress())
@@ -84,12 +91,14 @@ public class CartActivity extends AppCompatActivity {
         if (selectedNotifModel.getCount() > 0) {
             selectedNotifModel.setCount(selectedNotifModel.getCount() - 1);
             ((EditText) countView).setText(String.valueOf(selectedNotifModel.getCount()));
-            ((TextView) costView).setText(String.valueOf(selectedNotifModel.getCount() + selectedNotifModel.getCost()));
+            ((TextView) costView).setText(String.valueOf(selectedNotifModel.getCount() * selectedNotifModel.getCost()));
 
             int totalCost = getCartTotalCost();
             int totalPayable = getCartTotalPayable(totalCost);
+            int shippingCost = getShippingCost(totalCost);
             tv_total_cost.setText(String.valueOf(totalCost));
             tv_total_pay.setText(String.valueOf(totalPayable));
+            tv_shipping_cost.setText(String.valueOf(shippingCost));
         }
 
     }
@@ -98,12 +107,15 @@ public class CartActivity extends AppCompatActivity {
         final DeviceCartModel selectedNotifModel = (DeviceCartModel) v.getTag();
         selectedNotifModel.setCount(selectedNotifModel.getCount() + 1);
         ((EditText) countView).setText(String.valueOf(selectedNotifModel.getCount()));
-        ((TextView) costView).setText(String.valueOf(selectedNotifModel.getCount() + selectedNotifModel.getCost()));
+        ((TextView) costView).setText(String.valueOf(selectedNotifModel.getCount() * selectedNotifModel.getCost()));
 
         int totalCost = getCartTotalCost();
         int totalPayabale = getCartTotalPayable(totalCost);
+        int shippingCost = getShippingCost(totalCost);
+
         tv_total_cost.setText(String.valueOf(totalCost));
         tv_total_pay.setText(String.valueOf(totalPayabale));
+        tv_shipping_cost.setText(String.valueOf(shippingCost));
     }
 
     public void onItemClick(View view, View countView, View costView, int position, long id) {
@@ -124,27 +136,33 @@ public class CartActivity extends AppCompatActivity {
         return totalCost;
     }
 
+
+    private int getShippingCost(int totalCost) {
+        if(totalCost <= 0)
+            return 0;
+        return ApplicationConstants.SHIPPING_COST;
+    }
+
     private int getCartTotalPayable(int totalCost) {
+        if(totalCost <= 0)
+            return 0;
         return totalCost + ApplicationConstants.SHIPPING_COST;
     }
 
     public void onAddAddressCancelClickHandler(View v) {
         Intent intent4 = new Intent(getApplicationContext(), AddAddressActivity.class);
-        startActivity(intent4);
-        finish();
+        startActivityForResult(intent4, ApplicationConstants.ACTIVITY_ADD_ADDRESS);
     }
 
     public void onCartSelectAddressButtonClick(View v) {
         Intent intent4 = new Intent(getApplicationContext(), SelectAddressActivity.class);
-        startActivity(intent4);
-        finish();
+        startActivityForResult(intent4, ApplicationConstants.ACTIVITY_SELECT_ADDRESS);
     }
 
 
     public void onCartAddAddressButtonClick(View v) {
         Intent intent4 = new Intent(getApplicationContext(), AddAddressActivity.class);
-        startActivity(intent4);
-        finish();
+        startActivityForResult(intent4, ApplicationConstants.ACTIVITY_ADD_ADDRESS);
     }
 
     public void onCartOrderButtonClick(View v) {
@@ -395,4 +413,18 @@ public class CartActivity extends AppCompatActivity {
         });
     }*/
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ApplicationConstants.ACTIVITY_ADD_ADDRESS) {
+            finish();
+            startActivity(getIntent());
+        } else if (requestCode == ApplicationConstants.ACTIVITY_SELECT_ADDRESS) {
+            finish();
+            startActivity(getIntent());
+        }
+    }
 }

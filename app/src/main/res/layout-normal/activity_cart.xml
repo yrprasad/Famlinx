@@ -178,6 +178,7 @@
                                                 android:textSize="16sp"/>
 
                                             <TextView
+                                                android:id="@+id/tv_shipping_cost"
                                                 android:layout_width="0dp"
                                                 android:layout_height="match_parent"
                                                 android:layout_marginRight="20dp"

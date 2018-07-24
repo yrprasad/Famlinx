@@ -1,56 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                                        xmlns:tools="http://schemas.android.com/tools"
+                                        android:id="@+id/drawer_layout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fitsSystemWindows="true"
+                                        tools:openDrawer="start">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:fitsSystemWindows="true"
+                  tools:context=".MainActivity">
 
-        <ImageView
-            android:id="@+id/selected_notification_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/img1"
-            android:layout_centerHorizontal="true"/>
+        <include
+            android:id="@+id/inc_toolbar"
+            layout="@layout/toolbar_notification_detail" />
 
-        <TextView
-            android:id="@+id/line"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@+id/selected_notification_image"
-            android:layout_marginTop="10dp"
-            android:background="#cecece"/>
+            android:layout_height="150dp"
+            android:layout_below="@+id/inc_toolbar">
 
-        <TextView
-            android:id="@+id/notif_detail_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/line"
-            android:layout_marginTop="10dp"
-            android:text="Hide Notification"
-            android:gravity="center_horizontal"
-            android:clickable="true"
-            android:foreground="@drawable/ripple_effect"
-            android:textSize="14sp"
-            android:textColor="@android:color/black"/>
+            <ImageView
+                android:id="@+id/selected_notification_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/img1"/>
 
-        <TextView
-            android:id="@+id/notif_detail_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/notif_detail_date"
-            android:layout_marginTop="20dp"
-            android:clickable="true"
-            android:foreground="@drawable/ripple_effect"
-            android:gravity="center_horizontal"
-            android:text="Turn Off Notification from this device"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/selected_notification_image"
+                android:layout_marginTop="10dp"
+                android:background="#cecece"/>
+
+            <TextView
+                android:id="@+id/notif_detail_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:foreground="@drawable/ripple_effect"
+                android:gravity="center_horizontal"
+                android:text="Hide Notification"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/notif_detail_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/notif_detail_date"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                android:foreground="@drawable/ripple_effect"
+                android:gravity="center_horizontal"
+                android:text="Turn Off Notification from this device"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"/>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -137,6 +138,19 @@ public class MemberSettingsActivity extends AppCompatActivity {
         cb_email_fence = (CheckBox) findViewById(R.id.cb_email_fence);
         cb_email_speed = (CheckBox) findViewById(R.id.cb_email_speed);
         cb_email_battery = (CheckBox) findViewById(R.id.cb_email_battery);
+
+        Toolbar inc_toolbar;
+
+        inc_toolbar = (Toolbar) findViewById(R.id.inc_toolbar);
+
+        Button btn_toolbar_cancel = (Button) inc_toolbar.findViewById(R.id.btn_toolbar_cancel);
+        btn_toolbar_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_CANCELED, intent);
+                finish();
+            }
+        });
     }
 
 
@@ -278,8 +292,6 @@ public class MemberSettingsActivity extends AppCompatActivity {
                             public void onSuccess() {
                                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
                                 DialogUtils.diaplaySuccessDialog(MemberSettingsActivity.this, "Successfully deleted the member");
-                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                                startActivity(intent);
                                 finish();
                             }
 
@@ -410,5 +422,9 @@ public class MemberSettingsActivity extends AppCompatActivity {
                 speed_text.setText("");
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

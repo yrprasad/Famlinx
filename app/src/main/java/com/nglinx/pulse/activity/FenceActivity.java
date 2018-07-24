@@ -150,7 +150,6 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                 findViewById(R.id.ms_create_fence_cancel);
 
         inc_toolbar = (Toolbar) findViewById(R.id.inc_toolbar);
-
         ImageView img_myFences = (ImageView) inc_toolbar.findViewById(R.id.img_myFences);
         img_myFences.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -416,8 +415,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
     public void onApplyFenceFloatingBtnClick(View v) {
         Intent intent7 = new Intent(getApplicationContext(), ApplyFenceActivity.class);
         intent7.putExtra(ApplicationConstants.SELECTED_FENCE, selectedFence.getId());
-        startActivity(intent7);
-        finish();
+        startActivityForResult(intent7, ApplicationConstants.ACTIVITY_APPLY_FENCE);
     }
 
     public void onAddFenceFloatingBtnClick(View v) {
@@ -498,9 +496,8 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
     }
 
     public void on_ms_cancel_fence_click(View v) {
-        Intent intent7 = new Intent(getApplicationContext(), FenceActivity.class);
-        startActivity(intent7);
         finish();
+        startActivity(getIntent());
     }
 
     public void on_ms_add_fence_click(View v) {
@@ -598,8 +595,7 @@ public class FenceActivity extends AbstractActivity implements AdapterView.OnIte
                                                     Intent intent7 = new Intent(getApplicationContext(), ApplyFenceActivity.class);
                                                     ds.setSelectedFence(fenceModel);
                                                     intent7.putExtra(ApplicationConstants.SELECTED_FENCE, fenceModel.getId());
-                                                    startActivity(intent7);
-                                                    finish();
+                                                    startActivityForResult(intent7, ApplicationConstants.ACTIVITY_APPLY_FENCE);
                                                 }
                                             }).setNegativeButton(R.string.no, null).show();
                                     DialogUtils.diaplaySuccessDialog(FenceActivity.this, "Fence " + af_fence.getText() + " created successfully");

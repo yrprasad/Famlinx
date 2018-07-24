@@ -50,28 +50,36 @@
                             android:layout_height="0dp"
                             android:layout_weight=".5"/>
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="5">
+                            android:layout_weight="5"
+                            android:orientation="horizontal"
+                            android:weightSum="5">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:weightSum="10">
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/image_height_ninty"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:layout_weight="1.5"
+                                android:background="@drawable/teenage_device"
+                                android:layout_gravity="center_vertical"/>
 
-                                <com.nglinx.pulse.utils.view.HorizontalView
-                                    android:id="@+id/hv_devices"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:fillViewport="true">
-                                </com.nglinx.pulse.utils.view.HorizontalView>
+                            <Spinner
+                                android:id="@+id/hv_devices"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="3"
+                                android:background="@drawable/spinner_background"
+                                android:prompt="@string/device_prompt"
+                                android:popupBackground="#ffffff"
+                                android:spinnerMode="dropdown"
+                                android:theme="@style/devicespinnerstyletheme"/>
 
-                            </LinearLayout>
-
-
-                        </RelativeLayout>
+                        </LinearLayout>
 
                         <RelativeLayout
                             android:layout_width="match_parent"

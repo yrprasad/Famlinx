@@ -779,7 +779,22 @@ public class DeviceActivity extends AbstractActivity {
 
         Intent intent7 = new Intent(getApplicationContext(), EditProfileActivity.class);
         intent7.putExtra(ApplicationConstants.CHILD_PROFILE_SELECTED_USERID, iModel.getId());
-        startActivity(intent7);
-        finish();
+        startActivityForResult(intent7, ApplicationConstants.ACTIVITY_EDIT_PROFILE);
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ApplicationConstants.ACTIVITY_EDIT_PROFILE) {
+            if (resultCode == RESULT_OK) {
+                finish();
+                startActivity(getIntent());
+            }
+        }
+    }
+
+
 }

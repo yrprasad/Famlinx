@@ -23,13 +23,13 @@ public class DeviceTypesModel {
         sizes.add(2);
         sizes.add(3);
         description = new ArrayList<>(3);
-        description.add(name + "Description1");
-        description.add(name + "Description2");
-        description.add(name + "Description3");
+        description.add("Description1");
+        description.add("Description2");
+        description.add("Description3");
         care = new ArrayList<>(3);
-        care.add(name + "Care1");
-        care.add(name + "Care2");
-        care.add(name + "Care3");
+        care.add("Care1");
+        care.add("Care2");
+        care.add("Care3");
     }
 
     public DeviceTypesModel(DeviceType type, String name) {
@@ -110,6 +110,6 @@ public class DeviceTypesModel {
 
     @Override
     public String toString() {
-        return "DeviceTypesModel [type=" + type + ", name=" + name + "]";
+        return type + " " + orderType;
     }
 }

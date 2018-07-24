@@ -140,8 +140,7 @@ public class MyFencesActivity extends AppCompatActivity implements SwipeRefreshL
                     public void onClick(final DialogInterface dialog, int whichButton) {
                         Intent intent7 = new Intent(getApplicationContext(), ApplyFenceActivity.class);
                         intent7.putExtra(ApplicationConstants.SELECTED_FENCE, fenceModel.getId());
-                        startActivity(intent7);
-                        finish();
+                        startActivityForResult(intent7, ApplicationConstants.ACTIVITY_APPLY_FENCE);
                     }
                 }).setNegativeButton(android.R.string.no, null).show();
     }

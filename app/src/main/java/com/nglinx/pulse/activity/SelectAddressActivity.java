@@ -94,17 +94,17 @@ public class SelectAddressActivity extends AppCompatActivity {
         if (null == ds.getSelectedAddress()) {
             Toast.makeText(this, "Select any address", Toast.LENGTH_SHORT).show();
         } else {
-            Intent intent4 = new Intent(getApplicationContext(), CartActivity.class);
-            startActivity(intent4);
             finish();
         }
 
     }
 
     public void onSACancelClickHandler(View v) {
-        Intent intent4 = new Intent(getApplicationContext(), CartActivity.class);
-        startActivity(intent4);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
 }

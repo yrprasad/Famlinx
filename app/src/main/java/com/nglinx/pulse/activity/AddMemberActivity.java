@@ -1,6 +1,5 @@
 package com.nglinx.pulse.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -9,16 +8,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.adapter.AddMemberAdapter;
-import com.nglinx.pulse.models.FenceModel;
+import com.nglinx.pulse.constants.ApplicationConstants;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.UserModel;
 import com.nglinx.pulse.session.DataSession;
@@ -37,6 +36,7 @@ public class AddMemberActivity extends AppCompatActivity {
     Button nm_add_btn, nm_cancel_btn;
     UserModel selectedUserForAdd;
     AddMemberAdapter adapter;
+    Toolbar inc_toolbar;
 
     public AddMemberActivity() {
         intent = new Intent();
@@ -66,6 +66,17 @@ public class AddMemberActivity extends AppCompatActivity {
                     if (selectedUserForAdd.getPhone() != null)
                         nm_phone_value.setText(selectedUserForAdd.getPhone());
                 }
+            }
+        });
+
+        inc_toolbar = (Toolbar) findViewById(R.id.inc_toolbar);
+
+        Button btn_toolbar_cancel = (Button) inc_toolbar.findViewById(R.id.btn_toolbar_cancel);
+        btn_toolbar_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(RESULT_CANCELED, intent);
+                finish();
             }
         });
     }
@@ -125,8 +136,7 @@ public class AddMemberActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess() {
                                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
-                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                                startActivity(intent);
+                                setResult(RESULT_OK, intent);
                                 finish();
                             }
 
@@ -145,8 +155,12 @@ public class AddMemberActivity extends AppCompatActivity {
     }
 
     public void cancelClickHandler(View v) {
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        startActivity(intent);
+        setResult(RESULT_CANCELED, intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+    }
+
 }

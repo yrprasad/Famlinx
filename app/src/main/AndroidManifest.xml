@@ -86,6 +86,8 @@
                   android:screenOrientation="portrait"></activity>
         <activity android:name="com.nglinx.pulse.activity.MyOrdersActivity"
                   android:screenOrientation="portrait"></activity>
+        <activity android:name="com.nglinx.pulse.activity.ForgotPasswordActivity"
+                  android:screenOrientation="portrait"></activity>
 
         <!--<activity android:name=".mainClasses.RetroResponse"></activity>-->
         <service android:name=".activity.AuthenticateIntentService"></service>

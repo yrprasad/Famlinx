@@ -12,6 +12,7 @@
         android:orientation="horizontal"
         android:weightSum="15">
 
+
         <RelativeLayout
             android:id="@+id/menu_toolbar_layout"
             android:layout_width="0dp"
@@ -31,34 +32,33 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/layout_height_thirty"
-            android:layout_weight="2.5"/>
+            android:layout_weight="3"/>
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="@dimen/layout_height_fourty"
-            android:layout_weight="6">
-
-
+            android:layout_height="@dimen/layout_height_thirty"
+            android:layout_weight="5">
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="Add Member"
-                android:textSize="@dimen/text_size_twenty"
+                android:layout_centerHorizontal="true"
+                android:text="Notification"
+                android:textSize="@dimen/text_size_eighteen"
                 android:textColor="@android:color/white"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/layout_height_thirty"
-            android:layout_weight="1.5"/>
+            android:layout_weight="2.0"/>
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/layout_height_thirty"
-            android:layout_weight="3">
+            android:layout_weight="3"
+            android:onClick="OnCancelToolBarClick">
 
             <Button
                 android:id="@+id/btn_toolbar_cancel"
@@ -71,6 +71,7 @@
                 android:text="Cancel"
                 android:textSize="10sp"
                 android:background="@drawable/header_background"/>
+
         </RelativeLayout>
     </LinearLayout>
 

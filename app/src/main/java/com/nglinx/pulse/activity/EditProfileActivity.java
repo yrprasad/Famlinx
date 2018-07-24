@@ -34,6 +34,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
     Button btn_ep_save, btn_ep_cancel, btn_ep_delete;
     DataSession ds;
+    Intent intent;
+
+    public EditProfileActivity()
+    {
+        intent = new Intent();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,8 +66,7 @@ public class EditProfileActivity extends AppCompatActivity {
         btn_ep_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent7 = new Intent(EditProfileActivity.this, DeviceActivity.class);
-                startActivity(intent7);
+                setResult(RESULT_CANCELED, intent);
                 finish();
             }
         });
@@ -141,9 +146,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                                 }
                                             });
                                     builder.show();
-
-                                    Intent intent7 = new Intent(EditProfileActivity.this, DeviceActivity.class);
-                                    startActivity(intent7);
+                                    setResult(RESULT_OK, intent);
                                     finish();
                                 }
 
@@ -188,9 +191,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                             }
                                         });
                                 builder.show();
-
-                                Intent intent7 = new Intent(EditProfileActivity.this, DeviceActivity.class);
-                                startActivity(intent7);
+                                setResult(RESULT_OK, intent);
                                 finish();
                             }
 
@@ -203,5 +204,9 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }
