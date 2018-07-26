@@ -70,12 +70,12 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     public DrawerLayout drawerLayout;
 
     //Pager
-    private ViewPager mPager;
-    private int currentPage = 0;
+//    private ViewPager mPager;
+//    private int currentPage = 0;
 //        private static final Integer[] XMEN= {R.drawable.cradle1, R.drawable.cradle2};
 
-    private final Integer[] XMEN= {R.drawable.cradle2};
-    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
+//    private final Integer[] XMEN= {R.drawable.cradle2};
+//    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
     //Group Details
     public ArrayList<GroupModel> groupsList;
@@ -162,7 +162,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
         refreshUserDetails();
 
-        initPager();
+//        initPager();
 
         createDefaultGroupIfNotPresent();
 
@@ -173,7 +173,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
     }
 
 
-    private void initPager() {
+    /*private void initPager() {
 
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);
@@ -199,7 +199,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 handler.post(Update);
             }
         }, 5000, 10000);
-    }
+    }*/
 
     @Override
     public void onPause() {
