@@ -105,7 +105,7 @@ public interface ApiEndpointInterface {
     void trackMember(@Path("userId") String userId, @Path("groupId") String groupId, @Path("memberId") String memberId, Callback<ResponseDto<GroupMemberModel>> cb);
 
     @GET("/api/users/{userId}/notifications")
-    void getAllNotifications(@Path("userId") String userId, Callback<ResponseDto<NotificationModel>> cb);
+    void getAllNotifications(@Path("userId") String userId, @Query("page") String page, Callback<ResponseDto<NotificationModel>> cb);
 
     @DELETE("/api/users/{userId}/notifications/{notificationId}")
     void deleteNotification(@Path("userId") String userId, @Path("notificationId") String notificationId, Callback<ResponseDto<NotificationModel>> cb);

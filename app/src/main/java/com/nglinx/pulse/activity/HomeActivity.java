@@ -366,8 +366,8 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
         lt_views.setVisibility(View.GONE);
         lt_members.setVisibility(View.GONE);
 //        lt_search_bar.setVisibility(View.GONE);
-        webView.setVisibility(View.GONE);
-        fm.getView().setVisibility(View.VISIBLE);
+        webView.setVisibility(View.VISIBLE);
+        fm.getView().setVisibility(View.GONE);
     }
 
     @Override
@@ -806,7 +806,7 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
 
     private void getNotifications(final SwipeRefreshLayout swipeRefreshLayout_notifications) {
         ApiEndpointInterface apiEndpointInterface = RetroUtils.getHostAdapterForAuthenticate(getApplicationContext(), RetroUtils.URL_HIT).create(ApiEndpointInterface.class);
-        apiEndpointInterface.getAllNotifications(DataSession.getInstance().getUserModel().getId(), new RetroResponse<NotificationModel>() {
+        apiEndpointInterface.getAllNotifications(DataSession.getInstance().getUserModel().getId(), "0", new RetroResponse<NotificationModel>() {
             @Override
             public void onSuccess() {
                 if ((models != null) && (models.size() > 0)) {
