@@ -57,27 +57,26 @@ public class SelectAddressAdapter extends ArrayAdapter<AddressModel> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        // Get the data item for this position
-        AddressModel addressModel = getItem(position);
-
-        final ViewHolder holder = new ViewHolder();
-        holder.modelHolder = addressModel;
+        ViewHolder holder = null;
+        AddressModel modelHolder = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.activity_select_address_row, null);
+            holder = new ViewHolder();
+            holder.tv_address = (TextView) convertView.findViewById(R.id.tv_address);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.tv_address = (TextView) convertView.findViewById(R.id.tv_address);
-        holder.tv_address.setText(ApplicationUtils.getAddress(addressModel));
+        holder.tv_address.setText(ApplicationUtils.getAddress(modelHolder));
 
-        convertView.setTag(holder);
         // Return the completed view to render on screen
         return convertView;
     }
 
     public class ViewHolder {
-        AddressModel modelHolder;
         public TextView tv_address;
     }
 }

@@ -22,8 +22,6 @@ import java.util.ArrayList;
 
 public class MyFencesAdapter extends ArrayAdapter<FenceModel> {
 
-    private ViewHolder holder = null;
-
     private ArrayList<FenceModel> arr2;
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
@@ -66,27 +64,28 @@ public class MyFencesAdapter extends ArrayAdapter<FenceModel> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        // Get the data item for this position
-        FenceModel fenceModel = getItem(position);
-
-        final ViewHolder holder = new ViewHolder();
-        holder.modelHolder = fenceModel;
+        ViewHolder holder = null;
+        final FenceModel fenceModel = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.activity_myfences_row, null);
+            holder = new ViewHolder();
+            // Lookup view for data population
+            holder.tv_myfence_fencename = (TextView) convertView.findViewById(R.id.tv_myfence_fencename);
+            holder.tv_myfence_createddate = (TextView) convertView.findViewById(R.id.tv_myfence_createddate);
+            holder.options = (ImageView) convertView.findViewById(R.id.optionsMenu);
+            convertView.setTag(holder);
+        } else
+        {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        // Lookup view for data population
-        holder.tv_myfence_fencename = (TextView) convertView.findViewById(R.id.tv_myfence_fencename);
-        holder.tv_myfence_createddate = (TextView) convertView.findViewById(R.id.tv_myfence_createddate);
-
-        holder.options = (ImageView) convertView.findViewById(R.id.optionsMenu);
         holder.options.setTag(holder);
         holder.options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                view.setTag(holder.modelHolder);
+                view.setTag(fenceModel);
                 view.post(new Runnable() {
                     @Override
                     public void run() {
@@ -99,19 +98,16 @@ public class MyFencesAdapter extends ArrayAdapter<FenceModel> {
         // Populate the data into the template view using the data object
 
         if ((fenceModel != null))
-            holder.tv_myfence_fencename.setText(fenceModel.getName());
+            holder.tv_myfence_fencename.setText(fenceModel.getName().replace("/", "//"));
 
         if ((fenceModel != null) && (fenceModel.getCreationDate() != null))
             holder.tv_myfence_createddate.setText(fenceModel.getCreationDate().toString());
 
-        convertView.setTag(holder.modelHolder);
         // Return the completed view to render on screen
         return convertView;
     }
 
     public class ViewHolder {
-        FenceModel modelHolder;
-
         public TextView tv_myfence_fencename;
         public TextView tv_myfence_createddate;
         public ImageView options;

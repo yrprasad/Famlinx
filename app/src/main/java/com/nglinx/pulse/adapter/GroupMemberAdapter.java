@@ -66,8 +66,7 @@ public class GroupMemberAdapter extends ArrayAdapter<GroupMemberModel> {
 
         View view = null;
         convertView = null;
-
-        GroupMemberModel memberModel = arr2.get(position);
+        final GroupMemberModel memberModel = arr2.get(position);
 
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.group_member_list_view, null);
@@ -81,10 +80,6 @@ public class GroupMemberAdapter extends ArrayAdapter<GroupMemberModel> {
             holder = (GroupMemberViewHolder) convertView.getTag();
         }
 
-		/*if(groupMembers.get(position).isFlag){
-            // show button here
-		}*/
-        int count = arr2.size();
         if (ApplicationUtils.isDummyMember(memberModel)) {
             holder.member_image.setImageResource(R.drawable.add_icon);
             holder.name.setText("Add User");

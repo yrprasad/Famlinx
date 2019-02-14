@@ -59,9 +59,44 @@ public class SharingFragmentAdapter extends ArrayAdapter {
         return dataSet.get(position);
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
 
+    private View getPendingInvitesView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        InviteModel inviteModel = getItem(position);
+
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.activity_sharing_pending_invites_row, parent, false);
+            viewHolder.acceptMember = (ImageView) convertView.findViewById(R.id.accept_member);
+            viewHolder.rejectMember = (ImageView) convertView.findViewById(R.id.reject_member);
+            viewHolder.accept_member_layout_pendinginvites = (RelativeLayout) convertView.findViewById(R.id.accept_member_layout_pendinginvites);
+            viewHolder.reject_member_layout_pendinginvites = (RelativeLayout) convertView.findViewById(R.id.reject_member_layout_pendinginvites);
+
+            viewHolder.invites_row1 = (TextView) convertView.findViewById(R.id.invites_row1);
+            viewHolder.invites_row2 = (TextView) convertView.findViewById(R.id.invites_row2);
+            viewHolder.invites_row3 = (TextView) convertView.findViewById(R.id.invites_row3);
+
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        viewHolder.acceptMember.setTag(viewHolder.modelHolder);
+        viewHolder.rejectMember.setTag(viewHolder.modelHolder);
+        viewHolder.accept_member_layout_pendinginvites.setTag(viewHolder.modelHolder);
+        viewHolder.reject_member_layout_pendinginvites.setTag(viewHolder.modelHolder);
+
+        viewHolder.modelHolder = inviteModel;
+        viewHolder.invites_row1.setText("User: " + inviteModel.getName() + "(" + inviteModel.getEmail() + ")");
+        viewHolder.invites_row2.setText("requests tracking of " + getItem(position).getToName());
+        viewHolder.invites_row3.setText(ApplicationUtils.convertFormatByTimeZone(getItem(position).getDate()));
+
+        // Return the completed view to render on screen
+        return convertView;
+    }
+
+    private View getAcceptedInvitesView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder; // view lookup cache stored in tag
         InviteModel inviteModel = getItem(position);
 
@@ -70,52 +105,43 @@ public class SharingFragmentAdapter extends ArrayAdapter {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
 
-            if (listType == ApplicationConstants.SHARING_PENDING_INVITES_INDEX) {
-                convertView = inflater.inflate(R.layout.activity_sharing_pending_invites_row, parent, false);
-                viewHolder.modelHolder = inviteModel;
+            convertView = inflater.inflate(R.layout.activity_sharing_accepted_invites_row, parent, false);
 
-                viewHolder.acceptMember = (ImageView) convertView.findViewById(R.id.accept_member);
-                viewHolder.rejectMember = (ImageView) convertView.findViewById(R.id.reject_member);
-                viewHolder.accept_member_layout_pendinginvites = (RelativeLayout) convertView.findViewById(R.id.accept_member_layout_pendinginvites);
-                viewHolder.reject_member_layout_pendinginvites = (RelativeLayout) convertView.findViewById(R.id.reject_member_layout_pendinginvites);
+            viewHolder.suspendMember = (ImageView) convertView.findViewById(R.id.suspend_member);
+            viewHolder.rejectMember = (ImageView) convertView.findViewById(R.id.reject_member);
+            viewHolder.suspend_member_layout_trackingme = (RelativeLayout) convertView.findViewById(R.id.suspend_member_layout_trackingme);
+            viewHolder.reject_member_layout_trackingme = (RelativeLayout) convertView.findViewById(R.id.reject_member_layout_trackingme);
 
-                viewHolder.acceptMember.setTag(viewHolder.modelHolder);
-                viewHolder.rejectMember.setTag(viewHolder.modelHolder);
-                viewHolder.accept_member_layout_pendinginvites.setTag(viewHolder.modelHolder);
-                viewHolder.reject_member_layout_pendinginvites.setTag(viewHolder.modelHolder);
+            viewHolder.invites_row1 = (TextView) convertView.findViewById(R.id.invites_row1);
+            viewHolder.invites_row2 = (TextView) convertView.findViewById(R.id.invites_row2);
+            viewHolder.invites_row3 = (TextView) convertView.findViewById(R.id.invites_row3);
 
-                viewHolder.invites_row1 = (TextView) convertView.findViewById(R.id.invites_row1);
-                viewHolder.invites_row2 = (TextView) convertView.findViewById(R.id.invites_row2);
-                viewHolder.invites_row3 = (TextView) convertView.findViewById(R.id.invites_row3);
-
-                InviteModel model = getItem(position);
-                viewHolder.invites_row1.setText("User: " + model.getName() + "(" + model.getEmail() + ")");
-                viewHolder.invites_row2.setText("requests tracking of " + getItem(position).getToName());
-                viewHolder.invites_row3.setText(ApplicationUtils.convertFormatByTimeZone(getItem(position).getDate()));
-
-            } else if (listType == ApplicationConstants.SHARING_TRACKING_ME_INDEX) {
-                convertView = inflater.inflate(R.layout.activity_sharing_accepted_invites_row, parent, false);
-                viewHolder.modelHolder = inviteModel;
-                viewHolder.suspendMember = (ImageView) convertView.findViewById(R.id.suspend_member);
-                viewHolder.rejectMember = (ImageView) convertView.findViewById(R.id.reject_member);
-                viewHolder.suspend_member_layout_trackingme = (RelativeLayout) convertView.findViewById(R.id.suspend_member_layout_trackingme);
-                viewHolder.reject_member_layout_trackingme = (RelativeLayout) convertView.findViewById(R.id.reject_member_layout_trackingme);
-                viewHolder.suspendMember.setTag(viewHolder.modelHolder);
-                viewHolder.rejectMember.setTag(viewHolder.modelHolder);
-                viewHolder.suspend_member_layout_trackingme.setTag(viewHolder.modelHolder);
-                viewHolder.reject_member_layout_trackingme.setTag(viewHolder.modelHolder);
-
-                viewHolder.invites_row1 = (TextView) convertView.findViewById(R.id.invites_row1);
-                viewHolder.invites_row2 = (TextView) convertView.findViewById(R.id.invites_row2);
-                viewHolder.invites_row3 = (TextView) convertView.findViewById(R.id.invites_row3);
-
-                viewHolder.invites_row1.setText("User: " + getItem(position).getName());
-                viewHolder.invites_row2.setText("Tracking: " + getItem(position).getToName());
-                viewHolder.invites_row3.setText(ApplicationUtils.convertFormatByTimeZone(getItem(position).getDate()));
-            }
+            viewHolder.modelHolder = inviteModel;
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        viewHolder.invites_row1.setText("User: " + getItem(position).getName());
+        viewHolder.invites_row2.setText("Tracking: " + getItem(position).getToName());
+        viewHolder.invites_row3.setText(ApplicationUtils.convertFormatByTimeZone(getItem(position).getDate()));
+        viewHolder.suspendMember.setTag(viewHolder.modelHolder);
+        viewHolder.rejectMember.setTag(viewHolder.modelHolder);
+        viewHolder.suspend_member_layout_trackingme.setTag(viewHolder.modelHolder);
+        viewHolder.reject_member_layout_trackingme.setTag(viewHolder.modelHolder);
+
+        // Return the completed view to render on screen
+        return convertView;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        if (listType == ApplicationConstants.SHARING_PENDING_INVITES_INDEX) {
+            return getPendingInvitesView(position, convertView, parent);
+
+        } else if (listType == ApplicationConstants.SHARING_TRACKING_ME_INDEX) {
+            return getAcceptedInvitesView(position, convertView, parent);
         }
 
         // Return the completed view to render on screen

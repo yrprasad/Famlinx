@@ -3,6 +3,8 @@ package com.nglinx.pulse.viewholders;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nglinx.pulse.models.GroupMemberModel;
+
 /**
  * Created by yelisetr on 6/5/2018.
  */

@@ -414,6 +414,8 @@ public class DataSession {
     }
 
     public void setPendingInvites(List<InviteModel> pendingInvites) {
+//        if (null != this.pendingInvites)
+//            this.pendingInvites.clear();
         this.pendingInvites = pendingInvites;
     }
 
@@ -422,6 +424,8 @@ public class DataSession {
     }
 
     public void setTrackingMeInvites(List<InviteModel> trackingMeInvites) {
+//        if (null != this.trackingMeInvites)
+//            this.trackingMeInvites.clear();
         this.trackingMeInvites = trackingMeInvites;
     }
 

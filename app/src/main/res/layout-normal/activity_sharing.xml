@@ -139,7 +139,7 @@
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="18.4"
                     android:visibility="visible"
@@ -1152,6 +1152,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:visibility="visible"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 

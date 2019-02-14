@@ -21,7 +21,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -41,6 +43,7 @@ import com.nglinx.pulse.adapter.GroupMemberAdapter;
 import com.nglinx.pulse.adapter.NotificationsAdapter;
 import com.nglinx.pulse.adapter.ViewPagerAdapter;
 import com.nglinx.pulse.constants.ApplicationConstants;
+import com.nglinx.pulse.models.DeviceType;
 import com.nglinx.pulse.models.GroupMemberModel;
 import com.nglinx.pulse.models.GroupModel;
 import com.nglinx.pulse.models.NotificationModel;
@@ -490,7 +493,15 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
             member = selectedMember;
         }
 
-        if (member != null) {
+        if (member == null) {
+            DialogUtils.diaplayErrorDialog(HomeActivity.this, "Internal Error. Unable to get the selected member details.");
+            return;
+        }
+
+        if ((member.getTrackingModel() != null) && (member.getTrackingModel().getType() != null) && (member.getTrackingModel().getType().equals(DeviceType.SENSOR))) {
+            String webUrl = ApplicationConstants.DEVICE_GRAPH_URL + member.getTrackingModel().getUuid();
+            renderPost("https://www.bseindia.com/");
+        } else {
             activateItemsOnTrackMemberSelect();
             if (member.getStatus().equalsIgnoreCase("0")) {
                 if (isPopUpRequired)
@@ -897,5 +908,46 @@ public class HomeActivity extends AbstractActivity implements LocationListener, 
                 startActivity(getIntent());
             }
         }
+    }
+
+
+    private void renderPost(String url) {
+
+        if (null != webView) {
+            webView.stopLoading();
+            webView.clearView();
+            webView.clearHistory();
+            webView.resumeTimers();
+            webView.getSettings().setJavaScriptEnabled(false);
+            webView.clearCache(true);
+//            webView = null;
+        }
+
+//        System.out.println("Web view original url after findViewById: " + webView.getOriginalUrl());
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setAppCacheEnabled(false);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+        webView.setWebChromeClient(null);
+        final ProgressDialog mProgressDialog1 = ProgressbarUtil.startProgressBar(HomeActivity.this);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // do your stuff here
+                ProgressbarUtil.stopProgressBar(mProgressDialog1);
+            }
+        });
+
+        webView.getSettings().setAppCacheEnabled(false);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+
+        System.out.println("URL being Passed : " + url);
+
+        System.out.println("URL retrieved from Web before loadurl : " + webView.getUrl());
+        webView.clearCache(true);
+        webView.loadUrl(url);
+        System.out.println("URL retrieved from Web before reload: " + webView.getUrl());
+
+        System.out.println("Web view original url: " + webView.getOriginalUrl());
     }
 }

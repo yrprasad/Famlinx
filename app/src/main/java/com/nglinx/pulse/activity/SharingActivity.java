@@ -68,9 +68,13 @@ public class SharingActivity extends AbstractActivity {
                 trackingMe.clear();
                 pendingInvites.addAll(getInvitesByStatus(tmp, ApplicationConstants.SHARING_PENDING_INVITES_STATUS));
                 trackingMe.addAll(getInvitesByStatus(tmp, ApplicationConstants.SHARING_TRACKING_ME_STATUS));
-                Collections.sort(pendingInvites);
+
+                if (pendingInvites.size() > 0)
+                    Collections.sort(pendingInvites);
                 ds.setPendingInvites(pendingInvites);
-                Collections.sort(trackingMe);
+
+                if(trackingMe.size() > 0)
+                    Collections.sort(trackingMe);
                 ds.setTrackingMeInvites(trackingMe);
                 sharingAdapter.notifyDataSetChanged();
                 ProgressbarUtil.stopProgressBar(mProgressDialog1);
@@ -98,6 +102,7 @@ public class SharingActivity extends AbstractActivity {
         sharingAdapter = new SharingAdapter(getSupportFragmentManager());
         viewPager.setAdapter(sharingAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(20);
     }
 
     private List<InviteModel> getInvitesByStatus(List<InviteModel> allInvites, int status) {

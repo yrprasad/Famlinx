@@ -59,6 +59,7 @@
             android:layout_weight="2">
 
             <ImageView
+                android:id="@+id/img_myFences"
                 android:layout_width="@dimen/image_height_thirty_five"
                 android:layout_height="@dimen/image_height_thirty"
                 android:layout_centerVertical="true"

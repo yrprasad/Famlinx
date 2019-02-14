@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,6 +45,8 @@ public class MyFencesActivity extends AppCompatActivity implements SwipeRefreshL
 
     DataSession ds;
 
+    Toolbar inc_toolbar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,17 @@ public class MyFencesActivity extends AppCompatActivity implements SwipeRefreshL
         adapter = new MyFencesAdapter(MyFencesActivity.this, (ArrayList<FenceModel>) fenceList);
 
         lv_fence.setAdapter(adapter);
+
+        inc_toolbar = (Toolbar) findViewById(R.id.inc_toolbar);
+        ImageView img_myFences = (ImageView) inc_toolbar.findViewById(R.id.img_myFences);
+        img_myFences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), FenceActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 //        lv_fence.setOnItemClickListener(fenceItemClickListener);
     }

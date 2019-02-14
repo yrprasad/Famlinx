@@ -66,27 +66,31 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         // Get the data item for this position
-        NotificationModel notificationModel = getItem(position);
-
-        final ViewHolder holder = new ViewHolder();
-        holder.modelHolder = notificationModel;
+        ViewHolder holder = null;
+        final NotificationModel modelHolder = getItem(position);;
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
+
+            holder = new ViewHolder();
+
             convertView = mInflater.inflate(R.layout.activity_notifications_row, null);
-        }
+            // Lookup view for data population
+            holder.notif_row_type = (TextView) convertView.findViewById(R.id.notif_row_type);
+            holder.notif_row_date = (TextView) convertView.findViewById(R.id.notif_row_date);
+            holder.notif_row_message = (TextView) convertView.findViewById(R.id.notif_row_message);
+            holder.options = (ImageView) convertView.findViewById(R.id.optionsMenu);
+            convertView.setTag(holder);
+        }else
+            holder = (ViewHolder) convertView.getTag();
 
-        // Lookup view for data population
-        holder.notif_row_type = (TextView) convertView.findViewById(R.id.notif_row_type);
-        holder.notif_row_date = (TextView) convertView.findViewById(R.id.notif_row_date);
-        holder.notif_row_message = (TextView) convertView.findViewById(R.id.notif_row_message);
+        final ViewHolder viewHolder1=holder;
 
-        holder.options = (ImageView) convertView.findViewById(R.id.optionsMenu);
         holder.options.setTag(holder);
         holder.options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                view.setTag(holder.modelHolder);
+                view.setTag(modelHolder);
                 view.post(new Runnable() {
                     @Override
                     public void run() {
@@ -124,23 +128,23 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
 
         // Populate the data into the template view using the data object
 
-        if((notificationModel != null) && (notificationModel.getType() != null))
-            holder.notif_row_type.setText(notificationModel.getType().toString());
+        if((modelHolder != null) && (modelHolder.getType() != null))
+            holder.notif_row_type.setText(modelHolder.getType().toString());
         else
             holder.notif_row_type.setText(NotificationModel.Type.ALERT.toString());
 
-        if((notificationModel != null) && (notificationModel.getCreatedDate() != null))
+        if((modelHolder != null) && (modelHolder.getCreatedDate() != null))
         {
-            String localTimeZoneFormat = ApplicationUtils.convertFormatByTimeZone(notificationModel.getCreatedDate());
+            String localTimeZoneFormat = ApplicationUtils.convertFormatByTimeZone(modelHolder.getCreatedDate());
             holder.notif_row_date.setText(localTimeZoneFormat);
         }
 
-        if((notificationModel.getMessage() != null) && ((notificationModel.getMessage().length() != 0)))
+        if((modelHolder.getMessage() != null) && ((modelHolder.getMessage().length() != 0)))
         {
-            if (notificationModel.getMessage().length() > 50) {
-                holder.notif_row_message.setText(notificationModel.getMessage().substring(0, 50) + "...");
+            if (modelHolder.getMessage().length() > 50) {
+                holder.notif_row_message.setText(modelHolder.getMessage().substring(0, 50) + "...");
             } else {
-                holder.notif_row_message.setText(notificationModel.getMessage());
+                holder.notif_row_message.setText(modelHolder.getMessage());
             }
         }
 
@@ -150,7 +154,6 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationModel> {
     }
 
     public class ViewHolder {
-        NotificationModel modelHolder;
 
         public TextView notif_row_type;
         public TextView notif_row_date;

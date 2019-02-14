@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroupAdapter extends ArrayAdapter<GroupModel> {
-    private ViewHolder holder = null;
+
     private ArrayList<GroupModel> arr1;
     private LayoutInflater mInflater;
 
@@ -64,8 +64,9 @@ public class GroupAdapter extends ArrayAdapter<GroupModel> {
 
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        View view = null;
         convertView = null;
+        ViewHolder holder = null;
+        final GroupModel model = arr1.get(position);
 
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.nav_header_group_row, parent, false);
@@ -73,17 +74,13 @@ public class GroupAdapter extends ArrayAdapter<GroupModel> {
             holder.tv_groupname = (TextView) convertView.findViewById(R.id.tv_groupname);
             holder.tv_groupmember_count = (TextView) convertView.findViewById(R.id.tv_groupmember_count);
             convertView.setTag(holder);
+        } else
+        {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        String first_name;
-        String[] separated = arr1.get(position).getName().split(" ");
-        if (separated[0].toCharArray().length > 10) {
-            first_name = separated[0].substring(0, 10) + "...";
-        } else {
-            first_name = separated[0];
-        }
-        holder.tv_groupname.setText(arr1.get(position).getName());
-        holder.tv_groupmember_count.setText(getMembercount(arr1.get(position).getMembers()) + " " + "member in this Circle");
+        holder.tv_groupname.setText(model.getName());
+        holder.tv_groupmember_count.setText(getMembercount(model.getMembers()) + " " + "member in this Circle");
 
         return convertView;
     }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.nglinx.pulse.R;
 import com.nglinx.pulse.activity.DeviceActivity;
 import com.nglinx.pulse.models.ChildUserModel;
+import com.nglinx.pulse.models.NotificationModel;
 import com.nglinx.pulse.session.DataSession;
 
 import java.util.List;
@@ -62,73 +63,78 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         // Get the data item for this position
-        ChildUserModel model = getItem(position);
-
-        final ViewHolder holder = new ViewHolder();
-        holder.modelHolder = model;
+        ViewHolder holder = null;
+        ChildUserModel modelHolder = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
+            holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.activity_member_profile_row, null);
-        }
 
-        // Lookup view for data population
-        holder.tv_profile_name = (TextView) convertView.findViewById(R.id.tv_profile_name);
-        holder.tv_prodile_email = (TextView) convertView.findViewById(R.id.tv_prodile_email);
-        holder.tv_profile_udid = (TextView) convertView.findViewById(R.id.tv_profile_udid);
-        holder.tv_profile_status = (TextView) convertView.findViewById(R.id.tv_profile_status);
-        holder.img_online_status = (ImageView) convertView.findViewById(R.id.img_online_status);
+            // Lookup view for data population
+            holder.tv_profile_name = (TextView) convertView.findViewById(R.id.tv_profile_name);
+            holder.tv_prodile_email = (TextView) convertView.findViewById(R.id.tv_prodile_email);
+            holder.tv_profile_udid = (TextView) convertView.findViewById(R.id.tv_profile_udid);
+            holder.tv_profile_status = (TextView) convertView.findViewById(R.id.tv_profile_status);
+            holder.img_online_status = (ImageView) convertView.findViewById(R.id.img_online_status);
 
-        RelativeLayout layout_profile_manage= (RelativeLayout) convertView.findViewById(R.id.layout_profile_manage);
-        holder.btn_profile_manage = (ImageView) convertView.findViewById(R.id.btn_profile_manage);
+            holder.layout_profile_manage= (RelativeLayout) convertView.findViewById(R.id.layout_profile_manage);
+            holder.btn_profile_manage = (ImageView) convertView.findViewById(R.id.btn_profile_manage);
 
-        holder.btn_profile_manage.setTag(holder.modelHolder);
+            holder.layout_profile_edit= (RelativeLayout) convertView.findViewById(R.id.layout_profile_edit);
+            holder.btn_profile_edit = (ImageView) convertView.findViewById(R.id.btn_profile_edit);
+
+            convertView.setTag(holder);
+        } else
+            holder = (ViewHolder) convertView.getTag();
+
+        final ViewHolder viewHolder1 = holder;
+
+        holder.btn_profile_manage.setTag(modelHolder);
         holder.btn_profile_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_manage, position, 0);
+                ((DeviceActivity) context).onProfileItemClick(viewHolder1.btn_profile_manage, position, 0);
             }
         });
-        layout_profile_manage.setOnClickListener(new View.OnClickListener() {
+        holder.layout_profile_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_manage, position, 0);
+                ((DeviceActivity) context).onProfileItemClick(viewHolder1.btn_profile_manage, position, 0);
             }
         });
 
-        RelativeLayout layout_profile_edit= (RelativeLayout) convertView.findViewById(R.id.layout_profile_edit);
-        holder.btn_profile_edit = (ImageView) convertView.findViewById(R.id.btn_profile_edit);
-        holder.btn_profile_edit.setTag(holder.modelHolder);
+        holder.btn_profile_edit.setTag(modelHolder);
         holder.btn_profile_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_edit, position, 0);
+                ((DeviceActivity) context).onProfileItemClick(viewHolder1.btn_profile_edit, position, 0);
             }
         });
-        layout_profile_edit.setOnClickListener(new View.OnClickListener() {
+        holder.layout_profile_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((DeviceActivity) context).onProfileItemClick(holder.btn_profile_edit, position, 0);
+                ((DeviceActivity) context).onProfileItemClick(viewHolder1.btn_profile_edit, position, 0);
             }
         });
 
         // Populate the data into the template view using the data object
 
-        if ((model != null) && (model.getName() != null))
-            holder.tv_profile_name.setText(model.getName());
+        if ((modelHolder != null) && (modelHolder.getName() != null))
+            holder.tv_profile_name.setText(modelHolder.getName());
 
-        if ((model != null) && (model.getEmail() != null))
-            holder.tv_prodile_email.setText(model.getEmail());
+        if ((modelHolder != null) && (modelHolder.getEmail() != null))
+            holder.tv_prodile_email.setText(modelHolder.getEmail());
 
-        if ((model != null) && (model.getUdid() != null)) {
-            holder.tv_profile_udid.setText(model.getUdid());
+        if ((modelHolder != null) && (modelHolder.getUdid() != null)) {
+            holder.tv_profile_udid.setText(modelHolder.getUdid());
         } else
         {
             convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.inactive_row));
         }
 
-        if ((model != null) && (model.getStatus() != null)) {
-            if(model.getStatus().equals(1))
+        if ((modelHolder != null) && (modelHolder.getStatus() != null)) {
+            if(modelHolder.getStatus().equals(1))
             {
                 holder.tv_profile_status.setText("Active");
                 holder.img_online_status.setBackgroundResource(R.drawable.circle_green);
@@ -140,26 +146,11 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
 
         }
 
-        convertView.setTag(holder);
         // Return the completed view to render on screen
         return convertView;
     }
 
-    /*public class ViewHolder {
-        ChildUserModel modelHolder;
-
-        public TextView tv_profile_name;
-        public TextView tv_prodile_email;
-        public TextView tv_profile_udid;
-        public TextView tv_profile_status;
-
-        public ImageView btn_profile_delete;
-        public ImageView btn_profile_view;
-        public ImageView img_online_status;
-    }*/
-
     public class ViewHolder {
-        ChildUserModel modelHolder;
 
         public TextView tv_profile_name;
         public TextView tv_prodile_email;
@@ -169,5 +160,7 @@ public class ProfilesFragmentAdapter extends ArrayAdapter<ChildUserModel> {
         public ImageView btn_profile_manage;
         public ImageView btn_profile_edit;
         public ImageView img_online_status;
+        public RelativeLayout layout_profile_manage;
+        public RelativeLayout layout_profile_edit;
     }
 }

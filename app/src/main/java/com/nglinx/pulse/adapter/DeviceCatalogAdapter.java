@@ -34,14 +34,15 @@ public class DeviceCatalogAdapter extends ArrayAdapter<DeviceModel> {
     public View getView(final int position, View convertView, final ViewGroup parent) {
 
         // Get the data item for this position
-        DeviceModel deviceModel = getItem(position);
+        DeviceModel deviceModel = null;
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_device_catalog_row, parent, false);
-        }
-
-        final View tmpView = convertView;
+            deviceModel = getItem(position);
+            convertView.setTag(deviceModel);
+        } else
+            deviceModel = getItem(position);
 
         // Lookup view for data population
 //        TextView device_modified_date = (TextView) convertView.findViewById(R.id.device_modified_date);
@@ -75,22 +76,6 @@ public class DeviceCatalogAdapter extends ArrayAdapter<DeviceModel> {
                 ((DeviceCatelogActivity) context).onItemClick(img_activate_device, position, 0);
             }
         });
-
-        /*final ImageView img_edit_device = (ImageView) convertView.findViewById(R.id.img_edit_device);
-        img_edit_device.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((DeviceCatelogActivity) context).onItemClick(img_edit_device, position, 0);
-            }
-        });
-
-        final ImageView img_manage_device = (ImageView) convertView.findViewById(R.id.img_manage_device);
-        img_manage_device.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((DeviceCatelogActivity) context).onItemClick(img_manage_device, position, 1);
-            }
-        });*/
 
         // Return the completed view to render on screen
         return convertView;

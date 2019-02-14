@@ -63,47 +63,49 @@ public class MyOrdersAdapter extends ArrayAdapter<DeviceOrderModel> {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         // Get the data item for this position
-        DeviceOrderModel deviceOrderModel = getItem(position);
-
-        final ViewHolder holder = new ViewHolder();
-        holder.modelHolder = deviceOrderModel;
+        ViewHolder holder = null;
+        final DeviceOrderModel modelHolder = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.activity_my_account_order_row, null);
+
+            holder = new ViewHolder();
+            // Lookup view for data population
+            holder.tv_order_id = (TextView) convertView.findViewById(R.id.tv_order_id);
+            holder.tv_device_name = (TextView) convertView.findViewById(R.id.tv_device_name);
+            holder.tv_order_status = (TextView) convertView.findViewById(R.id.tv_order_status);
+            holder.tv_order_date = (TextView) convertView.findViewById(R.id.tv_order_date);
+            holder.img_device = (ImageView) convertView.findViewById(R.id.img_device);
+
+            convertView.setTag(holder);
+        } else
+        {
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        // Lookup view for data population
-        holder.tv_order_id = (TextView) convertView.findViewById(R.id.tv_order_id);
-        holder.tv_device_name = (TextView) convertView.findViewById(R.id.tv_device_name);
-        holder.tv_order_status = (TextView) convertView.findViewById(R.id.tv_order_status);
-        holder.tv_order_date = (TextView) convertView.findViewById(R.id.tv_order_date);
-        holder.img_device = (ImageView) convertView.findViewById(R.id.img_device);
-
-        holder.tv_order_id.setText("Order # " + deviceOrderModel.getId());
-        holder.tv_device_name.setText(deviceOrderModel.getDeviceType().toString());
-        holder.tv_order_status.setText("Order Status : " + deviceOrderModel.getStatus());
+        holder.tv_order_id.setText("Order # " + modelHolder.getId());
+        holder.tv_device_name.setText(modelHolder.getDeviceType().toString());
+        holder.tv_order_status.setText("Order Status : " + modelHolder.getStatus());
         holder.tv_order_date.setText("Order Date : " +
-                ApplicationUtils.convertFormatByTimeZone(deviceOrderModel.getCreatedDate()));
+                ApplicationUtils.convertFormatByTimeZone(modelHolder.getCreatedDate()));
 
 
-        if (deviceOrderModel.getDeviceType().equals(DeviceType.A9)) {
+        if (modelHolder.getDeviceType().equals(DeviceType.A9)) {
             holder.img_device.setImageResource(R.drawable.a9);
-        } else if (deviceOrderModel.getDeviceType().equals(DeviceType.V7)) {
+        } else if (modelHolder.getDeviceType().equals(DeviceType.V7)) {
             holder.img_device.setImageResource(R.drawable.v7);
-        } else if (deviceOrderModel.getDeviceType().equals(DeviceType.V16)) {
+        } else if (modelHolder.getDeviceType().equals(DeviceType.V16)) {
             holder.img_device.setImageResource(R.drawable.v16);
-        } else if (deviceOrderModel.getDeviceType().equals(DeviceType.MQTT)) {
+        } else if (modelHolder.getDeviceType().equals(DeviceType.MQTT)) {
             holder.img_device.setImageResource(R.drawable.mqtt);
         }
 
-        convertView.setTag(holder);
         // Return the completed view to render on screen
         return convertView;
     }
 
     public class ViewHolder {
-        DeviceOrderModel modelHolder;
 
         public TextView tv_order_id;
         public TextView tv_device_name;
